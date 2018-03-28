@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>562</width>
-    <height>494</height>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -107,16 +107,6 @@
       <string>Select obus calibre:</string>
      </property>
     </widget>
-    <widget class="QLCDNumber" name="weight_lcdNumber">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>240</y>
-       <width>64</width>
-       <height>23</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QLabel" name="weight_label">
      <property name="geometry">
       <rect>
@@ -146,11 +136,14 @@
     <widget class="QLCDNumber" name="tool_force_lcdNumber">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>270</y>
-       <width>64</width>
-       <height>23</height>
+       <x>130</x>
+       <y>280</y>
+       <width>71</width>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="segmentStyle">
+      <enum>QLCDNumber::Flat</enum>
      </property>
     </widget>
     <widget class="QPushButton" name="PrePick_Button">
@@ -215,6 +208,22 @@
      </property>
      <property name="text">
       <string>Placed</string>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="weight_lcdNumber">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>240</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="segmentStyle">
+      <enum>QLCDNumber::Flat</enum>
      </property>
     </widget>
    </widget>
@@ -360,120 +369,6 @@
    </property>
    <property name="text">
     <string>C:</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>40</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>70</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit_3">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>100</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit_4">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>40</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit_5">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>70</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit_6">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>100</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_9">
@@ -929,6 +824,134 @@
    </property>
    <property name="text">
     <string>Apply</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_24">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>520</y>
+     <width>41</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Mode:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="mode_label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>520</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 170, 0);</string>
+   </property>
+   <property name="text">
+    <string>MANUAL</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="robot_pose_x">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>40</y>
+     <width>59</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="robot_pose_y">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>70</y>
+     <width>59</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="robot_pose_z">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>100</y>
+     <width>59</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="robot_pose_a">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>40</y>
+     <width>59</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="robot_pose_b">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>70</y>
+     <width>59</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="robot_pose_c">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>100</y>
+     <width>59</width>
+     <height>14</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="info_label">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>509</y>
+     <width>281</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

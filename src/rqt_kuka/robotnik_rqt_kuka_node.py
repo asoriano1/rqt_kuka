@@ -40,6 +40,8 @@ srv_finger_set_pose='kuka_tool_finger_node/set_odometry' #robotnik_msgs.set.odom
 #topic names:
 topic_cart_pose_kuka='cartesian_pos_kuka'
 topic_kuka_moving='kuka_moving'
+topic_tool_weight='tool_weight'
+topic_current='current'
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
 #Prepick_Pose=Pose(Point(100, 100, 100), Quaternion(0, 0, 0, 1))
@@ -107,7 +109,13 @@ class RqtKuka(Plugin):
         rospy.Subscriber(topic_kuka_moving, Bool, self.callback_moving)
 
         #subscriber to robot pose
-        rospy.Subscriber(topic_cart_pose_kuka, JointState, self.callback_robot_pose)       
+        rospy.Subscriber(topic_cart_pose_kuka, JointState, self.callback_robot_pose)     
+
+        #subscriber to tool weight detected
+        rospy.Subscriber(topic_tool_weight, JointState, self.callback_tool_weight)     
+
+        #subscriber to tool current
+        rospy.Subscriber(topic_current, JointState, self.callback_current) 
         
         # Show _widget.windowTitle on left-top of each plugin (when 
         # it's set in _widget). This is useful when you open multiple 
@@ -138,10 +146,29 @@ class RqtKuka(Plugin):
         self._widget.Placed_Button.setEnabled(True)
 
     def callback_moving(self, data):
-        print 'CB:moving_received %s',data.data
+        print 'CB:moving_received:',data.data
+        if data.data == True:
+            self._widget.mode_label.setText("AUTOMATIC")
+            #selt._widget.mode_label.setStyleSheet(\ncolor: rgb(255, 0, 0))
+        else:
+            self._widget.mode_label.setText("MANUAL")
 
     def callback_robot_pose(self, data):
-        print 'CB:robot_pose_received %s',data.data
+        print 'CB:robot_pose_received',data
+        self._widget.robot_pose_x.setText(str(data.position[0]))
+        self._widget.robot_pose_y.setText(str(data.position[1]))
+        self._widget.robot_pose_z.setText(str(data.position[2]))
+        self._widget.robot_pose_a.setText(str(data.position[3]))
+        self._widget.robot_pose_b.setText(str(data.position[4]))
+        self._widget.robot_pose_c.setText(str(data.position[5]))
+
+    def callback_tool_weight(self, data):
+        print 'CB:tool_weight_received',data
+        self._widget.weight_lcdNumber.display(8)
+
+    def callback_current(self, data):
+        print 'CB:current_received',data
+        self._widget.tool_force_lcdNumber.display(8)
 
     def press_tool_homming(self):
         #Call tool homing method
@@ -150,8 +177,10 @@ class RqtKuka(Plugin):
             ret = homing_service()
             if ret == True:
                 TOOL_HOMED=True
+                self._widget.info_label.setText("Service tool homing call done")
         except rospy.ServiceException, e:
             print "Service call failed: %s"%e
+            self._widget.info_label.setText("Service tool homing call failed")
 
     def press_prepick_button(self):
         #Call service to move robot to prepick pose
