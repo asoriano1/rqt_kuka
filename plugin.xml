@@ -1,0 +1,17 @@
+<library path="src">
+  <class name="Kuka" type="rqt_kuka.robotnik_rqt_kuka_node.RqtKuka" base_class_type="rqt_gui_py::Plugin">
+    <description>
+      RQT Plugin to control Kuka
+    </description>
+    <qtgui>
+		<group>
+			<label>KUKA OBUSESs</label>
+			<icon type="theme">folder</icon>
+			<statustip></statustip>
+		</group>
+      <label>RQT Kuka</label>
+      <icon type="theme">start-here</icon>
+      <statustip>RQT Plugin for Kuka project.</statustip>
+    </qtgui>
+  </class>
+</library>
