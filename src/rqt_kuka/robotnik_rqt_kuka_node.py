@@ -30,17 +30,17 @@ STATE_HOMING=6
 TOOL_HOMED=False
 
 #service names:
-srv_name_move_abs_fast='setKukaAbsFast'
-srv_name_move_abs_slow='setKukaAbs'
-srv_name_move_rel_fast='setKukaRelFast'
-srv_name_move_rel_slow='setKukaRel'
-srv_tool_homing='home'
-srv_finger_set_pose='kuka_tool_finger_node/set_odometry' #robotnik_msgs.set.odometry
+srv_name_move_abs_fast='/setKukaAbsFast'
+srv_name_move_abs_slow='/setKukaAbs'
+srv_name_move_rel_fast='/setKukaRelFast'
+srv_name_move_rel_slow='/setKukaRel'
+srv_tool_homing='/kuka_tool/robotnik_base_hw/home'
+srv_finger_set_pose='/kuka_tool_finger_node/set_odometry' #robotnik_msgs.set.odometry
 
 #topic names:
-topic_cart_pose_kuka='cartesian_pos_kuka'
-topic_kuka_moving='kuka_moving'
-topic_tool_weight='tool_weight'
+topic_cart_pose_kuka='/kuka_robot/cartesian_pos_kuka'
+topic_kuka_moving='/kuka_robot/kuka_moving'
+topic_tool_weight='/kuka_gauges/phidget_load/load_mean'
 topic_current='current'
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
