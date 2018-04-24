@@ -104,11 +104,11 @@ class RqtKuka(Plugin):
 
         #Buttons
         self._widget.PrePick_Button.pressed.connect(self.press_prepick_button)
+        self._widget.PrePlace_Button.pressed.connect(self.press_placed_button)
+        
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
-        self._widget.Picked_Button.pressed.connect(self.press_picked_button)
-        self._widget.Placed_Button.pressed.connect(self.press_placed_button)
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
-        self._widget.Apply_Button.pressed.connect(self.press_apply_button)
+
 
         #displays
         #self._widget.weight_lcdNumber.pressed.connect(self.press_load_yaml)
