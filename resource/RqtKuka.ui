@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>273</width>
-    <height>634</height>
+    <width>270</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -296,7 +296,7 @@
   <widget class="QLabel" name="label_24">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>40</x>
      <y>500</y>
      <width>41</width>
      <height>16</height>
@@ -309,15 +309,15 @@
   <widget class="QLabel" name="mode_label">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>500</y>
-     <width>141</width>
-     <height>16</height>
+     <x>80</x>
+     <y>497</y>
+     <width>151</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>13</pointsize>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="autoFillBackground">
@@ -333,9 +333,9 @@
   <widget class="QLabel" name="info_label">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>530</y>
-     <width>281</width>
+     <width>231</width>
      <height>41</height>
     </rect>
    </property>
@@ -346,10 +346,10 @@
   <widget class="QLabel" name="label_25">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>170</x>
      <y>580</y>
-     <width>201</width>
-     <height>41</height>
+     <width>91</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -359,7 +359,7 @@
     <pixmap>images/logo.png</pixmap>
    </property>
    <property name="scaledContents">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
