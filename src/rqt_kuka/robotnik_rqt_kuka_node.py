@@ -191,9 +191,11 @@ class RqtKuka(Plugin):
         #Call tool homing method
         global weight_empty, weight_read
         try:
+            gripper_move_service = rospy.ServiceProxy(srv_finger_set_pose,set_odometry)
             homing_service = rospy.ServiceProxy(srv_tool_homing, home)           
             ret = homing_service()
             weight_empty=weight_read
+            gripper_move_service(0.05,0,0,-0.3)
             if ret == True:
                 TOOL_HOMED=True
                 self._widget.info_label.setText("Service tool homing call done")
@@ -288,28 +290,28 @@ class RqtKuka(Plugin):
         if index == 1:            
             print 'Set gripper to 100mm'
             #TODO: Set gripper to 100mm
-            tras_from_homing=0.21-0.1;
+            tras_from_homing=0.2-0.1;
             #ret=gripper_trasl_service(tras_from_homing,0,0,0)
             #if ret == False:
 				#print 'Set gripper to 100mm: OUT OF RANGE'
         elif index == 2:
             print 'Set gripper to 140mm'
             #TODO: Set gripper to 140mm
-            tras_from_homing=0.21-0.14;
+            tras_from_homing=0.2-0.14;
             ret=gripper_trasl_service(tras_from_homing,0,0,0)
             if ret == False:
 				print 'Set gripper to 140mm: OUT OF RANGE'
         elif index == 3:
             print 'Set gripper to 160mm'
             #TODO: Set gripper to 160mm
-            tras_from_homing=0.21-0.16;
+            tras_from_homing=0.2-0.16;
             ret=gripper_trasl_service(tras_from_homing,0,0,0)
             if ret == False:
 				print 'Set gripper to 140mm: OUT OF RANGE'
         elif index == 4:
             print 'Set gripper to 270mm'
             #TODO: Set gripper to 270mm
-            ret=gripper_trasl_service(0.01,0,0,0)
+            ret=gripper_trasl_service(0.03,0,0,0)
 
         
     def shutdown_plugin(self):
