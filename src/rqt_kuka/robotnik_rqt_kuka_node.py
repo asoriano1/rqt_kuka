@@ -47,22 +47,26 @@ topic_current='/kuka_tool/robotnik_base_hw/current'
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
 #Prepick_Pose=Pose(Point(100, 100, 100), Quaternion(0, 0, 0, 1))
-Prepick_Pose_x=1707.69
-Prepick_Pose_y=235.42
-Prepick_Pose_z=1435.39
-Prepick_Pose_theta=0
-Prepick_Pose_a=-59.39
-Prepick_Pose_b=0#-0.21
-Prepick_Pose_c=-174#178.41
+#rosservice call /kuka_robot/setKukaAbs "{x: 1707.69, y: 235.42, z: 1435.39, A: -59.39, B: 0, C: -174}" 
+#CAJA NEGRA
+Preplace_Pose_x=1707.69
+Preplace_Pose_y=235.42
+Preplace_Pose_z=1435.39
+Preplace_Pose_a=-50
+Preplace_Pose_b=0#-0.21
+Preplace_Pose_c=-174#178.41
+
+
 #Preplace Pose
 #Preplace_Pose=Pose(Point(400, 400, 100), Quaternion(0, 0, 0, 1))
-Preplace_Pose_x=255.49
-Preplace_Pose_y=1704.49
-Preplace_Pose_z=1475.38
-Preplace_Pose_theta=0
-Preplace_Pose_a=14.24#15.2
-Preplace_Pose_b=0.0#-0.12
-Preplace_Pose_c=174#178.73
+#rosservice call /kuka_robot/setKukaAbs "{x: 255.69, y: 1704.42, z: 1475.39, A: 14.39, B: 0, C: -174}" 
+#CAJA GRIS
+Prepick_Pose_x=255.49
+Prepick_Pose_y=1704.49
+Prepick_Pose_z=1475.38
+Prepick_Pose_a=-14.24#15.2
+Prepick_Pose_b=0.0#-0.12
+Prepick_Pose_c=174#178.73
 #RollerBench Pose
 RollerBench_Pose=Pose(Point(200, 200, 100), Quaternion(0, 0, 0, 1))
 pos_z_kuka=0.0
@@ -104,7 +108,7 @@ class RqtKuka(Plugin):
 
         #Buttons
         self._widget.PrePick_Button.pressed.connect(self.press_prepick_button)
-        self._widget.PrePlace_Button.pressed.connect(self.press_placed_button)
+        self._widget.PrePlace_Button.pressed.connect(self.press_preplaced_button)
         
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
@@ -145,14 +149,14 @@ class RqtKuka(Plugin):
     def desactivate_buttons(self):
         self._widget.PrePick_Button.setEnabled(False)
         self._widget.PickTest_Button.setEnabled(False)
-        self._widget.Picked_Button.setEnabled(False)
-        self._widget.Placed_Button.setEnabled(False)
+        #self._widget.Picked_Button.setEnabled(False)
+        self._widget.PrePlace_Button.setEnabled(False)
 
     def activate_buttons(self):
         self._widget.PrePick_Button.setEnabled(True)
         self._widget.PickTest_Button.setEnabled(True)
-        self._widget.Picked_Button.setEnabled(True)
-        self._widget.Placed_Button.setEnabled(True)
+        #self._widget.Picked_Button.setEnabled(True)
+        self._widget.PrePlace_Button.setEnabled(True)
 
     def callback_moving(self, data):
 		global KUKA_AUT
@@ -167,13 +171,7 @@ class RqtKuka(Plugin):
 
     def callback_robot_pose(self, data):
 		global pos_z_kuka
-		#print 'CB:robot_pose_received',data
-		self._widget.robot_pose_x.setText(str(data.x))
-		self._widget.robot_pose_y.setText(str(data.y))
-		self._widget.robot_pose_z.setText(str(data.z))
-		self._widget.robot_pose_a.setText(str(data.A))
-		self._widget.robot_pose_b.setText(str(data.B))
-		self._widget.robot_pose_c.setText(str(data.C))
+		print 'CB:robot_pose_received',data
 		pos_z_kuka=data.z
 
     def callback_tool_weight(self, data):
@@ -203,59 +201,47 @@ class RqtKuka(Plugin):
             print "Service call failed: %s"%e
             self._widget.info_label.setText("Service tool homing call failed")
 
-    def press_prepick_button(self):
-        #Call service to move robot to prepick pose
-        try:
-            prepick_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)            
-            ret = prepick_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a, Prepick_Pose_b, Prepick_Pose_c)
-            if ret == True:
-                CURRENT_STATE=STATE_MOVING_TO_PREPICK
-        except rospy.ServiceException, e:
-            print "Service call failed: %s"%e 
-
-    def press_placed_button(self):
+    def press_preplaced_button(self):
 		global KUKA_AUT, pos_z_kuka
         #Call service to move robot up and then to the pre-pick pose, should be fast
 		try:
 			placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
-			ret_rel=placed_rel_service(0, 0, -pos_z_kuka+Prepick_Pose_z, 0, 0, 0)
+			ret_rel=placed_rel_service(0, 0, Preplace_Pose_z-pos_z_kuka, 0, 0, 0)
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.05)
-			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
-			ret = placed_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)
+			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a,Preplace_Pose_b,Preplace_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
 				CURRENT_STATE=3
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
 
-    def press_picked_button(self):
+    def press_prepick_button(self):
 		global KUKA_AUT, pos_z_kuka
 		#Call service to move robot up and then to pre place pose, should be slow
 		try:
 			picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
-			ret_rel=picked_rel_service(0, 0, -pos_z_kuka+Preplace_Pose_z, 0, 0, 0)
+			ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.05)
 			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
-			ret = picked_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a,Preplace_Pose_b,Preplace_Pose_c)
+			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
-				CURRENT_STATE=3
+				CURRENT_STATE=STATE_MOVING_TO_PLACE
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
             
     def press_picktest_button(self):
 		global KUKA_AUT
 		try:
-			#placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
 			placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
 			ret_rel=placed_rel_service(0, 0, 20, 0, 0, 0)
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.05)
-			#ret = placed_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)
 			if ret_rel == True:
-					CURRENT_STATE=3
+					CURRENT_STATE=STATE_DOING_PICK_TEST
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
 			    
