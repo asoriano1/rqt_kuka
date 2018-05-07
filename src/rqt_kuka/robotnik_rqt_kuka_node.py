@@ -6,6 +6,9 @@ import inspect
 import rospy
 import rospkg
 import time 
+import xacro
+import subprocess
+import sys
 
 from qt_gui.plugin import Plugin
 from python_qt_binding import loadUi
@@ -67,6 +70,15 @@ Prepick_Pose_z=1475.38
 Prepick_Pose_a=-14.24#15.2
 Prepick_Pose_b=0.0#-0.12
 Prepick_Pose_c=174#178.73
+
+#Homming Pose
+Homming_Pose_x=255.49
+Homming_Pose_y=1704.49
+Homming_Pose_z=1475.38
+Homming_Pose_a=-14.24#15.2
+Homming_Pose_b=0.0#-0.12
+Homming_Pose_c=174#178.73
+
 #RollerBench Pose
 RollerBench_Pose=Pose(Point(200, 200, 100), Quaternion(0, 0, 0, 1))
 pos_z_kuka=0.0
@@ -112,7 +124,7 @@ class RqtKuka(Plugin):
         
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
-
+        self._widget.Gripper_Straighten_Button.pressed.connect(self.press_tool_straighten)
 
         #displays
         #self._widget.weight_lcdNumber.pressed.connect(self.press_load_yaml)
@@ -149,13 +161,11 @@ class RqtKuka(Plugin):
     def desactivate_buttons(self):
         self._widget.PrePick_Button.setEnabled(False)
         self._widget.PickTest_Button.setEnabled(False)
-        #self._widget.Picked_Button.setEnabled(False)
         self._widget.PrePlace_Button.setEnabled(False)
 
     def activate_buttons(self):
         self._widget.PrePick_Button.setEnabled(True)
         self._widget.PickTest_Button.setEnabled(True)
-        #self._widget.Picked_Button.setEnabled(True)
         self._widget.PrePlace_Button.setEnabled(True)
 
     def callback_moving(self, data):
@@ -232,6 +242,22 @@ class RqtKuka(Plugin):
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
+			
+    def press_tool_homming(self):
+		global KUKA_AUT, pos_z_kuka
+		#Call service to move robot up and then to pre place pose, should be slow
+		try:
+			homming_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
+			ret_rel=homming_rel_service(0, 0,Homming_Pose_z-pos_z_kuka , 0, 0, 0)
+			KUKA_AUT=True
+			while KUKA_AUT: time.sleep(0.05)
+			homming_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
+			ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, Homming_Pose_a,Homming_Pose_b,Homming_Pose_c)
+			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
+			if ret == True:
+				CURRENT_STATE=STATE_MOVING_TO_PLACE
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
             
     def press_picktest_button(self):
 		global KUKA_AUT
@@ -244,6 +270,10 @@ class RqtKuka(Plugin):
 					CURRENT_STATE=STATE_DOING_PICK_TEST
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
+
+    def press_tool_straighten(self):
+		global KUKA_AUT
+		print "Service called"
 			    
     def press_apply_button(self):
         Prepick_Pose_x=self._widget.prepick_x.toPlainText()
@@ -280,25 +310,49 @@ class RqtKuka(Plugin):
             #ret=gripper_trasl_service(tras_from_homing,0,0,0)
             #if ret == False:
 				#print 'Set gripper to 100mm: OUT OF RANGE'
+            #if rospy.get_param('robot_description')
+            try:
+                rospy.delete_param('robot_description')
+            except KeyError:
+                print "value not set"
+            self.load_robot_description(index)
         elif index == 2:
             print 'Set gripper to 140mm'
             #TODO: Set gripper to 140mm
             tras_from_homing=0.2-0.14;
-            ret=gripper_trasl_service(tras_from_homing,0,0,0)
-            if ret == False:
-				print 'Set gripper to 140mm: OUT OF RANGE'
+            #ret=gripper_trasl_service(tras_from_homing,0,0,0)
+            #if ret == False:
+			#	print 'Set gripper to 140mm: OUT OF RANGE'
+            try:
+                rospy.delete_param('robot_description')
+            except KeyError:
+                print "value not set"
+            self.load_robot_description(index+1)
         elif index == 3:
             print 'Set gripper to 160mm'
             #TODO: Set gripper to 160mm
             tras_from_homing=0.2-0.16;
-            ret=gripper_trasl_service(tras_from_homing,0,0,0)
-            if ret == False:
-				print 'Set gripper to 140mm: OUT OF RANGE'
+            #ret=gripper_trasl_service(tras_from_homing,0,0,0)
+            #if ret == False:
+			#	print 'Set gripper to 140mm: OUT OF RANGE'
+            try:
+                rospy.delete_param('robot_description')
+            except KeyError:
+                print "value not set"
+            self.load_robot_description(index+1)
         elif index == 4:
             print 'Set gripper to 270mm'
             #TODO: Set gripper to 270mm
-            ret=gripper_trasl_service(0.03,0,0,0)
+            #ret=gripper_trasl_service(0.03,0,0,0)
+            try:
+                rospy.delete_param('robot_description')
+            except KeyError:
+                print "value not set"
+            self.load_robot_description(index+1)
 
+    def load_robot_description(self, gripper_model):
+		command_string = "rosparam load ~/workspaces/kuka_catkin_ws/src/kuka_experimental/kuka_robot_bringup/robot/bin/kr120toolv%d.urdf /robot_description" % gripper_model
+		os.system(command_string)
         
     def shutdown_plugin(self):
         # TODO unregister all publishers here
