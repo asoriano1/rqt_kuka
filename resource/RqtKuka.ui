@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>271</width>
-    <height>715</height>
+    <width>291</width>
+    <height>769</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>271</width>
-     <height>601</height>
+     <width>291</width>
+     <height>711</height>
     </rect>
    </property>
    <widget class="QFrame" name="frame">
@@ -27,8 +27,8 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>251</width>
-      <height>591</height>
+      <width>271</width>
+      <height>701</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -40,8 +40,8 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>440</y>
+       <x>30</x>
+       <y>610</y>
        <width>211</width>
        <height>81</height>
       </rect>
@@ -60,7 +60,7 @@
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>60</y>
+       <y>50</y>
        <width>101</width>
        <height>22</height>
       </rect>
@@ -98,7 +98,7 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>40</y>
+       <y>30</y>
        <width>141</width>
        <height>16</height>
       </rect>
@@ -110,8 +110,8 @@
     <widget class="QLabel" name="weight_label">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>370</y>
+       <x>30</x>
+       <y>530</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -123,8 +123,8 @@
     <widget class="QLabel" name="tool_force_label">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>410</y>
+       <x>40</x>
+       <y>480</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -136,8 +136,8 @@
     <widget class="QLCDNumber" name="tool_force_lcdNumber">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>400</y>
+       <x>140</x>
+       <y>470</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -152,8 +152,8 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>150</y>
+       <x>90</x>
+       <y>130</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -169,7 +169,7 @@
      <property name="geometry">
       <rect>
        <x>80</x>
-       <y>250</y>
+       <y>370</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -184,8 +184,8 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>180</y>
+       <x>90</x>
+       <y>240</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -200,8 +200,8 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>120</y>
+       <x>90</x>
+       <y>100</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -213,8 +213,8 @@
     <widget class="QLCDNumber" name="weight_lcdNumber">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>360</y>
+       <x>160</x>
+       <y>520</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -229,8 +229,8 @@
     <widget class="QLabel" name="Gotolabel">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>90</y>
+       <x>80</x>
+       <y>80</y>
        <width>101</width>
        <height>16</height>
       </rect>
@@ -243,7 +243,7 @@
      <property name="geometry">
       <rect>
        <x>80</x>
-       <y>220</y>
+       <y>350</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -259,7 +259,7 @@
      <property name="geometry">
       <rect>
        <x>53</x>
-       <y>320</y>
+       <y>439</y>
        <width>141</width>
        <height>22</height>
       </rect>
@@ -268,6 +268,151 @@
       <string>Gripper Straighten</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="tare_button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>570</y>
+       <width>41</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Tare</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="reset_button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>570</y>
+       <width>41</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>510</y>
+       <width>231</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="pick_left">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>160</y>
+       <width>121</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>images/pick_Left.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="pick_right">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>160</y>
+       <width>120</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>images/pick_Right.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="pick_left_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>270</y>
+       <width>121</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>images/pick_Left2.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="pick_right_2">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>270</y>
+       <width>120</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>images/pick_Right2.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <zorder>frame_2</zorder>
+    <zorder>label</zorder>
+    <zorder>calibre_comboBox</zorder>
+    <zorder>Select_obus_label</zorder>
+    <zorder>weight_label</zorder>
+    <zorder>tool_force_label</zorder>
+    <zorder>tool_force_lcdNumber</zorder>
+    <zorder>PrePick_Button</zorder>
+    <zorder>PickTest_Button</zorder>
+    <zorder>PrePlace_Button</zorder>
+    <zorder>Home_Button</zorder>
+    <zorder>weight_lcdNumber</zorder>
+    <zorder>Gotolabel</zorder>
+    <zorder>Gotolabel_2</zorder>
+    <zorder>Gripper_Straighten_Button</zorder>
+    <zorder>tare_button</zorder>
+    <zorder>reset_button</zorder>
+    <zorder>pick_left</zorder>
+    <zorder>pick_right</zorder>
+    <zorder>pick_left_2</zorder>
+    <zorder>pick_right_2</zorder>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -300,7 +445,7 @@
    <property name="geometry">
     <rect>
      <x>67</x>
-     <y>285</y>
+     <y>404</y>
      <width>131</width>
      <height>22</height>
     </rect>
@@ -313,7 +458,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>610</y>
+     <y>710</y>
      <width>41</width>
      <height>16</height>
     </rect>
@@ -326,7 +471,7 @@
    <property name="geometry">
     <rect>
      <x>82</x>
-     <y>609</y>
+     <y>709</y>
      <width>151</width>
      <height>20</height>
     </rect>
@@ -350,7 +495,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>640</y>
+     <y>720</y>
      <width>231</width>
      <height>41</height>
     </rect>
@@ -363,7 +508,7 @@
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>690</y>
+     <y>750</y>
      <width>91</width>
      <height>16</height>
     </rect>
