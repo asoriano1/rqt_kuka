@@ -45,7 +45,7 @@ srv_finger_set_pose='/kuka_tool_finger_node/set_odometry' #robotnik_msgs.set.odo
 #topic names:
 topic_cart_pose_kuka='/kuka_robot/cartesian_pos_kuka'
 topic_kuka_moving='/kuka_robot/kuka_moving'
-topic_tool_weight='/kuka_gauges/phidget_load/load_mean'
+topic_tool_weight='/phidget_load/load_mean'
 topic_current='/kuka_tool/robotnik_base_hw/current'
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
@@ -57,31 +57,34 @@ Preplace_Pose_y=235.42
 Preplace_Pose_z=1435.39
 Preplace_Pose_a=-50
 Preplace_Pose_b=0#-0.21
-Preplace_Pose_c=-174#178.41
+Preplace_Pose_c=179#178.41
 
 
 #Preplace Pose
 #Preplace_Pose=Pose(Point(400, 400, 100), Quaternion(0, 0, 0, 1))
-#rosservice call /kuka_robot/setKukaAbs "{x: 255.69, y: 1704.42, z: 1475.39, A: 14.39, B: 0, C: -174}" 
+#rosservice call /kuka_robot/setKukaAbs "{x: 255.69, y: 1704.42, z: 1475.39, A: -14.39, B: 0, C: 174}" 
 #CAJA GRIS
 Prepick_Pose_x=255.49
 Prepick_Pose_y=1704.49
 Prepick_Pose_z=1475.38
 Prepick_Pose_a=-14.24#15.2
 Prepick_Pose_b=0.0#-0.12
-Prepick_Pose_c=174#178.73
+Prepick_Pose_c=179.0#178.73
 
 #Homming Pose
-Homming_Pose_x=255.49
-Homming_Pose_y=1704.49
-Homming_Pose_z=1475.38
-Homming_Pose_a=-14.24#15.2
-Homming_Pose_b=0.0#-0.12
-Homming_Pose_c=174#178.73
+Homming_Pose_x=1260.41
+Homming_Pose_y=1284.82
+Homming_Pose_z=1455.99
+Homming_Pose_a=-43.03
+Homming_Pose_b=0.0
+Homming_Pose_c=179.0#178.73
 
 #RollerBench Pose
 RollerBench_Pose=Pose(Point(200, 200, 100), Quaternion(0, 0, 0, 1))
+pos_x_kuka=0.0
+pos_y_kuka=0.0
 pos_z_kuka=0.0
+pos_a_kuka=0.0
 weight_read=0.0
 weight_empty=0.0
 
@@ -121,6 +124,7 @@ class RqtKuka(Plugin):
         #Buttons
         self._widget.PrePick_Button.pressed.connect(self.press_prepick_button)
         self._widget.PrePlace_Button.pressed.connect(self.press_preplaced_button)
+        self._widget.Home_Button.pressed.connect(self.press_homming_button)
         
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
@@ -160,13 +164,19 @@ class RqtKuka(Plugin):
 
     def desactivate_buttons(self):
         self._widget.PrePick_Button.setEnabled(False)
-        self._widget.PickTest_Button.setEnabled(False)
         self._widget.PrePlace_Button.setEnabled(False)
+        self._widget.Home_Button.setEnabled(False)
+        self._widget.PickTest_Button.setEnabled(False)
+        self._widget.Gripper_Homing_Button.setEnabled(False)
+        self._widget.Gripper_Straighten_Button.setEnabled(False)
 
     def activate_buttons(self):
         self._widget.PrePick_Button.setEnabled(True)
         self._widget.PickTest_Button.setEnabled(True)
         self._widget.PrePlace_Button.setEnabled(True)
+        self._widget.Gripper_Homing_Button.setEnabled(True)
+        self._widget.Gripper_Straighten_Button.setEnabled(True)
+        self._widget.Home_Button.setEnabled(True)
 
     def callback_moving(self, data):
 		global KUKA_AUT
@@ -174,15 +184,21 @@ class RqtKuka(Plugin):
 		if data.data == True:
 							KUKA_AUT=True
 							self._widget.mode_label.setText("AUTOMATIC")
+							self.desactivate_buttons()
 							#selt._widget.mode_label.setStyleSheet(\ncolor: rgb(255, 0, 0))
+							
 		else:
 			KUKA_AUT=False
 			self._widget.mode_label.setText("MANUAL")
+			self.activate_buttons()
 
     def callback_robot_pose(self, data):
-		global pos_z_kuka
+		global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka
 		print 'CB:robot_pose_received',data
+		pos_x_kuka=data.x
+		pos_y_kuka=data.y
 		pos_z_kuka=data.z
+		pos_a_kuka=data.a
 
     def callback_tool_weight(self, data):
 		global weight_empty, weight_read
@@ -203,7 +219,7 @@ class RqtKuka(Plugin):
             homing_service = rospy.ServiceProxy(srv_tool_homing, home)           
             ret = homing_service()
             weight_empty=weight_read
-            gripper_move_service(0.05,0,0,-0.3)
+            gripper_move_service(0.02,0,0,-0.15)
             if ret == True:
                 TOOL_HOMED=True
                 self._widget.info_label.setText("Service tool homing call done")
@@ -218,7 +234,7 @@ class RqtKuka(Plugin):
 			placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
 			ret_rel=placed_rel_service(0, 0, Preplace_Pose_z-pos_z_kuka, 0, 0, 0)
 			KUKA_AUT=True
-			while KUKA_AUT: time.sleep(0.05)
+			while KUKA_AUT: time.sleep(0.1)
 			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
 			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a,Preplace_Pose_b,Preplace_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
@@ -234,23 +250,21 @@ class RqtKuka(Plugin):
 			picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
 			ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
 			KUKA_AUT=True
-			while KUKA_AUT: time.sleep(0.05)
+			while KUKA_AUT: time.sleep(0.1)
 			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
 			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)
-			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
 			
-    def press_tool_homming(self):
+    def press_homming_button(self):
 		global KUKA_AUT, pos_z_kuka
-		#Call service to move robot up and then to pre place pose, should be slow
 		try:
 			homming_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
 			ret_rel=homming_rel_service(0, 0,Homming_Pose_z-pos_z_kuka , 0, 0, 0)
 			KUKA_AUT=True
-			while KUKA_AUT: time.sleep(0.05)
+			while KUKA_AUT: time.sleep(0.1)
 			homming_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
 			ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, Homming_Pose_a,Homming_Pose_b,Homming_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
@@ -265,7 +279,7 @@ class RqtKuka(Plugin):
 			placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
 			ret_rel=placed_rel_service(0, 0, 20, 0, 0, 0)
 			KUKA_AUT=True
-			while KUKA_AUT: time.sleep(0.05)
+			while KUKA_AUT: time.sleep(0.1)
 			if ret_rel == True:
 					CURRENT_STATE=STATE_DOING_PICK_TEST
 		except rospy.ServiceException, e:
@@ -274,6 +288,17 @@ class RqtKuka(Plugin):
     def press_tool_straighten(self):
 		global KUKA_AUT
 		print "Service called"
+		try:
+			KUKA_AUT=True
+			while KUKA_AUT: time.sleep(0.1)
+			tool_straighten_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+			ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,0.0,179.0)
+			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
+			if ret == True:
+				CURRENT_STATE=STATE_MOVING_TO_PLACE
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+		
 			    
     def press_apply_button(self):
         Prepick_Pose_x=self._widget.prepick_x.toPlainText()
@@ -351,7 +376,7 @@ class RqtKuka(Plugin):
             self.load_robot_description(index+1)
 
     def load_robot_description(self, gripper_model):
-		command_string = "rosparam load ~/workspaces/kuka_catkin_ws/src/kuka_experimental/kuka_robot_bringup/robot/bin/kr120toolv%d.urdf /robot_description" % gripper_model
+		command_string = "rosparam load ~/kuka_catkin_ws/src/kuka_experimental/kuka_robot_bringup/robot/bin/kr120toolv%d.urdf /robot_description" % gripper_model
 		os.system(command_string)
         
     def shutdown_plugin(self):
