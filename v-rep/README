@@ -1,0 +1,3 @@
+copy ROS plugin/libv_repExtRosInterface.so into V-REP folder (maybe is already there)
+copy model/KUKA into V-REP/models/robots/non-mobile/
+
