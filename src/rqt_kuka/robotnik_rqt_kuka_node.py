@@ -34,6 +34,7 @@ STATE_HOMING=6
 
 TOOL_HOMED=False
 KUKA_AUT=False
+finger_type=0
 #service names:
 srv_name_move_abs_fast='/kuka_robot/setKukaAbsFast'
 srv_name_move_abs_slow='/kuka_robot/setKukaAbs'
@@ -129,10 +130,14 @@ class RqtKuka(Plugin):
         self._widget.Pick_Right_Button.pressed.connect(self.press_pick_right_button)
         self._widget.Place_Left_Button.pressed.connect(self.press_place_left_button)
         self._widget.Place_Right_Button.pressed.connect(self.press_place_right_button)
+        self._widget.Finger_Adjust_Button.pressed.connect(self.press_finger_adjust_button)
+        self._widget.Tare_Button.pressed.connect(self.press_tare_button)
+        self._widget.Tare_Reset_Button.pressed.connect(self.press_tare_reset_button)
         
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
         self._widget.Gripper_Straighten_Button.pressed.connect(self.press_tool_straighten)
+        self._widget.Capture_Button.pressed.connect(self.press_capture_button)
 
         #displays
         #self._widget.weight_lcdNumber.pressed.connect(self.press_load_yaml)
@@ -220,22 +225,48 @@ class RqtKuka(Plugin):
     def callback_current(self, data):
         #print 'CB:current_received',data
         self._widget.tool_force_lcdNumber.display(data.data)
-
+        
     def press_tool_homming(self):
-        #Call tool homing method
-        global weight_empty, weight_read
-        try:
-            gripper_move_service = rospy.ServiceProxy(srv_finger_set_pose,set_odometry)
-            homing_service = rospy.ServiceProxy(srv_tool_homing, home)           
-            ret = homing_service()
-            weight_empty=weight_read
-            gripper_move_service(0.02,0,0,-0.15)
-            if ret == True:
-                TOOL_HOMED=True
-                self._widget.info_label.setText("Service tool homing call done")
-        except rospy.ServiceException, e:
-            print "Service call failed: %s"%e
-            self._widget.info_label.setText("Service tool homing call failed")
+		ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
+		if ret == QMessageBox.Ok:
+			#Call tool homing method
+			global weight_empty, weight_read
+			try:
+				gripper_move_service = rospy.ServiceProxy(srv_finger_set_pose,set_odometry)
+				homing_service = rospy.ServiceProxy(srv_tool_homing, home)           
+				ret = homing_service()
+				#weight_empty=weight_read
+				gripper_move_service(0.02,0,0,-0.15)
+				if ret == True:
+					TOOL_HOMED=True
+					self._widget.info_label.setText("Service tool homing call done")
+			except rospy.ServiceException, e:
+				print "Service call failed: %s"%e
+				self._widget.info_label.setText("Service tool homing call failed")
+	
+    def press_finger_adjust_button(self):
+		
+		ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
+		if ret == QMessageBox.Ok:
+			if finger_type == 0:
+				print 'No gripper selected'
+			elif finger_type == 1:
+				print 'Set gripper to 100mm'
+				tras_from_homing=0.2-0.1;
+				#ret=gripper_trasl_service(tras_from_homing,0,0,0)
+			elif finger_type == 2:
+				print 'Set gripper to 140mm'
+				tras_from_homing=0.2-0.14;
+				#ret=gripper_trasl_service(tras_from_homing,0,0,0)
+			elif finger_type == 3:
+				print 'Set gripper to 160mm'
+				tras_from_homing=0.2-0.16;
+				#ret=gripper_trasl_service(tras_from_homing,0,0,0)
+			elif finger_type == 4:
+				print 'Set gripper to 270mm'
+				tras_from_homing=0.2-0.14;
+				#ret=gripper_trasl_service(tras_from_homing,0,0,0)
+			
 
     def press_place_right_button(self):
 		global KUKA_AUT, pos_z_kuka,pos_a_kuka
@@ -378,8 +409,18 @@ class RqtKuka(Plugin):
         Preplace_Pose_c=self._widget.preplace_c.toPlainText()
         print "updated Preplace Pose x:", Preplace_Pose_x, " y:", Preplace_Pose_y, " z:", Preplace_Pose_z, " a:", Preplace_Pose_a, " b:", Preplace_Pose_b, " c:", Preplace_Pose_c
     
+    def press_tare_button(self):
+		global weight_empty
+		weight_empty=weight_read
+
+    def press_tare_reset_button(self):
+		global weight_empty
+		weight_empty = 0
+    
     def calibre_selected(self, index):
-        print 'Selected:', index
+        global finger_type
+        print 'Selected:',index
+        finger_type = index
         #self.set_current_arm() NO DEBERIA ENTRAR AQUI SIN EL HOMING
         gripper_trasl_service = rospy.ServiceProxy(srv_finger_set_pose,set_odometry)
         if index == 0:
@@ -390,51 +431,33 @@ class RqtKuka(Plugin):
             #TODO: check if the gripper is empty. If there is some load not allow to move autonomously
             self.activate_buttons()            
         if index == 1:            
-            print 'Set gripper to 100mm'
-            #TODO: Set gripper to 100mm
-            tras_from_homing=0.2-0.1;
-            #ret=gripper_trasl_service(tras_from_homing,0,0,0)
-            #if ret == False:
-				#print 'Set gripper to 100mm: OUT OF RANGE'
-            #if rospy.get_param('robot_description')
             try:
                 rospy.delete_param('robot_description')
             except KeyError:
                 print "value not set"
             self.load_robot_description(index)
         elif index == 2:
-            print 'Set gripper to 140mm'
-            #TODO: Set gripper to 140mm
-            tras_from_homing=0.2-0.14;
-            #ret=gripper_trasl_service(tras_from_homing,0,0,0)
-            #if ret == False:
-			#	print 'Set gripper to 140mm: OUT OF RANGE'
             try:
                 rospy.delete_param('robot_description')
             except KeyError:
                 print "value not set"
             self.load_robot_description(index+1)
         elif index == 3:
-            print 'Set gripper to 160mm'
-            #TODO: Set gripper to 160mm
-            tras_from_homing=0.2-0.16;
-            #ret=gripper_trasl_service(tras_from_homing,0,0,0)
-            #if ret == False:
-			#	print 'Set gripper to 140mm: OUT OF RANGE'
             try:
                 rospy.delete_param('robot_description')
             except KeyError:
                 print "value not set"
             self.load_robot_description(index+1)
         elif index == 4:
-            print 'Set gripper to 270mm'
-            #TODO: Set gripper to 270mm
-            #ret=gripper_trasl_service(0.03,0,0,0)
             try:
                 rospy.delete_param('robot_description')
             except KeyError:
                 print "value not set"
             self.load_robot_description(index+1)
+            
+    def press_capture_button(self):
+		print 'capture button'
+		#msg = rospy.wait_for_message('',)
 
     def load_robot_description(self, gripper_model):
 		command_string = "rosparam load ~/kuka_catkin_ws/src/kuka_experimental/kuka_robot_bringup/robot/bin/kr120toolv%d.urdf /robot_description" % gripper_model
@@ -443,20 +466,3 @@ class RqtKuka(Plugin):
     def shutdown_plugin(self):
         # TODO unregister all publishers here
         pass
-
-    def save_settings(self, plugin_settings, instance_settings):
-        # TODO save intrinsic configuration, usually using:
-        # instance_settings.set_value(k, v)
-        pass
-
-    def restore_settings(self, plugin_settings, instance_settings):
-        # TODO restore intrinsic configuration, usually using:
-        # v = instance_settings.value(k)
-        pass
-    
-    def get_function_name(self):
-        return inspect.currentframe().f_back.f_code.co_name
-    #def trigger_configuration(self):
-        # Comment in to signal that the plugin has a way to configure
-        # This will enable a setting button (gear icon) in each dock widget title bar
-        # Usually used to open a modal configuration dialog

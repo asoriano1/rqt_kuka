@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>291</width>
-    <height>740</height>
+    <height>828</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,16 +23,16 @@
      <x>0</x>
      <y>0</y>
      <width>291</width>
-     <height>711</height>
+     <height>821</height>
     </rect>
    </property>
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>10</y>
       <width>271</width>
-      <height>671</height>
+      <height>751</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -45,7 +45,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>580</y>
+       <y>660</y>
        <width>211</width>
        <height>81</height>
       </rect>
@@ -63,8 +63,8 @@
     <widget class="QComboBox" name="calibre_comboBox">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>50</y>
+       <x>30</x>
+       <y>100</y>
        <width>101</width>
        <height>22</height>
       </rect>
@@ -101,8 +101,8 @@
     <widget class="QLabel" name="Select_obus_label">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>30</y>
+       <x>30</x>
+       <y>80</y>
        <width>141</width>
        <height>16</height>
       </rect>
@@ -115,7 +115,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>500</y>
+       <y>580</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -128,7 +128,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>450</y>
+       <y>530</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -141,7 +141,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>440</y>
+       <y>524</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -157,7 +157,7 @@
      <property name="geometry">
       <rect>
        <x>95</x>
-       <y>340</y>
+       <y>330</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -173,7 +173,7 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>100</y>
+       <y>160</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -186,7 +186,7 @@
      <property name="geometry">
       <rect>
        <x>160</x>
-       <y>490</y>
+       <y>570</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -202,7 +202,7 @@
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>80</y>
+       <y>140</y>
        <width>101</width>
        <height>16</height>
       </rect>
@@ -215,7 +215,7 @@
      <property name="geometry">
       <rect>
        <x>102</x>
-       <y>320</y>
+       <y>410</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -230,24 +230,24 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>65</x>
-       <y>409</y>
+       <x>20</x>
+       <y>429</y>
        <width>141</width>
        <height>22</height>
       </rect>
      </property>
      <property name="text">
-      <string>Gripper Straighten</string>
+      <string>Tool Straighten</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="tare_button">
+    <widget class="QPushButton" name="Tare_Button">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>540</y>
+       <y>620</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -256,14 +256,14 @@
       <string>Tare</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="reset_button">
+    <widget class="QPushButton" name="Tare_Reset_Button">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>540</y>
+       <y>620</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -312,9 +312,9 @@
     <widget class="QFrame" name="frame_2">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>480</y>
-       <width>231</width>
+       <x>10</x>
+       <y>560</y>
+       <width>251</width>
        <height>91</height>
       </rect>
      </property>
@@ -332,7 +332,7 @@
      <property name="geometry">
       <rect>
        <x>150</x>
-       <y>240</y>
+       <y>300</y>
        <width>91</width>
        <height>22</height>
       </rect>
@@ -412,7 +412,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>280</y>
+       <y>370</y>
        <width>91</width>
        <height>22</height>
       </rect>
@@ -465,7 +465,7 @@
      <property name="geometry">
       <rect>
        <x>150</x>
-       <y>280</y>
+       <y>370</y>
        <width>91</width>
        <height>22</height>
       </rect>
@@ -515,7 +515,7 @@
      <property name="geometry">
       <rect>
        <x>80</x>
-       <y>130</y>
+       <y>190</y>
        <width>111</width>
        <height>91</height>
       </rect>
@@ -537,52 +537,169 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>240</y>
+       <y>300</y>
        <width>91</width>
        <height>21</height>
       </rect>
-     </property>
-     <property name="palette">
-      <palette>
-       <active>
-        <colorrole role="ButtonText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>170</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </active>
-       <inactive>
-        <colorrole role="ButtonText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>170</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </inactive>
-       <disabled>
-        <colorrole role="ButtonText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>190</red>
-           <green>190</green>
-           <blue>190</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </disabled>
-      </palette>
      </property>
      <property name="text">
       <string>Pick Left</string>
      </property>
     </widget>
+    <widget class="QFrame" name="frame_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>9</y>
+       <width>251</width>
+       <height>121</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="Finger_Adjust_Button">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>90</y>
+        <width>101</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Finger Adjust</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Gripper_Homing_Button">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>40</y>
+        <width>120</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Gripper Homing</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Run_Program_Button">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>10</y>
+        <width>120</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>RUN PROGRAM</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="Capture_Button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>430</y>
+       <width>80</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Capture</string>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>251</width>
+       <height>271</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Led_On_Button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>490</y>
+       <width>80</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ON</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Led_Off_Button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>490</y>
+       <width>80</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>OFF</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Gotolabel_3">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>470</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LED:</string>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>460</y>
+       <width>251</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <zorder>frame_5</zorder>
+    <zorder>frame_4</zorder>
+    <zorder>frame_3</zorder>
     <zorder>frame_2</zorder>
     <zorder>label</zorder>
     <zorder>calibre_comboBox</zorder>
@@ -596,33 +713,24 @@
     <zorder>Gotolabel</zorder>
     <zorder>Gotolabel_2</zorder>
     <zorder>Gripper_Straighten_Button</zorder>
-    <zorder>tare_button</zorder>
-    <zorder>reset_button</zorder>
+    <zorder>Tare_Button</zorder>
+    <zorder>Tare_Reset_Button</zorder>
     <zorder>Pick_Right_Button</zorder>
     <zorder>Place_Left_Button</zorder>
     <zorder>Place_Right_Button</zorder>
     <zorder>label_2</zorder>
     <zorder>Pick_Left_Button</zorder>
+    <zorder>Capture_Button</zorder>
+    <zorder>Led_On_Button</zorder>
+    <zorder>Led_Off_Button</zorder>
+    <zorder>Gotolabel_3</zorder>
    </widget>
-  </widget>
-  <widget class="QPushButton" name="Gripper_Homing_Button">
-   <property name="geometry">
-    <rect>
-     <x>86</x>
-     <y>374</y>
-     <width>120</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Gripper Homing</string>
-   </property>
   </widget>
   <widget class="QLabel" name="label_24">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>680</y>
+     <x>60</x>
+     <y>770</y>
      <width>41</width>
      <height>16</height>
     </rect>
@@ -634,8 +742,8 @@
   <widget class="QLabel" name="mode_label">
    <property name="geometry">
     <rect>
-     <x>82</x>
-     <y>679</y>
+     <x>102</x>
+     <y>769</y>
      <width>151</width>
      <height>20</height>
     </rect>
@@ -659,7 +767,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>690</y>
+     <y>780</y>
      <width>231</width>
      <height>41</height>
     </rect>
@@ -672,7 +780,7 @@
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>720</y>
+     <y>800</y>
      <width>91</width>
      <height>16</height>
     </rect>
