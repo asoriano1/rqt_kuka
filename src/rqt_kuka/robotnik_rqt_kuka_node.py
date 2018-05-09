@@ -85,6 +85,8 @@ pos_x_kuka=0.0
 pos_y_kuka=0.0
 pos_z_kuka=0.0
 pos_a_kuka=0.0
+pos_b_kuka=0.0
+pos_c_kuka=0.0
 weight_read=0.0
 weight_empty=0.0
 
@@ -199,6 +201,8 @@ class RqtKuka(Plugin):
 		pos_y_kuka=data.y
 		pos_z_kuka=data.z
 		pos_a_kuka=data.a
+		pos_b_kuka=data.b
+		pos_c_kuka=data.c
 
     def callback_tool_weight(self, data):
 		global weight_empty, weight_read
@@ -286,13 +290,16 @@ class RqtKuka(Plugin):
 			print "Service call failed: %s"%e
 
     def press_tool_straighten(self):
-		global KUKA_AUT
+		global KUKA_AUT,pos_a_kuka,pos_b_kuka,pos_c_kuka,pos_x_kuka,pos_y_kuka,pos_z_kuka
 		print "Service called"
 		try:
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			tool_straighten_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-			ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,0.0,179.0)
+			ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,pos_b_kuka,179)
+			KUKA_AUT=True
+			while KUKA_AUT: time.sleep(0.1)
+			ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,0.0,pos_c_kuka)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
