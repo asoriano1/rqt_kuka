@@ -127,6 +127,10 @@ class RqtKuka(Plugin):
         self._widget.PrePick_Button.pressed.connect(self.press_prepick_button)
         self._widget.PrePlace_Button.pressed.connect(self.press_preplaced_button)
         self._widget.Home_Button.pressed.connect(self.press_homming_button)
+        self._widget.Pick_Left_Button.pressed.connect(self.press_pick_left_button)
+        self._widget.Pick_Right_Button.pressed.connect(self.press_pick_right_button)
+        self._widget.Place_Left_Button.pressed.connect(self.press_place_left_button)
+        self._widget.Place_Right_Button.pressed.connect(self.press_place_right_button)
         
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
@@ -171,6 +175,10 @@ class RqtKuka(Plugin):
         self._widget.PickTest_Button.setEnabled(False)
         self._widget.Gripper_Homing_Button.setEnabled(False)
         self._widget.Gripper_Straighten_Button.setEnabled(False)
+        self._widget.Pick_Right_Button.setEnabled(False)
+        self._widget.Pick_Left_Button.setEnabled(False)
+        self._widget.Place_Right_Button.setEnabled(False)
+        self._widget.Place_Left_Button.setEnabled(False)
 
     def activate_buttons(self):
         self._widget.PrePick_Button.setEnabled(True)
@@ -179,7 +187,11 @@ class RqtKuka(Plugin):
         self._widget.Gripper_Homing_Button.setEnabled(True)
         self._widget.Gripper_Straighten_Button.setEnabled(True)
         self._widget.Home_Button.setEnabled(True)
-
+        self._widget.Pick_Right_Button.setEnabled(True)
+        self._widget.Pick_Left_Button.setEnabled(True)
+        self._widget.Place_Right_Button.setEnabled(True)
+        self._widget.Place_Left_Button.setEnabled(True)
+        
     def callback_moving(self, data):
 		global KUKA_AUT
 		#print 'CB:moving_received:',data.data
@@ -247,6 +259,38 @@ class RqtKuka(Plugin):
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
 
+    def press_place_right_button(self):
+		global KUKA_AUT, pos_z_kuka
+        #Call service to move robot up and then to the pre-pick pose, should be fast
+		try:
+			placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
+			ret_rel=placed_rel_service(0, 0, Preplace_Pose_z-pos_z_kuka, 0, 0, 0)
+			KUKA_AUT=True
+			while KUKA_AUT: time.sleep(0.1)
+			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a,Preplace_Pose_b,Preplace_Pose_c)
+			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
+			if ret == True:
+				CURRENT_STATE=3
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+			
+    def press_place_left_button(self):
+		global KUKA_AUT, pos_z_kuka
+        #Call service to move robot up and then to the pre-pick pose, should be fast
+		try:
+			placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
+			ret_rel=placed_rel_service(0, 0, Preplace_Pose_z-pos_z_kuka, 0, 0, 0)
+			KUKA_AUT=True
+			while KUKA_AUT: time.sleep(0.1)
+			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a,Preplace_Pose_b,Preplace_Pose_c)
+			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
+			if ret == True:
+				CURRENT_STATE=3
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+			
     def press_prepick_button(self):
 		global KUKA_AUT, pos_z_kuka
 		#Call service to move robot up and then to pre place pose, should be slow
@@ -261,6 +305,36 @@ class RqtKuka(Plugin):
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
+
+    def press_pick_left_button(self):
+		global KUKA_AUT, pos_z_kuka
+		#Call service to move robot up and then to pre place pose, should be slow
+		try:
+			picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
+			ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
+			KUKA_AUT=True
+			while KUKA_AUT: time.sleep(0.1)
+			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
+			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)
+			if ret == True:
+				CURRENT_STATE=STATE_MOVING_TO_PLACE
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+			
+    def press_pick_right_button(self):
+		global KUKA_AUT, pos_z_kuka
+		#Call service to move robot up and then to pre place pose, should be slow
+		try:
+			picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
+			ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
+			KUKA_AUT=True
+			while KUKA_AUT: time.sleep(0.1)
+			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
+			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)
+			if ret == True:
+				CURRENT_STATE=STATE_MOVING_TO_PLACE
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e			
 			
     def press_homming_button(self):
 		global KUKA_AUT, pos_z_kuka
