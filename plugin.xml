@@ -7,7 +7,7 @@
 		<group>
 			<label>KUKA OBUSES</label>
 			<icon type="theme">folder</icon>
-			<statustip></statustip>
+			<statustip>Kuka Plugin</statustip>
 		</group>
       <label>RQT Kuka</label>
       <icon type="theme">start-here</icon>

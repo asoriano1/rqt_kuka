@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>291</width>
-    <height>769</height>
+    <height>740</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Robotnik Graphical Interface</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>images/logo.png</normaloff>images/logo.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget" native="true">
    <property name="geometry">
@@ -28,7 +32,7 @@
       <x>10</x>
       <y>0</y>
       <width>271</width>
-      <height>701</height>
+      <height>671</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -41,7 +45,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>610</y>
+       <y>580</y>
        <width>211</width>
        <height>81</height>
       </rect>
@@ -111,7 +115,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>530</y>
+       <y>500</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -124,7 +128,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>480</y>
+       <y>450</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -137,29 +141,13 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>470</y>
+       <y>440</y>
        <width>81</width>
        <height>31</height>
       </rect>
      </property>
      <property name="segmentStyle">
       <enum>QLCDNumber::Flat</enum>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="PrePick_Button">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>320</y>
-       <width>80</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>PrePick</string>
      </property>
     </widget>
     <widget class="QPushButton" name="PickTest_Button">
@@ -169,29 +157,13 @@
      <property name="geometry">
       <rect>
        <x>95</x>
-       <y>370</y>
+       <y>340</y>
        <width>80</width>
        <height>22</height>
       </rect>
      </property>
      <property name="text">
-      <string>Pick_Test</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="PrePlace_Button">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>320</y>
-       <width>80</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>PrePlace</string>
+      <string>Pick Test</string>
      </property>
     </widget>
     <widget class="QPushButton" name="Home_Button">
@@ -214,7 +186,7 @@
      <property name="geometry">
       <rect>
        <x>160</x>
-       <y>520</y>
+       <y>490</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -243,7 +215,7 @@
      <property name="geometry">
       <rect>
        <x>102</x>
-       <y>350</y>
+       <y>320</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -259,7 +231,7 @@
      <property name="geometry">
       <rect>
        <x>65</x>
-       <y>439</y>
+       <y>409</y>
        <width>141</width>
        <height>22</height>
       </rect>
@@ -275,7 +247,7 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>570</y>
+       <y>540</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -291,7 +263,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>570</y>
+       <y>540</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -341,7 +313,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>510</y>
+       <y>480</y>
        <width>231</width>
        <height>91</height>
       </rect>
@@ -353,97 +325,6 @@
       <enum>QFrame::Raised</enum>
      </property>
     </widget>
-    <widget class="QPushButton" name="Pick_Left_Button">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>240</y>
-       <width>80</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="palette">
-      <palette>
-       <active>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-        <colorrole role="ButtonText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>170</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </active>
-       <inactive>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-        <colorrole role="ButtonText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>170</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </inactive>
-       <disabled>
-        <colorrole role="WindowText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>190</red>
-           <green>190</green>
-           <blue>190</blue>
-          </color>
-         </brush>
-        </colorrole>
-        <colorrole role="ButtonText">
-         <brush brushstyle="SolidPattern">
-          <color alpha="255">
-           <red>190</red>
-           <green>190</green>
-           <blue>190</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </disabled>
-      </palette>
-     </property>
-     <property name="font">
-      <font>
-       <family>Sans Serif</family>
-      </font>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>Pick Left</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="Pick_Right_Button">
      <property name="enabled">
       <bool>false</bool>
@@ -452,7 +333,7 @@
       <rect>
        <x>150</x>
        <y>240</y>
-       <width>80</width>
+       <width>91</width>
        <height>22</height>
       </rect>
      </property>
@@ -530,9 +411,9 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>30</x>
        <y>280</y>
-       <width>80</width>
+       <width>91</width>
        <height>22</height>
       </rect>
      </property>
@@ -585,7 +466,7 @@
       <rect>
        <x>150</x>
        <y>280</y>
-       <width>80</width>
+       <width>91</width>
        <height>22</height>
       </rect>
      </property>
@@ -649,6 +530,59 @@
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QPushButton" name="Pick_Left_Button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>240</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>170</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>170</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="ButtonText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>190</red>
+           <green>190</green>
+           <blue>190</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="text">
+      <string>Pick Left</string>
+     </property>
+    </widget>
     <zorder>frame_2</zorder>
     <zorder>label</zorder>
     <zorder>calibre_comboBox</zorder>
@@ -656,9 +590,7 @@
     <zorder>weight_label</zorder>
     <zorder>tool_force_label</zorder>
     <zorder>tool_force_lcdNumber</zorder>
-    <zorder>PrePick_Button</zorder>
     <zorder>PickTest_Button</zorder>
-    <zorder>PrePlace_Button</zorder>
     <zorder>Home_Button</zorder>
     <zorder>weight_lcdNumber</zorder>
     <zorder>Gotolabel</zorder>
@@ -666,45 +598,19 @@
     <zorder>Gripper_Straighten_Button</zorder>
     <zorder>tare_button</zorder>
     <zorder>reset_button</zorder>
-    <zorder>Pick_Left_Button</zorder>
     <zorder>Pick_Right_Button</zorder>
     <zorder>Place_Left_Button</zorder>
     <zorder>Place_Right_Button</zorder>
     <zorder>label_2</zorder>
+    <zorder>Pick_Left_Button</zorder>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>203</width>
-     <height>19</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuRobotnik_Kuka_GUI">
-    <property name="title">
-     <string>Robotnik Kuka GUI</string>
-    </property>
-   </widget>
-   <addaction name="menuRobotnik_Kuka_GUI"/>
-  </widget>
-  <widget class="QStatusBar" name="statusbar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>3</width>
-     <height>22</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QPushButton" name="Gripper_Homing_Button">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>404</y>
-     <width>110</width>
+     <x>86</x>
+     <y>374</y>
+     <width>120</width>
      <height>22</height>
     </rect>
    </property>
@@ -716,7 +622,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>710</y>
+     <y>680</y>
      <width>41</width>
      <height>16</height>
     </rect>
@@ -729,7 +635,7 @@
    <property name="geometry">
     <rect>
      <x>82</x>
-     <y>709</y>
+     <y>679</y>
      <width>151</width>
      <height>20</height>
     </rect>
@@ -753,7 +659,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>720</y>
+     <y>690</y>
      <width>231</width>
      <height>41</height>
     </rect>
@@ -766,7 +672,7 @@
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>750</y>
+     <y>720</y>
      <width>91</width>
      <height>16</height>
     </rect>
