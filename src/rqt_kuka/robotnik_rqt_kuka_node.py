@@ -248,24 +248,25 @@ class RqtKuka(Plugin):
 		
 		ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
 		if ret == QMessageBox.Ok:
+			gripper_trasl_service = rospy.ServiceProxy(srv_finger_set_pose,set_odometry)
 			if finger_type == 0:
 				print 'No gripper selected'
 			elif finger_type == 1:
 				print 'Set gripper to 100mm'
 				tras_from_homing=0.2-0.1;
-				#ret=gripper_trasl_service(tras_from_homing,0,0,0)
+				ret=gripper_trasl_service(tras_from_homing,0,0,0)
 			elif finger_type == 2:
 				print 'Set gripper to 140mm'
 				tras_from_homing=0.2-0.14;
-				#ret=gripper_trasl_service(tras_from_homing,0,0,0)
+				ret=gripper_trasl_service(tras_from_homing,0,0,0)
 			elif finger_type == 3:
 				print 'Set gripper to 160mm'
 				tras_from_homing=0.2-0.16;
-				#ret=gripper_trasl_service(tras_from_homing,0,0,0)
+				ret=gripper_trasl_service(tras_from_homing,0,0,0)
 			elif finger_type == 4:
 				print 'Set gripper to 270mm'
-				tras_from_homing=0.2-0.14;
-				#ret=gripper_trasl_service(tras_from_homing,0,0,0)
+				tras_from_homing=0.03;
+				ret=gripper_trasl_service(tras_from_homing,0,0,0)
 			
 
     def press_place_right_button(self):
@@ -422,7 +423,6 @@ class RqtKuka(Plugin):
         print 'Selected:',index
         finger_type = index
         #self.set_current_arm() NO DEBERIA ENTRAR AQUI SIN EL HOMING
-        gripper_trasl_service = rospy.ServiceProxy(srv_finger_set_pose,set_odometry)
         if index == 0:
             print 'No gripper selected'
             self.desactivate_buttons()
