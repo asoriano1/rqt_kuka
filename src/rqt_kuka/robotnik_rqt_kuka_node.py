@@ -55,7 +55,7 @@ topic_current='/kuka_tool/robotnik_base_hw/current'
 Preplace_Pose_x=1707.69
 Preplace_Pose_y=235.42
 Preplace_Pose_z=1435.39
-Preplace_Pose_a=-50
+Preplace_Pose_a=-71 #left
 Preplace_Pose_b=0#-0.21
 Preplace_Pose_c=179#178.41
 
@@ -238,7 +238,7 @@ class RqtKuka(Plugin):
             self._widget.info_label.setText("Service tool homing call failed")
 
     def press_place_right_button(self):
-		global KUKA_AUT, pos_z_kuka
+		global KUKA_AUT, pos_z_kuka,pos_a_kuka
         #Call service to move robot up and then to the pre-pick pose, should be fast
 		try:
 			placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -246,7 +246,12 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a,Preplace_Pose_b,Preplace_Pose_c)
+			#if(pos_a_kuka<=-71 and pos_a_kuka>=-151):
+			if((pos_a_kuka<=190 and pos_a_kuka>=110) or (pos_a_kuka>=-179 and pos_a_kuka<=-151)):
+				ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a-90,Preplace_Pose_b,Preplace_Pose_c)
+				KUKA_AUT=True
+				while KUKA_AUT: time.sleep(0.1)
+			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a+180,Preplace_Pose_b,Preplace_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
 				CURRENT_STATE=3
@@ -254,7 +259,7 @@ class RqtKuka(Plugin):
 			print "Service call failed: %s"%e
 			
     def press_place_left_button(self):
-		global KUKA_AUT, pos_z_kuka
+		global KUKA_AUT, pos_z_kuka, pos_a_kuka
         #Call service to move robot up and then to the pre-pick pose, should be fast
 		try:
 			placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -262,6 +267,10 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+			if((pos_a_kuka<=190 and pos_a_kuka>=110) or (pos_a_kuka>=-179 and pos_a_kuka<=-151)):
+				ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a-90,Preplace_Pose_b,Preplace_Pose_c)
+				KUKA_AUT=True
+				while KUKA_AUT: time.sleep(0.1)
 			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a,Preplace_Pose_b,Preplace_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
