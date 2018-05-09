@@ -32,7 +32,7 @@
       <x>10</x>
       <y>10</y>
       <width>271</width>
-      <height>741</height>
+      <height>751</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -45,7 +45,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>650</y>
+       <y>660</y>
        <width>211</width>
        <height>81</height>
       </rect>
@@ -115,7 +115,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>570</y>
+       <y>580</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -141,7 +141,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>520</y>
+       <y>524</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -186,7 +186,7 @@
      <property name="geometry">
       <rect>
        <x>160</x>
-       <y>560</y>
+       <y>570</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -240,14 +240,14 @@
       <string>Tool Straighten</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="tare_button">
+    <widget class="QPushButton" name="Tare_Button">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>610</y>
+       <y>620</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -256,14 +256,14 @@
       <string>Tare</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="reset_button">
+    <widget class="QPushButton" name="Tare_Reset_Button">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>610</y>
+       <y>620</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -313,7 +313,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>550</y>
+       <y>560</y>
        <width>251</width>
        <height>91</height>
       </rect>
@@ -713,8 +713,8 @@
     <zorder>Gotolabel</zorder>
     <zorder>Gotolabel_2</zorder>
     <zorder>Gripper_Straighten_Button</zorder>
-    <zorder>tare_button</zorder>
-    <zorder>reset_button</zorder>
+    <zorder>Tare_Button</zorder>
+    <zorder>Tare_Reset_Button</zorder>
     <zorder>Pick_Right_Button</zorder>
     <zorder>Place_Left_Button</zorder>
     <zorder>Place_Right_Button</zorder>
@@ -730,7 +730,7 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>760</y>
+     <y>770</y>
      <width>41</width>
      <height>16</height>
     </rect>
@@ -743,7 +743,7 @@
    <property name="geometry">
     <rect>
      <x>102</x>
-     <y>759</y>
+     <y>769</y>
      <width>151</width>
      <height>20</height>
     </rect>
@@ -767,7 +767,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>740</y>
+     <y>780</y>
      <width>231</width>
      <height>41</height>
     </rect>
