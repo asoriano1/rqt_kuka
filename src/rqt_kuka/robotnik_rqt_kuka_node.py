@@ -67,7 +67,7 @@ Preplace_Pose_c=179#178.41
 Prepick_Pose_x=255.49
 Prepick_Pose_y=1704.49
 Prepick_Pose_z=1475.38
-Prepick_Pose_a=-14.24#15.2
+Prepick_Pose_a=-14#15.2
 Prepick_Pose_b=0.0#-0.12
 Prepick_Pose_c=179.0#178.73
 
@@ -203,17 +203,17 @@ class RqtKuka(Plugin):
 
     def callback_robot_pose(self, data):
 		global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka
-		print 'CB:robot_pose_received',data
+		#print 'CB:robot_pose_received',data
 		pos_x_kuka=data.x
 		pos_y_kuka=data.y
 		pos_z_kuka=data.z
-		pos_a_kuka=data.a
-		pos_b_kuka=data.b
-		pos_c_kuka=data.c
+		pos_a_kuka=data.A
+		pos_b_kuka=data.B
+		pos_c_kuka=data.C
 
     def callback_tool_weight(self, data):
 		global weight_empty, weight_read
-		print 'CB:tool_weight_received',data
+		#print 'CB:tool_weight_received',data
 		weight_read=data.data
 		weight_no_tool=data.data-weight_empty
 		self._widget.weight_lcdNumber.display(weight_no_tool)
@@ -271,7 +271,7 @@ class RqtKuka(Plugin):
 			print "Service call failed: %s"%e
 
     def press_pick_left_button(self):
-		global KUKA_AUT, pos_z_kuka
+		global KUKA_AUT, pos_z_kuka, pos_a_kuka
 		#Call service to move robot up and then to pre place pose, should be slow
 		try:
 			picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -279,14 +279,18 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
-			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)
+			if((pos_a_kuka<=180 and pos_a_kuka>=90)):
+				ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a-90,Prepick_Pose_b,Prepick_Pose_c)
+				KUKA_AUT=True
+				while KUKA_AUT: time.sleep(0.1)
+			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)			
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
 			
     def press_pick_right_button(self):
-		global KUKA_AUT, pos_z_kuka
+		global KUKA_AUT, pos_z_kuka, pos_a_kuka
 		#Call service to move robot up and then to pre place pose, should be slow
 		try:
 			picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -294,7 +298,11 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
-			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)
+			if (pos_a_kuka<=90 and pos_a_kuka>=-16):
+					ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a-90,Prepick_Pose_b,Prepick_Pose_c)
+					KUKA_AUT=True
+					while KUKA_AUT: time.sleep(0.1)
+			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a+180,Prepick_Pose_b,Prepick_Pose_c)
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
 		except rospy.ServiceException, e:
@@ -331,13 +339,13 @@ class RqtKuka(Plugin):
 		global KUKA_AUT,pos_a_kuka,pos_b_kuka,pos_c_kuka,pos_x_kuka,pos_y_kuka,pos_z_kuka
 		print "Service called"
 		try:
-			KUKA_AUT=True
-			while KUKA_AUT: time.sleep(0.1)
+			#KUKA_AUT=True
+			#while KUKA_AUT: time.sleep(0.1)
 			tool_straighten_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-			ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,pos_b_kuka,179)
+			ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,0.0,179)
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
-			ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,0.0,pos_c_kuka)
+			#ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,0.0,pos_c_kuka)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
