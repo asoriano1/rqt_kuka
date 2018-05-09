@@ -133,6 +133,7 @@ class RqtKuka(Plugin):
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
         self._widget.Gripper_Straighten_Button.pressed.connect(self.press_tool_straighten)
+        self._widget.Capture_Button.pressed.connect(self.press_capture_button)
 
         #displays
         #self._widget.weight_lcdNumber.pressed.connect(self.press_load_yaml)
@@ -418,6 +419,10 @@ class RqtKuka(Plugin):
             except KeyError:
                 print "value not set"
             self.load_robot_description(index+1)
+            
+    def press_capture_button(self):
+		print 'capture button'
+		#msg = rospy.wait_for_message('',)
 
     def load_robot_description(self, gripper_model):
 		command_string = "rosparam load ~/kuka_catkin_ws/src/kuka_experimental/kuka_robot_bringup/robot/bin/kr120toolv%d.urdf /robot_description" % gripper_model
