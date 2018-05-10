@@ -56,9 +56,12 @@ topic_current='/kuka_tool/robotnik_base_hw/current'
 Preplace_Pose_x=1707.69
 Preplace_Pose_y=235.42
 Preplace_Pose_z=1435.39
-Preplace_Pose_a=-71 #left
+Preplace_Pose_a_left=-71 #left
+Preplace_Pose_a_right=-71 + 180 #+180 because Preplace_Pose_a_left<0 otherwise -180
 Preplace_Pose_b=0#-0.21
 Preplace_Pose_c=179#178.41
+
+Preplace_angle_limit=20
 
 
 #Preplace Pose
@@ -68,9 +71,12 @@ Preplace_Pose_c=179#178.41
 Prepick_Pose_x=255.49
 Prepick_Pose_y=1704.49
 Prepick_Pose_z=1475.38
-Prepick_Pose_a=-14#15.2
+Prepick_Pose_a_left=-14#15.2
+Prepick_Pose_a_right=Prepick_Pose_a_left+180 #+180 because Preplace_Pose_a_left<0 otherwise -180
 Prepick_Pose_b=0.0#-0.12
 Prepick_Pose_c=179.0#178.73
+
+Prepick_angle_limit=90
 
 #Homming Pose
 Homming_Pose_x=1260.41
@@ -279,14 +285,17 @@ class RqtKuka(Plugin):
 			while KUKA_AUT: time.sleep(0.1)
 			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
 			#if(pos_a_kuka<=-71 and pos_a_kuka>=-151):
-			if((pos_a_kuka<=190 and pos_a_kuka>=110) or (pos_a_kuka>=-179 and pos_a_kuka<=-151)):
-				ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a-90,Preplace_Pose_b,Preplace_Pose_c)
+			#if((pos_a_kuka<=190 and pos_a_kuka>=110) or (pos_a_kuka>=-179 and pos_a_kuka<=-151)):
+			if(pos_a_kuka <= Preplace_angle_limit and pos_a_kuka >= Preplace_Pose_a_left):
+				print "pass at -160 (-71-90)"
+				ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left-90,Preplace_Pose_b,Preplace_Pose_c)
 				KUKA_AUT=True
 				while KUKA_AUT: time.sleep(0.1)
-			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a+180,Preplace_Pose_b,Preplace_Pose_c)
+			print "go at 110 (-71+180)"
+			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_right,Preplace_Pose_b,Preplace_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
-			if ret == True:
-				CURRENT_STATE=3
+			#if ret == True:
+			#	CURRENT_STATE=3
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
 			
@@ -299,11 +308,13 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-			if((pos_a_kuka<=190 and pos_a_kuka>=110) or (pos_a_kuka>=-179 and pos_a_kuka<=-151)):
-				ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a-90,Preplace_Pose_b,Preplace_Pose_c)
+			if(pos_a_kuka >= Preplace_angle_limit and (pos_a_kuka <= Preplace_Pose_a_right)): 
+				#print "pass at 160 (-71-90)"
+				ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left-90,Preplace_Pose_b,Preplace_Pose_c)
 				KUKA_AUT=True
 				while KUKA_AUT: time.sleep(0.1)
-			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a,Preplace_Pose_b,Preplace_Pose_c)
+			#print "go at -70"
+			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left,Preplace_Pose_b,Preplace_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
 				CURRENT_STATE=3
@@ -319,11 +330,13 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
-			if((pos_a_kuka<=180 and pos_a_kuka>=90)):
-				ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a-90,Prepick_Pose_b,Prepick_Pose_c)
+			#if((pos_a_kuka<=180 and pos_a_kuka>=90)):
+			if(pos_a_kuka>=Prepick_angle_limit and pos_a_kuka<=Prepick_Pose_a_right):
+			#	print "pass at 76 (-14-90)"
+				ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left-90,Prepick_Pose_b,Prepick_Pose_c)
 				KUKA_AUT=True
 				while KUKA_AUT: time.sleep(0.1)
-			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a,Prepick_Pose_b,Prepick_Pose_c)			
+			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left,Prepick_Pose_b,Prepick_Pose_c)			
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
 		except rospy.ServiceException, e:
@@ -338,11 +351,11 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
-			if (pos_a_kuka<=90 and pos_a_kuka>=-16):
-					ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a-90,Prepick_Pose_b,Prepick_Pose_c)
+			if (pos_a_kuka<=Prepick_angle_limit and pos_a_kuka>=Prepick_Pose_a_left):
+					ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left-90,Prepick_Pose_b,Prepick_Pose_c)
 					KUKA_AUT=True
 					while KUKA_AUT: time.sleep(0.1)
-			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a+180,Prepick_Pose_b,Prepick_Pose_c)
+			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_right,Prepick_Pose_b,Prepick_Pose_c)
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
 		except rospy.ServiceException, e:
@@ -356,7 +369,8 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			homming_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
-			ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, Homming_Pose_a,Homming_Pose_b,Homming_Pose_c)
+			#DE MOMENTO EL ANGULO EN EL HOMMING NO SE MODIFICA
+			ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, pos_a_kuka,Homming_Pose_b,Homming_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
@@ -368,8 +382,8 @@ class RqtKuka(Plugin):
 		try:
 			placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
 			ret_rel=placed_rel_service(0, 0, 20, 0, 0, 0)
-			KUKA_AUT=True
-			while KUKA_AUT: time.sleep(0.1)
+			#KUKA_AUT=True
+			#while KUKA_AUT: time.sleep(0.1)
 			if ret_rel == True:
 					CURRENT_STATE=STATE_DOING_PICK_TEST
 		except rospy.ServiceException, e:
@@ -383,8 +397,8 @@ class RqtKuka(Plugin):
 			#while KUKA_AUT: time.sleep(0.1)
 			tool_straighten_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
 			ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,0.0,179)
-			KUKA_AUT=True
-			while KUKA_AUT: time.sleep(0.1)
+			#KUKA_AUT=True
+			#while KUKA_AUT: time.sleep(0.1)
 			#ret = tool_straighten_service(pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka,0.0,pos_c_kuka)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
@@ -422,7 +436,6 @@ class RqtKuka(Plugin):
         global finger_type
         print 'Selected:',index
         finger_type = index
-        #self.set_current_arm() NO DEBERIA ENTRAR AQUI SIN EL HOMING
         if index == 0:
             print 'No gripper selected'
             self.desactivate_buttons()
