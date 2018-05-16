@@ -82,7 +82,7 @@ Prepick_angle_limit=90
 Homming_Pose_x=1260.41
 Homming_Pose_y=1284.82
 Homming_Pose_z=1455.99
-Homming_Pose_a=-43.03
+Homming_Pose_a=-120.03 # es importante que no este entre los limites de pick y place [20,90] si no, podria rotar en el sentido erroneo.
 Homming_Pose_b=0.0
 Homming_Pose_c=179.0#178.73
 
@@ -308,11 +308,11 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-			if(pos_a_kuka >= Preplace_angle_limit and (pos_a_kuka <= Preplace_Pose_a_right)): 
+			#if(pos_a_kuka >= Preplace_angle_limit and (pos_a_kuka <= Preplace_Pose_a_right)): 
 				#print "pass at 160 (-71-90)"
-				ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left-90,Preplace_Pose_b,Preplace_Pose_c)
-				KUKA_AUT=True
-				while KUKA_AUT: time.sleep(0.1)
+				#ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left-90,Preplace_Pose_b,Preplace_Pose_c)
+				#KUKA_AUT=True
+				#while KUKA_AUT: time.sleep(0.1)
 			#print "go at -70"
 			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left,Preplace_Pose_b,Preplace_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
@@ -331,11 +331,11 @@ class RqtKuka(Plugin):
 			while KUKA_AUT: time.sleep(0.1)
 			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
 			#if((pos_a_kuka<=180 and pos_a_kuka>=90)):
-			if(pos_a_kuka>=Prepick_angle_limit and pos_a_kuka<=Prepick_Pose_a_right):
+			#if(pos_a_kuka>=Prepick_angle_limit and pos_a_kuka<=Prepick_Pose_a_right):
 			#	print "pass at 76 (-14-90)"
-				ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left-90,Prepick_Pose_b,Prepick_Pose_c)
-				KUKA_AUT=True
-				while KUKA_AUT: time.sleep(0.1)
+				#ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left-90,Prepick_Pose_b,Prepick_Pose_c)
+				#KUKA_AUT=True
+				#while KUKA_AUT: time.sleep(0.1)
 			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left,Prepick_Pose_b,Prepick_Pose_c)			
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
@@ -351,10 +351,10 @@ class RqtKuka(Plugin):
 			KUKA_AUT=True
 			while KUKA_AUT: time.sleep(0.1)
 			picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
-			if (pos_a_kuka<=Prepick_angle_limit and pos_a_kuka>=Prepick_Pose_a_left):
-					ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left-90,Prepick_Pose_b,Prepick_Pose_c)
-					KUKA_AUT=True
-					while KUKA_AUT: time.sleep(0.1)
+			#if (pos_a_kuka<=Prepick_angle_limit and pos_a_kuka>=Prepick_Pose_a_left):
+					#ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left-90,Prepick_Pose_b,Prepick_Pose_c)
+					#KUKA_AUT=True
+					#while KUKA_AUT: time.sleep(0.1)
 			ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_right,Prepick_Pose_b,Prepick_Pose_c)
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
@@ -370,7 +370,7 @@ class RqtKuka(Plugin):
 			while KUKA_AUT: time.sleep(0.1)
 			homming_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
 			#DE MOMENTO EL ANGULO EN EL HOMMING NO SE MODIFICA
-			ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, pos_a_kuka,Homming_Pose_b,Homming_Pose_c)
+			ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, Homming_Pose_a,Homming_Pose_b,Homming_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			if ret == True:
 				CURRENT_STATE=STATE_MOVING_TO_PLACE
