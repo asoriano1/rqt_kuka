@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>291</width>
-    <height>902</height>
+    <height>940</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
      <x>0</x>
      <y>0</y>
      <width>291</width>
-     <height>901</height>
+     <height>931</height>
     </rect>
    </property>
    <widget class="QFrame" name="frame">
@@ -32,7 +32,7 @@
       <x>10</x>
       <y>60</y>
       <width>271</width>
-      <height>801</height>
+      <height>841</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -96,7 +96,7 @@
      <property name="geometry">
       <rect>
        <x>94</x>
-       <y>564</y>
+       <y>594</y>
        <width>91</width>
        <height>21</height>
       </rect>
@@ -109,7 +109,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>530</y>
+       <y>555</y>
        <width>121</width>
        <height>21</height>
       </rect>
@@ -122,7 +122,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>524</y>
+       <y>550</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -167,7 +167,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>620</y>
+       <y>650</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -195,8 +195,8 @@
     <widget class="QLabel" name="Gotolabel_2">
      <property name="geometry">
       <rect>
-       <x>102</x>
-       <y>410</y>
+       <x>93</x>
+       <y>408</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -212,7 +212,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>429</y>
+       <y>430</y>
        <width>141</width>
        <height>22</height>
       </rect>
@@ -228,7 +228,7 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>660</y>
+       <y>690</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -244,7 +244,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>660</y>
+       <y>690</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -294,7 +294,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>560</y>
+       <y>590</y>
        <width>251</width>
        <height>131</height>
       </rect>
@@ -642,7 +642,7 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>430</y>
+       <y>429</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -667,14 +667,14 @@
       <enum>QFrame::Raised</enum>
      </property>
     </widget>
-    <widget class="QPushButton" name="Led_On_Button">
+    <widget class="QPushButton" name="Light_On_Button">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>490</y>
+       <x>80</x>
+       <y>470</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -683,14 +683,14 @@
       <string>ON</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="Led_Off_Button">
+    <widget class="QPushButton" name="Light_Off_Button">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>490</y>
+       <x>170</x>
+       <y>470</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -699,26 +699,13 @@
       <string>OFF</string>
      </property>
     </widget>
-    <widget class="QLabel" name="Gotolabel_3">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>470</y>
-       <width>31</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>LED:</string>
-     </property>
-    </widget>
     <widget class="QFrame" name="frame_5">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>460</y>
        <width>251</width>
-       <height>61</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="frameShape">
@@ -727,14 +714,27 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
+     <widget class="QLabel" name="Gotolabel_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>LIGHT:</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>710</y>
-       <width>191</width>
-       <height>81</height>
+       <x>30</x>
+       <y>730</y>
+       <width>211</width>
+       <height>91</height>
       </rect>
      </property>
      <property name="text">
@@ -747,6 +747,118 @@
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QPushButton" name="Led_Off_Button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>510</y>
+       <width>80</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>OFF</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Gotolabel_4">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>510</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LED:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="Led_On_Button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>510</y>
+       <width>80</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ON</string>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>500</y>
+       <width>251</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QFrame" name="frame_7">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>50</y>
+        <width>251</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QFrame" name="frame_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>400</y>
+       <width>251</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame_9">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>540</y>
+       <width>251</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <zorder>frame_9</zorder>
+    <zorder>frame_8</zorder>
+    <zorder>frame_6</zorder>
     <zorder>frame_5</zorder>
     <zorder>frame_4</zorder>
     <zorder>frame_3</zorder>
@@ -770,10 +882,12 @@
     <zorder>label_2</zorder>
     <zorder>Pick_Left_Button</zorder>
     <zorder>Capture_Button</zorder>
-    <zorder>Led_On_Button</zorder>
-    <zorder>Led_Off_Button</zorder>
-    <zorder>Gotolabel_3</zorder>
+    <zorder>Light_On_Button</zorder>
+    <zorder>Light_Off_Button</zorder>
     <zorder>label_3</zorder>
+    <zorder>Led_Off_Button</zorder>
+    <zorder>Gotolabel_4</zorder>
+    <zorder>Led_On_Button</zorder>
    </widget>
    <widget class="QLabel" name="label_25">
     <property name="geometry">
@@ -836,7 +950,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>870</y>
+      <y>910</y>
       <width>41</width>
       <height>16</height>
      </rect>
@@ -849,7 +963,7 @@
     <property name="geometry">
      <rect>
       <x>102</x>
-      <y>869</y>
+      <y>909</y>
       <width>151</width>
       <height>20</height>
      </rect>

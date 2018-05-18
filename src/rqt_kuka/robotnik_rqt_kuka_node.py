@@ -17,7 +17,7 @@ from python_qt_binding import loadUi
 from python_qt_binding.QtWidgets import QWidget, QDialog, QFileDialog, QMessageBox, QTableWidgetItem
 from std_msgs.msg import Bool, Float64, Float32
 from sensor_msgs.msg import JointState
-from robotnik_msgs.srv import home, set_odometry, set_CartesianEuler_pose
+from robotnik_msgs.srv import home, set_odometry, set_CartesianEuler_pose, set_digital_output
 from robotnik_msgs.msg import Cartesian_Euler_pose
 from geometry_msgs.msg import Pose, Point, Quaternion
 
@@ -44,6 +44,7 @@ srv_name_move_rel_fast='/kuka_robot/setKukaRelFast'
 srv_name_move_rel_slow='/kuka_robot/setKukaRel'
 srv_tool_homing='/kuka_tool/robotnik_base_hw/home'
 srv_finger_set_pose='/kuka_tool_finger_node/set_odometry' #robotnik_msgs.set.odometry
+srv_digital_io='/kuka_tool/robotnik_base_hw/set_digital_output'
 
 #topic names:
 topic_cart_pose_kuka='/kuka_robot/cartesian_pos_kuka'
@@ -149,6 +150,10 @@ class RqtKuka(Plugin):
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
         self._widget.Gripper_Straighten_Button.pressed.connect(self.press_tool_straighten)
         self._widget.Capture_Button.pressed.connect(self.press_capture_button)
+        self._widget.Led_On_Button.pressed.connect(self.press_led_on_button)
+        self._widget.Led_Off_Button.pressed.connect(self.press_led_off_button)
+        self._widget.Light_On_Button.pressed.connect(self.press_light_on_button)
+        self._widget.Light_Off_Button.pressed.connect(self.press_light_off_button)
 
         #displays
         #self._widget.weight_lcdNumber.pressed.connect(self.press_load_yaml)
@@ -301,6 +306,36 @@ class RqtKuka(Plugin):
 				tras_from_homing=0.03;
 				ret=gripper_trasl_service(tras_from_homing,0,0,0)
 			
+    def press_led_on_button(self):
+		try:
+			led_service = rospy.ServiceProxy(srv_digital_io, set_digital_output)
+			ret = led_service(6,False)
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+			self._widget.info_label.setText("Service led on call failed")
+
+    def press_led_off_button(self):
+		try:
+			led_service = rospy.ServiceProxy(srv_digital_io, set_digital_output)
+			ret = led_service(6,True)
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+			self._widget.info_label.setText("Service led off call failed")		
+    def press_light_on_button(self):
+		try:
+			led_service = rospy.ServiceProxy(srv_digital_io, set_digital_output)
+			ret = led_service(4,False)
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+			self._widget.info_label.setText("Service led on call failed")
+
+    def press_light_off_button(self):
+		try:
+			led_service = rospy.ServiceProxy(srv_digital_io, set_digital_output)
+			ret = led_service(4,True)
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+			self._widget.info_label.setText("Service led off call failed")	
 
     def press_place_right_button(self):
 		global KUKA_AUT, pos_z_kuka,pos_a_kuka
@@ -313,12 +348,12 @@ class RqtKuka(Plugin):
 			placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
 			#if(pos_a_kuka<=-71 and pos_a_kuka>=-151):
 			#if((pos_a_kuka<=190 and pos_a_kuka>=110) or (pos_a_kuka>=-179 and pos_a_kuka<=-151)):
-			if(pos_a_kuka <= Preplace_angle_limit and pos_a_kuka >= Preplace_Pose_a_left):
-				print "pass at -160 (-71-90)"
-				ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left-90,Preplace_Pose_b,Preplace_Pose_c)
-				KUKA_AUT=True
-				while KUKA_AUT: self.sleep_loop(0.1)
-			print "go at 110 (-71+180)"
+			#if(pos_a_kuka <= Preplace_angle_limit and pos_a_kuka >= Preplace_Pose_a_left):
+				#print "pass at -160 (-71-90)"
+				#ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left-90,Preplace_Pose_b,Preplace_Pose_c)
+				#KUKA_AUT=True
+				#while KUKA_AUT: self.sleep_loop(0.1)
+			#print "go at 110 (-71+180)"
 			ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_right,Preplace_Pose_b,Preplace_Pose_c)
 			#ret=placed_rel_service(0, 0, -100, 0, 0, 0)
 			#if ret == True:
