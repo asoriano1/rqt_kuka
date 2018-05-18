@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>291</width>
-    <height>840</height>
+    <height>902</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
      <x>0</x>
      <y>0</y>
      <width>291</width>
-     <height>841</height>
+     <height>901</height>
     </rect>
    </property>
    <widget class="QFrame" name="frame">
@@ -32,7 +32,7 @@
       <x>10</x>
       <y>60</y>
       <width>271</width>
-      <height>751</height>
+      <height>801</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -41,25 +41,6 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>660</y>
-       <width>211</width>
-       <height>81</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>images/cajas.png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="QComboBox" name="calibre_comboBox">
      <property name="geometry">
       <rect>
@@ -114,14 +95,14 @@
     <widget class="QLabel" name="weight_label">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>580</y>
-       <width>121</width>
+       <x>94</x>
+       <y>564</y>
+       <width>91</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>Weight detected:</string>
+      <string>Weight (Kg):</string>
      </property>
     </widget>
     <widget class="QLabel" name="tool_force_label">
@@ -185,8 +166,8 @@
     <widget class="QLCDNumber" name="weight_lcdNumber">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>570</y>
+       <x>140</x>
+       <y>620</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -247,7 +228,7 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>620</y>
+       <y>660</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -263,7 +244,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>620</y>
+       <y>660</y>
        <width>80</width>
        <height>22</height>
       </rect>
@@ -315,7 +296,7 @@
        <x>10</x>
        <y>560</y>
        <width>251</width>
-       <height>91</height>
+       <height>131</height>
       </rect>
      </property>
      <property name="frameShape">
@@ -324,6 +305,56 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
+     <widget class="QLabel" name="weight_label_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>70</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Detected:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="weight_label_expected">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>33</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Expected:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="weight_label_expected_var">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>26</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>[ N/A,N/A ]</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
     </widget>
     <widget class="QPushButton" name="Pick_Right_Button">
      <property name="enabled">
@@ -697,11 +728,29 @@
       <enum>QFrame::Raised</enum>
      </property>
     </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>710</y>
+       <width>191</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>images/cajas.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
     <zorder>frame_5</zorder>
     <zorder>frame_4</zorder>
     <zorder>frame_3</zorder>
     <zorder>frame_2</zorder>
-    <zorder>label</zorder>
     <zorder>calibre_comboBox</zorder>
     <zorder>Select_obus_label</zorder>
     <zorder>weight_label</zorder>
@@ -724,6 +773,7 @@
     <zorder>Led_On_Button</zorder>
     <zorder>Led_Off_Button</zorder>
     <zorder>Gotolabel_3</zorder>
+    <zorder>label_3</zorder>
    </widget>
    <widget class="QLabel" name="label_25">
     <property name="geometry">
@@ -786,7 +836,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>820</y>
+      <y>870</y>
       <width>41</width>
       <height>16</height>
      </rect>
@@ -799,7 +849,7 @@
     <property name="geometry">
      <rect>
       <x>102</x>
-      <y>819</y>
+      <y>869</y>
       <width>151</width>
       <height>20</height>
      </rect>

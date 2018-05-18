@@ -10,6 +10,7 @@ import xacro
 import subprocess
 import sys
 import QtCore
+import QtGui
 
 from qt_gui.plugin import Plugin
 from python_qt_binding import loadUi
@@ -48,7 +49,7 @@ srv_finger_set_pose='/kuka_tool_finger_node/set_odometry' #robotnik_msgs.set.odo
 topic_cart_pose_kuka='/kuka_robot/cartesian_pos_kuka'
 topic_kuka_moving='/kuka_robot/kuka_moving'
 topic_tool_weight='/phidget_load/load_mean'
-topic_current='/kuka_tool/robotnik_base_hw/current'
+topic_current='/kuka_tool/robotnik_base_hw/current0'
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
 #Prepick_Pose=Pose(Point(100, 100, 100), Quaternion(0, 0, 0, 1))
@@ -97,6 +98,9 @@ pos_b_kuka=0.0
 pos_c_kuka=0.0
 weight_read=0.0
 weight_empty=0.0
+weight_reads=[0, 0, 0, 0, 0]
+weight_expected_min = 9999
+weight_expected_max = 9999
 
 class RqtKuka(Plugin):
 
@@ -150,6 +154,7 @@ class RqtKuka(Plugin):
         #self._widget.weight_lcdNumber.pressed.connect(self.press_load_yaml)
         #self._widget.tool_force_lcdNumber.pressed.connect(self.press_save_yaml)
         
+        
         #subscriber to robot state
         rospy.Subscriber(topic_kuka_moving, Bool, self.callback_moving)
 
@@ -168,7 +173,8 @@ class RqtKuka(Plugin):
         # plugin at once, these lines add number to make it easy to 
         # tell from pane to pane.
         if context.serial_number() > 1:
-            self._widget.setWindowTitle(self._widget.windowTitle() + (' (%d)' % context.serial_number()))
+            #self._widget.setWindowTitle(self._widget.windowTitle() + (' (%d)' % context.serial_number()))
+            self.widget.setWindowTitle("Robotnik Kuka Interface")
         # Add widget to the user interface
         context.add_widget(self._widget)
         
@@ -224,14 +230,34 @@ class RqtKuka(Plugin):
 
     def callback_tool_weight(self, data):
 		global weight_empty, weight_read
+		self._widget.weight_lcdNumber.setDigitCount(4)
+		palette = self._widget.weight_lcdNumber.palette()		
 		#print 'CB:tool_weight_received',data
 		weight_read=data.data
 		weight_no_tool=data.data-weight_empty
-		self._widget.weight_lcdNumber.display(weight_no_tool)
+		weight_reads[0]=weight_no_tool
+		for i in range(1, 5):
+			weight_no_tool=weight_no_tool+weight_reads[i]
+		weight_no_tool=weight_no_tool/5
+		if(weight_no_tool<0 and weight_no_tool>-10):
+			weight_no_tool=-weight_no_tool
+		for i in range(1, 5):
+			weight_reads[i]=weight_reads[i-1]
+		self._widget.weight_lcdNumber.setDecMode()
+		#self._widget.weight_lcdNumber.setNumDigits(3)
+		self._widget.weight_lcdNumber.display(round(weight_no_tool,1))
+		if weight_no_tool<weight_expected_min:
+			palette.setColor(palette.WindowText, QtGui.QColor(10, 10, 10))
+		elif weight_no_tool<weight_expected_max:
+			palette.setColor(palette.WindowText, QtGui.QColor(20, 230, 20))
+		else:
+			palette.setColor(palette.WindowText, QtGui.QColor(255, 50, 50))
+		self._widget.weight_lcdNumber.setPalette(palette)
 
     def callback_current(self, data):
         #print 'CB:current_received',data
-        self._widget.tool_force_lcdNumber.display(data.data)
+        self._widget.tool_force_lcdNumber.setDigitCount(4)
+        self._widget.tool_force_lcdNumber.display(round(data.data,1))
         
     def press_tool_homming(self):
 		ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
@@ -435,12 +461,14 @@ class RqtKuka(Plugin):
 		weight_empty = 0
     
     def calibre_selected(self, index):
-        global finger_type
+        global finger_type, weight_expected_min, weight_expected_max
         print 'Selected:',index
         finger_type = index
         if index == 0:
             print 'No gripper selected'
             self.desactivate_buttons()
+            str_weight_expected = "[N/A, N/A]"
+            self._widget.weight_label_expected_var.setText(str_weight_expected)
             #desactivate all buttons
         else:
             #TODO: check if the gripper is empty. If there is some load not allow to move autonomously
@@ -451,24 +479,40 @@ class RqtKuka(Plugin):
             except KeyError:
                 print "value not set"
             self.load_robot_description(index)
+            weight_expected_min = 4
+            weight_expected_max = 9
+            str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
+            self._widget.weight_label_expected_var.setText(str_weight_expected)
         elif index == 2:
             try:
                 rospy.delete_param('robot_description')
             except KeyError:
                 print "value not set"
             self.load_robot_description(index+1)
+            weight_expected_min = 13
+            weight_expected_max = 18
+            str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
+            self._widget.weight_label_expected_var.setText(str_weight_expected)
         elif index == 3:
             try:
                 rospy.delete_param('robot_description')
             except KeyError:
                 print "value not set"
             self.load_robot_description(index+1)
+            weight_expected_min = 18
+            weight_expected_max = 46
+            str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
+            self._widget.weight_label_expected_var.setText(str_weight_expected)
         elif index == 4:
             try:
                 rospy.delete_param('robot_description')
             except KeyError:
                 print "value not set"
             self.load_robot_description(index+1)
+            weight_expected_min = 110
+            weight_expected_max = 130
+            str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
+            self._widget.weight_label_expected_var.setText(str_weight_expected)
             
     def press_capture_button(self):
 		print 'capture button'
