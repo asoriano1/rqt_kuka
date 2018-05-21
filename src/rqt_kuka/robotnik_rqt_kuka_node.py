@@ -148,13 +148,14 @@ class RqtKuka(Plugin):
         
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
-        self._widget.Gripper_Straighten_Button.pressed.connect(self.press_tool_straighten)
-        self._widget.Capture_Button.pressed.connect(self.press_capture_button)
         self._widget.Led_On_Button.pressed.connect(self.press_led_on_button)
         self._widget.Led_Off_Button.pressed.connect(self.press_led_off_button)
         self._widget.Light_On_Button.pressed.connect(self.press_light_on_button)
         self._widget.Light_Off_Button.pressed.connect(self.press_light_off_button)
-
+        self._widget.Led_On_Button.setStyleSheet("color: rgb(80, 170, 80)")
+        self._widget.Led_Off_Button.setStyleSheet("color: rgb(170, 80, 80)")
+        self._widget.Light_On_Button.setStyleSheet("color: rgb(80, 170, 80)")
+        self._widget.Light_Off_Button.setStyleSheet("color: rgb(170, 80, 80)")
         #displays
         #self._widget.weight_lcdNumber.pressed.connect(self.press_load_yaml)
         #self._widget.tool_force_lcdNumber.pressed.connect(self.press_save_yaml)
@@ -179,7 +180,7 @@ class RqtKuka(Plugin):
         # tell from pane to pane.
         if context.serial_number() > 1:
             #self._widget.setWindowTitle(self._widget.windowTitle() + (' (%d)' % context.serial_number()))
-            self.widget.setWindowTitle("Robotnik Kuka Interface")
+            self._widget.setWindowTitle("Robotnik Kuka Interface")
         # Add widget to the user interface
         context.add_widget(self._widget)
         
@@ -193,7 +194,6 @@ class RqtKuka(Plugin):
         self._widget.Home_Button.setEnabled(False)
         self._widget.PickTest_Button.setEnabled(False)
         self._widget.Gripper_Homing_Button.setEnabled(False)
-        self._widget.Gripper_Straighten_Button.setEnabled(False)
         self._widget.Pick_Right_Button.setEnabled(False)
         self._widget.Pick_Left_Button.setEnabled(False)
         self._widget.Place_Right_Button.setEnabled(False)
@@ -202,7 +202,6 @@ class RqtKuka(Plugin):
     def activate_buttons(self):
         self._widget.PickTest_Button.setEnabled(True)
         self._widget.Gripper_Homing_Button.setEnabled(True)
-        self._widget.Gripper_Straighten_Button.setEnabled(True)
         self._widget.Home_Button.setEnabled(True)
         self._widget.Pick_Right_Button.setEnabled(True)
         self._widget.Pick_Left_Button.setEnabled(True)
@@ -276,11 +275,9 @@ class RqtKuka(Plugin):
 				#weight_empty=weight_read
 				gripper_move_service(0.02,0,0,-0.15)
 				if ret == True:
-					TOOL_HOMED=True
-					self._widget.info_label.setText("Service tool homing call done")
+					TOOL_HOMED=True					
 			except rospy.ServiceException, e:
 				print "Service call failed: %s"%e
-				self._widget.info_label.setText("Service tool homing call failed")
 	
     def press_finger_adjust_button(self):
 		
@@ -291,7 +288,7 @@ class RqtKuka(Plugin):
 				print 'No gripper selected'
 			elif finger_type == 1:
 				print 'Set gripper to 100mm'
-				tras_from_homing=0.2-0.1;
+				tras_from_homing=0.2-0.1;				
 				ret=gripper_trasl_service(tras_from_homing,0,0,0)
 			elif finger_type == 2:
 				print 'Set gripper to 140mm'
@@ -312,7 +309,7 @@ class RqtKuka(Plugin):
 			ret = led_service(6,False)
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
-			self._widget.info_label.setText("Service led on call failed")
+
 
     def press_led_off_button(self):
 		try:
@@ -320,14 +317,14 @@ class RqtKuka(Plugin):
 			ret = led_service(6,True)
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
-			self._widget.info_label.setText("Service led off call failed")		
+		
     def press_light_on_button(self):
 		try:
 			led_service = rospy.ServiceProxy(srv_digital_io, set_digital_output)
 			ret = led_service(4,False)
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
-			self._widget.info_label.setText("Service led on call failed")
+
 
     def press_light_off_button(self):
 		try:
@@ -335,7 +332,7 @@ class RqtKuka(Plugin):
 			ret = led_service(4,True)
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
-			self._widget.info_label.setText("Service led off call failed")	
+
 
     def press_place_right_button(self):
 		global KUKA_AUT, pos_z_kuka,pos_a_kuka
@@ -503,6 +500,7 @@ class RqtKuka(Plugin):
             print 'No gripper selected'
             self.desactivate_buttons()
             str_weight_expected = "[N/A, N/A]"
+            self._widget.weight_limited.setText("N/A");
             self._widget.weight_label_expected_var.setText(str_weight_expected)
             #desactivate all buttons
         else:
@@ -518,6 +516,7 @@ class RqtKuka(Plugin):
             weight_expected_max = 9
             str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
             self._widget.weight_label_expected_var.setText(str_weight_expected)
+            self._widget.weight_limited.setText("1");
         elif index == 2:
             try:
                 rospy.delete_param('robot_description')
@@ -528,6 +527,7 @@ class RqtKuka(Plugin):
             weight_expected_max = 18
             str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
             self._widget.weight_label_expected_var.setText(str_weight_expected)
+            self._widget.weight_limited.setText("2");
         elif index == 3:
             try:
                 rospy.delete_param('robot_description')
@@ -538,6 +538,7 @@ class RqtKuka(Plugin):
             weight_expected_max = 46
             str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
             self._widget.weight_label_expected_var.setText(str_weight_expected)
+            self._widget.weight_limited.setText("4");
         elif index == 4:
             try:
                 rospy.delete_param('robot_description')
@@ -548,6 +549,7 @@ class RqtKuka(Plugin):
             weight_expected_max = 130
             str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
             self._widget.weight_label_expected_var.setText(str_weight_expected)
+            self._widget.weight_limited.setText("8");
             
     def press_capture_button(self):
 		print 'capture button'
