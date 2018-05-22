@@ -51,7 +51,7 @@ topic_cart_pose_kuka='/kuka_robot/cartesian_pos_kuka'
 topic_kuka_moving='/kuka_robot/kuka_moving'
 topic_tool_weight='/phidget_load/load_mean'
 topic_current='/kuka_tool/robotnik_base_hw/current0'
-topic_vertical_force='/phidget_load/vertical_force'
+topic_horiz_force='/phidget_load/vertical_force'
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
 #Prepick_Pose=Pose(Point(100, 100, 100), Quaternion(0, 0, 0, 1))
@@ -103,8 +103,8 @@ weight_empty=0.0
 weight_reads=[0, 0, 0, 0, 0]
 weight_expected_min = 9999
 weight_expected_max = 9999
-vertical_force_read=0.0
-vertical_force_empty=0.0
+horiz_force_read=0.0
+horiz_force_empty=0.0
 
 class RqtKuka(Plugin):
 
@@ -178,7 +178,7 @@ class RqtKuka(Plugin):
         rospy.Subscriber(topic_current, Float32, self.callback_current) 
                 
         #subscriber to vertical force
-        rospy.Subscriber(topic_vertical_force, Float32, self.callback_vertical_force) 
+        rospy.Subscriber(topic_horiz_force, Float64, self.callback_horiz_force) 
         
         # Show _widget.windowTitle on left-top of each plugin (when 
         # it's set in _widget). This is useful when you open multiple 
@@ -215,10 +215,11 @@ class RqtKuka(Plugin):
         self._widget.Place_Right_Button.setEnabled(True)
         self._widget.Place_Left_Button.setEnabled(True)
         
-    def callback_vertical_force(self, data):
-        vertical_force_read = data.data
+    def callback_horiz_force(self, data):
+        #print 'force_received:',data.data
+        horiz_force_read = data.data
         self._widget.vertforce_lcdNumber.setDigitCount(4)
-        self._widget.vertforce_lcdNumber.display(round(data.data-vertical_force_empty,1))
+        self._widget.vertforce_lcdNumber.display(round(data.data-horiz_force_empty,1))
         
     def callback_moving(self, data):
 		global KUKA_AUT
@@ -497,14 +498,14 @@ class RqtKuka(Plugin):
         print "updated Preplace Pose x:", Preplace_Pose_x, " y:", Preplace_Pose_y, " z:", Preplace_Pose_z, " a:", Preplace_Pose_a, " b:", Preplace_Pose_b, " c:", Preplace_Pose_c
     
     def press_tare_button(self):
-		global weight_empty,vertical_force
+		global weight_empty,horiz_force
 		weight_empty=weight_read
-		vertical_force_empty=vertical_force_read
+		horiz_force_empty=horiz_force_read
 
     def press_tare_reset_button(self):
-		global weight_empty,vertical_force
+		global weight_empty,horiz_force
 		weight_empty = 0
-		vertical_force_empty=0.0
+		horiz_force_empty=0
     
     def calibre_selected(self, index):
         global finger_type, weight_expected_min, weight_expected_max

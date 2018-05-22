@@ -336,14 +336,9 @@
        </rect>
       </property>
       <property name="text">
-       <string>Vertical Force:</string>
+       <string>Horiz Force:</string>
       </property>
      </widget>
-     <zorder>weight_label_2</zorder>
-     <zorder>weight_label_expected</zorder>
-     <zorder>weight_label_expected_var</zorder>
-     <zorder>weight_lcdNumber_2</zorder>
-     <zorder>weight_label_3</zorder>
     </widget>
     <widget class="QPushButton" name="Pick_Right_Button">
      <property name="enabled">
@@ -697,7 +692,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>LIGHT:</string>
+       <string>LIGHT</string>
       </property>
      </widget>
     </widget>
@@ -739,14 +734,14 @@
     <widget class="QLabel" name="Gotolabel_4">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>20</x>
        <y>450</y>
-       <width>31</width>
-       <height>16</height>
+       <width>51</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>LED:</string>
+      <string>LASER</string>
      </property>
     </widget>
     <widget class="QPushButton" name="Led_On_Button">
