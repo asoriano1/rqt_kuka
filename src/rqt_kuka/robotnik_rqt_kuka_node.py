@@ -5,7 +5,8 @@ import inspect
 
 import rospy
 import rospkg
-import time 
+import time
+import datetime 
 import xacro
 import subprocess
 import sys
@@ -18,7 +19,7 @@ from python_qt_binding.QtWidgets import QWidget, QDialog, QFileDialog, QMessageB
 from std_msgs.msg import Bool, Float64, Float32
 from sensor_msgs.msg import JointState
 from robotnik_msgs.srv import home, set_odometry, set_CartesianEuler_pose, set_digital_output
-from robotnik_msgs.msg import Cartesian_Euler_pose
+from robotnik_msgs.msg import Cartesian_Euler_pose, RobotnikMotorsStatus
 from geometry_msgs.msg import Pose, Point, Quaternion
 
 import yaml
@@ -37,6 +38,9 @@ STATE_HOMING=6
 TOOL_HOMED=False
 KUKA_AUT=False
 finger_type=0
+gauges_failure=False
+under_voltage_tool=False
+start_time_gauges=time.time()
 #service names:
 srv_name_move_abs_fast='/kuka_robot/setKukaAbsFast'
 srv_name_move_abs_slow='/kuka_robot/setKukaAbs'
@@ -52,6 +56,7 @@ topic_kuka_moving='/kuka_robot/kuka_moving'
 topic_tool_weight='/phidget_load/load_mean'
 topic_current='/kuka_tool/robotnik_base_hw/current0'
 topic_horiz_force='/phidget_load/vertical_force'
+topic_motor_status='/kuka_tool/robotnik_base_hw/status'
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
 #Prepick_Pose=Pose(Point(100, 100, 100), Quaternion(0, 0, 0, 1))
@@ -149,6 +154,8 @@ class RqtKuka(Plugin):
         self._widget.Tare_Button.pressed.connect(self.press_tare_button)
         self._widget.Tare_Reset_Button.pressed.connect(self.press_tare_reset_button)
         self._widget.Reset_Ext_Button.pressed.connect(self.press_reset_external_pc_button)
+        self._widget.Run_Program_Button.pressed.connect(self.press_run_program_button)
+        
         
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
         self._widget.Gripper_Homing_Button.pressed.connect(self.press_tool_homming)
@@ -178,7 +185,10 @@ class RqtKuka(Plugin):
         rospy.Subscriber(topic_current, Float32, self.callback_current) 
                 
         #subscriber to vertical force
-        rospy.Subscriber(topic_horiz_force, Float64, self.callback_horiz_force) 
+        rospy.Subscriber(topic_horiz_force, Float64, self.callback_horiz_force)
+        
+        #subscriber to motor status of the tool
+        rospy.Subscriber(topic_motor_status,RobotnikMotorsStatus,self.callback_motor_status)
         
         # Show _widget.windowTitle on left-top of each plugin (when 
         # it's set in _widget). This is useful when you open multiple 
@@ -215,11 +225,12 @@ class RqtKuka(Plugin):
         self._widget.Place_Right_Button.setEnabled(True)
         self._widget.Place_Left_Button.setEnabled(True)
         
-    def callback_horiz_force(self, data):
-        #print 'force_received:',data.data
-        horiz_force_read = data.data
-        self._widget.vertforce_lcdNumber.setDigitCount(4)
-        self._widget.vertforce_lcdNumber.display(round(data.data-horiz_force_empty,1))
+	def callback_motor_status(self,data):
+		global under_voltage_tool
+		if(data.motor_status=="UNDER_VOLTAGE"):
+			under_voltage_tool=True
+		else:
+			under_voltage_tool=False
         
     def callback_moving(self, data):
 		global KUKA_AUT
@@ -236,7 +247,7 @@ class RqtKuka(Plugin):
 			self.activate_buttons()
 
     def callback_robot_pose(self, data):
-		global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka
+		global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka, elapsed_time_gauges, gauges_failure
 		#print 'CB:robot_pose_received',data
 		pos_x_kuka=data.x
 		pos_y_kuka=data.y
@@ -244,9 +255,21 @@ class RqtKuka(Plugin):
 		pos_a_kuka=data.A
 		pos_b_kuka=data.B
 		pos_c_kuka=data.C
-
+		elapsed_time_gauges=time.time()-start_time_gauges
+		#print 'time between robot callback and gauges' ,elapsed_time_gauges
+		if (elapsed_time_gauges>=2):
+			gauges_failure=True
+    def callback_horiz_force(self, data):
+        global horiz_force_read, horiz_force_empty
+        #print 'force_received:',data.data
+        horiz_force_read = data.data
+        self._widget.vertforce_lcdNumber.setDigitCount(4)
+        self._widget.vertforce_lcdNumber.display(round((data.data-horiz_force_empty)*0.19,1))
+        
     def callback_tool_weight(self, data):
-		global weight_empty, weight_read
+		global weight_empty, weight_read, gauges_failure, start_time_gauges
+		start_time_gauges=time.time()
+		gauges_failure=False
 		self._widget.weight_lcdNumber.setDigitCount(4)
 		palette = self._widget.weight_lcdNumber.palette()		
 		#print 'CB:tool_weight_received',data
@@ -498,12 +521,12 @@ class RqtKuka(Plugin):
         print "updated Preplace Pose x:", Preplace_Pose_x, " y:", Preplace_Pose_y, " z:", Preplace_Pose_z, " a:", Preplace_Pose_a, " b:", Preplace_Pose_b, " c:", Preplace_Pose_c
     
     def press_tare_button(self):
-		global weight_empty,horiz_force
+		global weight_empty,horiz_force_empty
 		weight_empty=weight_read
 		horiz_force_empty=horiz_force_read
 
     def press_tare_reset_button(self):
-		global weight_empty,horiz_force
+		global weight_empty,horiz_force_empty
 		weight_empty = 0
 		horiz_force_empty=0
     
@@ -577,6 +600,10 @@ class RqtKuka(Plugin):
     def press_reset_external_pc_button(self):
 		command_string = "ssh vulcano@192.168.1.10 reboot"
 		os.system(command_string)
+		
+    def press_run_program_button(self):
+        command_string = "rosnode kill /kuka_pad/joy; sleep 1; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"
+        os.system(command_string)
 		
     def shutdown_plugin(self):
         # TODO unregister all publishers here
