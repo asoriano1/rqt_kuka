@@ -138,6 +138,8 @@ class RqtKuka(Plugin):
         loadUi(ui_file, self._widget)
         # Give QObjects reasonable names
         self._widget.setObjectName('RqtKukaUi')
+        #keyboard management
+        
         
         # add signals/slots
         #select obus calibre
@@ -171,6 +173,7 @@ class RqtKuka(Plugin):
         #self._widget.weight_lcdNumber.pressed.connect(self.press_load_yaml)
         #self._widget.tool_force_lcdNumber.pressed.connect(self.press_save_yaml)
         
+        self._widget.installEventFilter(self)
         
         #subscriber to robot state
         rospy.Subscriber(topic_kuka_moving, Bool, self.callback_moving)
@@ -301,6 +304,7 @@ class RqtKuka(Plugin):
         
     def press_tool_homming(self):
 		ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
+		ret = QMessageBox.critical(self._widget, "WARNING!", 'The tool is activated and there is some weight \ndetected by the gauges!', QMessageBox.Ok)
 		if ret == QMessageBox.Ok:
 			#Call tool homing method
 			global weight_empty, weight_read
