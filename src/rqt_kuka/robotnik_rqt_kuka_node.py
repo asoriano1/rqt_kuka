@@ -12,6 +12,7 @@ import subprocess
 import sys
 import QtCore
 import QtGui
+import numpy
 
 from qt_gui.plugin import Plugin
 from python_qt_binding import loadUi
@@ -19,7 +20,7 @@ from python_qt_binding.QtWidgets import QWidget, QDialog, QFileDialog, QMessageB
 from std_msgs.msg import Bool, Float64, Float32
 from sensor_msgs.msg import JointState
 from robotnik_msgs.srv import home, set_odometry, set_CartesianEuler_pose, set_digital_output
-from robotnik_msgs.msg import Cartesian_Euler_pose, RobotnikMotorsStatus
+from robotnik_msgs.msg import Cartesian_Euler_pose, RobotnikMotorsStatus, MotorStatus
 from geometry_msgs.msg import Pose, Point, Quaternion
 
 import yaml
@@ -40,6 +41,7 @@ KUKA_AUT=False
 finger_type=0
 gauges_failure=False
 under_voltage_tool=False
+first_time_enabled=False
 start_time_gauges=time.time()
 #service names:
 srv_name_move_abs_fast='/kuka_robot/setKukaAbsFast'
@@ -191,7 +193,7 @@ class RqtKuka(Plugin):
         rospy.Subscriber(topic_horiz_force, Float64, self.callback_horiz_force)
         
         #subscriber to motor status of the tool
-        rospy.Subscriber(topic_motor_status,RobotnikMotorsStatus,self.callback_motor_status)
+        rospy.Subscriber(topic_motor_status, RobotnikMotorsStatus, self.callback_motor_status)
         
         # Show _widget.windowTitle on left-top of each plugin (when 
         # it's set in _widget). This is useful when you open multiple 
@@ -227,13 +229,7 @@ class RqtKuka(Plugin):
         self._widget.Pick_Left_Button.setEnabled(True)
         self._widget.Place_Right_Button.setEnabled(True)
         self._widget.Place_Left_Button.setEnabled(True)
-        
-	def callback_motor_status(self,data):
-		global under_voltage_tool
-		if(data.motor_status=="UNDER_VOLTAGE"):
-			under_voltage_tool=True
-		else:
-			under_voltage_tool=False
+       
         
     def callback_moving(self, data):
 		global KUKA_AUT
@@ -248,6 +244,24 @@ class RqtKuka(Plugin):
 			KUKA_AUT=False
 			self._widget.mode_label.setText("MANUAL")
 			self.activate_buttons()
+			
+    def callback_motor_status(self,data):
+		global under_voltage_tool, first_time_enabled, weight_empty, weight_read
+		motor1=data.motor_status[1]
+		driveflags_1=numpy.array(map(int,motor1.driveflags))
+		under_voltage_1=driveflags_1[12]
+		if(motor1.status=="OPERATION_ENABLED" and first_time_enabled):
+			#if(weight_read-weight_empty<-10):
+				ret = QMessageBox.warning(self._widget, "WARNING!", 'Weight detected', QMessageBox.Ok, QMessageBox.Cancel)
+				if ret == QMessageBox.Ok:
+					first_time_enabled=False
+		if(under_voltage_1==1):
+			under_voltage_tool=True
+		else:
+			under_voltage_tool=False
+		if(motor1.status=="FAULT"):
+			first_time_enabled=True
+			
 
     def callback_robot_pose(self, data):
 		global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka, elapsed_time_gauges, gauges_failure
@@ -304,7 +318,7 @@ class RqtKuka(Plugin):
         
     def press_tool_homming(self):
 		ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
-		ret = QMessageBox.critical(self._widget, "WARNING!", 'The tool is activated and there is some weight \ndetected by the gauges!', QMessageBox.Ok)
+		#ret = QMessageBox.critical(self._widget, "WARNING!", 'The tool is activated and there is some weight \ndetected by the gauges!', QMessageBox.Ok)
 		if ret == QMessageBox.Ok:
 			#Call tool homing method
 			global weight_empty, weight_read
