@@ -495,6 +495,7 @@ class RqtKuka(Plugin):
         #if context.serial_number() > 1:
         #    #self._widget.setWindowTitle(self._widget.windowTitle() + (' (%d)' % context.serial_number()))
         #    self._widget.setWindowTitle("Robotnik Kuka Interface")
+        self._widget.setWindowTitle(" ")
         # Add widget to the user interface
         context.add_widget(self._widget)
         
@@ -1850,8 +1851,11 @@ class RqtKuka(Plugin):
         os.system(command_string)
         
     def press_reset_external_pc_button(self):
-        command_string = "ssh vulcano@192.168.1.10 reboot"
-        os.system(command_string)
+        ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nExternal PC is going to reset.\n Wait 10 sec and restart the GUI.', QMessageBox.Ok, QMessageBox.Cancel)
+        if ret == True:
+            command_string = "ssh vulcano@192.168.1.10 reboot"
+            os.system(command_string)
+            
         
     def press_run_program_button(self):
         command_string = "rosnode kill /kuka_pad/joy; sleep 1; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"
