@@ -165,6 +165,7 @@ class RqtKuka(Plugin):
         self._widget.Tare_Reset_Button.pressed.connect(self.press_tare_reset_button)
         self._widget.Reset_Ext_Button.pressed.connect(self.press_reset_external_pc_button)
         self._widget.Run_Program_Button.pressed.connect(self.press_run_program_button)
+        self._widget.MoveToTable_Button.pressed.connect(self.press_move_to_rotation_table_button)
         
         
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
@@ -181,6 +182,10 @@ class RqtKuka(Plugin):
         pixmap = QtGui.QPixmap(PATH+"resource/images/fondo_huevera_0.png")
         self._widget.background_plate.setPixmap(pixmap)
         
+        self._widget.Home_Button.setEnabled(False)
+        self._widget.Finger_Adjust_Button.setEnabled(False)
+        self._widget.MoveToTable_Button.setEnabled(False)
+                
         ##obuses buttons
         #Huevera_2
         h2o1posex=70
@@ -563,8 +568,10 @@ class RqtKuka(Plugin):
         self._widget.Gripper_Homing_Button.setEnabled(False)
         self._widget.Pick_Right_Button.setEnabled(False)
         self._widget.Pick_Left_Button.setEnabled(False)
+        self._widget.MoveToTable_Button.setEnabled(False)
         #self._widget.Place_Right_Button.setEnabled(False)
         #self._widget.Place_Left_Button.setEnabled(False)
+        self._widget.Finger_Adjust_Button.setEnabled(False)
         self._widget.Huevera2Obus1Button.setEnabled(False)
         self._widget.Huevera2Obus2Button.setEnabled(False)
         self._widget.Huevera4Obus1Button.setEnabled(False)
@@ -602,6 +609,8 @@ class RqtKuka(Plugin):
         self._widget.Gripper_Homing_Button.setEnabled(True)
         self._widget.Pick_Right_Button.setEnabled(True)
         self._widget.Pick_Left_Button.setEnabled(True)
+        self._widget.Finger_Adjust_Button.setEnabled(True)
+        self._widget.MoveToTable_Button.setEnabled(True)
         #self._widget.Place_Right_Button.setEnabled(True)
         #self._widget.Place_Left_Button.setEnabled(True)
         self._widget.Huevera2Obus1Button.setEnabled(True)
@@ -721,6 +730,9 @@ class RqtKuka(Plugin):
         #print 'CB:current_received',data
         self._widget.tool_force_lcdNumber.setDigitCount(4)
         self._widget.tool_force_lcdNumber.display(round(data.data,1))
+    
+    def press_move_to_rotation_table_button(self):
+        print 'move to rotation table'
     
     #pressing obuses
     #huevera2
