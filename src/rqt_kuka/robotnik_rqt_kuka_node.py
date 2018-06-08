@@ -19,7 +19,7 @@ from python_qt_binding import loadUi
 from python_qt_binding.QtWidgets import QWidget, QDialog, QFileDialog, QMessageBox, QTableWidgetItem
 from std_msgs.msg import Bool, Float64, Float32
 from sensor_msgs.msg import JointState
-from robotnik_msgs.srv import home, set_odometry, set_CartesianEuler_pose, set_digital_output
+from robotnik_msgs.srv import home, set_odometry, set_CartesianEuler_pose, set_digital_output, set_float_value
 from robotnik_msgs.msg import Cartesian_Euler_pose, RobotnikMotorsStatus, MotorStatus
 from geometry_msgs.msg import Pose, Point, Quaternion
 
@@ -51,6 +51,8 @@ srv_name_move_rel_slow='/kuka_robot/setKukaRel'
 srv_tool_homing='/kuka_tool/robotnik_base_hw/home'
 srv_finger_set_pose='/kuka_tool_finger_node/set_odometry' #robotnik_msgs.set.odometry
 srv_digital_io='/kuka_tool/robotnik_base_hw/set_digital_output'
+srv_limit_cont_current='/kuka_tool/robotnik_base_hw/set_continuous_current_limit'
+srv_limit_peak_current='/kuka_tool/robotnik_base_hw/set_peak_current_limit'
 
 #topic names:
 topic_cart_pose_kuka='/kuka_robot/cartesian_pos_kuka'
@@ -250,15 +252,14 @@ class RqtKuka(Plugin):
 		motor1=data.motor_status[1]
 		driveflags_1=numpy.array(map(int,motor1.driveflags))
 		under_voltage_1=driveflags_1[12]
-		if(motor1.status=="OPERATION_ENABLED" and first_time_enabled):
-			#if(weight_read-weight_empty<-10):
-				ret = QMessageBox.warning(self._widget, "WARNING!", 'Weight detected', QMessageBox.Ok, QMessageBox.Cancel)
-				if ret == QMessageBox.Ok:
-					first_time_enabled=False
 		if(under_voltage_1==1):
 			under_voltage_tool=True
 		else:
 			under_voltage_tool=False
+		if(motor1.status=="OPERATION_ENABLED" and first_time_enabled):
+			#if(weight_read-weight_empty<-10):
+			ret = QMessageBox.warning(self._widget, "WARNING!", 'Weight detected', QMessageBox.Ok, QMessageBox.Cancel)
+			first_time_enabled=False
 		if(motor1.status=="FAULT"):
 			first_time_enabled=True
 			
@@ -572,7 +573,12 @@ class RqtKuka(Plugin):
             weight_expected_max = 9
             str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
             self._widget.weight_label_expected_var.setText(str_weight_expected)
-            self._widget.weight_limited.setText("1");
+            self._widget.weight_limited.setText("3");
+            limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
+            limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
+            limit_cont_current_service(3)
+            limit_peak_current_service(3)
+            
         elif index == 2:
             try:
                 rospy.delete_param('robot_description')
@@ -583,7 +589,12 @@ class RqtKuka(Plugin):
             weight_expected_max = 18
             str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
             self._widget.weight_label_expected_var.setText(str_weight_expected)
-            self._widget.weight_limited.setText("2");
+            self._widget.weight_limited.setText("4");
+            limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
+            limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
+            limit_cont_current_service(4)
+            limit_peak_current_service(4)
+
         elif index == 3:
             try:
                 rospy.delete_param('robot_description')
@@ -594,7 +605,12 @@ class RqtKuka(Plugin):
             weight_expected_max = 46
             str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
             self._widget.weight_label_expected_var.setText(str_weight_expected)
-            self._widget.weight_limited.setText("4");
+            self._widget.weight_limited.setText("7");
+            limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
+            limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
+            limit_cont_current_service(5)
+            limit_peak_current_service(7)
+
         elif index == 4:
             try:
                 rospy.delete_param('robot_description')
@@ -606,6 +622,10 @@ class RqtKuka(Plugin):
             str_weight_expected = "["+str(weight_expected_min)+ ", "+ str(weight_expected_max)+ "]"
             self._widget.weight_label_expected_var.setText(str_weight_expected)
             self._widget.weight_limited.setText("8");
+            limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
+            limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
+            limit_cont_current_service(5)
+            limit_peak_current_service(8)
             
     def press_capture_button(self):
 		print 'capture button'
