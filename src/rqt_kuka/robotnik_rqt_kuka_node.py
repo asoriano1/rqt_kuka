@@ -669,7 +669,7 @@ class RqtKuka(Plugin):
 		if(under_voltage_1==1):
 			under_voltage_tool=True
 			pixmap = QtGui.QPixmap(PATH+"resource/images/pinza_roja_peq2.png")
-            self._widget.under_voltage_tool.setPixmap(pixmap)
+			self._widget.under_voltage_tool.setPixmap(pixmap)
 		else:
 			under_voltage_tool=False
 
