@@ -8,6 +8,22 @@ pose_a_right = 106.9
 # z is always safe
 pose_z_safe = 1435.39
 
+#rotation table
+table_pose_x = -137.822
+table_pose_y = -1465.47
+table_pose_z = pose_z_safe
+table_pose_a = -133.35
+table_pose_b = pose_b
+table_pose_c = pose_c
+#
+#x: 390.0305
+#y: -1334.5508
+#z: 1435.3049
+#A: -130.4625
+#B: 0.4523
+#C: 179.7874
+#
+
 #huevera 16
 #obus16
 H16O16_Pose_x = 1877
@@ -203,24 +219,24 @@ H4O2_Pose_a = pose_a_left
 H4O2_Pose_b = pose_b
 H4O2_Pose_c = pose_c
 #obus1
-H4O2_Pose_x = 1803.39
-H4O2_Pose_y = -346.9
-H4O2_Pose_z = pose_z_safe
-H4O2_Pose_a = pose_a_left
-H4O2_Pose_b = pose_b
-H4O2_Pose_c = pose_c
+H4O1_Pose_x = 1803.39
+H4O1_Pose_y = -346.9
+H4O1_Pose_z = pose_z_safe
+H4O1_Pose_a = pose_a_left
+H4O1_Pose_b = pose_b
+H4O1_Pose_c = pose_c
 
 #huevera 2
 #obus2
-H2O2_Pose_x = 1619.39
-H2O2_Pose_y = -13.90
+H2O2_Pose_x = 1630.93
+H2O2_Pose_y = 47.44
 H2O2_Pose_z = pose_z_safe
 H2O2_Pose_a = pose_a_right
 H2O2_Pose_b = pose_b
 H2O2_Pose_c = pose_c
 #obus1
-H2O1_Pose_x = 1722
-H2O1_Pose_y = -79
+H2O1_Pose_x = 1716.63
+H2O1_Pose_y = -203
 H2O1_Pose_z = pose_z_safe
 H2O1_Pose_a = pose_a_left
 H2O1_Pose_b = pose_b

@@ -40,7 +40,7 @@ STATE_MOVING_TO_PLACE=4
 STATE_PLACED=5
 STATE_HOMING=6
 
-PATH="/home/asoriano/workspaces/kuka_catkin_ws/src/rqt_kuka/"
+PATH="/home/suippes/kuka_catkin_ws/src/rqt_kuka/"
 
 TOOL_HOMED=False
 KUKA_AUT=False
@@ -90,7 +90,7 @@ Preplace_angle_limit=20
 Prepick_Pose_x=255.49
 Prepick_Pose_y=1704.49
 Prepick_Pose_z=1475.38
-Prepick_Pose_a_left=-14#15.2
+Prepick_Pose_a_left=-18#15.2
 Prepick_Pose_a_right=Prepick_Pose_a_left+180 #+180 because Preplace_Pose_a_left<0 otherwise -180
 Prepick_Pose_b=0.0#-0.12
 Prepick_Pose_c=179.0#178.73
@@ -167,6 +167,7 @@ class RqtKuka(Plugin):
         self._widget.Tare_Reset_Button.pressed.connect(self.press_tare_reset_button)
         self._widget.Reset_Ext_Button.pressed.connect(self.press_reset_external_pc_button)
         self._widget.Run_Program_Button.pressed.connect(self.press_run_program_button)
+        self._widget.Run_Program_Button.hide()
         self._widget.MoveToTable_Button.pressed.connect(self.press_move_to_rotation_table_button)
         
         
@@ -514,54 +515,54 @@ class RqtKuka(Plugin):
 
     #filtro para detectar el raton
     def eventFilter(self, object, event):
-
-        #huevera 16
-        if finger_type == 1 :
-            if event.type() == QtCore.QEvent.HoverEnter:
-                #obuses hacia abajo (los de arriba [1-8])
-                if object == self._widget.Huevera16Obus1Button or object == self._widget.Huevera16Obus2Button or object == self._widget.Huevera16Obus3Button or object == self._widget.Huevera16Obus4Button or object == self._widget.Huevera16Obus5Button or object == self._widget.Huevera16Obus6Button or object == self._widget.Huevera16Obus7Button or object == self._widget.Huevera16Obus8Button :
-                    object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51P.png"))
-                #obuses hacia arriba
-                else:
-                    object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51P.png"))
-            if event.type() == QtCore.QEvent.HoverLeave:
-                #obuses hacia abajo (los de arriba [1-8])
-                if object == self._widget.Huevera16Obus1Button or object == self._widget.Huevera16Obus2Button or object == self._widget.Huevera16Obus3Button or object == self._widget.Huevera16Obus4Button or object == self._widget.Huevera16Obus5Button or object == self._widget.Huevera16Obus6Button or object == self._widget.Huevera16Obus7Button or object == self._widget.Huevera16Obus8Button :
-                    object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
-                #obuses hacia arriba
-                else:
-                    object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))  
-
-        #huevera 8
-        if finger_type == 2 :
-            if event.type() == QtCore.QEvent.HoverEnter:
-                #obuses hacia abajo (los de arriba [1-4])
-                if object == self._widget.Huevera8Obus1Button or object == self._widget.Huevera8Obus2Button or object == self._widget.Huevera8Obus3Button or object == self._widget.Huevera8Obus4Button :
-                    object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71P.png"))
-                #obuses hacia arriba
-                else:
-                    object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71P.png"))
-            if event.type() == QtCore.QEvent.HoverLeave:
-                #obuses hacia abajo (los de arriba [1-4])
-                if object == self._widget.Huevera8Obus1Button or object == self._widget.Huevera8Obus2Button or object == self._widget.Huevera8Obus3Button or object == self._widget.Huevera8Obus4Button :
-                    object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))
-                #obuses hacia arriba
-                else:
-                    object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))        
-        #huevera 4
-        if finger_type == 3 :
-            if event.type() == QtCore.QEvent.HoverEnter:
-                object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101P.png"))
-            if event.type() == QtCore.QEvent.HoverLeave:
-                object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))
-        #huevera 2
-        if finger_type == 4 :
-            if event.type() == QtCore.QEvent.HoverEnter:            
-                object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111P.png"))
-            if event.type() == QtCore.QEvent.HoverLeave:
-                object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png"))
-             
-        return False
+		if not KUKA_AUT :
+			#huevera 16
+			if finger_type == 1 :
+				if event.type() == QtCore.QEvent.HoverEnter:
+					#obuses hacia abajo (los de arriba [1-8])
+					if object == self._widget.Huevera16Obus1Button or object == self._widget.Huevera16Obus2Button or object == self._widget.Huevera16Obus3Button or object == self._widget.Huevera16Obus4Button or object == self._widget.Huevera16Obus5Button or object == self._widget.Huevera16Obus6Button or object == self._widget.Huevera16Obus7Button or object == self._widget.Huevera16Obus8Button :
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51P.png"))
+					#obuses hacia arriba
+					else:
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51P.png"))
+				if event.type() == QtCore.QEvent.HoverLeave:
+					#obuses hacia abajo (los de arriba [1-8])
+					if object == self._widget.Huevera16Obus1Button or object == self._widget.Huevera16Obus2Button or object == self._widget.Huevera16Obus3Button or object == self._widget.Huevera16Obus4Button or object == self._widget.Huevera16Obus5Button or object == self._widget.Huevera16Obus6Button or object == self._widget.Huevera16Obus7Button or object == self._widget.Huevera16Obus8Button :
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+					#obuses hacia arriba
+					else:
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))  
+			
+			#huevera 8
+			if finger_type == 2 :
+				if event.type() == QtCore.QEvent.HoverEnter:
+					#obuses hacia abajo (los de arriba [1-4])
+					if object == self._widget.Huevera8Obus1Button or object == self._widget.Huevera8Obus2Button or object == self._widget.Huevera8Obus3Button or object == self._widget.Huevera8Obus4Button :
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71P.png"))
+					#obuses hacia arriba
+					else:
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71P.png"))
+				if event.type() == QtCore.QEvent.HoverLeave:
+					#obuses hacia abajo (los de arriba [1-4])
+					if object == self._widget.Huevera8Obus1Button or object == self._widget.Huevera8Obus2Button or object == self._widget.Huevera8Obus3Button or object == self._widget.Huevera8Obus4Button :
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))
+					#obuses hacia arriba
+					else:
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))        
+			#huevera 4
+			if finger_type == 3 :
+				if event.type() == QtCore.QEvent.HoverEnter:
+					object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101P.png"))
+				if event.type() == QtCore.QEvent.HoverLeave:
+					object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))
+			#huevera 2
+			if finger_type == 4 :
+				if event.type() == QtCore.QEvent.HoverEnter:            
+					object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111P.png"))
+				if event.type() == QtCore.QEvent.HoverLeave:
+					object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png"))
+			
+		return False
         
 
     def desactivate_buttons(self):
@@ -672,17 +673,19 @@ class RqtKuka(Plugin):
 			self._widget.under_voltage_tool.setPixmap(pixmap)
 		else:
 			under_voltage_tool=False
-
+			pixmap = QtGui.QPixmap(PATH+"resource/images/pinza_verde_peq2.png")
+			self._widget.under_voltage_tool.setPixmap(pixmap)
 		if(motor1.status=="OPERATION_ENABLED" and first_time_enabled):
 			#if(weight_read-weight_empty<-10):
-			ret = QMessageBox.warning(self._widget, "WARNING!", 'Weight detected', QMessageBox.Ok, QMessageBox.Cancel)
-			first_time_enabled=False			
+			first_time_enabled=False				
+			#ret = QMessageBox.information(self._widget, "WARNING!", 'Weight detected', QMessageBox.Ok)
+					
 		if(motor1.status=="FAULT"):
 			first_time_enabled=True
 			
 
     def callback_robot_pose(self, data):
-        global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka, elapsed_time_gauges, gauges_failure
+        global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka, pos_b_kuka, pos_c_kuka, elapsed_time_gauges, gauges_failure
         #print 'CB:robot_pose_received',data
         pos_x_kuka=data.x
         pos_y_kuka=data.y
@@ -735,16 +738,33 @@ class RqtKuka(Plugin):
         self._widget.tool_force_lcdNumber.display(round(data.data,1))
     
     def press_move_to_rotation_table_button(self):
-        print 'move to rotation table'
-    
+		ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
+		global KUKA_AUT
+		if ret == QMessageBox.Ok:
+			try:
+				placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
+				ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
+				KUKA_AUT=True
+				while KUKA_AUT: self.sleep_loop(0.3)
+				placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+				ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, H2O1_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
+				KUKA_AUT=True
+				while KUKA_AUT: self.sleep_loop(0.3)
+				placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+				ret = placed_abs_service(table_pose_x, table_pose_y, table_pose_z, table_pose_a, table_pose_b, table_pose_c)
+			except rospy.ServiceException, e:
+				print "Service call failed: %s"%e
+                
     #pressing obuses
     #huevera2
     #obus1
     def press_obus2_1_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
-            #cambia el color de la imagen
-            self._widget.Huevera2Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111PP.png"))
+            #cambia el color de la imagen            
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera2Obus1Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -752,21 +772,26 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, H2O1_Pose_z, H2O1_Pose_a, H2O1_Pose_b, H2O1_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera2Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png"))
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera2Obus1Button.setIcon(icon)
+            #self._widget.Huevera2Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png", QtGui.QIcon.Disabled))
     #obus2
     def press_obus2_2_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera2Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera2Obus2Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -774,22 +799,26 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H2O2_Pose_x, H2O2_Pose_y, H2O2_Pose_z, H2O2_Pose_a, H2O2_Pose_b, H2O2_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera2Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png"))        
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera2Obus2Button.setIcon(icon)
     #huevera4
     #obus1
     def press_obus4_1_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:           
             #cambia el color de la imagen
-            self._widget.Huevera4Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera4Obus1Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -797,21 +826,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H4O1_Pose_x, H4O1_Pose_y, H4O1_Pose_z, H4O1_Pose_a, H4O1_Pose_b, H4O1_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera4Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))    
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera4Obus1Button.setIcon(icon)
     #obus2
     def press_obus4_2_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:    
-            #cambia el color de la imagen
-            self._widget.Huevera4Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101PP.png"))
+            #cambia el color de la imagen            
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera4Obus2Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -819,21 +852,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H4O2_Pose_x, H4O2_Pose_y, H4O2_Pose_z, H4O2_Pose_a, H4O2_Pose_b, H4O2_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera4Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera4Obus2Button.setIcon(icon)
     #obus3
     def press_obus4_3_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:           
             #cambia el color de la imagen
-            self._widget.Huevera4Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera4Obus3Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -841,21 +878,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H4O3_Pose_x, H4O3_Pose_y, H4O3_Pose_z, H4O3_Pose_a, H4O3_Pose_b, H4O3_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera4Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera4Obus3Button.setIcon(icon)
     #obus4
     def press_obus4_4_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera4Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera4Obus4Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -863,22 +904,26 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H4O4_Pose_x, H4O4_Pose_y, H4O4_Pose_z, H4O4_Pose_a, H4O4_Pose_b, H4O4_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera4Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))    
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera4Obus4Button.setIcon(icon)
     #huevera8
     #obus1
     def press_obus8_1_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera8Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus1Button.setIcon(icon)            
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -886,21 +931,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H8O1_Pose_x, H8O1_Pose_y, H8O1_Pose_z, H8O1_Pose_a, H8O1_Pose_b, H8O1_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera8Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus1Button.setIcon(icon)
     #obus2
     def press_obus8_2_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera8Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus2Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -908,21 +957,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H8O2_Pose_x, H8O2_Pose_y, H8O2_Pose_z, H8O2_Pose_a, H8O2_Pose_b, H8O2_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera8Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus2Button.setIcon(icon)
     #obus3
     def press_obus8_3_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera8Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus3Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -930,21 +983,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H8O3_Pose_x, H8O3_Pose_y, H8O3_Pose_z, H8O3_Pose_a, H8O3_Pose_b, H8O3_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera8Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus3Button.setIcon(icon)
     #obus4
     def press_obus8_4_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera8Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus4Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -952,21 +1009,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H8O4_Pose_x, H8O4_Pose_y, H8O4_Pose_z, H8O4_Pose_a, H8O4_Pose_b, H8O4_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera8Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus4Button.setIcon(icon)
     #obus5
     def press_obus8_5_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera8Obus5Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus5Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -974,21 +1035,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H8O5_Pose_x, H8O5_Pose_y, H8O5_Pose_z, H8O5_Pose_a, H8O5_Pose_b, H8O5_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera8Obus5Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus5Button.setIcon(icon)
     #obus6
     def press_obus8_6_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:           
             #cambia el color de la imagen
-            self._widget.Huevera8Obus6Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus6Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -996,21 +1061,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H8O6_Pose_x, H8O6_Pose_y, H8O6_Pose_z, H8O6_Pose_a, H8O6_Pose_b, H8O6_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera8Obus6Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus6Button.setIcon(icon)
     #obus7
     def press_obus8_7_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera8Obus7Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus7Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1018,21 +1087,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H8O7_Pose_x, H8O7_Pose_y, H8O7_Pose_z, H8O7_Pose_a, H8O7_Pose_b, H8O7_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera8Obus7Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus7Button.setIcon(icon)
     #obus8
     def press_obus8_8_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:           
             #cambia el color de la imagen
-            self._widget.Huevera8Obus8Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus8Button.setIcon(icon)
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1040,22 +1113,26 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H8O8_Pose_x, H8O8_Pose_y, H8O8_Pose_z, H8O8_Pose_a, H8O8_Pose_b, H8O8_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera8Obus8Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera8Obus8Button.setIcon(icon)
     #huevera16
     #obus1
     def press_obus16_1_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus1Button.setIcon(icon)            
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1063,21 +1140,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O1_Pose_x, H16O1_Pose_y, H16O1_Pose_z, H16O1_Pose_a, H16O1_Pose_b, H16O1_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus1Button.setIcon(icon)            
     #obus2
     def press_obus16_2_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus2Button.setIcon(icon)            
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1085,21 +1166,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O2_Pose_x, H16O2_Pose_y, H16O2_Pose_z, H16O2_Pose_a, H16O2_Pose_b, H16O2_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus2Button.setIcon(icon)            
     #obus3
     def press_obus16_3_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus3Button.setIcon(icon)                        
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1107,21 +1192,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O3_Pose_x, H16O3_Pose_y, H16O3_Pose_z, H16O3_Pose_a, H16O3_Pose_b, H16O3_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus3Button.setIcon(icon)            
     #obus4
     def press_obus16_4_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus4Button.setIcon(icon)            
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1129,21 +1218,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O4_Pose_x, H16O4_Pose_y, H16O4_Pose_z, H16O4_Pose_a, H16O4_Pose_b, H16O4_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus4Button.setIcon(icon)            
     #obus5
     def press_obus16_5_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus5Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus5Button.setIcon(icon)            
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1151,21 +1244,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O5_Pose_x, H16O5_Pose_y, H16O5_Pose_z, H16O5_Pose_a, H16O5_Pose_b, H16O5_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus5Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus5Button.setIcon(icon)            
     #obus6
     def press_obus16_6_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:           
             #cambia el color de la imagen
-            self._widget.Huevera16Obus6Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus6Button.setIcon(icon)            
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1173,21 +1270,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O6_Pose_x, H16O6_Pose_y, H16O6_Pose_z, H16O6_Pose_a, H16O6_Pose_b, H16O6_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus6Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus6Button.setIcon(icon)            
     #obus7
     def press_obus16_7_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus7Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus7Button.setIcon(icon)            
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1195,21 +1296,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O7_Pose_x, H16O7_Pose_y, H16O7_Pose_z, H16O7_Pose_a, H16O7_Pose_b, H16O7_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus7Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus7Button.setIcon(icon) 
     #obus8
     def press_obus16_8_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:           
             #cambia el color de la imagen
-            self._widget.Huevera16Obus8Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus8Button.setIcon(icon) 
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1217,21 +1322,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O8_Pose_x, H16O8_Pose_y, H16O8_Pose_z, H16O8_Pose_a, H16O8_Pose_b, H16O8_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus8Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png")) 
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus8Button.setIcon(icon) 
     #obus9
     def press_obus16_9_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus9Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus9Button.setIcon(icon) 
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1239,21 +1348,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O9_Pose_x, H16O9_Pose_y, H16O9_Pose_z, H16O9_Pose_a, H16O9_Pose_b, H16O9_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus9Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus9Button.setIcon(icon) 
     #obus10
     def press_obus16_10_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus10Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus10Button.setIcon(icon) 
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1261,21 +1374,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O10_Pose_x, H16O10_Pose_y, H16O10_Pose_z, H16O10_Pose_a, H16O10_Pose_b, H16O10_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus10Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus10Button.setIcon(icon) 
     #obus11
     def press_obus16_11_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus11Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus11Button.setIcon(icon) 
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1283,21 +1400,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O11_Pose_x, H16O11_Pose_y, H16O11_Pose_z, H16O11_Pose_a, H16O11_Pose_b, H16O11_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus11Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus11Button.setIcon(icon) 
     #obus12
     def press_obus16_12_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus12Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus12Button.setIcon(icon) 
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1305,21 +1426,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O12_Pose_x, H16O12_Pose_y, H16O12_Pose_z, H16O12_Pose_a, H16O12_Pose_b, H16O12_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus12Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus12Button.setIcon(icon) 
     #obus13
     def press_obus16_13_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus13Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus13Button.setIcon(icon) 
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1327,21 +1452,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O13_Pose_x, H16O13_Pose_y, H16O13_Pose_z, H16O13_Pose_a, H16O13_Pose_b, H16O13_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus13Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus13Button.setIcon(icon) 
     #obus14
     def press_obus16_14_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:           
             #cambia el color de la imagen
-            self._widget.Huevera16Obus14Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus14Button.setIcon(icon) 
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1349,21 +1478,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O14_Pose_x, H16O14_Pose_y, H16O14_Pose_z, H16O14_Pose_a, H16O14_Pose_b, H16O14_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus14Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus14Button.setIcon(icon) 
     #obus15
     def press_obus16_15_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             #cambia el color de la imagen
-            self._widget.Huevera16Obus15Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus15Button.setIcon(icon) 
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1371,21 +1504,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O15_Pose_x, H16O15_Pose_y, H16O15_Pose_z, H16O15_Pose_a, H16O15_Pose_b, H16O15_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus15Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus15Button.setIcon(icon) 
     #obus16
     def press_obus16_16_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:           
             #cambia el color de la imagen
-            self._widget.Huevera16Obus16Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51PP.png"))
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus16Button.setIcon(icon) 
             #llamara al servicio de mover
             global KUKA_AUT
             #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -1393,19 +1530,25 @@ class RqtKuka(Plugin):
                 placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(H16O16_Pose_x, H16O16_Pose_y, H16O16_Pose_z, H16O16_Pose_a, H16O16_Pose_b, H16O16_Pose_c)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
             #y volvera a poner el color original
-            self._widget.Huevera16Obus16Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))                
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+            self._widget.Huevera16Obus16Button.setIcon(icon) 
     def press_tool_homming(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
         #ret = QMessageBox.critical(self._widget, "WARNING!", 'The tool is activated and there is some weight \ndetected by the gauges!', QMessageBox.Ok)
         if ret == QMessageBox.Ok:
+            limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
+            limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
+            limit_cont_current_service(2)
+            limit_peak_current_service(2)
             #Call tool homing method
             global weight_empty, weight_read
             try:
@@ -1418,7 +1561,23 @@ class RqtKuka(Plugin):
                     TOOL_HOMED=True                 
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
-    
+            #set current again
+            if finger_type == 0:
+                limit_cont_current_service(2)
+                limit_peak_current_service(2)
+            elif finger_type == 1:
+                limit_cont_current_service(3)
+                limit_peak_current_service(3)
+            elif finger_type == 2:
+                limit_cont_current_service(4)
+                limit_peak_current_service(4)
+            elif finger_type == 3:
+                limit_cont_current_service(5)
+                limit_peak_current_service(7)
+            elif finger_type == 4:
+                limit_cont_current_service(5)
+                limit_peak_current_service(8)
+                
     def press_finger_adjust_button(self):
         
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
@@ -1474,52 +1633,6 @@ class RqtKuka(Plugin):
             print "Service call failed: %s"%e
 
 
-    def press_place_right_button(self):
-        global KUKA_AUT, pos_z_kuka,pos_a_kuka
-        #Call service to move robot up and then to the pre-pick pose, should be fast
-        try:
-            placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
-            ret_rel=placed_rel_service(0, 0, Preplace_Pose_z-pos_z_kuka, 0, 0, 0)
-            KUKA_AUT=True
-            while KUKA_AUT: self.sleep_loop(0.1)
-            placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-            #if(pos_a_kuka<=-71 and pos_a_kuka>=-151):
-            #if((pos_a_kuka<=190 and pos_a_kuka>=110) or (pos_a_kuka>=-179 and pos_a_kuka<=-151)):
-            #if(pos_a_kuka <= Preplace_angle_limit and pos_a_kuka >= Preplace_Pose_a_left):
-                #print "pass at -160 (-71-90)"
-                #ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left-90,Preplace_Pose_b,Preplace_Pose_c)
-                #KUKA_AUT=True
-                #while KUKA_AUT: self.sleep_loop(0.1)
-            #print "go at 110 (-71+180)"
-            ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_right,Preplace_Pose_b,Preplace_Pose_c)
-            #ret=placed_rel_service(0, 0, -100, 0, 0, 0)
-            #if ret == True:
-            #   CURRENT_STATE=3
-        except rospy.ServiceException, e:
-            print "Service call failed: %s"%e
-            
-    def press_place_left_button(self):
-        global KUKA_AUT, pos_z_kuka, pos_a_kuka
-        #Call service to move robot up and then to the pre-pick pose, should be fast
-        try:
-            placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
-            ret_rel=placed_rel_service(0, 0, Preplace_Pose_z-pos_z_kuka, 0, 0, 0)
-            KUKA_AUT=True
-            while KUKA_AUT: self.sleep_loop(0.1)
-            placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-            #if(pos_a_kuka >= Preplace_angle_limit and (pos_a_kuka <= Preplace_Pose_a_right)): 
-                #print "pass at 160 (-71-90)"
-                #ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left-90,Preplace_Pose_b,Preplace_Pose_c)
-                #KUKA_AUT=True
-                #while KUKA_AUT: time.sleep(0.1)
-            #print "go at -70"
-            ret = placed_abs_service(Preplace_Pose_x, Preplace_Pose_y, Preplace_Pose_z, Preplace_Pose_a_left,Preplace_Pose_b,Preplace_Pose_c)
-            #ret=placed_rel_service(0, 0, -100, 0, 0, 0)
-            if ret == True:
-                CURRENT_STATE=3
-        except rospy.ServiceException, e:
-            print "Service call failed: %s"%e
-
     def press_pick_left_button(self):
         global KUKA_AUT, pos_z_kuka, pos_a_kuka
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
@@ -1529,7 +1642,12 @@ class RqtKuka(Plugin):
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
+                if(pos_y_kuka<-800):
+						placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+						ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
+						KUKA_AUT=True
+						while KUKA_AUT: self.sleep_loop(0.3)
                 picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
                 #if((pos_a_kuka<=180 and pos_a_kuka>=90)):
                 #if(pos_a_kuka>=Prepick_angle_limit and pos_a_kuka<=Prepick_Pose_a_right):
@@ -1552,7 +1670,12 @@ class RqtKuka(Plugin):
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
+                if(pos_y_kuka<-850):
+						placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+						ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
+						KUKA_AUT=True
+						while KUKA_AUT: self.sleep_loop(0.3)
                 picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
                 #if (pos_a_kuka<=Prepick_angle_limit and pos_a_kuka>=Prepick_Pose_a_left):
                         #ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left-90,Prepick_Pose_b,Prepick_Pose_c)
@@ -1572,7 +1695,12 @@ class RqtKuka(Plugin):
                 homming_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=homming_rel_service(0, 0,Homming_Pose_z-pos_z_kuka , 0, 0, 0)
                 KUKA_AUT=True
-                while KUKA_AUT: self.sleep_loop(0.1)
+                while KUKA_AUT: self.sleep_loop(0.3)
+                if(pos_y_kuka<-850):
+						placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+						ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
+						KUKA_AUT=True
+						while KUKA_AUT: self.sleep_loop(0.3)
                 homming_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
                 #DE MOMENTO EL ANGULO EN EL HOMMING NO SE MODIFICA
                 ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, Homming_Pose_a,Homming_Pose_b,Homming_Pose_c)
@@ -1584,15 +1712,17 @@ class RqtKuka(Plugin):
             
     def press_picktest_button(self):
         global KUKA_AUT
-        try:
-            placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
-            ret_rel=placed_rel_service(0, 0, 20, 0, 0, 0)
-            #KUKA_AUT=True
-            #while KUKA_AUT: time.sleep(0.1)
-            if ret_rel == True:
-                    CURRENT_STATE=STATE_DOING_PICK_TEST
-        except rospy.ServiceException, e:
-            print "Service call failed: %s"%e
+        ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
+        if ret == QMessageBox.Ok:
+            try:
+                placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
+                ret_rel=placed_rel_service(0, 0, 20, 0, 0, 0)
+                #KUKA_AUT=True
+                #while KUKA_AUT: time.sleep(0.1)
+                if ret_rel == True:
+                        CURRENT_STATE=STATE_DOING_PICK_TEST
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
 
     def press_tool_straighten(self):
         global KUKA_AUT,pos_a_kuka,pos_b_kuka,pos_c_kuka,pos_x_kuka,pos_y_kuka,pos_z_kuka
@@ -1892,8 +2022,10 @@ class RqtKuka(Plugin):
         
     def press_reset_external_pc_button(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nExternal PC is going to reset.\n Wait 10 sec and restart the GUI.', QMessageBox.Ok, QMessageBox.Cancel)
-        if ret == True:
-            command_string = "ssh vulcano@192.168.1.10 reboot"
+        if ret == QMessageBox.Ok:
+            #command_string = "ssh robotnik@192.168.1.10 sudo -S <<< \"R0b0tn1K\" reboot \n"
+            command_string = "~/kuka_catkin_ws/src/rqt_kuka/scripts/reboot.sh"
+            print command_string
             os.system(command_string)
             
         
