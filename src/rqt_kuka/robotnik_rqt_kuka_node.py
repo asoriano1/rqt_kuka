@@ -21,10 +21,12 @@ from qt_gui.plugin import Plugin
 from python_qt_binding import loadUi
 from python_qt_binding.QtWidgets import QWidget, QDialog, QFileDialog, QMessageBox, QTableWidgetItem
 from std_msgs.msg import Bool, Float64, Float32
+from std_srvs.srv import SetBool
 from sensor_msgs.msg import JointState
 from robotnik_msgs.srv import home, set_odometry, set_CartesianEuler_pose, set_digital_output, set_float_value
 from robotnik_msgs.msg import Cartesian_Euler_pose, RobotnikMotorsStatus, MotorStatus
 from geometry_msgs.msg import Pose, Point, Quaternion
+from kuka_rsi_cartesian_hw_interface.srv import set_A1_A6
 
 
 import yaml
@@ -49,6 +51,7 @@ gauges_failure=False
 under_voltage_tool=False
 first_time_enabled=False
 start_time_gauges=time.time()
+angle_mode=True
 #service names:
 srv_name_move_abs_fast='/kuka_robot/setKukaAbsFast'
 srv_name_move_abs_slow='/kuka_robot/setKukaAbs'
@@ -59,6 +62,8 @@ srv_finger_set_pose='/kuka_tool_finger_node/set_odometry' #robotnik_msgs.set.odo
 srv_digital_io='/kuka_tool/robotnik_base_hw/set_digital_output'
 srv_limit_cont_current='/kuka_tool/robotnik_base_hw/set_continuous_current_limit'
 srv_limit_peak_current='/kuka_tool/robotnik_base_hw/set_peak_current_limit'
+srv_angle_mode='kuka_tool_finger_node/set_angle_mode'
+srv_move_A1_A6='/kuka_robot/setKukaA1A6'
 
 #topic names:
 topic_cart_pose_kuka='/kuka_robot/cartesian_pos_kuka'
@@ -89,7 +94,7 @@ Preplace_angle_limit=20
 #CAJA GRIS
 Prepick_Pose_x=255.49
 Prepick_Pose_y=1704.49
-Prepick_Pose_z=1475.38
+Prepick_Pose_z=1442.38
 Prepick_Pose_a_left=-18#15.2
 Prepick_Pose_a_right=Prepick_Pose_a_left+180 #+180 because Preplace_Pose_a_left<0 otherwise -180
 Prepick_Pose_b=0.0#-0.12
@@ -168,7 +173,7 @@ class RqtKuka(Plugin):
         self._widget.Reset_Ext_Button.pressed.connect(self.press_reset_external_pc_button)
         self._widget.Run_Program_Button.pressed.connect(self.press_run_program_button)
         self._widget.Run_Program_Button.hide()
-        self._widget.MoveToTable_Button.pressed.connect(self.press_move_to_rotation_table_button)
+        self._widget.MoveToTable_Button.pressed.connect(self.press_homming_button)#self.press_move_to_rotation_table_button)
         
         
         self._widget.PickTest_Button.pressed.connect(self.press_picktest_button)
@@ -177,6 +182,9 @@ class RqtKuka(Plugin):
         self._widget.Led_Off_Button.pressed.connect(self.press_led_off_button)
         self._widget.Light_On_Button.pressed.connect(self.press_light_on_button)
         self._widget.Light_Off_Button.pressed.connect(self.press_light_off_button)
+        self._widget.ExpertMode_ON_Button.pressed.connect(self.press_expert_on_button)
+        self._widget.ExpertMode_OFF_Button.pressed.connect(self.press_expert_off_button)
+        
         self._widget.Led_On_Button.setStyleSheet("color: rgb(80, 170, 80)")
         self._widget.Led_Off_Button.setStyleSheet("color: rgb(170, 80, 80)")
         self._widget.Light_On_Button.setStyleSheet("color: rgb(80, 170, 80)")
@@ -474,8 +482,9 @@ class RqtKuka(Plugin):
         mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png")
         self._widget.Huevera16Obus16Button.setMask(mask.mask())
         self._widget.Huevera16Obus16Button.setMouseTracking(True)       
-        self._widget.Huevera16Obus16Button.installEventFilter(self)        
+        self._widget.Huevera16Obus16Button.installEventFilter(self)
         
+                
         
         #subscriber to robot state
         rospy.Subscriber(topic_kuka_moving, Bool, self.callback_moving)
@@ -717,8 +726,8 @@ class RqtKuka(Plugin):
         for i in range(1, 5):
             weight_no_tool=weight_no_tool+weight_reads[i]
         weight_no_tool=weight_no_tool/5
-        if(weight_no_tool<0 and weight_no_tool>-10):
-            weight_no_tool=-weight_no_tool
+        #if(weight_no_tool<0 and weight_no_tool>-10):
+            #weight_no_tool=-weight_no_tool
         for i in range(1, 5):
             weight_reads[i]=weight_reads[i-1]
         self._widget.weight_lcdNumber.setDecMode()
@@ -1617,14 +1626,28 @@ class RqtKuka(Plugin):
         except rospy.ServiceException, e:
             print "Service call failed: %s"%e
         
+    def press_expert_on_button(self):
+	   try:
+            angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+            ret = angle_mode_service(True)
+	   except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+			
+    def press_expert_off_button(self):
+	  try:
+            angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+            ret = angle_mode_service(False)
+	  except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+			
+    
     def press_light_on_button(self):
         try:
             led_service = rospy.ServiceProxy(srv_digital_io, set_digital_output)
             ret = led_service(4,False)
         except rospy.ServiceException, e:
             print "Service call failed: %s"%e
-
-
+    
     def press_light_off_button(self):
         try:
             led_service = rospy.ServiceProxy(srv_digital_io, set_digital_output)
@@ -1643,19 +1666,21 @@ class RqtKuka(Plugin):
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
                 KUKA_AUT=True
                 while KUKA_AUT: self.sleep_loop(0.3)
-                if(pos_y_kuka<-800):
-						placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-						ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
-						KUKA_AUT=True
-						while KUKA_AUT: self.sleep_loop(0.3)
-                picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
+                #if(pos_y_kuka<-800):
+				#		placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+				#		ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
+				#		KUKA_AUT=True
+				#		while KUKA_AUT: self.sleep_loop(0.3)
+                #picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
                 #if((pos_a_kuka<=180 and pos_a_kuka>=90)):
                 #if(pos_a_kuka>=Prepick_angle_limit and pos_a_kuka<=Prepick_Pose_a_right):
                 #   print "pass at 76 (-14-90)"
                     #ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left-90,Prepick_Pose_b,Prepick_Pose_c)
                     #KUKA_AUT=True
                     #while KUKA_AUT: time.sleep(0.1)
-                ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left,Prepick_Pose_b,Prepick_Pose_c)         
+                #ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left,Prepick_Pose_b,Prepick_Pose_c)
+                pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
+                ret=pick_A1_A6_service(-87.0, 87.0)
                 if ret == True:
                     CURRENT_STATE=STATE_MOVING_TO_PLACE
             except rospy.ServiceException, e:
@@ -1671,17 +1696,19 @@ class RqtKuka(Plugin):
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
                 KUKA_AUT=True
                 while KUKA_AUT: self.sleep_loop(0.3)
-                if(pos_y_kuka<-850):
-						placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-						ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
-						KUKA_AUT=True
-						while KUKA_AUT: self.sleep_loop(0.3)
-                picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
+                #if(pos_y_kuka<-850):
+						#placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+						#ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
+						#KUKA_AUT=True
+						#while KUKA_AUT: self.sleep_loop(0.3)
+                #picked_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
                 #if (pos_a_kuka<=Prepick_angle_limit and pos_a_kuka>=Prepick_Pose_a_left):
                         #ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_left-90,Prepick_Pose_b,Prepick_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: time.sleep(0.1)
-                ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_right,Prepick_Pose_b,Prepick_Pose_c)
+                #ret = picked_abs_service(Prepick_Pose_x, Prepick_Pose_y, Prepick_Pose_z, Prepick_Pose_a_right,Prepick_Pose_b,Prepick_Pose_c)
+                pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
+                ret=pick_A1_A6_service(-87.0, 267)
                 if ret == True:
                     CURRENT_STATE=STATE_MOVING_TO_PLACE
             except rospy.ServiceException, e:
@@ -1696,15 +1723,17 @@ class RqtKuka(Plugin):
                 ret_rel=homming_rel_service(0, 0,Homming_Pose_z-pos_z_kuka , 0, 0, 0)
                 KUKA_AUT=True
                 while KUKA_AUT: self.sleep_loop(0.3)
-                if(pos_y_kuka<-850):
-						placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-						ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
-						KUKA_AUT=True
-						while KUKA_AUT: self.sleep_loop(0.3)
-                homming_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
+                #if(pos_y_kuka<-850):
+						#placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+						#ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
+						#KUKA_AUT=True
+						#while KUKA_AUT: self.sleep_loop(0.3)
+                #homming_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
                 #DE MOMENTO EL ANGULO EN EL HOMMING NO SE MODIFICA
-                ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, Homming_Pose_a,Homming_Pose_b,Homming_Pose_c)
+                #ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, Homming_Pose_a,Homming_Pose_b,Homming_Pose_c)
                 #ret=placed_rel_service(0, 0, -100, 0, 0, 0)
+                home_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
+                ret=home_A1_A6_service(0.0, 177)
                 if ret == True:
                     CURRENT_STATE=STATE_MOVING_TO_PLACE
             except rospy.ServiceException, e:
