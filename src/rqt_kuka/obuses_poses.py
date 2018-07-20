@@ -8,6 +8,15 @@ pose_a_right = 106.9
 # z is always safe
 pose_z_safe = 1435.39
 
+
+
+##AXIS POSITIONS A1 and A6
+pick_A1=-87.0
+pick_right_A6=267.0
+pick_left_A6=87.0
+place_A1=87.0
+place_left_A6=267.0
+place_right_A6=87.0
 #rotation table
 table_pose_x = -137.822
 table_pose_y = -1465.47
@@ -131,10 +140,10 @@ H16O2_Pose_a = pose_a_left
 H16O2_Pose_b = pose_b
 H16O2_Pose_c = pose_c
 #obus1
-H16O1_Pose_x = 1612
-H16O1_Pose_y = -446
+H16O1_Pose_x = -260
+H16O1_Pose_y = -1342
 H16O1_Pose_z = pose_z_safe
-H16O1_Pose_a = pose_a_left
+H16O1_Pose_a = -179
 H16O1_Pose_b = pose_b
 H16O1_Pose_c = pose_c
 
