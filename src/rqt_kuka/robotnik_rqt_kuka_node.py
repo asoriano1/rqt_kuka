@@ -167,6 +167,11 @@ Obus_1615=False
 Obus_1616=False
 
 class RqtKuka(Plugin):
+        
+    do_callback_motor_status = QtCore.pyqtSignal(RobotnikMotorsStatus)
+    do_callback_horiz_force = QtCore.pyqtSignal(Float64)
+    do_callback_current = QtCore.pyqtSignal(Float32)
+    do_callback_tool_weight = QtCore.pyqtSignal(Float64)
 
     def __init__(self, context):
         super(RqtKuka, self).__init__(context)
@@ -536,16 +541,20 @@ class RqtKuka(Plugin):
         rospy.Subscriber(topic_cart_pose_kuka, Cartesian_Euler_pose, self.callback_robot_pose)     
 
         #subscriber to tool weight detected
-        rospy.Subscriber(topic_tool_weight, Float64, self.callback_tool_weight)     
+        rospy.Subscriber(topic_tool_weight, Float64, self.callback_tool_weight2)
+        self.do_callback_tool_weight.connect(self.callback_tool_weight)     
 
         #subscriber to tool current
-        rospy.Subscriber(topic_current, Float32, self.callback_current) 
+        rospy.Subscriber(topic_current, Float32, self.callback_current2)
+        self.do_callback_current.connect(self.callback_current) 
                 
         #subscriber to vertical force
-        rospy.Subscriber(topic_horiz_force, Float64, self.callback_horiz_force)
+        rospy.Subscriber(topic_horiz_force, Float64, self.callback_horiz_force2)
+        self.do_callback_horiz_force.connect(self.callback_horiz_force)
         
         #subscriber to motor status of the tool
-        rospy.Subscriber(topic_motor_status, RobotnikMotorsStatus, self.callback_motor_status)
+        rospy.Subscriber(topic_motor_status, RobotnikMotorsStatus, self.callback_motor_status2)
+        self.do_callback_motor_status.connect(self.callback_motor_status)
         
         # Show _widget.windowTitle on left-top of each plugin (when 
         # it's set in _widget). This is useful when you open multiple 
@@ -780,7 +789,6 @@ class RqtKuka(Plugin):
                         name_method='Huevera2Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
-                        #FALTA LA CAJA de 2
 				
 				
     def press_reset_positions_button(self):
@@ -895,10 +903,14 @@ class RqtKuka(Plugin):
 		if(motor1.status=="OPERATION_ENABLED" and first_time_enabled):
 			#if(weight_read-weight_empty<-10):
 			first_time_enabled=False				
-			#ret = QMessageBox.information(self._widget, "WARNING!", 'Weight detected', QMessageBox.Ok)
+			ret = QMessageBox.information(self._widget, "WARNING!", 'Weight detected', QMessageBox.Ok)
 					
 		if(motor1.status=="FAULT"):
 			first_time_enabled=True
+                #print first_time_enabled
+                        
+    def callback_motor_status2(self,data):
+            self.do_callback_motor_status.emit(data)
 			
 
     def callback_robot_pose(self, data):
@@ -920,6 +932,8 @@ class RqtKuka(Plugin):
         horiz_force_read = data.data
         self._widget.vertforce_lcdNumber.setDigitCount(4)
         self._widget.vertforce_lcdNumber.display(round((data.data-horiz_force_empty)*0.19,1))
+    def callback_horiz_force2(self,data):
+            self.do_callback_horiz_force.emit(data)
         
     def callback_tool_weight(self, data):
         global weight_empty, weight_read, gauges_failure, start_time_gauges
@@ -948,11 +962,15 @@ class RqtKuka(Plugin):
         else:
             palette.setColor(palette.WindowText, QtGui.QColor(255, 50, 50))
         self._widget.weight_lcdNumber.setPalette(palette)
+    def callback_tool_weight2(self,data):
+            self.do_callback_tool_weight.emit(data)
 
     def callback_current(self, data):
         #print 'CB:current_received',data
         self._widget.tool_force_lcdNumber.setDigitCount(4)
         self._widget.tool_force_lcdNumber.display(round(data.data,1))
+    def callback_current2(self,data):
+            self.do_callback_current.emit(data)
     
     def press_move_to_rotation_table_button(self):
 		ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
