@@ -1542,7 +1542,7 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-                        ret = placed_abs_service(H16O1_Pose_x, H16O1_Pose_y, H16O1_Pose_z, H16O1_Pose_a, H16O1_Pose_b, H16O1_Pose_c)
+                        ret2 = placed_abs_service(H16O1_Pose_x, H16O1_Pose_y, H16O1_Pose_z, H16O1_Pose_a, H16O1_Pose_b, H16O1_Pose_c)
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
@@ -1580,9 +1580,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O2_Pose_x, H16O2_Pose_y, H16O2_Pose_z, H16O2_Pose_a, H16O2_Pose_b, H16O2_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O2_Pose_x, H16O2_Pose_y, H16O2_Pose_z, H16O2_Pose_a, H16O2_Pose_b, H16O2_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1617,9 +1617,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O3_Pose_x, H16O3_Pose_y, H16O3_Pose_z, H16O3_Pose_a, H16O3_Pose_b, H16O3_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O3_Pose_x, H16O3_Pose_y, H16O3_Pose_z, H16O3_Pose_a, H16O3_Pose_b, H16O3_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1654,9 +1654,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O4_Pose_x, H16O4_Pose_y, H16O4_Pose_z, H16O4_Pose_a, H16O4_Pose_b, H16O4_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O4_Pose_x, H16O4_Pose_y, H16O4_Pose_z, H16O4_Pose_a, H16O4_Pose_b, H16O4_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1691,9 +1691,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O5_Pose_x, H16O5_Pose_y, H16O5_Pose_z, H16O5_Pose_a, H16O5_Pose_b, H16O5_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O5_Pose_x, H16O5_Pose_y, H16O5_Pose_z, H16O5_Pose_a, H16O5_Pose_b, H16O5_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1728,9 +1728,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O6_Pose_x, H16O6_Pose_y, H16O6_Pose_z, H16O6_Pose_a, H16O6_Pose_b, H16O6_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O6_Pose_x, H16O6_Pose_y, H16O6_Pose_z, H16O6_Pose_a, H16O6_Pose_b, H16O6_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1765,9 +1765,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O7_Pose_x, H16O7_Pose_y, H16O7_Pose_z, H16O7_Pose_a, H16O7_Pose_b, H16O7_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O7_Pose_x, H16O7_Pose_y, H16O7_Pose_z, H16O7_Pose_a, H16O7_Pose_b, H16O7_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1802,9 +1802,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O8_Pose_x, H16O8_Pose_y, H16O8_Pose_z, H16O8_Pose_a, H16O8_Pose_b, H16O8_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O8_Pose_x, H16O8_Pose_y, H16O8_Pose_z, H16O8_Pose_a, H16O8_Pose_b, H16O8_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1839,9 +1839,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O9_Pose_x, H16O9_Pose_y, H16O9_Pose_z, H16O9_Pose_a, H16O9_Pose_b, H16O9_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O9_Pose_x, H16O9_Pose_y, H16O9_Pose_z, H16O9_Pose_a, H16O9_Pose_b, H16O9_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1876,9 +1876,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O10_Pose_x, H16O10_Pose_y, H16O10_Pose_z, H16O10_Pose_a, H16O10_Pose_b, H16O10_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O10_Pose_x, H16O10_Pose_y, H16O10_Pose_z, H16O10_Pose_a, H16O10_Pose_b, H16O10_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1913,9 +1913,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O11_Pose_x, H16O11_Pose_y, H16O11_Pose_z, H16O11_Pose_a, H16O11_Pose_b, H16O11_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O11_Pose_x, H16O11_Pose_y, H16O11_Pose_z, H16O11_Pose_a, H16O11_Pose_b, H16O11_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1950,9 +1950,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O12_Pose_x, H16O12_Pose_y, H16O12_Pose_z, H16O12_Pose_a, H16O12_Pose_b, H16O12_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O12_Pose_x, H16O12_Pose_y, H16O12_Pose_z, H16O12_Pose_a, H16O12_Pose_b, H16O12_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -1987,9 +1987,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O13_Pose_x, H16O13_Pose_y, H16O13_Pose_z, H16O13_Pose_a, H16O13_Pose_b, H16O13_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O13_Pose_x, H16O13_Pose_y, H16O13_Pose_z, H16O13_Pose_a, H16O13_Pose_b, H16O13_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -2024,9 +2024,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O14_Pose_x, H16O14_Pose_y, H16O14_Pose_z, H16O14_Pose_a, H16O14_Pose_b, H16O14_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O14_Pose_x, H16O14_Pose_y, H16O14_Pose_z, H16O14_Pose_a, H16O14_Pose_b, H16O14_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -2061,9 +2061,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O15_Pose_x, H16O15_Pose_y, H16O15_Pose_z, H16O15_Pose_a, H16O15_Pose_b, H16O15_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O15_Pose_x, H16O15_Pose_y, H16O15_Pose_z, H16O15_Pose_a, H16O15_Pose_b, H16O15_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -2098,9 +2098,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H16O16_Pose_x, H16O16_Pose_y, H16O16_Pose_z, H16O16_Pose_a, H16O16_Pose_b, H16O16_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H16O16_Pose_x, H16O16_Pose_y, H16O16_Pose_z, H16O16_Pose_a, H16O16_Pose_b, H16O16_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
