@@ -65,6 +65,8 @@ srv_limit_cont_current='/kuka_tool/robotnik_base_hw/set_continuous_current_limit
 srv_limit_peak_current='/kuka_tool/robotnik_base_hw/set_peak_current_limit'
 srv_angle_mode='kuka_tool_finger_node/set_angle_mode'
 srv_move_A1_A6='/kuka_robot/setKukaA1A6'
+srv_deadman='kuka_tool_finger_node/set_deadMan_mode'
+srv_rel_tool='/kuka_robot/setMoveRelTool'
 
 #topic names:
 topic_cart_pose_kuka='/kuka_robot/cartesian_pos_kuka'
@@ -958,7 +960,7 @@ class RqtKuka(Plugin):
         self._widget.weight_lcdNumber.display(round(weight_no_tool,1))
         if (-weight_no_tool)<weight_expected_min:
             palette.setColor(palette.WindowText, QtGui.QColor(10, 10, 10))
-            self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: blue; }""")
+            self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: grey; }""")
         elif (-weight_no_tool)<weight_expected_max:
             palette.setColor(palette.WindowText, QtGui.QColor(20, 230, 20))
             self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: green; }""")
@@ -2203,27 +2205,46 @@ class RqtKuka(Plugin):
 	  #except rospy.ServiceException, e:
 			#print "Service call failed: %s"%e
                         
-    def press_apply_settings_button(self):
-            if(self._widget.toolAngle_check.isChecked()):
-                    try:
-                        angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
-                        ret = angle_mode_service(True)
-                    except rospy.ServiceException, e:
-                        print "Service call failed: %s"%e
-            elif(self._widget.toolAngle_check.isChecked()==False):
-                    try:
-                        angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
-                        ret = angle_mode_service(False)
-                    except rospy.ServiceException, e:
-                        print "Service call failed: %s"%e
-            if(self._widget.deadMan_check.isChecked()):
-                    print 'Deadman checked'
-            elif(self._widget.deadMan_check.isChecked()==False):
-                    print 'Deadman not checked'
-            if(self._widget.toolOrientation_check.isChecked()):
-                    print 'Tool orientation movement selected'
-            elif(self._widget.toolOrientation_check.isChecked()==False):
-                    print 'Tool orientation movement NOT selected'
+    def press_apply_settings_button(self):#Warning changes will be applied
+            ret = QMessageBox.warning(self._widget, "WARNING!", 'Changes to the current configuration will be applied', QMessageBox.Ok, QMessageBox.Cancel)
+            if(ret==QMessageBox.Ok):
+                    if(self._widget.toolAngle_check.isChecked()):
+                            try:
+                                angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+                                ret = angle_mode_service(True)
+                            except rospy.ServiceException, e:
+                                print "Service call failed: %s"%e
+                    elif(self._widget.toolAngle_check.isChecked()==False):
+                            try:
+                                angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+                                ret = angle_mode_service(False)
+                            except rospy.ServiceException, e:
+                                print "Service call failed: %s"%e
+                    if(self._widget.deadMan_check.isChecked()):
+                            try:
+                                deadman_service=rospy.ServiceProxy(srv_deadman, SetBool)
+                                ret = deadman_service(True)
+                            except rospy.ServiceException, e:
+                                print "Service call failed: %s"%e
+                    elif(self._widget.deadMan_check.isChecked()==False):
+                            try:
+                                deadman_service=rospy.ServiceProxy(srv_deadman, SetBool)
+                                #Warning? to disable deadman
+                                ret = deadman_service(False)
+                            except rospy.ServiceException, e:
+                                print "Service call failed: %s"%e
+                    if(self._widget.toolOrientation_check.isChecked()):
+                            try:
+                                toolOrientation_service=rospy.ServiceProxy(srv_rel_tool, SetBool)
+                                ret = toolOrientation_service(True)
+                            except rospy.ServiceException, e:
+                                print "Service call failed: %s"%e
+                    elif(self._widget.toolOrientation_check.isChecked()==False):
+                            try:
+                                toolOrientation_service=rospy.ServiceProxy(srv_rel_tool, SetBool)
+                                ret = toolOrientation_service(False)
+                            except rospy.ServiceException, e:
+                                print "Service call failed: %s"%e
                     
             
                     
