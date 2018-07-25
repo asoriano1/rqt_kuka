@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>555</width>
-    <height>810</height>
+    <width>722</width>
+    <height>819</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,8 +22,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>531</width>
-     <height>801</height>
+     <width>681</width>
+     <height>811</height>
     </rect>
    </property>
    <widget class="QFrame" name="frame">
@@ -31,7 +31,7 @@
      <rect>
       <x>10</x>
       <y>60</y>
-      <width>531</width>
+      <width>621</width>
       <height>651</height>
      </rect>
     </property>
@@ -46,7 +46,7 @@
       <rect>
        <x>270</x>
        <y>190</y>
-       <width>251</width>
+       <width>341</width>
        <height>171</height>
       </rect>
      </property>
@@ -59,7 +59,7 @@
      <widget class="QLabel" name="weight_label_2">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>90</x>
         <y>70</y>
         <width>81</width>
         <height>21</height>
@@ -72,7 +72,7 @@
      <widget class="QLabel" name="weight_label_expected">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>90</x>
         <y>33</y>
         <width>81</width>
         <height>21</height>
@@ -85,7 +85,7 @@
      <widget class="QLabel" name="weight_label_expected_var">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>190</x>
         <y>26</y>
         <width>81</width>
         <height>31</height>
@@ -109,7 +109,7 @@
      <widget class="QLabel" name="weight_label_3">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>90</x>
         <y>110</y>
         <width>101</width>
         <height>21</height>
@@ -122,7 +122,7 @@
      <widget class="QLabel" name="weight_label">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>140</x>
         <y>10</y>
         <width>91</width>
         <height>21</height>
@@ -135,7 +135,7 @@
      <widget class="QLCDNumber" name="weight_lcdNumber">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>190</x>
         <y>60</y>
         <width>81</width>
         <height>31</height>
@@ -151,7 +151,7 @@
      <widget class="QLCDNumber" name="vertforce_lcdNumber">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>190</x>
         <y>100</y>
         <width>81</width>
         <height>31</height>
@@ -170,7 +170,7 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>100</x>
         <y>140</y>
         <width>80</width>
         <height>22</height>
@@ -186,7 +186,7 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>190</x>
         <y>140</y>
         <width>80</width>
         <height>22</height>
@@ -231,6 +231,25 @@
       </property>
       <property name="text">
        <string>Reset</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="weightProgressBar">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>31</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+      <property name="textVisible">
+       <bool>false</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
      </widget>
     </widget>
@@ -3581,7 +3600,7 @@
       <rect>
        <x>270</x>
        <y>10</y>
-       <width>251</width>
+       <width>341</width>
        <height>41</height>
       </rect>
      </property>
@@ -3594,7 +3613,7 @@
      <widget class="QLabel" name="LightLabel">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>70</x>
         <y>10</y>
         <width>51</width>
         <height>20</height>
@@ -3610,7 +3629,7 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>130</x>
         <y>10</y>
         <width>80</width>
         <height>22</height>
@@ -3626,7 +3645,7 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>220</x>
         <y>10</y>
         <width>80</width>
         <height>22</height>
@@ -3642,7 +3661,7 @@
       <rect>
        <x>270</x>
        <y>50</y>
-       <width>251</width>
+       <width>341</width>
        <height>41</height>
       </rect>
      </property>
@@ -3658,7 +3677,7 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>220</x>
         <y>10</y>
         <width>80</width>
         <height>22</height>
@@ -3674,7 +3693,7 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>130</x>
         <y>10</y>
         <width>80</width>
         <height>22</height>
@@ -3687,7 +3706,7 @@
      <widget class="QLabel" name="LaserLabel">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>70</x>
         <y>10</y>
         <width>51</width>
         <height>20</height>
@@ -3703,7 +3722,7 @@
       <rect>
        <x>270</x>
        <y>90</y>
-       <width>251</width>
+       <width>341</width>
        <height>101</height>
       </rect>
      </property>
@@ -3716,7 +3735,7 @@
      <widget class="QLabel" name="tool_force_label_2">
       <property name="geometry">
        <rect>
-        <x>24</x>
+        <x>84</x>
         <y>30</y>
         <width>71</width>
         <height>21</height>
@@ -3729,7 +3748,7 @@
      <widget class="QLabel" name="weight_limited">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>190</x>
         <y>25</y>
         <width>81</width>
         <height>31</height>
@@ -3753,7 +3772,7 @@
      <widget class="QLabel" name="tool_force_label_3">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>130</x>
         <y>4</y>
         <width>110</width>
         <height>21</height>
@@ -3766,7 +3785,7 @@
      <widget class="QLabel" name="tool_force_label">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>80</x>
         <y>60</y>
         <width>121</width>
         <height>21</height>
@@ -3779,7 +3798,7 @@
      <widget class="QLCDNumber" name="tool_force_lcdNumber">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>190</x>
         <y>60</y>
         <width>81</width>
         <height>31</height>
@@ -3795,7 +3814,7 @@
       <rect>
        <x>270</x>
        <y>360</y>
-       <width>251</width>
+       <width>341</width>
        <height>121</height>
       </rect>
      </property>
@@ -3808,7 +3827,7 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>70</x>
         <y>50</y>
         <width>61</width>
         <height>51</height>
@@ -3827,7 +3846,7 @@
      <widget class="QLabel" name="under_voltage_tool">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>140</x>
         <y>50</y>
         <width>64</width>
         <height>51</height>
@@ -3846,7 +3865,7 @@
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>220</x>
         <y>50</y>
         <width>62</width>
         <height>51</height>
@@ -3865,7 +3884,7 @@
      <widget class="QLabel" name="weight_label_4">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>150</x>
         <y>10</y>
         <width>91</width>
         <height>21</height>
@@ -3881,7 +3900,7 @@
       <rect>
        <x>270</x>
        <y>490</y>
-       <width>251</width>
+       <width>341</width>
        <height>151</height>
       </rect>
      </property>
@@ -3898,7 +3917,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>80</y>
+        <y>40</y>
         <width>151</width>
         <height>22</height>
        </rect>
@@ -3924,7 +3943,7 @@
       <property name="geometry">
        <rect>
         <x>62</x>
-        <y>109</y>
+        <y>69</y>
         <width>121</width>
         <height>20</height>
        </rect>
@@ -3948,7 +3967,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>110</y>
+        <y>70</y>
         <width>41</width>
         <height>16</height>
        </rect>
@@ -3957,44 +3976,85 @@
        <string>Mode:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
+     <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>101</width>
-        <height>16</height>
+        <x>180</x>
+        <y>10</y>
+        <width>161</width>
+        <height>131</height>
        </rect>
       </property>
-      <property name="text">
-       <string>EXPERT MODE</string>
+      <property name="title">
+       <string>Settings</string>
       </property>
-     </widget>
-     <widget class="QPushButton" name="ExpertMode_ON_Button">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>40</y>
-        <width>51</width>
-        <height>21</height>
-       </rect>
+      <property name="flat">
+       <bool>true</bool>
       </property>
-      <property name="text">
-       <string>ON</string>
+      <property name="checkable">
+       <bool>false</bool>
       </property>
-     </widget>
-     <widget class="QPushButton" name="ExpertMode_OFF_Button">
-      <property name="geometry">
-       <rect>
-        <x>190</x>
-        <y>40</y>
-        <width>51</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>OFF</string>
-      </property>
+      <widget class="QCheckBox" name="toolAngle_check">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>30</y>
+         <width>92</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Rotation</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="applySettings_Button">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>100</y>
+         <width>61</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Apply</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="deadMan_check">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>50</y>
+         <width>151</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Deadman Robot</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="toolOrientation_check">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>70</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Tool orientation</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
      </widget>
     </widget>
     <zorder>frame_move</zorder>

@@ -19,7 +19,7 @@ from PyQt5 import QtCore, QtGui
 
 from qt_gui.plugin import Plugin
 from python_qt_binding import loadUi
-from python_qt_binding.QtWidgets import QWidget, QDialog, QFileDialog, QMessageBox, QTableWidgetItem, QApplication
+from python_qt_binding.QtWidgets import QWidget, QDialog, QFileDialog, QMessageBox, QTableWidgetItem, QApplication, QGroupBox, QCheckBox
 from std_msgs.msg import Bool, Float64, Float32
 from std_srvs.srv import SetBool
 from sensor_msgs.msg import JointState
@@ -229,9 +229,11 @@ class RqtKuka(Plugin):
         self._widget.Led_Off_Button.pressed.connect(self.press_led_off_button)
         self._widget.Light_On_Button.pressed.connect(self.press_light_on_button)
         self._widget.Light_Off_Button.pressed.connect(self.press_light_off_button)
-        self._widget.ExpertMode_ON_Button.pressed.connect(self.press_expert_on_button)
-        self._widget.ExpertMode_OFF_Button.pressed.connect(self.press_expert_off_button)
+        #self._widget.ExpertMode_ON_Button.pressed.connect(self.press_expert_on_button)
+        #self._widget.ExpertMode_OFF_Button.pressed.connect(self.press_expert_off_button)
         self._widget.resetPositions_Button.pressed.connect(self.press_reset_positions_button)
+        
+        self._widget.applySettings_Button.pressed.connect(self.press_apply_settings_button)
         
         self._widget.Led_On_Button.setStyleSheet("color: rgb(80, 170, 80)")
         self._widget.Led_Off_Button.setStyleSheet("color: rgb(170, 80, 80)")
@@ -940,7 +942,8 @@ class RqtKuka(Plugin):
         start_time_gauges=time.time()
         gauges_failure=False
         self._widget.weight_lcdNumber.setDigitCount(4)
-        palette = self._widget.weight_lcdNumber.palette()       
+        palette = self._widget.weight_lcdNumber.palette()
+        progressBar_palette = self._widget.weightProgressBar.palette()   
         #print 'CB:tool_weight_received',data
         weight_read=data.data
         weight_no_tool=data.data-weight_empty
@@ -948,20 +951,23 @@ class RqtKuka(Plugin):
         for i in range(1, 5):
             weight_no_tool=weight_no_tool+weight_reads[i]
         weight_no_tool=weight_no_tool/5
-        #if(weight_no_tool<0 and weight_no_tool>-10):
-            #weight_no_tool=-weight_no_tool
         for i in range(1, 5):
             weight_reads[i]=weight_reads[i-1]
         self._widget.weight_lcdNumber.setDecMode()
         #self._widget.weight_lcdNumber.setNumDigits(3)
         self._widget.weight_lcdNumber.display(round(weight_no_tool,1))
-        if weight_no_tool<weight_expected_min:
+        if (-weight_no_tool)<weight_expected_min:
             palette.setColor(palette.WindowText, QtGui.QColor(10, 10, 10))
-        elif weight_no_tool<weight_expected_max:
+            self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: blue; }""")
+        elif (-weight_no_tool)<weight_expected_max:
             palette.setColor(palette.WindowText, QtGui.QColor(20, 230, 20))
+            self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: green; }""")
         else:
             palette.setColor(palette.WindowText, QtGui.QColor(255, 50, 50))
+            self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: red; }""")
         self._widget.weight_lcdNumber.setPalette(palette)
+        self._widget.weightProgressBar.setValue(-int(round(weight_no_tool)))
+        
     def callback_tool_weight2(self,data):
             self.do_callback_tool_weight.emit(data)
 
@@ -2183,19 +2189,45 @@ class RqtKuka(Plugin):
         except rospy.ServiceException, e:
             print "Service call failed: %s"%e
         
-    def press_expert_on_button(self):
-	   try:
-            angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
-            ret = angle_mode_service(True)
-	   except rospy.ServiceException, e:
-			print "Service call failed: %s"%e
+    #def press_expert_on_button(self):
+	   #try:
+            #angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+            #ret = angle_mode_service(True)
+	   #except rospy.ServiceException, e:
+			#print "Service call failed: %s"%e
 			
-    def press_expert_off_button(self):
-	  try:
-            angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
-            ret = angle_mode_service(False)
-	  except rospy.ServiceException, e:
-			print "Service call failed: %s"%e
+    #def press_expert_off_button(self):
+	  #try:
+            #angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+            #ret = angle_mode_service(False)
+	  #except rospy.ServiceException, e:
+			#print "Service call failed: %s"%e
+                        
+    def press_apply_settings_button(self):
+            if(self._widget.toolAngle_check.isChecked()):
+                    try:
+                        angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+                        ret = angle_mode_service(True)
+                    except rospy.ServiceException, e:
+                        print "Service call failed: %s"%e
+            elif(self._widget.toolAngle_check.isChecked()==False):
+                    try:
+                        angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+                        ret = angle_mode_service(False)
+                    except rospy.ServiceException, e:
+                        print "Service call failed: %s"%e
+            if(self._widget.deadMan_check.isChecked()):
+                    print 'Deadman checked'
+            elif(self._widget.deadMan_check.isChecked()==False):
+                    print 'Deadman not checked'
+            if(self._widget.toolOrientation_check.isChecked()):
+                    print 'Tool orientation movement selected'
+            elif(self._widget.toolOrientation_check.isChecked()==False):
+                    print 'Tool orientation movement NOT selected'
+                    
+            
+                    
+            
 			
     
     def press_light_on_button(self):
@@ -2661,7 +2693,9 @@ class RqtKuka(Plugin):
             self._widget.Huevera16Obus13Button.hide()
             self._widget.Huevera16Obus14Button.hide()
             self._widget.Huevera16Obus15Button.hide()
-            self._widget.Huevera16Obus16Button.hide() 
+            self._widget.Huevera16Obus16Button.hide()
+        #weight progress bar
+        self._widget.weightProgressBar.setMaximum(weight_expected_max*2)
 
 
     def load_robot_description(self, gripper_model):
