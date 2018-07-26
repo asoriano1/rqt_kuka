@@ -97,7 +97,7 @@ Preplace_angle_limit=20
 #CAJA GRIS
 Prepick_Pose_x=255.49
 Prepick_Pose_y=1704.49
-Prepick_Pose_z=1442.38
+Prepick_Pose_z=1542.38
 Prepick_Pose_a_left=-18#15.2
 Prepick_Pose_a_right=Prepick_Pose_a_left+180 #+180 because Preplace_Pose_a_left<0 otherwise -180
 Prepick_Pose_b=0.0#-0.12
@@ -713,6 +713,15 @@ class RqtKuka(Plugin):
                 self._widget.Huevera8Obus6Button.setEnabled(True)
                 self._widget.Huevera8Obus7Button.setEnabled(True)
                 self._widget.Huevera8Obus8Button.setEnabled(True)
+        elif((finger_type==3 or finger_type==4) and (origin_pick==2 or origin_pick==4)):
+                self._widget.Huevera4Obus3Button.setEnabled(True)
+                self._widget.Huevera4Obus4Button.setEnabled(True)
+                self._widget.Huevera2Obus2Button.setEnabled(True)
+        elif((finger_type==3 or finger_type==4) and (origin_pick==1 or origin_pick==3)):
+                self._widget.Huevera4Obus1Button.setEnabled(True)
+                self._widget.Huevera4Obus2Button.setEnabled(True)
+                self._widget.Huevera2Obus1Button.setEnabled(True)
+                
         elif(origin_pick==2 or origin_pick==3):
 			self._widget.Huevera16Obus9Button.setEnabled(True)
 			self._widget.Huevera16Obus10Button.setEnabled(True)
@@ -722,9 +731,6 @@ class RqtKuka(Plugin):
 			self._widget.Huevera16Obus6Button.setEnabled(True)
 			self._widget.Huevera16Obus7Button.setEnabled(True)
 			self._widget.Huevera16Obus8Button.setEnabled(True)
-                        self._widget.Huevera2Obus1Button.setEnabled(True)
-                        self._widget.Huevera4Obus1Button.setEnabled(True)
-                        self._widget.Huevera4Obus2Button.setEnabled(True)
                         self._widget.Huevera8Obus3Button.setEnabled(True)
                         self._widget.Huevera8Obus4Button.setEnabled(True)
                         self._widget.Huevera8Obus5Button.setEnabled(True)
@@ -738,9 +744,6 @@ class RqtKuka(Plugin):
 			self._widget.Huevera16Obus2Button.setEnabled(True)
 			self._widget.Huevera16Obus3Button.setEnabled(True)
 			self._widget.Huevera16Obus4Button.setEnabled(True)
-                        self._widget.Huevera2Obus2Button.setEnabled(True)
-                        self._widget.Huevera4Obus3Button.setEnabled(True)
-                        self._widget.Huevera4Obus4Button.setEnabled(True)
                         self._widget.Huevera8Obus1Button.setEnabled(True)
                         self._widget.Huevera8Obus2Button.setEnabled(True)
                         self._widget.Huevera8Obus7Button.setEnabled(True)
@@ -864,7 +867,7 @@ class RqtKuka(Plugin):
                                         name_method='Huevera4Obus'+str(i)+'Button'
                                         test_method=getattr(self._widget, name_method)
                                         test_method.setIcon(icon)
-				#FALTA LA CAJA de 2
+				
                 for i in range(1,3):
                                         icon=QtGui.QIcon();
                                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)

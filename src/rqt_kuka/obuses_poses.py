@@ -6,7 +6,7 @@ pose_c = 179
 pose_a_left = -179
 pose_a_right = 1
 # z is always safe
-pose_z_safe = 1435.39
+pose_z_safe = 1535.39
 
 
 
