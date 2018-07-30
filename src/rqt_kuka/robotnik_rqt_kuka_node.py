@@ -47,10 +47,10 @@ PATH="/home/suippes/kuka_catkin_ws/src/rqt_kuka/"
 TOOL_HOMED=False
 KUKA_AUT=False
 finger_type=0
-gauges_failure=False
+#gauges_failure=False
 under_voltage_tool=False
 first_time_enabled=False
-start_time_gauges=time.time()
+#start_time_gauges=time.time()
 angle_mode=True
 origin_pick=0
 #service names:
@@ -67,6 +67,7 @@ srv_angle_mode='kuka_tool_finger_node/set_angle_mode'
 srv_move_A1_A6='/kuka_robot/setKukaA1A6'
 srv_deadman='kuka_tool_finger_node/set_deadMan_mode'
 srv_rel_tool='/kuka_robot/setMoveRelTool'
+srv_tare_gauges = '/tare_weight_gauges'
 
 #topic names:
 topic_cart_pose_kuka='/kuka_robot/cartesian_pos_kuka'
@@ -248,6 +249,8 @@ class RqtKuka(Plugin):
         self._widget.Home_Button.setEnabled(False)
         self._widget.Finger_Adjust_Button.setEnabled(False)
         self._widget.MoveToTable_Button.setEnabled(False)
+        self._widget.weightProgressBar_2.setMinimum(0)
+        self._widget.weightProgressBar_2.setMaximum(15)
                 
         ##obuses buttons
         #Huevera_2
@@ -921,7 +924,7 @@ class RqtKuka(Plugin):
 			
 
     def callback_robot_pose(self, data):
-        global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka, pos_b_kuka, pos_c_kuka, elapsed_time_gauges, gauges_failure
+        global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka, pos_b_kuka, pos_c_kuka#, elapsed_time_gauges#, gauges_failure
         #print 'CB:robot_pose_received',data
         pos_x_kuka=data.x
         pos_y_kuka=data.y
@@ -929,10 +932,10 @@ class RqtKuka(Plugin):
         pos_a_kuka=data.A
         pos_b_kuka=data.B
         pos_c_kuka=data.C
-        elapsed_time_gauges=time.time()-start_time_gauges
+        #elapsed_time_gauges=time.time()-start_time_gauges
         #print 'time between robot callback and gauges' ,elapsed_time_gauges
-        if (elapsed_time_gauges>=2):
-            gauges_failure=True
+        #if (elapsed_time_gauges>=2):
+            #gauges_failure=True
     def callback_horiz_force(self, data):
         global horiz_force_read, horiz_force_empty
         #print 'force_received:',data.data
@@ -943,15 +946,15 @@ class RqtKuka(Plugin):
             self.do_callback_horiz_force.emit(data)
         
     def callback_tool_weight(self, data):
-        global weight_empty, weight_read, gauges_failure, start_time_gauges
-        start_time_gauges=time.time()
-        gauges_failure=False
+        global weight_empty, weight_read#, gauges_failure, start_time_gauges
+        #start_time_gauges=time.time()
+        #gauges_failure=False
         self._widget.weight_lcdNumber.setDigitCount(4)
         palette = self._widget.weight_lcdNumber.palette()
         progressBar_palette = self._widget.weightProgressBar.palette()   
         #print 'CB:tool_weight_received',data
         weight_read=data.data
-        weight_no_tool=data.data-weight_empty
+        weight_no_tool=data.data#-weight_empty
         weight_reads[0]=weight_no_tool
         for i in range(1, 5):
             weight_no_tool=weight_no_tool+weight_reads[i]
@@ -964,6 +967,9 @@ class RqtKuka(Plugin):
         if (-weight_no_tool)<weight_expected_min:
             palette.setColor(palette.WindowText, QtGui.QColor(10, 10, 10))
             self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: grey; }""")
+            self._widget.weightProgressBar_2.setStyleSheet("""QProgressBar::chunk { background: grey; }""")
+            if(weight_no_tool>5):
+                    self._widget.weightProgressBar_2.setStyleSheet("""QProgressBar::chunk { background: red; }""")
         elif (-weight_no_tool)<weight_expected_max:
             palette.setColor(palette.WindowText, QtGui.QColor(20, 230, 20))
             self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: green; }""")
@@ -972,6 +978,7 @@ class RqtKuka(Plugin):
             self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: red; }""")
         self._widget.weight_lcdNumber.setPalette(palette)
         self._widget.weightProgressBar.setValue(-int(round(weight_no_tool)))
+        self._widget.weightProgressBar_2.setValue(int(round(weight_no_tool)))
         
     def callback_tool_weight2(self,data):
             self.do_callback_tool_weight.emit(data)
@@ -2465,14 +2472,18 @@ class RqtKuka(Plugin):
         print "updated Preplace Pose x:", Preplace_Pose_x, " y:", Preplace_Pose_y, " z:", Preplace_Pose_z, " a:", Preplace_Pose_a, " b:", Preplace_Pose_b, " c:", Preplace_Pose_c
     
     def press_tare_button(self):
-        global weight_empty,horiz_force_empty
-        weight_empty=weight_read
-        horiz_force_empty=horiz_force_read
+        #global weight_empty,horiz_force_empty
+        #weight_empty=weight_read
+        #horiz_force_empty=horiz_force_read
+        tare_service = rospy.ServiceProxy(srv_tare_gauges, SetBool)
+        ret = tare_service(True)
 
     def press_tare_reset_button(self):
-        global weight_empty,horiz_force_empty
-        weight_empty = 0
-        horiz_force_empty=0
+        #global weight_empty,horiz_force_empty
+        #weight_empty = 0
+        #horiz_force_empty=0
+        tare_service = rospy.ServiceProxy(srv_tare_gauges, SetBool)
+        ret = tare_service(False)
     #################################################CALIBRE SELECTION
     def calibre_selected(self, index):
         global finger_type, weight_expected_min, weight_expected_max

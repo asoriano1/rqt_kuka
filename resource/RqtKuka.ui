@@ -239,7 +239,7 @@
         <x>20</x>
         <y>10</y>
         <width>31</width>
-        <height>151</height>
+        <height>111</height>
        </rect>
       </property>
       <property name="value">
@@ -250,6 +250,59 @@
       </property>
       <property name="orientation">
        <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="weightProgressBar_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>31</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+      </property>
+      <property name="textVisible">
+       <bool>false</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="invertedAppearance">
+       <bool>true</bool>
+      </property>
+      <property name="textDirection">
+       <enum>QProgressBar::TopToBottom</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>31</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="lineWidth">
+       <number>11</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </widget>

@@ -24,6 +24,12 @@ table_pose_z = pose_z_safe
 table_pose_a = -133.35
 table_pose_b = pose_b
 table_pose_c = pose_c
+
+#Datos hueveras
+center_distance_16 = 129.38
+center_distance_8 = 260
+center_distance_4 = 280
+center_distance_2 = 380
 #
 #x: 390.0305
 #y: -1334.5508
@@ -38,56 +44,56 @@ table_pose_c = pose_c
 
 
 #obus1
-H16O1_Pose_x = -260
-H16O1_Pose_y = -1342
+H16O1_Pose_x = -260  #DATA
+H16O1_Pose_y = -1342 #DATA
 H16O1_Pose_z = pose_z_safe
 H16O1_Pose_a = -179
 H16O1_Pose_b = pose_b
 H16O1_Pose_c = pose_c
 #obus2
-H16O2_Pose_x = -130.62
-H16O2_Pose_y = H16O1_Pose_y
+H16O2_Pose_x = H16O1_Pose_x+center_distance_16
+H16O2_Pose_y = H16O1_Pose_y #The whole first line has the same y value
 H16O2_Pose_z = pose_z_safe
 H16O2_Pose_a = pose_a_left
 H16O2_Pose_b = pose_b
 H16O2_Pose_c = pose_c
 #obus3
-H16O3_Pose_x = -1.24
+H16O3_Pose_x = H16O2_Pose_x+center_distance_16
 H16O3_Pose_y = H16O1_Pose_y
 H16O3_Pose_z = pose_z_safe
 H16O3_Pose_a = pose_a_left
 H16O3_Pose_b = pose_b
 H16O3_Pose_c = pose_c
 #obus4
-H16O4_Pose_x = 128.14
+H16O4_Pose_x = H16O3_Pose_x+center_distance_16
 H16O4_Pose_y = H16O1_Pose_y
 H16O4_Pose_z = pose_z_safe
 H16O4_Pose_a = pose_a_left
 H16O4_Pose_b = pose_b
 H16O4_Pose_c = pose_c
 #obus5
-H16O5_Pose_x = 11
+H16O5_Pose_x = 11  #DATA
 H16O5_Pose_y = H16O1_Pose_y
 H16O5_Pose_z = pose_z_safe
 H16O5_Pose_a = pose_a_right
 H16O5_Pose_b = pose_b
 H16O5_Pose_c = pose_c
 #obus6
-H16O6_Pose_x = 140.38
+H16O6_Pose_x = H16O5_Pose_x+center_distance_16
 H16O6_Pose_y = H16O1_Pose_y
 H16O6_Pose_z = pose_z_safe
 H16O6_Pose_a = pose_a_right
 H16O6_Pose_b = pose_b
 H16O6_Pose_c = pose_c
 #obus7
-H16O7_Pose_x = 269.76
+H16O7_Pose_x = H16O6_Pose_x+center_distance_16
 H16O7_Pose_y = H16O1_Pose_y
 H16O7_Pose_z = pose_z_safe
 H16O7_Pose_a = pose_a_right
 H16O7_Pose_b = pose_b
 H16O7_Pose_c = pose_c
 #obus8
-H16O8_Pose_x = 399.14
+H16O8_Pose_x = H16O7_Pose_x+center_distance_16
 H16O8_Pose_y = H16O1_Pose_y
 H16O8_Pose_z = pose_z_safe
 H16O8_Pose_a = pose_a_right
@@ -95,7 +101,7 @@ H16O8_Pose_b = pose_b
 H16O8_Pose_c = pose_c
 #obus9
 H16O9_Pose_x = H16O1_Pose_x
-H16O9_Pose_y = -1875
+H16O9_Pose_y = -1875 #DATA
 H16O9_Pose_z = pose_z_safe
 H16O9_Pose_a = pose_a_left
 H16O9_Pose_b = pose_b
@@ -154,92 +160,95 @@ H16O16_Pose_c = pose_c
 
 
 #huevera 8
-#obus8
-H8O8_Pose_x = 1824
-H8O8_Pose_y = 410
-H8O8_Pose_z = pose_z_safe
-H8O8_Pose_a = pose_a_right
-H8O8_Pose_b = pose_b
-H8O8_Pose_c = pose_c
-#obus7
-H8O7_Pose_x = 1899.58
-H8O7_Pose_y = 161.22
-H8O7_Pose_z = pose_z_safe
-H8O7_Pose_a = pose_a_right
-H8O7_Pose_b = pose_b
-H8O7_Pose_c = pose_c
-#obus6
-H8O6_Pose_x = 1918.16
-H8O6_Pose_y = 132.45
-H8O6_Pose_z = pose_z_safe
-H8O6_Pose_a = pose_a_left
-H8O6_Pose_b = pose_b
-H8O6_Pose_c = pose_c
-#obus5
-H8O5_Pose_x = 1993.74
-H8O5_Pose_y = -116.31
-H8O5_Pose_z = pose_z_safe
-H8O5_Pose_a = pose_a_left
-H8O5_Pose_b = pose_b
-H8O5_Pose_c = pose_c
-#obus4
-H8O4_Pose_x = 1439
-H8O4_Pose_y = 147
-H8O4_Pose_z = pose_z_safe
-H8O4_Pose_a = pose_a_right
-H8O4_Pose_b = pose_b
-H8O4_Pose_c = pose_c
-#obus3
-H8O3_Pose_x = 1514.58
-H8O3_Pose_y = -101.77
-H8O3_Pose_z = pose_z_safe
-H8O3_Pose_a = pose_a_right
-H8O3_Pose_b = pose_b
-H8O3_Pose_c = pose_c
-#obus2
-H8O2_Pose_x = 1570
-H8O2_Pose_y = -164
-H8O2_Pose_z = pose_z_safe
-H8O2_Pose_a = pose_a_left
-H8O2_Pose_b = pose_b
-H8O2_Pose_c = pose_c
 #obus1
-H8O1_Pose_x = 1645.58
-H8O1_Pose_y = -412.77
+H8O1_Pose_x = 1645.58 #DATA
+H8O1_Pose_y = -412.77 #DATA
 H8O1_Pose_z = pose_z_safe
 H8O1_Pose_a = pose_a_left
 H8O1_Pose_b = pose_b
 H8O1_Pose_c = pose_c
+#obus2
+H8O2_Pose_x = H8O1_Pose_x+center_distance_8
+H8O2_Pose_y = H8O1_Pose_y
+H8O2_Pose_z = pose_z_safe
+H8O2_Pose_a = pose_a_left
+H8O2_Pose_b = pose_b
+H8O2_Pose_c = pose_c
+#obus3
+H8O3_Pose_x = 1514.58 #DATA
+H8O3_Pose_y = H8O1_Pose_y
+H8O3_Pose_z = pose_z_safe
+H8O3_Pose_a = pose_a_right
+H8O3_Pose_b = pose_b
+H8O3_Pose_c = pose_c
+#obus4
+H8O4_Pose_x = H8O3_Pose_x+center_distance_8
+H8O4_Pose_y = H8O1_Pose_y
+H8O4_Pose_z = pose_z_safe
+H8O4_Pose_a = pose_a_right
+H8O4_Pose_b = pose_b
+H8O4_Pose_c = pose_c
+#obus5
+H8O5_Pose_x = H8O1_Pose_x
+H8O5_Pose_y = -116.31 #DATA
+H8O5_Pose_z = pose_z_safe
+H8O5_Pose_a = pose_a_left
+H8O5_Pose_b = pose_b
+H8O5_Pose_c = pose_c
+#obus6
+H8O6_Pose_x = H8O2_Pose_x
+H8O6_Pose_y = H8O5_Pose_y
+H8O6_Pose_z = pose_z_safe
+H8O6_Pose_a = pose_a_left
+H8O6_Pose_b = pose_b
+H8O6_Pose_c = pose_c
+#obus7
+H8O7_Pose_x = H8O3_Pose_x
+H8O7_Pose_y = H8O5_Pose_y
+H8O7_Pose_z = pose_z_safe
+H8O7_Pose_a = pose_a_right
+H8O7_Pose_b = pose_b
+H8O7_Pose_c = pose_c
+#obus8
+H8O8_Pose_x = H8O4_Pose_x
+H8O8_Pose_y = H8O5_Pose_y
+H8O8_Pose_z = pose_z_safe
+H8O8_Pose_a = pose_a_right
+H8O8_Pose_b = pose_b
+H8O8_Pose_c = pose_c
+
 
 #huevera 4
-#obus4
-H4O4_Pose_x = 1538
-H4O4_Pose_y = 254
-H4O4_Pose_z = pose_z_safe
-H4O4_Pose_a = pose_a_right
-H4O4_Pose_b = pose_b
-H4O4_Pose_c = pose_c
-#obus3
-H4O3_Pose_x = 1619.39
-H4O3_Pose_y = -13.90
-H4O3_Pose_z = pose_z_safe
-H4O3_Pose_a = pose_a_right
-H4O3_Pose_b = pose_b
-H4O3_Pose_c = pose_c
-#obus2
-H4O2_Pose_x = 1722
-H4O2_Pose_y = -79
-H4O2_Pose_z = pose_z_safe
-H4O2_Pose_a = pose_a_left
-H4O2_Pose_b = pose_b
-H4O2_Pose_c = pose_c
 #obus1
-H4O1_Pose_x = 1803.39
-H4O1_Pose_y = -346.9
+H4O1_Pose_x = 1803.39 #DATA
+H4O1_Pose_y = -346.9 #DATA
 H4O1_Pose_z = pose_z_safe
 H4O1_Pose_a = pose_a_left
 H4O1_Pose_b = pose_b
 H4O1_Pose_c = pose_c
+#obus2
+H4O2_Pose_x = 1803.39 #DATA
+H4O2_Pose_y = H4O1_Pose_y
+H4O2_Pose_z = pose_z_safe
+H4O2_Pose_a = pose_a_left
+H4O2_Pose_b = pose_b
+H4O2_Pose_c = pose_c
+#obus3
+H4O3_Pose_x = H4O1_Pose_x
+H4O3_Pose_y = -13.90 #DATA
+H4O3_Pose_z = pose_z_safe
+H4O3_Pose_a = pose_a_right
+H4O3_Pose_b = pose_b
+H4O3_Pose_c = pose_c
+#obus4
+H4O4_Pose_x = H4O2_Pose_x
+H4O4_Pose_y = H4O3_Pose_y
+H4O4_Pose_z = pose_z_safe
+H4O4_Pose_a = pose_a_right
+H4O4_Pose_b = pose_b
+H4O4_Pose_c = pose_c
+
+
 
 #huevera 2
 #obus2
