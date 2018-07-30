@@ -2402,18 +2402,9 @@ class RqtKuka(Plugin):
             origin_pick=0
             try:
                 homming_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
-                ret_rel=homming_rel_service(0, 0,Homming_Pose_z-pos_z_kuka , 0, 0, 0)
+                ret_rel=homming_rel_service(0, 0,pose_z_safe-pos_z_kuka , 0, 0, 0)
                 KUKA_AUT=True
                 while KUKA_AUT: self.sleep_loop(0.3)
-                #if(pos_y_kuka<-850):
-						#placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-						#ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, Prepick_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
-						#KUKA_AUT=True
-						#while KUKA_AUT: self.sleep_loop(0.3)
-                #homming_abs_service = rospy.ServiceProxy(srv_name_move_abs_fast, set_CartesianEuler_pose)
-                #DE MOMENTO EL ANGULO EN EL HOMMING NO SE MODIFICA
-                #ret = homming_abs_service(Homming_Pose_x, Homming_Pose_y, Homming_Pose_z, Homming_Pose_a,Homming_Pose_b,Homming_Pose_c)
-                #ret=placed_rel_service(0, 0, -100, 0, 0, 0)
                 home_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=home_A1_A6_service(0.0, 177)
                 if ret == True:
