@@ -232,11 +232,13 @@ class RqtKuka(Plugin):
         self._widget.Led_Off_Button.pressed.connect(self.press_led_off_button)
         self._widget.Light_On_Button.pressed.connect(self.press_light_on_button)
         self._widget.Light_Off_Button.pressed.connect(self.press_light_off_button)
-        #self._widget.ExpertMode_ON_Button.pressed.connect(self.press_expert_on_button)
-        #self._widget.ExpertMode_OFF_Button.pressed.connect(self.press_expert_off_button)
         self._widget.resetPositions_Button.pressed.connect(self.press_reset_positions_button)
         
-        self._widget.applySettings_Button.pressed.connect(self.press_apply_settings_button)
+        
+        #Checkboxes of robot settings
+        self._widget.deadMan_check.stateChanged.connect(self.deadMan_state_changed)
+        self._widget.toolAngle_check.stateChanged.connect(self.toolAngle_state_changed)
+        self._widget.toolOrientation_check.stateChanged.connect(self.toolOrientation_state_changed)
         
         self._widget.Led_On_Button.setStyleSheet("color: rgb(80, 170, 80)")
         self._widget.Led_Off_Button.setStyleSheet("color: rgb(170, 80, 80)")
@@ -562,6 +564,28 @@ class RqtKuka(Plugin):
         #subscriber to motor status of the tool
         rospy.Subscriber(topic_motor_status, RobotnikMotorsStatus, self.callback_motor_status2)
         self.do_callback_motor_status.connect(self.callback_motor_status)
+        
+        
+        #Robot settings initialization
+        #Default: deadman activated
+        try:
+                deadman_service=rospy.ServiceProxy(srv_deadman, SetBool)
+                ret = deadman_service(True)
+        except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
+        #Default: angle activated
+        try:
+                angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+                ret = angle_mode_service(True)
+        except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
+        #Default: tool orientation reference deactivated
+        try:
+                toolOrientation_service=rospy.ServiceProxy(srv_rel_tool, SetBool)
+                ret = toolOrientation_service(False)
+        except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
+
         
         # Show _widget.windowTitle on left-top of each plugin (when 
         # it's set in _widget). This is useful when you open multiple 
@@ -2201,64 +2225,51 @@ class RqtKuka(Plugin):
         except rospy.ServiceException, e:
             print "Service call failed: %s"%e
         
-    #def press_expert_on_button(self):
-	   #try:
-            #angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
-            #ret = angle_mode_service(True)
-	   #except rospy.ServiceException, e:
-			#print "Service call failed: %s"%e
-			
-    #def press_expert_off_button(self):
-	  #try:
-            #angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
-            #ret = angle_mode_service(False)
-	  #except rospy.ServiceException, e:
-			#print "Service call failed: %s"%e
-                        
-    def press_apply_settings_button(self):#Warning changes will be applied
-            ret = QMessageBox.warning(self._widget, "WARNING!", 'Changes to the current configuration will be applied', QMessageBox.Ok, QMessageBox.Cancel)
-            if(ret==QMessageBox.Ok):
-                    if(self._widget.toolAngle_check.isChecked()):
-                            try:
-                                angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
-                                ret = angle_mode_service(True)
-                            except rospy.ServiceException, e:
-                                print "Service call failed: %s"%e
-                    elif(self._widget.toolAngle_check.isChecked()==False):
-                            try:
-                                angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
-                                ret = angle_mode_service(False)
-                            except rospy.ServiceException, e:
-                                print "Service call failed: %s"%e
+    def deadMan_state_changed(self):
+        ret_q = QMessageBox.warning(self._widget, "WARNING!", 'Changes to the current configuration will be applied', QMessageBox.Ok, QMessageBox.Cancel)
+        if(ret_q==QMessageBox.Ok):
                     if(self._widget.deadMan_check.isChecked()):
-                            try:
-                                deadman_service=rospy.ServiceProxy(srv_deadman, SetBool)
-                                ret = deadman_service(True)
-                            except rospy.ServiceException, e:
-                                print "Service call failed: %s"%e
+                                    try:
+                                        deadman_service=rospy.ServiceProxy(srv_deadman, SetBool)
+                                        ret = deadman_service(True)
+                                    except rospy.ServiceException, e:
+                                        print "Service call failed: %s"%e
                     elif(self._widget.deadMan_check.isChecked()==False):
-                            try:
-                                deadman_service=rospy.ServiceProxy(srv_deadman, SetBool)
-                                #Warning? to disable deadman
-                                ret = deadman_service(False)
-                            except rospy.ServiceException, e:
-                                print "Service call failed: %s"%e
-                    if(self._widget.toolOrientation_check.isChecked()):
+                                    try:
+                                        deadman_service=rospy.ServiceProxy(srv_deadman, SetBool)
+                                        ret = deadman_service(False)
+                                    except rospy.ServiceException, e:
+                                        print "Service call failed: %s"%e
+    def toolAngle_state_changed(self):
+        ret_q = QMessageBox.warning(self._widget, "WARNING!", 'Changes to the current configuration will be applied', QMessageBox.Ok, QMessageBox.Cancel)
+        if(ret_q==QMessageBox.Ok):
+                        if(self._widget.toolAngle_check.isChecked()):
+                                    try:
+                                        angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+                                        ret = angle_mode_service(True)
+                                    except rospy.ServiceException, e:
+                                        print "Service call failed: %s"%e
+                        elif(self._widget.toolAngle_check.isChecked()==False):
+                                    try:
+                                        angle_mode_service=rospy.ServiceProxy(srv_angle_mode, SetBool)
+                                        ret = angle_mode_service(False)
+                                    except rospy.ServiceException, e:
+                                        print "Service call failed: %s"%e
+    def toolOrientation_state_changed(self):
+        ret_q = QMessageBox.warning(self._widget, "WARNING!", 'Changes to the current configuration will be applied', QMessageBox.Ok, QMessageBox.Cancel)
+        if(ret_q==QMessageBox.Ok):
+                if(self._widget.toolOrientation_check.isChecked()):
                             try:
                                 toolOrientation_service=rospy.ServiceProxy(srv_rel_tool, SetBool)
                                 ret = toolOrientation_service(True)
                             except rospy.ServiceException, e:
                                 print "Service call failed: %s"%e
-                    elif(self._widget.toolOrientation_check.isChecked()==False):
+                elif(self._widget.toolOrientation_check.isChecked()==False):
                             try:
                                 toolOrientation_service=rospy.ServiceProxy(srv_rel_tool, SetBool)
                                 ret = toolOrientation_service(False)
                             except rospy.ServiceException, e:
                                 print "Service call failed: %s"%e
-                    
-            
-                    
-            
 			
     
     def press_light_on_button(self):
@@ -2407,6 +2418,10 @@ class RqtKuka(Plugin):
                 while KUKA_AUT: self.sleep_loop(0.3)
                 home_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=home_A1_A6_service(0.0, 177)
+                KUKA_AUT=True
+                while KUKA_AUT: self.sleep_loop(0.3)
+                placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                ret = placed_abs_service(table_pose_x, table_pose_y, table_pose_z, table_pose_a, table_pose_b, table_pose_c)
                 if ret == True:
                     CURRENT_STATE=STATE_MOVING_TO_PLACE
             except rospy.ServiceException, e:

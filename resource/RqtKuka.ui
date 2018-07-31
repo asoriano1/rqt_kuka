@@ -3836,7 +3836,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -3990,24 +3990,11 @@
       <attribute name="title">
        <string>Robot settings</string>
       </attribute>
-      <widget class="QPushButton" name="applySettings_Button">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>110</y>
-         <width>61</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Apply</string>
-       </property>
-      </widget>
       <widget class="QCheckBox" name="deadMan_check">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>40</y>
+         <y>50</y>
          <width>151</width>
          <height>21</height>
         </rect>
@@ -4039,7 +4026,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>70</y>
+         <y>90</y>
          <width>141</width>
          <height>21</height>
         </rect>

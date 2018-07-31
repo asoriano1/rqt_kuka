@@ -18,10 +18,10 @@ place_A1=87.0
 place_left_A6=267.0
 place_right_A6=87.0
 #rotation table
-table_pose_x = -137.822
-table_pose_y = -1465.47
+table_pose_x = 1620
+table_pose_y = -8.45
 table_pose_z = pose_z_safe
-table_pose_a = -133.35
+table_pose_a = -178
 table_pose_b = pose_b
 table_pose_c = pose_c
 
