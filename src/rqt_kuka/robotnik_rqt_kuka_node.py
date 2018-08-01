@@ -256,287 +256,287 @@ class RqtKuka(Plugin):
                 
         ##obuses buttons
         #Huevera_2
-        h2o1posex=70
-        h2o1posey=330
+        h2o1posex=80
+        h2o1posey=350
         #obus1     
-        self._widget.Huevera2Obus1Button.setGeometry(h2o1posex,h2o1posey,41,111)
+        self._widget.Huevera2Obus1Button.setGeometry(h2o1posex,h2o1posey,111,41)
         self._widget.Huevera2Obus1Button.clicked.connect(self.press_obus2_1_button)
-        self._widget.Huevera2Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png"))
+        self._widget.Huevera2Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"))
         self._widget.Huevera2Obus1Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png")
         self._widget.Huevera2Obus1Button.setMask(mask.mask())
         self._widget.Huevera2Obus1Button.setMouseTracking(True)       
         self._widget.Huevera2Obus1Button.installEventFilter(self)
         #obus2
-        self._widget.Huevera2Obus2Button.setGeometry(h2o1posex+70,h2o1posey,41,111)
+        self._widget.Huevera2Obus2Button.setGeometry(h2o1posex,h2o1posey+70,111,41)
         self._widget.Huevera2Obus2Button.clicked.connect(self.press_obus2_2_button)
-        self._widget.Huevera2Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png"))
+        self._widget.Huevera2Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"))
         self._widget.Huevera2Obus2Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png")
         self._widget.Huevera2Obus2Button.setMask(mask.mask())
         self._widget.Huevera2Obus2Button.setMouseTracking(True)       
         self._widget.Huevera2Obus2Button.installEventFilter(self)        
         
         #Huevera_4
-        h4o1posex=30
-        h4o1posey=320
+        h4o1posex=80
+        h4o1posey=463
         #obus1
-        self._widget.Huevera4Obus1Button.setGeometry(h4o1posex,h4o1posey,37,102)
+        self._widget.Huevera4Obus1Button.setGeometry(h4o1posex,h4o1posey,102,37)
         self._widget.Huevera4Obus1Button.clicked.connect(self.press_obus4_1_button)
-        self._widget.Huevera4Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))
+        self._widget.Huevera4Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
         self._widget.Huevera4Obus1Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo31x101.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
         self._widget.Huevera4Obus1Button.setMask(mask.mask())
         self._widget.Huevera4Obus1Button.setMouseTracking(True)       
         self._widget.Huevera4Obus1Button.installEventFilter(self)
         #obus2
-        self._widget.Huevera4Obus2Button.setGeometry(h4o1posex+50,h4o1posey,37,102)
+        self._widget.Huevera4Obus2Button.setGeometry(h4o1posex,h4o1posey-50,102,37)
         self._widget.Huevera4Obus2Button.clicked.connect(self.press_obus4_2_button)
-        self._widget.Huevera4Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))
+        self._widget.Huevera4Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
         self._widget.Huevera4Obus2Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo31x101.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
         self._widget.Huevera4Obus2Button.setMask(mask.mask())
         self._widget.Huevera4Obus2Button.setMouseTracking(True)       
         self._widget.Huevera4Obus2Button.installEventFilter(self)
         #obus3
-        self._widget.Huevera4Obus3Button.setGeometry(h4o1posex+102,h4o1posey,37,102)
+        self._widget.Huevera4Obus3Button.setGeometry(h4o1posex,h4o1posey-102,102,37)
         self._widget.Huevera4Obus3Button.clicked.connect(self.press_obus4_3_button)
-        self._widget.Huevera4Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))
+        self._widget.Huevera4Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
         self._widget.Huevera4Obus3Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo31x101.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
         self._widget.Huevera4Obus3Button.setMask(mask.mask())
         self._widget.Huevera4Obus3Button.setMouseTracking(True)       
         self._widget.Huevera4Obus3Button.installEventFilter(self)
         #obus4
-        self._widget.Huevera4Obus4Button.setGeometry(h4o1posex+152,h4o1posey,37,102)
+        self._widget.Huevera4Obus4Button.setGeometry(h4o1posex,h4o1posey-152,102,37)
         self._widget.Huevera4Obus4Button.clicked.connect(self.press_obus4_4_button)
-        self._widget.Huevera4Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))
+        self._widget.Huevera4Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
         self._widget.Huevera4Obus4Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo31x101.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
         self._widget.Huevera4Obus4Button.setMask(mask.mask())
         self._widget.Huevera4Obus4Button.setMouseTracking(True)       
         self._widget.Huevera4Obus4Button.installEventFilter(self)
 
         #Huevera_8
-        h8o1posex=40
-        h8o1posey=320
+        h8o1posex=70
+        h8o1posey=470
         #obus1
-        self._widget.Huevera8Obus1Button.setGeometry(h8o1posex,h8o1posey,26,71)
+        self._widget.Huevera8Obus1Button.setGeometry(h8o1posex,h8o1posey,71,26)
         self._widget.Huevera8Obus1Button.clicked.connect(self.press_obus8_1_button)
-        self._widget.Huevera8Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))
+        self._widget.Huevera8Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
         self._widget.Huevera8Obus1Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
         self._widget.Huevera8Obus1Button.setMask(mask.mask())
         self._widget.Huevera8Obus1Button.setMouseTracking(True)       
         self._widget.Huevera8Obus1Button.installEventFilter(self)
         #obus2
-        self._widget.Huevera8Obus2Button.setGeometry(h8o1posex+38,h8o1posey,26,71)
+        self._widget.Huevera8Obus2Button.setGeometry(h8o1posex,h8o1posey-38,71,26)
         self._widget.Huevera8Obus2Button.clicked.connect(self.press_obus8_2_button)
-        self._widget.Huevera8Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))
+        self._widget.Huevera8Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
         self._widget.Huevera8Obus2Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
         self._widget.Huevera8Obus2Button.setMask(mask.mask())
         self._widget.Huevera8Obus2Button.setMouseTracking(True)       
         self._widget.Huevera8Obus2Button.installEventFilter(self)
         #obus3
-        self._widget.Huevera8Obus3Button.setGeometry(h8o1posex+86,h8o1posey,26,71)
+        self._widget.Huevera8Obus3Button.setGeometry(h8o1posex,h8o1posey-86,71,26)
         self._widget.Huevera8Obus3Button.clicked.connect(self.press_obus8_3_button)
-        self._widget.Huevera8Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))
+        self._widget.Huevera8Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
         self._widget.Huevera8Obus3Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
         self._widget.Huevera8Obus3Button.setMask(mask.mask())
         self._widget.Huevera8Obus3Button.setMouseTracking(True)       
         self._widget.Huevera8Obus3Button.installEventFilter(self)
         #obus4
-        self._widget.Huevera8Obus4Button.setGeometry(h8o1posex+132,h8o1posey,26,71)
+        self._widget.Huevera8Obus4Button.setGeometry(h8o1posex,h8o1posey-132,71,26)
         self._widget.Huevera8Obus4Button.clicked.connect(self.press_obus8_4_button)
-        self._widget.Huevera8Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))
+        self._widget.Huevera8Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
         self._widget.Huevera8Obus4Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
         self._widget.Huevera8Obus4Button.setMask(mask.mask())
         self._widget.Huevera8Obus4Button.setMouseTracking(True)       
         self._widget.Huevera8Obus4Button.installEventFilter(self)
         #obus5
-        self._widget.Huevera8Obus5Button.setGeometry(h8o1posex+18,h8o1posey+51,26,71)
+        self._widget.Huevera8Obus5Button.setGeometry(h8o1posex+51,h8o1posey-18,71,26)
         self._widget.Huevera8Obus5Button.clicked.connect(self.press_obus8_5_button)
-        self._widget.Huevera8Obus5Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))
+        self._widget.Huevera8Obus5Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))
         self._widget.Huevera8Obus5Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
         self._widget.Huevera8Obus5Button.setMask(mask.mask())
         self._widget.Huevera8Obus5Button.setMouseTracking(True)       
         self._widget.Huevera8Obus5Button.installEventFilter(self)
         #obus6
-        self._widget.Huevera8Obus6Button.setGeometry(h8o1posex+63,h8o1posey+51,26,71)
+        self._widget.Huevera8Obus6Button.setGeometry(h8o1posex+51,h8o1posey-63,71,26)
         self._widget.Huevera8Obus6Button.clicked.connect(self.press_obus8_6_button)
-        self._widget.Huevera8Obus6Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))
+        self._widget.Huevera8Obus6Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))
         self._widget.Huevera8Obus6Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
         self._widget.Huevera8Obus6Button.setMask(mask.mask())
         self._widget.Huevera8Obus6Button.setMouseTracking(True)       
         self._widget.Huevera8Obus6Button.installEventFilter(self)
         #obus7
-        self._widget.Huevera8Obus7Button.setGeometry(h8o1posex+109,h8o1posey+51,26,71)
+        self._widget.Huevera8Obus7Button.setGeometry(h8o1posex+51,h8o1posey-109,71,26)
         self._widget.Huevera8Obus7Button.clicked.connect(self.press_obus8_7_button)
-        self._widget.Huevera8Obus7Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))
+        self._widget.Huevera8Obus7Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))
         self._widget.Huevera8Obus7Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
         self._widget.Huevera8Obus7Button.setMask(mask.mask())
         self._widget.Huevera8Obus7Button.setMouseTracking(True)       
         self._widget.Huevera8Obus7Button.installEventFilter(self)
         #obus8
-        self._widget.Huevera8Obus8Button.setGeometry(h8o1posex+150,h8o1posey+51,26,71)
+        self._widget.Huevera8Obus8Button.setGeometry(h8o1posex+51,h8o1posey-150,71,26)
         self._widget.Huevera8Obus8Button.clicked.connect(self.press_obus8_8_button)
-        self._widget.Huevera8Obus8Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))
+        self._widget.Huevera8Obus8Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))
         self._widget.Huevera8Obus8Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
         self._widget.Huevera8Obus8Button.setMask(mask.mask())
         self._widget.Huevera8Obus8Button.setMouseTracking(True)       
         self._widget.Huevera8Obus8Button.installEventFilter(self)
         
         #huevera16
-        h16o1posex=40
-        h16o1posey=315
+        h16o1posex=70
+        h16o1posey=470
         #obus1
-        self._widget.Huevera16Obus1Button.setGeometry(h16o1posex,h16o1posey,19,51)
+        self._widget.Huevera16Obus1Button.setGeometry(h16o1posex,h16o1posey,51,19)
         self._widget.Huevera16Obus1Button.clicked.connect(self.press_obus16_1_button)
-        self._widget.Huevera16Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+        self._widget.Huevera16Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
         self._widget.Huevera16Obus1Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
         self._widget.Huevera16Obus1Button.setMask(mask.mask())
         self._widget.Huevera16Obus1Button.setMouseTracking(True)       
         self._widget.Huevera16Obus1Button.installEventFilter(self)
         #obus2
-        self._widget.Huevera16Obus2Button.setGeometry(h16o1posex+22,h16o1posey,19,51)
+        self._widget.Huevera16Obus2Button.setGeometry(h16o1posex,h16o1posey-22,51,19)
         self._widget.Huevera16Obus2Button.clicked.connect(self.press_obus16_2_button)
-        self._widget.Huevera16Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+        self._widget.Huevera16Obus2Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
         self._widget.Huevera16Obus2Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
         self._widget.Huevera16Obus2Button.setMask(mask.mask())
         self._widget.Huevera16Obus2Button.setMouseTracking(True)       
         self._widget.Huevera16Obus2Button.installEventFilter(self)
         #obus3
-        self._widget.Huevera16Obus3Button.setGeometry(h16o1posex+42,h16o1posey,19,51)
+        self._widget.Huevera16Obus3Button.setGeometry(h16o1posex,h16o1posey-42,51,19)
         self._widget.Huevera16Obus3Button.clicked.connect(self.press_obus16_3_button)
-        self._widget.Huevera16Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+        self._widget.Huevera16Obus3Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
         self._widget.Huevera16Obus3Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
         self._widget.Huevera16Obus3Button.setMask(mask.mask())
         self._widget.Huevera16Obus3Button.setMouseTracking(True)       
         self._widget.Huevera16Obus3Button.installEventFilter(self)
         #obus4
-        self._widget.Huevera16Obus4Button.setGeometry(h16o1posex+63,h16o1posey,19,51)
+        self._widget.Huevera16Obus4Button.setGeometry(h16o1posex,h16o1posey-63,51,19)
         self._widget.Huevera16Obus4Button.clicked.connect(self.press_obus16_4_button)
-        self._widget.Huevera16Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+        self._widget.Huevera16Obus4Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
         self._widget.Huevera16Obus4Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
         self._widget.Huevera16Obus4Button.setMask(mask.mask())
         self._widget.Huevera16Obus4Button.setMouseTracking(True)       
         self._widget.Huevera16Obus4Button.installEventFilter(self)
         #obus5
-        self._widget.Huevera16Obus5Button.setGeometry(h16o1posex+86,h16o1posey,19,51)
+        self._widget.Huevera16Obus5Button.setGeometry(h16o1posex,h16o1posey-86,51,19)
         self._widget.Huevera16Obus5Button.clicked.connect(self.press_obus16_5_button)
-        self._widget.Huevera16Obus5Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+        self._widget.Huevera16Obus5Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
         self._widget.Huevera16Obus5Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
         self._widget.Huevera16Obus5Button.setMask(mask.mask())
         self._widget.Huevera16Obus5Button.setMouseTracking(True)       
         self._widget.Huevera16Obus5Button.installEventFilter(self)
         #obus6
-        self._widget.Huevera16Obus6Button.setGeometry(h16o1posex+109,h16o1posey,19,51)
+        self._widget.Huevera16Obus6Button.setGeometry(h16o1posex,h16o1posey-109,51,19)
         self._widget.Huevera16Obus6Button.clicked.connect(self.press_obus16_6_button)
-        self._widget.Huevera16Obus6Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+        self._widget.Huevera16Obus6Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
         self._widget.Huevera16Obus6Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
         self._widget.Huevera16Obus6Button.setMask(mask.mask())
         self._widget.Huevera16Obus6Button.setMouseTracking(True)       
         self._widget.Huevera16Obus6Button.installEventFilter(self)
         #obus7
-        self._widget.Huevera16Obus7Button.setGeometry(h16o1posex+132,h16o1posey,19,51)
+        self._widget.Huevera16Obus7Button.setGeometry(h16o1posex,h16o1posey-132,51,19)
         self._widget.Huevera16Obus7Button.clicked.connect(self.press_obus16_7_button)
-        self._widget.Huevera16Obus7Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+        self._widget.Huevera16Obus7Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
         self._widget.Huevera16Obus7Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
         self._widget.Huevera16Obus7Button.setMask(mask.mask())
         self._widget.Huevera16Obus7Button.setMouseTracking(True)       
         self._widget.Huevera16Obus7Button.installEventFilter(self)
         #obus8
-        self._widget.Huevera16Obus8Button.setGeometry(h16o1posex+152,h16o1posey,19,51)
+        self._widget.Huevera16Obus8Button.setGeometry(h16o1posex,h16o1posey-152,51,19)
         self._widget.Huevera16Obus8Button.clicked.connect(self.press_obus16_8_button)
-        self._widget.Huevera16Obus8Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+        self._widget.Huevera16Obus8Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
         self._widget.Huevera16Obus8Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
         self._widget.Huevera16Obus8Button.setMask(mask.mask())
         self._widget.Huevera16Obus8Button.setMouseTracking(True)       
         self._widget.Huevera16Obus8Button.installEventFilter(self)
         #obus9
-        self._widget.Huevera16Obus9Button.setGeometry(h16o1posex,h16o1posey+74,19,51)
+        self._widget.Huevera16Obus9Button.setGeometry(h16o1posex+74,h16o1posey,51,19)
         self._widget.Huevera16Obus9Button.clicked.connect(self.press_obus16_9_button)
-        self._widget.Huevera16Obus9Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+        self._widget.Huevera16Obus9Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
         self._widget.Huevera16Obus9Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
         self._widget.Huevera16Obus9Button.setMask(mask.mask())
         self._widget.Huevera16Obus9Button.setMouseTracking(True)       
         self._widget.Huevera16Obus9Button.installEventFilter(self)
         #obus10
-        self._widget.Huevera16Obus10Button.setGeometry(h16o1posex+22,h16o1posey+74,19,51)
+        self._widget.Huevera16Obus10Button.setGeometry(h16o1posex+74,h16o1posey-22,51,19)
         self._widget.Huevera16Obus10Button.clicked.connect(self.press_obus16_10_button)
-        self._widget.Huevera16Obus10Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+        self._widget.Huevera16Obus10Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
         self._widget.Huevera16Obus10Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
         self._widget.Huevera16Obus10Button.setMask(mask.mask())
         self._widget.Huevera16Obus10Button.setMouseTracking(True)       
         self._widget.Huevera16Obus10Button.installEventFilter(self)
         #obus11
-        self._widget.Huevera16Obus11Button.setGeometry(h16o1posex+42,h16o1posey+74,19,51)
+        self._widget.Huevera16Obus11Button.setGeometry(h16o1posex+74,h16o1posey-42,51,19)
         self._widget.Huevera16Obus11Button.clicked.connect(self.press_obus16_11_button)
-        self._widget.Huevera16Obus11Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+        self._widget.Huevera16Obus11Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
         self._widget.Huevera16Obus11Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
         self._widget.Huevera16Obus11Button.setMask(mask.mask())
         self._widget.Huevera16Obus11Button.setMouseTracking(True)       
         self._widget.Huevera16Obus11Button.installEventFilter(self)
         #obus12
-        self._widget.Huevera16Obus12Button.setGeometry(h16o1posex+63,h16o1posey+74,19,51)
+        self._widget.Huevera16Obus12Button.setGeometry(h16o1posex+74,h16o1posey-63,51,19)
         self._widget.Huevera16Obus12Button.clicked.connect(self.press_obus16_12_button)
-        self._widget.Huevera16Obus12Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+        self._widget.Huevera16Obus12Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
         self._widget.Huevera16Obus12Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
         self._widget.Huevera16Obus12Button.setMask(mask.mask())
         self._widget.Huevera16Obus12Button.setMouseTracking(True)       
         self._widget.Huevera16Obus12Button.installEventFilter(self)
         #obus13
-        self._widget.Huevera16Obus13Button.setGeometry(h16o1posex+86,h16o1posey+74,19,51)
+        self._widget.Huevera16Obus13Button.setGeometry(h16o1posex+74,h16o1posey-86,51,19)
         self._widget.Huevera16Obus13Button.clicked.connect(self.press_obus16_13_button)
-        self._widget.Huevera16Obus13Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+        self._widget.Huevera16Obus13Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
         self._widget.Huevera16Obus13Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
         self._widget.Huevera16Obus13Button.setMask(mask.mask())
         self._widget.Huevera16Obus13Button.setMouseTracking(True)       
         self._widget.Huevera16Obus13Button.installEventFilter(self)
         #obus14
-        self._widget.Huevera16Obus14Button.setGeometry(h16o1posex+109,h16o1posey+74,19,51)
+        self._widget.Huevera16Obus14Button.setGeometry(h16o1posex+74,h16o1posey-109,51,19)
         self._widget.Huevera16Obus14Button.clicked.connect(self.press_obus16_14_button)
-        self._widget.Huevera16Obus14Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+        self._widget.Huevera16Obus14Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
         self._widget.Huevera16Obus14Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
         self._widget.Huevera16Obus14Button.setMask(mask.mask())
         self._widget.Huevera16Obus14Button.setMouseTracking(True)       
         self._widget.Huevera16Obus14Button.installEventFilter(self)
         #obus15
-        self._widget.Huevera16Obus15Button.setGeometry(h16o1posex+132,h16o1posey+74,19,51)
+        self._widget.Huevera16Obus15Button.setGeometry(h16o1posex+74,h16o1posey-132,51,19)
         self._widget.Huevera16Obus15Button.clicked.connect(self.press_obus16_15_button)
-        self._widget.Huevera16Obus15Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+        self._widget.Huevera16Obus15Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
         self._widget.Huevera16Obus15Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
         self._widget.Huevera16Obus15Button.setMask(mask.mask())
         self._widget.Huevera16Obus15Button.setMouseTracking(True)       
         self._widget.Huevera16Obus15Button.installEventFilter(self)
         #obus16
-        self._widget.Huevera16Obus16Button.setGeometry(h16o1posex+152,h16o1posey+74,19,51)
+        self._widget.Huevera16Obus16Button.setGeometry(h16o1posex+74,h16o1posey-152,51,19)
         self._widget.Huevera16Obus16Button.clicked.connect(self.press_obus16_16_button)
-        self._widget.Huevera16Obus16Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))
+        self._widget.Huevera16Obus16Button.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
         self._widget.Huevera16Obus16Button.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
         self._widget.Huevera16Obus16Button.setMask(mask.mask())
         self._widget.Huevera16Obus16Button.setMouseTracking(True)       
         self._widget.Huevera16Obus16Button.installEventFilter(self)
@@ -613,46 +613,46 @@ class RqtKuka(Plugin):
 				if event.type() == QtCore.QEvent.HoverEnter:
 					#obuses hacia abajo (los de arriba [1-8])
 					if object == self._widget.Huevera16Obus1Button or object == self._widget.Huevera16Obus2Button or object == self._widget.Huevera16Obus3Button or object == self._widget.Huevera16Obus4Button or object == self._widget.Huevera16Obus5Button or object == self._widget.Huevera16Obus6Button or object == self._widget.Huevera16Obus7Button or object == self._widget.Huevera16Obus8Button :
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51P.png"))
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51P.png"))
 					#obuses hacia arriba
 					else:
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51P.png"))
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51P.png"))
 				if event.type() == QtCore.QEvent.HoverLeave:
 					#obuses hacia abajo (los de arriba [1-8])
 					if object == self._widget.Huevera16Obus1Button or object == self._widget.Huevera16Obus2Button or object == self._widget.Huevera16Obus3Button or object == self._widget.Huevera16Obus4Button or object == self._widget.Huevera16Obus5Button or object == self._widget.Huevera16Obus6Button or object == self._widget.Huevera16Obus7Button or object == self._widget.Huevera16Obus8Button :
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo19x51.png"))
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
 					#obuses hacia arriba
 					else:
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba19x51.png"))  
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))  
 			
 			#huevera 8
 			if finger_type == 2 :
 				if event.type() == QtCore.QEvent.HoverEnter:
 					#obuses hacia abajo (los de arriba [1-4])
 					if object == self._widget.Huevera8Obus1Button or object == self._widget.Huevera8Obus2Button or object == self._widget.Huevera8Obus3Button or object == self._widget.Huevera8Obus4Button :
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71P.png"))
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71P.png"))
 					#obuses hacia arriba
 					else:
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71P.png"))
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71P.png"))
 				if event.type() == QtCore.QEvent.HoverLeave:
 					#obuses hacia abajo (los de arriba [1-4])
 					if object == self._widget.Huevera8Obus1Button or object == self._widget.Huevera8Obus2Button or object == self._widget.Huevera8Obus3Button or object == self._widget.Huevera8Obus4Button :
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo26x71.png"))
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
 					#obuses hacia arriba
 					else:
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_arriba26x71.png"))        
+						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))        
 			#huevera 4
 			if finger_type == 3 :
 				if event.type() == QtCore.QEvent.HoverEnter:
-					object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101P.png"))
+					object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101P.png"))
 				if event.type() == QtCore.QEvent.HoverLeave:
-					object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo37x101.png"))
+					object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
 			#huevera 2
 			if finger_type == 4 :
 				if event.type() == QtCore.QEvent.HoverEnter:            
-					object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111P.png"))
+					object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111P.png"))
 				if event.type() == QtCore.QEvent.HoverLeave:
-					object.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png"))
+					object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"))
 			
 		return False
         
@@ -779,7 +779,7 @@ class RqtKuka(Plugin):
                 name='Obus_16'+str(i)
                 if(globals()[name]==True):
                         icon=QtGui.QIcon();
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera16Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
@@ -787,7 +787,7 @@ class RqtKuka(Plugin):
                 name='Obus_16'+str(i)
                 if(globals()[name]==True):
                         icon=QtGui.QIcon();
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera16Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
@@ -795,7 +795,7 @@ class RqtKuka(Plugin):
                 name='Obus_8'+str(i)
                 if(globals()[name]==True):
                         icon=QtGui.QIcon();
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera8Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
@@ -803,7 +803,7 @@ class RqtKuka(Plugin):
                 name='Obus_8'+str(i)
                 if(globals()[name]==True):
                         icon=QtGui.QIcon();
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera8Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
@@ -811,7 +811,7 @@ class RqtKuka(Plugin):
                 name='Obus_4'+str(i)
                 if(globals()[name]==True):
                         icon=QtGui.QIcon();
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera4Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
@@ -819,7 +819,7 @@ class RqtKuka(Plugin):
                 name='Obus_2'+str(i)
                 if(globals()[name]==True):
                         icon=QtGui.QIcon();
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera2Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
@@ -866,38 +866,38 @@ class RqtKuka(Plugin):
 		Obus_1616=False
 		for i in range(1,9):
 				icon=QtGui.QIcon();
-				icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+				icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
 				name_method='Huevera16Obus'+str(i)+'Button'
 				test_method=getattr(self._widget, name_method)
 				test_method.setIcon(icon)
 		for i in range(9,17):
 				icon=QtGui.QIcon();
-				icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+				icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
 				name_method='Huevera16Obus'+str(i)+'Button'
 				test_method=getattr(self._widget, name_method)
 				test_method.setIcon(icon)
                 for i in range(1,5):
                                         icon=QtGui.QIcon();
-                                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+                                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
                                         name_method='Huevera8Obus'+str(i)+'Button'
                                         test_method=getattr(self._widget, name_method)
                                         test_method.setIcon(icon)
                 for i in range(5,9):
                                 icon=QtGui.QIcon();
-                                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+                                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
                                 name_method='Huevera8Obus'+str(i)+'Button'
                                 test_method=getattr(self._widget, name_method)
                                 test_method.setIcon(icon)
                 for i in range(1,5):
                                         icon=QtGui.QIcon();
-                                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+                                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
                                         name_method='Huevera4Obus'+str(i)+'Button'
                                         test_method=getattr(self._widget, name_method)
                                         test_method.setIcon(icon)
 				
                 for i in range(1,3):
                                         icon=QtGui.QIcon();
-                                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
+                                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
                                         name_method='Huevera2Obus'+str(i)+'Button'
                                         test_method=getattr(self._widget, name_method)
                                         test_method.setIcon(icon)
@@ -1047,7 +1047,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen 
                     Obus_21=True           
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera2Obus1Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1069,7 +1069,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera2Obus1Button.setIcon(icon)
                     #self._widget.Huevera2Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png", QtGui.QIcon.Disabled))
     #obus2
@@ -1085,7 +1085,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_22=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera2Obus2Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1107,7 +1107,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera2Obus2Button.setIcon(icon)
     #huevera4
     #obus1
@@ -1123,7 +1123,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_41=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera4Obus1Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1145,7 +1145,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera4Obus1Button.setIcon(icon)
     #obus2
     def press_obus4_2_button(self):
@@ -1160,7 +1160,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_42=True            
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera4Obus2Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1182,7 +1182,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera4Obus2Button.setIcon(icon)
     #obus3
     def press_obus4_3_button(self):
@@ -1197,7 +1197,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_43=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera4Obus3Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1219,7 +1219,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera4Obus3Button.setIcon(icon)
     #obus4
     def press_obus4_4_button(self):
@@ -1234,7 +1234,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_44=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera4Obus4Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1256,7 +1256,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera4Obus4Button.setIcon(icon)
     #huevera8
     #obus1
@@ -1272,7 +1272,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_81=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus1Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1294,7 +1294,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus1Button.setIcon(icon)
     #obus2
     def press_obus8_2_button(self):
@@ -1309,7 +1309,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_82=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus2Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1331,7 +1331,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus2Button.setIcon(icon)
     #obus3
     def press_obus8_3_button(self):
@@ -1346,7 +1346,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_83=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus3Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1368,7 +1368,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus3Button.setIcon(icon)
     #obus4
     def press_obus8_4_button(self):
@@ -1383,7 +1383,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_84=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus4Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1405,7 +1405,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus4Button.setIcon(icon)
     #obus5
     def press_obus8_5_button(self):
@@ -1420,7 +1420,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_85=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus5Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1442,7 +1442,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus5Button.setIcon(icon)
     #obus6
     def press_obus8_6_button(self):
@@ -1457,7 +1457,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_86=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus6Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1479,7 +1479,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus6Button.setIcon(icon)
     #obus7
     def press_obus8_7_button(self):
@@ -1494,7 +1494,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_87=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus7Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1516,7 +1516,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus7Button.setIcon(icon)
     #obus8
     def press_obus8_8_button(self):
@@ -1531,7 +1531,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_88=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus8Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1553,7 +1553,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera8Obus8Button.setIcon(icon)
     #huevera16
     #obus1
@@ -1569,7 +1569,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_161=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus1Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1591,7 +1591,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus1Button.setIcon(icon)
                 
     #obus2
@@ -1607,7 +1607,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_162=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus2Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1629,7 +1629,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus2Button.setIcon(icon)            
     #obus3
     def press_obus16_3_button(self):
@@ -1644,7 +1644,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_163=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus3Button.setIcon(icon)                        
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1666,7 +1666,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus3Button.setIcon(icon)            
     #obus4
     def press_obus16_4_button(self):
@@ -1681,7 +1681,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_164=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus4Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1703,7 +1703,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus4Button.setIcon(icon)            
     #obus5
     def press_obus16_5_button(self):
@@ -1718,7 +1718,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_165=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus5Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1740,7 +1740,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus5Button.setIcon(icon)            
     #obus6
     def press_obus16_6_button(self):
@@ -1755,7 +1755,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_166=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus6Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1777,7 +1777,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus6Button.setIcon(icon)            
     #obus7
     def press_obus16_7_button(self):
@@ -1792,7 +1792,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_167=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus7Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1814,7 +1814,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus7Button.setIcon(icon) 
     #obus8
     def press_obus16_8_button(self):
@@ -1829,7 +1829,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_168=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus8Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1851,7 +1851,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus8Button.setIcon(icon) 
     #obus9
     def press_obus16_9_button(self):
@@ -1866,7 +1866,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_169=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus9Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1888,7 +1888,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus9Button.setIcon(icon) 
     #obus10
     def press_obus16_10_button(self):
@@ -1903,7 +1903,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1610=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus10Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1925,7 +1925,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus10Button.setIcon(icon) 
     #obus11
     def press_obus16_11_button(self):
@@ -1940,7 +1940,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1611=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus11Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1962,7 +1962,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus11Button.setIcon(icon) 
     #obus12
     def press_obus16_12_button(self):
@@ -1977,7 +1977,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1612=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus12Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -1999,7 +1999,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus12Button.setIcon(icon) 
     #obus13
     def press_obus16_13_button(self):
@@ -2014,7 +2014,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1613=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus13Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -2036,7 +2036,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus13Button.setIcon(icon) 
     #obus14
     def press_obus16_14_button(self):
@@ -2051,7 +2051,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1614=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus14Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -2073,7 +2073,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus14Button.setIcon(icon) 
     #obus15
     def press_obus16_15_button(self):
@@ -2088,7 +2088,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1615=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus15Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -2110,7 +2110,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus15Button.setIcon(icon) 
     #obus16
     def press_obus16_16_button(self):
@@ -2125,7 +2125,7 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1616=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus16Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -2147,7 +2147,7 @@ class RqtKuka(Plugin):
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
                     self._widget.Huevera16Obus16Button.setIcon(icon) 
     def press_tool_homming(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
@@ -2552,7 +2552,7 @@ class RqtKuka(Plugin):
             limit_cont_current_service(3)
             limit_peak_current_service(3)
 
-            pixmap = QtGui.QPixmap(PATH+"resource/images/fondo_huevera_16.png")
+            pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_16.png")
             self._widget.background_plate.setPixmap(pixmap)
             self._widget.Huevera16Obus1Button.show()
             self._widget.Huevera16Obus2Button.show()
@@ -2603,7 +2603,7 @@ class RqtKuka(Plugin):
             limit_peak_current_service(4)
 
 
-            pixmap = QtGui.QPixmap(PATH+"resource/images/fondo_huevera_8.png")
+            pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_8.png")
             self._widget.background_plate.setPixmap(pixmap)
             self._widget.Huevera2Obus1Button.hide()
             self._widget.Huevera2Obus2Button.hide()
@@ -2653,7 +2653,7 @@ class RqtKuka(Plugin):
             limit_cont_current_service(5)
             limit_peak_current_service(7)
 
-            pixmap = QtGui.QPixmap(PATH+"resource/images/fondo_huevera_4.png")
+            pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_4.png")
             self._widget.background_plate.setPixmap(pixmap)
             self._widget.Huevera4Obus1Button.show()
             self._widget.Huevera4Obus2Button.show()
@@ -2703,7 +2703,7 @@ class RqtKuka(Plugin):
             limit_cont_current_service(5)
             limit_peak_current_service(8)
             
-            pixmap = QtGui.QPixmap(PATH+"resource/images/fondo_huevera_2.png")
+            pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_2.png")
             self._widget.background_plate.setPixmap(pixmap)
             self._widget.Huevera2Obus1Button.show()
             self._widget.Huevera2Obus2Button.show()
