@@ -175,6 +175,7 @@ class RqtKuka(Plugin):
     do_callback_horiz_force = QtCore.pyqtSignal(Float64)
     do_callback_current = QtCore.pyqtSignal(Float32)
     do_callback_tool_weight = QtCore.pyqtSignal(Float64)
+    do_callback_moving = QtCore.pyqtSignal(Bool)
 
     def __init__(self, context):
         super(RqtKuka, self).__init__(context)
@@ -545,6 +546,7 @@ class RqtKuka(Plugin):
         
         #subscriber to robot state
         rospy.Subscriber(topic_kuka_moving, Bool, self.callback_moving)
+        #self.do_callback_moving.connect(self.callback_moving)
 
         #subscriber to robot pose
         rospy.Subscriber(topic_cart_pose_kuka, Cartesian_Euler_pose, self.callback_robot_pose)     
@@ -919,6 +921,8 @@ class RqtKuka(Plugin):
             self._widget.mode_label.setText("MANUAL")
             #self.activate_buttons()
             self.activate_buttons()
+    def callback_moving2(self,data):
+            self.do_callback_moving.emit(data)
             
     def callback_motor_status(self,data):
 
