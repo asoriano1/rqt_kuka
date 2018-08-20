@@ -290,9 +290,9 @@ class RqtKuka(Plugin):
         self._widget.resetPositions_Button_pick.pressed.connect(self.press_reset_positions_button_pick)
         
         #Checkboxes of robot settings
-        self._widget.deadMan_check.stateChanged.connect(self.deadMan_state_changed)
-        self._widget.toolAngle_check.stateChanged.connect(self.toolAngle_state_changed)
-        self._widget.toolOrientation_check.stateChanged.connect(self.toolOrientation_state_changed)
+        self._widget.deadMan_check.clicked.connect(self.deadMan_state_changed)
+        self._widget.toolAngle_check.clicked.connect(self.toolAngle_state_changed)
+        self._widget.toolOrientation_check.clicked.connect(self.toolOrientation_state_changed)
         
         self._widget.Led_On_Button.setStyleSheet("color: rgb(80, 170, 80)")
         self._widget.Led_Off_Button.setStyleSheet("color: rgb(170, 80, 80)")
@@ -1496,14 +1496,16 @@ class RqtKuka(Plugin):
 			under_voltage_tool=True
 			pixmap = QtGui.QPixmap(PATH+"resource/images/pinza_roja_peq2.png")
 			self._widget.under_voltage_tool.setPixmap(pixmap)
+                        #print 'undervoltage'
 		else:
 			under_voltage_tool=False
 			pixmap = QtGui.QPixmap(PATH+"resource/images/pinza_verde_peq2.png")
 			self._widget.under_voltage_tool.setPixmap(pixmap)
 		if(motor1.status=="OPERATION_ENABLED" and first_time_enabled):
 			#if(weight_read-weight_empty<-10):
-			first_time_enabled=False				
-			ret = QMessageBox.information(self._widget, "WARNING!", 'Weight detected', QMessageBox.Ok)
+			first_time_enabled=False
+                        #print 'Warninng of weight should be here'				
+			ret = QMessageBox.information(self._widget, "WARNING!", 'Tool enabled', QMessageBox.Ok)
 					
 		if(motor1.status=="FAULT"):
 			first_time_enabled=True
@@ -3584,6 +3586,10 @@ class RqtKuka(Plugin):
                                         ret = deadman_service(False)
                                     except rospy.ServiceException, e:
                                         print "Service call failed: %s"%e
+        else : 
+                self._widget.deadMan_check.nextCheckState()
+                
+                
     def toolAngle_state_changed(self):
         ret_q = QMessageBox.warning(self._widget, "WARNING!", 'Changes to the current configuration will be applied', QMessageBox.Ok, QMessageBox.Cancel)
         if(ret_q==QMessageBox.Ok):
@@ -3599,6 +3605,9 @@ class RqtKuka(Plugin):
                                         ret = angle_mode_service(False)
                                     except rospy.ServiceException, e:
                                         print "Service call failed: %s"%e
+        else:
+                self._widget.toolAngle_check.nextCheckState()
+
     def toolOrientation_state_changed(self):
         ret_q = QMessageBox.warning(self._widget, "WARNING!", 'Changes to the current configuration will be applied', QMessageBox.Ok, QMessageBox.Cancel)
         if(ret_q==QMessageBox.Ok):
@@ -3614,6 +3623,8 @@ class RqtKuka(Plugin):
                                 ret = toolOrientation_service(False)
                             except rospy.ServiceException, e:
                                 print "Service call failed: %s"%e
+        else:
+                self._widget.toolOrientation_check.nextCheckState()
 			
     
     def press_light_on_button(self):
