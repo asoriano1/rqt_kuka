@@ -4253,6 +4253,19 @@
         <bool>false</bool>
        </property>
       </widget>
+      <widget class="QPushButton" name="press_Button">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>10</y>
+         <width>89</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Press</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <zorder>tabWidget</zorder>

@@ -53,6 +53,7 @@ first_time_enabled=False
 #start_time_gauges=time.time()
 angle_mode=True
 origin_pick=0
+tool_current=0
 #service names:
 srv_name_move_abs_fast='/kuka_robot/setKukaAbsFast'
 srv_name_move_abs_slow='/kuka_robot/setKukaAbs'
@@ -76,6 +77,7 @@ topic_tool_weight='/phidget_load/load_mean'
 topic_current='/kuka_tool/robotnik_base_hw/current0'
 topic_horiz_force='/phidget_load/vertical_force'
 topic_motor_status='/kuka_tool/robotnik_base_hw/status'
+topic_tool_state='/kuka_tool/joint_states'
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
 #Prepick_Pose=Pose(Point(100, 100, 100), Quaternion(0, 0, 0, 1))
@@ -130,6 +132,14 @@ weight_expected_max = 9999
 horiz_force_read=0.0
 horiz_force_empty=0.0
 
+#Current limits
+current_limit_0 = 2
+current_limit_1 = 3
+current_limit_2 = 4
+current_limit_cont = 5
+current_limit_3 = 7
+current_limit_4 = 8
+current_limit_picked = 2
 #Obus already placed
 #Hueveras de 2
 Obus_21=False
@@ -288,6 +298,7 @@ class RqtKuka(Plugin):
         self._widget.Light_Off_Button.pressed.connect(self.press_light_off_button)
         self._widget.resetPositions_Button.pressed.connect(self.press_reset_positions_button)
         self._widget.resetPositions_Button_pick.pressed.connect(self.press_reset_positions_button_pick)
+        self._widget.press_Button.pressed.connect(self.aut_press_tool)
         
         #Checkboxes of robot settings
         self._widget.deadMan_check.clicked.connect(self.deadMan_state_changed)
@@ -936,6 +947,9 @@ class RqtKuka(Plugin):
         self.sub_tool_status = rospy.Subscriber(topic_motor_status, RobotnikMotorsStatus, self.callback_motor_status2)
         self.do_callback_motor_status.connect(self.callback_motor_status)
         
+        #subscriber to tool state
+        self.sub_tool_state = rospy.Subscriber(topic_tool_state, JointState,  self.callback_tool_state)
+        
         
         #Robot settings initialization
         #Default: deadman activated
@@ -1577,6 +1591,8 @@ class RqtKuka(Plugin):
 
     def callback_current(self, data):
         #print 'CB:current_received',data
+        global tool_current
+        tool_current = data.data
         self._widget.tool_force_lcdNumber.setDigitCount(4)
         self._widget.tool_force_lcdNumber.display(round(data.data,1))
     def callback_current2(self,data):
@@ -3501,8 +3517,8 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
             limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
-            limit_cont_current_service(2)
-            limit_peak_current_service(2)
+            limit_cont_current_service(current_limit_0)
+            limit_peak_current_service(current_limit_0)
             #Call tool homing method
             global weight_empty, weight_read
             try:
@@ -3517,20 +3533,20 @@ class RqtKuka(Plugin):
                 print "Service call failed: %s"%e
             #set current again
             if finger_type == 0:
-                limit_cont_current_service(2)
-                limit_peak_current_service(2)
+                limit_cont_current_service(current_limit_0)
+                limit_peak_current_service(current_limit_0)
             elif finger_type == 1:
-                limit_cont_current_service(3)
-                limit_peak_current_service(3)
+                limit_cont_current_service(current_limit_1)
+                limit_peak_current_service(current_limit_1)
             elif finger_type == 2:
-                limit_cont_current_service(4)
-                limit_peak_current_service(4)
+                limit_cont_current_service(current_limit_2)
+                limit_peak_current_service(current_limit_2)
             elif finger_type == 3:
-                limit_cont_current_service(5)
-                limit_peak_current_service(7)
+                limit_cont_current_service(current_limit_cont)
+                limit_peak_current_service(current_limit_3)
             elif finger_type == 4:
-                limit_cont_current_service(5)
-                limit_peak_current_service(8)
+                limit_cont_current_service(current_limit_cont)
+                limit_peak_current_service(current_limit_4)
                 
     def press_finger_adjust_button(self):
         
@@ -3687,7 +3703,7 @@ class RqtKuka(Plugin):
         ret = tare_service(False)
     #################################################CALIBRE SELECTION
     def calibre_selected(self, index):
-        global finger_type, weight_expected_min, weight_expected_max
+        global finger_type, weight_expected_min, weight_expected_max, current_limit_picked
         print 'Selected:',index
         finger_type = index
         if index == 0:
@@ -3761,8 +3777,9 @@ class RqtKuka(Plugin):
             self._widget.weight_limited.setText("3");
             limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
             limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
-            limit_cont_current_service(3)
-            limit_peak_current_service(3)
+            limit_cont_current_service(current_limit_1)
+            limit_peak_current_service(current_limit_1)
+            current_limit_picked = current_limit_1
 
             pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_16.png")
             self._widget.background_plate.setPixmap(pixmap)
@@ -3829,8 +3846,9 @@ class RqtKuka(Plugin):
             self._widget.weight_limited.setText("4");
             limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
             limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
-            limit_cont_current_service(4)
-            limit_peak_current_service(4)
+            limit_cont_current_service(current_limit_2)
+            limit_peak_current_service(current_limit_2)
+            current_limit_picked = current_limit_2
 
 
             pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_8.png")
@@ -3898,8 +3916,9 @@ class RqtKuka(Plugin):
             self._widget.weight_limited.setText("7");
             limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
             limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
-            limit_cont_current_service(5)
-            limit_peak_current_service(7)
+            limit_cont_current_service(current_limit_cont)
+            limit_peak_current_service(current_limit_3)
+            current_limit_picked = current_limit_3
 
             pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_4.png")
             self._widget.background_plate.setPixmap(pixmap)
@@ -3966,8 +3985,9 @@ class RqtKuka(Plugin):
 
             limit_cont_current_service=rospy.ServiceProxy(srv_limit_cont_current, set_float_value)
             limit_peak_current_service=rospy.ServiceProxy(srv_limit_peak_current, set_float_value)
-            limit_cont_current_service(5)
-            limit_peak_current_service(8)
+            limit_cont_current_service(current_limit_cont)
+            limit_peak_current_service(current_limit_4)
+            current_limit_picked = current_limit_4
             
             pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_2.png")
             self._widget.background_plate.setPixmap(pixmap)
@@ -4034,8 +4054,43 @@ class RqtKuka(Plugin):
             command_string = "~/kuka_catkin_ws/src/rqt_kuka/scripts/reboot.sh"
             print command_string
             os.system(command_string)
-            
+###TEST APRIETE AUTOMATICO: si el nodo de las galgas falla se va  a liar
+    def aut_press_tool(self):
+        ##loop for closing tool (first translation then angle)
+        gripper_move_service = rospy.ServiceProxy(srv_finger_set_pose, set_odometry)
+        press_counter=0
+        old_pos_x=0
+        while press_counter<10 :
+                print press_counter
+                print 'angle tool '
+                print angle_tool
+                gripper_move_service(x_tool,0,0,angle_tool-0.01)
+                self.sleep_loop(0.15)
+                if(tool_current>current_limit_picked-0.2):
+                        press_counter=press_counter+1
+                else:
+                        pres_counter=0
+                print abs(x_tool-old_pos_x)
+                print 'current:'
+                print tool_current
+                
+        press_counter=0
+        while press_counter<10 :
+                print press_counter
+                gripper_move_service(x_tool+0.02,0,0,angle_tool)
+                self.sleep_loop(0.15)
+                if(tool_current>current_limit_picked-0.2 or abs(x_tool-old_pos_x)<0.002):
+                        press_counter=press_counter+1
+                else:
+                       pres_counter=0
+                       old_pos_x=x_tool
         
+        
+    def callback_tool_state(self, data):
+        global x_tool, angle_tool
+        x_tool = data.position[2]
+        angle_tool = data.position[3]
+    
     def press_run_program_button(self):
         command_string = "rosnode kill /kuka_pad/joy; sleep 1; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"
         os.system(command_string)
