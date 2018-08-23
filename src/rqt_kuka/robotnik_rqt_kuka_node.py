@@ -54,6 +54,7 @@ first_time_enabled=False
 angle_mode=True
 origin_pick=0
 tool_current=0
+first_time_moving_kuka=False
 #service names:
 srv_name_move_abs_fast='/kuka_robot/setKukaAbsFast'
 srv_name_move_abs_slow='/kuka_robot/setKukaAbs'
@@ -621,13 +622,6 @@ class RqtKuka(Plugin):
         self._widget.PickBox16_19.setMask(mask.mask())
         self._widget.PickBox16_19.setMouseTracking(True)       
         self._widget.PickBox16_19.installEventFilter(self)
-        #obus16
-        self._widget.PickBox16_19.clicked.connect(self.press_pick_obus16_19_button)
-        self._widget.PickBox16_19.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
-        self._widget.PickBox16_19.setMask(mask.mask())
-        self._widget.PickBox16_19.setMouseTracking(True)       
-        self._widget.PickBox16_19.installEventFilter(self)
         #obus20
         self._widget.PickBox16_20.clicked.connect(self.press_pick_obus16_20_button)
         self._widget.PickBox16_20.hide()
@@ -1001,10 +995,10 @@ class RqtKuka(Plugin):
                                         object == self._widget.Huevera16Obus6Button or object == self._widget.Huevera16Obus7Button or object == self._widget.Huevera16Obus8Button or object ==self._widget.PickBox16_1
                                         or object ==self._widget.PickBox16_2 or object ==self._widget.PickBox16_3 or object ==self._widget.PickBox16_4 or object ==self._widget.PickBox16_5 or object ==self._widget.PickBox16_6  or object ==self._widget.PickBox16_7 
                                         or object ==self._widget.PickBox16_8 or object ==self._widget.PickBox16_9 or object ==self._widget.PickBox16_10 ) :
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51P.png"))
+                                                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51P.png"))
 					#obuses hacia arriba
 					else:
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51P.png"))
+                                                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51P.png"))
 				if event.type() == QtCore.QEvent.HoverLeave:
 					#obuses hacia abajo (los de arriba [1-8])
 					if (object == self._widget.Huevera16Obus1Button or object == self._widget.Huevera16Obus2Button or
@@ -1012,10 +1006,10 @@ class RqtKuka(Plugin):
                                           object == self._widget.Huevera16Obus6Button or object == self._widget.Huevera16Obus7Button or object == self._widget.Huevera16Obus8Button or object ==self._widget.PickBox16_1
                                         or object ==self._widget.PickBox16_2 or object ==self._widget.PickBox16_3 or object ==self._widget.PickBox16_4 or object ==self._widget.PickBox16_5 or object ==self._widget.PickBox16_6  or object ==self._widget.PickBox16_7 
                                         or object ==self._widget.PickBox16_8 or object ==self._widget.PickBox16_9 or object ==self._widget.PickBox16_10) :
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
+                                                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
 					#obuses hacia arriba
 					else:
-						object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))  
+                                                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))  
 			
 			#huevera 8
 			if finger_type == 2 :
@@ -1049,6 +1043,7 @@ class RqtKuka(Plugin):
 					object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111P.png"))
 				if event.type() == QtCore.QEvent.HoverLeave:
 					object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"))
+                                        
 			
 		return False
         
@@ -1062,6 +1057,9 @@ class RqtKuka(Plugin):
         self._widget.MoveToTable_Button.setEnabled(False)
         #self._widget.Place_Right_Button.setEnabled(False)
         #self._widget.Place_Left_Button.setEnabled(False)
+        self._widget.resetPositions_Button.setEnabled(False)
+        self._widget.resetPositions_Button_pick.setEnabled(False)
+        self._widget.calibre_comboBox.setEnabled(False)
         self._widget.Finger_Adjust_Button.setEnabled(False)
         self._widget.Huevera2Obus1Button.setEnabled(False)
         self._widget.Huevera2Obus2Button.setEnabled(False)
@@ -1120,6 +1118,9 @@ class RqtKuka(Plugin):
         self._widget.MoveToTable_Button.setEnabled(True)
         #self._widget.Place_Right_Button.setEnabled(True)
         #self._widget.Place_Left_Button.setEnabled(True)
+        self._widget.resetPositions_Button.setEnabled(True)
+        self._widget.resetPositions_Button_pick.setEnabled(True)
+        self._widget.calibre_comboBox.setEnabled(True)
         for i in range(1, 21):
 				name_method='PickBox16'+'_'+str(i)
 				test_method=getattr(self._widget, name_method)
@@ -1211,6 +1212,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera16Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(9,17):
                 name='Obus_16'+str(i)
@@ -1219,6 +1221,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera16Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(1,5):
                 name='Obus_8'+str(i)
@@ -1227,6 +1230,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera8Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(5,9):
                 name='Obus_8'+str(i)
@@ -1235,6 +1239,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera8Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(1,5):
                 name='Obus_4'+str(i)
@@ -1243,6 +1248,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera4Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(1,3):
                 name='Obus_2'+str(i)
@@ -1251,6 +1257,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera2Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         ##PICK
         for i in range(1,11):
@@ -1260,6 +1267,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox16_'+str(i)
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(11,21):
                 name='Pick_Obus_16'+str(i)
@@ -1268,6 +1276,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox16_'+str(i)
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(1,8):
                 name='Pick_Obus_8'+str(i)
@@ -1276,6 +1285,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox8_'+str(i)
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(8,15):
                 name='Pick_Obus_8'+str(i)
@@ -1284,6 +1294,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox8_'+str(i)
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(1,6):
                 name='Pick_Obus_4'+str(i)
@@ -1292,6 +1303,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox4_'+str(i)
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         for i in range(1,5):
                 name='Pick_Obus_2'+str(i)
@@ -1300,6 +1312,7 @@ class RqtKuka(Plugin):
                         icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox2_'+str(i)
                         test_method=getattr(self._widget, name_method)
+                        test_method.removeEventFilter(self)
                         test_method.setIcon(icon)
         
         
@@ -1350,37 +1363,43 @@ class RqtKuka(Plugin):
 				name_method='Huevera16Obus'+str(i)+'Button'
 				test_method=getattr(self._widget, name_method)
 				test_method.setIcon(icon)
+                                test_method.installEventFilter(self)
 		for i in range(9,17):
 				icon=QtGui.QIcon();
 				icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
 				name_method='Huevera16Obus'+str(i)+'Button'
 				test_method=getattr(self._widget, name_method)
 				test_method.setIcon(icon)
+                                test_method.installEventFilter(self)
                 for i in range(1,5):
-                                        icon=QtGui.QIcon();
-                                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                                        name_method='Huevera8Obus'+str(i)+'Button'
-                                        test_method=getattr(self._widget, name_method)
-                                        test_method.setIcon(icon)
+                                icon=QtGui.QIcon();
+                                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
+                                name_method='Huevera8Obus'+str(i)+'Button'
+                                test_method=getattr(self._widget, name_method)
+                                test_method.setIcon(icon)
+                                test_method.installEventFilter(self)
                 for i in range(5,9):
                                 icon=QtGui.QIcon();
                                 icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
                                 name_method='Huevera8Obus'+str(i)+'Button'
                                 test_method=getattr(self._widget, name_method)
                                 test_method.setIcon(icon)
+                                test_method.installEventFilter(self)
                 for i in range(1,5):
-                                        icon=QtGui.QIcon();
-                                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
-                                        name_method='Huevera4Obus'+str(i)+'Button'
-                                        test_method=getattr(self._widget, name_method)
-                                        test_method.setIcon(icon)
+                                icon=QtGui.QIcon();
+                                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+                                name_method='Huevera4Obus'+str(i)+'Button'
+                                test_method=getattr(self._widget, name_method)
+                                test_method.setIcon(icon)
+                                test_method.installEventFilter(self)
 				
                 for i in range(1,3):
-                                        icon=QtGui.QIcon();
-                                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
-                                        name_method='Huevera2Obus'+str(i)+'Button'
-                                        test_method=getattr(self._widget, name_method)
-                                        test_method.setIcon(icon)
+                                icon=QtGui.QIcon();
+                                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
+                                name_method='Huevera2Obus'+str(i)+'Button'
+                                test_method=getattr(self._widget, name_method)
+                                test_method.setIcon(icon)
+                                test_method.installEventFilter(self)
                 
 		
 		
@@ -1447,6 +1466,7 @@ class RqtKuka(Plugin):
                         name_method='PickBox16_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
+                        test_method.installEventFilter(self)
                 for i in range(11,21):
                         name='Pick_Obus_16'+str(i)
                         icon=QtGui.QIcon();
@@ -1454,6 +1474,7 @@ class RqtKuka(Plugin):
                         name_method='PickBox16_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
+                        test_method.installEventFilter(self)
                 for i in range(1,8):
                         name='Pick_Obus_8'+str(i)
                         icon=QtGui.QIcon();
@@ -1461,6 +1482,7 @@ class RqtKuka(Plugin):
                         name_method='PickBox8_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
+                        test_method.installEventFilter(self)
                 for i in range(8,15):
                         name='Pick_Obus_8'+str(i)
                         icon=QtGui.QIcon();
@@ -1468,6 +1490,7 @@ class RqtKuka(Plugin):
                         name_method='PickBox8_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
+                        test_method.installEventFilter(self)
                 for i in range(1,6):
                         name='Pick_Obus_4'+str(i)
                         icon=QtGui.QIcon();
@@ -1475,6 +1498,7 @@ class RqtKuka(Plugin):
                         name_method='PickBox4_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
+                        test_method.installEventFilter(self)
                 for i in range(1,5):
                         name='Pick_Obus_2'+str(i)
                         icon=QtGui.QIcon();
@@ -1482,21 +1506,26 @@ class RqtKuka(Plugin):
                         name_method='PickBox2_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.setIcon(icon)
+                        test_method.installEventFilter(self)
         
     def callback_moving(self, data):
-        global KUKA_AUT
+        global KUKA_AUT, first_time_moving_kuka
         #print 'CB:moving_received:',data.data
         if data.data == True:
             KUKA_AUT=True
-            self._widget.mode_label.setText("AUTOMATIC")
-            self.desactivate_buttons()
+            if first_time_moving_kuka:
+                    self._widget.mode_label.setText("AUTOMATIC")
+                    self.desactivate_buttons()
+                    first_time_moving_kuka = False
             #selt._widget.mode_label.setStyleSheet(\ncolor: rgb(255, 0, 0))
                             
         else:
             KUKA_AUT=False
-            self._widget.mode_label.setText("MANUAL")
-            #self.activate_buttons()
-            self.activate_buttons()
+            if first_time_moving_kuka==False:
+                self._widget.mode_label.setText("MANUAL")
+                self.activate_buttons()
+                first_time_moving_kuka = True
+
     def callback_moving2(self,data):
             self.do_callback_moving.emit(data)
             
@@ -1583,8 +1612,12 @@ class RqtKuka(Plugin):
             palette.setColor(palette.WindowText, QtGui.QColor(255, 50, 50))
             self._widget.weightProgressBar.setStyleSheet("""QProgressBar::chunk { background: red; }""")
         self._widget.weight_lcdNumber.setPalette(palette)
-        self._widget.weightProgressBar.setValue(-int(round(weight_no_tool)))
-        self._widget.weightProgressBar_2.setValue(int(round(weight_no_tool)))
+        if(weight_no_tool<0):
+                self._widget.weightProgressBar_2.setValue(0)
+                self._widget.weightProgressBar.setValue(-int(round(weight_no_tool)))
+        else: 
+                self._widget.weightProgressBar_2.setValue(int(round(weight_no_tool)))
+                self._widget.weightProgressBar.setValue(0)
         
     def callback_tool_weight2(self,data):
             self.do_callback_tool_weight.emit(data)
@@ -1622,6 +1655,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_21=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox2_1.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1640,6 +1676,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_22=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox2_2.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1658,6 +1697,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_23=True
             origin_pick=2      
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox2_3.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1676,6 +1718,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_24=True
             origin_pick=2      
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox2_4.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1695,6 +1740,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_41=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox4_1.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1713,6 +1761,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_42=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox4_2.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1731,6 +1782,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_43=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox4_3.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1748,7 +1802,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_44=True
-            origin_pick=2      
+            origin_pick=2 
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox4_4.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1766,7 +1823,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_45=True
-            origin_pick=2      
+            origin_pick=2 
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox4_5.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1786,6 +1846,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_81=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_1.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1804,6 +1867,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_82=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_2.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1822,6 +1888,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_83=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_3.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1840,6 +1909,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_84=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_4.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1857,7 +1929,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_85=True
-            origin_pick=2      
+            origin_pick=2   
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_5.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1875,7 +1950,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             Pick_Obus_86=True
-            origin_pick=2      
+            origin_pick=2 
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_6.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1893,7 +1971,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             Pick_Obus_87=True
-            origin_pick=2      
+            origin_pick=2 
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_7.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1912,6 +1993,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_88=True
             origin_pick=3
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_8.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1930,6 +2014,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_89=True
             origin_pick=3
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_9.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1948,6 +2035,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_810=True
             origin_pick=3
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_10.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1966,6 +2056,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_811=True
             origin_pick=3
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_11.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -1984,6 +2077,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok: 
             Pick_Obus_812=True
             origin_pick=4      
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_12.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2001,7 +2097,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             Pick_Obus_813=True
-            origin_pick=4      
+            origin_pick=4   
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_13.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2020,6 +2119,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok: 
             origin_pick=4 
             Pick_Obus_814=True     
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox8_14.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2039,6 +2141,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             origin_pick=1
             Pick_Obus_161=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_1.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2057,6 +2162,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             origin_pick=1
             Pick_Obus_162=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_2.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2075,6 +2183,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_163=True
             origin_pick=1
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_3.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2093,6 +2204,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             origin_pick=1
             Pick_Obus_164=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_4.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2111,6 +2225,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             origin_pick=1
             Pick_Obus_165=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_5.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2128,7 +2245,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             origin_pick=2
-            Pick_Obus_166=True     
+            Pick_Obus_166=True    
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_6.setIcon(icon) 
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2146,7 +2266,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             origin_pick=2
-            Pick_Obus_167=True      
+            Pick_Obus_167=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_7.setIcon(icon)      
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2164,7 +2287,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             origin_pick=2 
-            Pick_Obus_168=True     
+            Pick_Obus_168=True  
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_8.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2183,6 +2309,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok: 
             origin_pick=2      
             Pick_Obus_169=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_9.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2200,7 +2329,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             origin_pick=2  
-            Pick_Obus_1610=True    
+            Pick_Obus_1610=True  
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_10.setIcon(icon)  
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2219,6 +2351,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             origin_pick=3
             Pick_Obus_1611=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_11.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2237,6 +2372,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             origin_pick=3
             Pick_Obus_1612=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_12.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2255,6 +2393,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             Pick_Obus_1613=True
             origin_pick=3
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_13.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2273,6 +2414,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             origin_pick=3
             Pick_Obus_1614=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_14.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2291,6 +2435,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok:
             origin_pick=3
             Pick_Obus_1615=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_15.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2308,7 +2455,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             origin_pick=4    
-            Pick_Obus_1616=True  
+            Pick_Obus_1616=True 
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_16.setIcon(icon) 
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2327,6 +2477,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok: 
             origin_pick=4    
             Pick_Obus_1617=True  
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_17.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2345,6 +2498,9 @@ class RqtKuka(Plugin):
         if ret == QMessageBox.Ok: 
             origin_pick=4      
             Pick_Obus_1618=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_18.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2362,7 +2518,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             origin_pick=4 
-            Pick_Obus_1619=True     
+            Pick_Obus_1619=True
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_19.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2380,7 +2539,10 @@ class RqtKuka(Plugin):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             origin_pick=4  
-            Pick_Obus_1620=True    
+            Pick_Obus_1620=True 
+            icon = QtGui.QIcon();
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            self._widget.PickBox16_20.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
@@ -2470,7 +2632,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera2Obus2Button.setIcon(icon)
+                   # self._widget.Huevera2Obus2Button.setIcon(icon)
     #huevera4
     #obus1
     def press_obus4_1_button(self):
@@ -2508,7 +2670,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera4Obus1Button.setIcon(icon)
+                    #self._widget.Huevera4Obus1Button.setIcon(icon)
     #obus2
     def press_obus4_2_button(self):
         global Obus_42
@@ -2545,7 +2707,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera4Obus2Button.setIcon(icon)
+                    #self._widget.Huevera4Obus2Button.setIcon(icon)
     #obus3
     def press_obus4_3_button(self):
         global Obus_43
@@ -2582,7 +2744,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera4Obus3Button.setIcon(icon)
+                    #self._widget.Huevera4Obus3Button.setIcon(icon)
     #obus4
     def press_obus4_4_button(self):
         global Obus_44
@@ -2619,7 +2781,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera4Obus4Button.setIcon(icon)
+                    #self._widget.Huevera4Obus4Button.setIcon(icon)
     #huevera8
     #obus1
     def press_obus8_1_button(self):
@@ -2634,8 +2796,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_81=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera8Obus1Button.setIcon(icon)            
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera8Obus1Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2657,7 +2819,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera8Obus1Button.setIcon(icon)
+                    #self._widget.Huevera8Obus1Button.setIcon(icon)
     #obus2
     def press_obus8_2_button(self):
         global Obus_82
@@ -2671,8 +2833,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_82=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera8Obus2Button.setIcon(icon)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera8Obus2Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2694,7 +2856,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera8Obus2Button.setIcon(icon)
+                    #self._widget.Huevera8Obus2Button.setIcon(icon)
     #obus3
     def press_obus8_3_button(self):
         global Obus_83
@@ -2708,8 +2870,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_83=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera8Obus3Button.setIcon(icon)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera8Obus3Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2731,7 +2893,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera8Obus3Button.setIcon(icon)
+                    #self._widget.Huevera8Obus3Button.setIcon(icon)
     #obus4
     def press_obus8_4_button(self):
         global Obus_84
@@ -2745,8 +2907,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_84=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera8Obus4Button.setIcon(icon)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera8Obus4Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2768,7 +2930,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera8Obus4Button.setIcon(icon)
+                    #self._widget.Huevera8Obus4Button.setIcon(icon)
     #obus5
     def press_obus8_5_button(self):
         global Obus_85
@@ -2782,8 +2944,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_85=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera8Obus5Button.setIcon(icon)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera8Obus5Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2805,7 +2967,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera8Obus5Button.setIcon(icon)
+                    #self._widget.Huevera8Obus5Button.setIcon(icon)
     #obus6
     def press_obus8_6_button(self):
         global Obus_86
@@ -2819,8 +2981,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_86=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera8Obus6Button.setIcon(icon)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera8Obus6Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2842,7 +3004,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera8Obus6Button.setIcon(icon)
+                    #self._widget.Huevera8Obus6Button.setIcon(icon)
     #obus7
     def press_obus8_7_button(self):
         global Obus_87
@@ -2856,8 +3018,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_87=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera8Obus7Button.setIcon(icon)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera8Obus7Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2879,7 +3041,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera8Obus7Button.setIcon(icon)
+                    #self._widget.Huevera8Obus7Button.setIcon(icon)
     #obus8
     def press_obus8_8_button(self):
         global Obus_88
@@ -2893,8 +3055,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_88=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera8Obus8Button.setIcon(icon)
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera8Obus8Button.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2916,7 +3078,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera8Obus8Button.setIcon(icon)
+                    #self._widget.Huevera8Obus8Button.setIcon(icon)
     #huevera16
     #obus1
     def press_obus16_1_button(self):
@@ -2932,7 +3094,7 @@ class RqtKuka(Plugin):
                     Obus_161=True
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus1Button.setIcon(icon)            
+                    self._widget.Huevera16Obus1Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2954,7 +3116,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus1Button.setIcon(icon)
+                    #self._widget.Huevera16Obus1Button.setIcon(icon)
                 
     #obus2
     def press_obus16_2_button(self):
@@ -2969,8 +3131,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_162=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus2Button.setIcon(icon)            
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus2Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -2992,7 +3154,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus2Button.setIcon(icon)            
+                    #self._widget.Huevera16Obus2Button.setIcon(icon)            
     #obus3
     def press_obus16_3_button(self):
         global Obus_163
@@ -3006,8 +3168,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_163=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus3Button.setIcon(icon)                        
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus3Button.setIcon(icon)                        
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3029,7 +3191,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus3Button.setIcon(icon)            
+                    #self._widget.Huevera16Obus3Button.setIcon(icon)            
     #obus4
     def press_obus16_4_button(self):
         global Obus_164
@@ -3043,8 +3205,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_164=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus4Button.setIcon(icon)            
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus4Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3066,7 +3228,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus4Button.setIcon(icon)            
+                    #self._widget.Huevera16Obus4Button.setIcon(icon)            
     #obus5
     def press_obus16_5_button(self):
         global Obus_165
@@ -3080,8 +3242,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_165=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus5Button.setIcon(icon)            
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus5Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3103,7 +3265,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus5Button.setIcon(icon)            
+                    #self._widget.Huevera16Obus5Button.setIcon(icon)            
     #obus6
     def press_obus16_6_button(self):
         global Obus_166
@@ -3117,8 +3279,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_166=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus6Button.setIcon(icon)            
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus6Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3140,7 +3302,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus6Button.setIcon(icon)            
+                    #self._widget.Huevera16Obus6Button.setIcon(icon)            
     #obus7
     def press_obus16_7_button(self):
         global Obus_167
@@ -3154,8 +3316,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_167=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus7Button.setIcon(icon)            
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus7Button.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3177,7 +3339,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus7Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus7Button.setIcon(icon) 
     #obus8
     def press_obus16_8_button(self):
         global Obus_168
@@ -3191,8 +3353,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_168=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus8Button.setIcon(icon) 
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus8Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3214,7 +3376,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus8Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus8Button.setIcon(icon) 
     #obus9
     def press_obus16_9_button(self):
         global Obus_169
@@ -3228,8 +3390,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_169=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus9Button.setIcon(icon) 
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus9Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3251,7 +3413,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus9Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus9Button.setIcon(icon) 
     #obus10
     def press_obus16_10_button(self):
         global Obus_1610
@@ -3265,8 +3427,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1610=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus10Button.setIcon(icon) 
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus10Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3288,7 +3450,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus10Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus10Button.setIcon(icon) 
     #obus11
     def press_obus16_11_button(self):
         global Obus_1611
@@ -3302,8 +3464,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1611=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus11Button.setIcon(icon) 
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus11Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3325,7 +3487,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus11Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus11Button.setIcon(icon) 
     #obus12
     def press_obus16_12_button(self):
         global Obus_1612
@@ -3339,8 +3501,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1612=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus12Button.setIcon(icon) 
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus12Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3362,7 +3524,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus12Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus12Button.setIcon(icon) 
     #obus13
     def press_obus16_13_button(self):
         global Obus_1613
@@ -3376,8 +3538,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1613=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus13Button.setIcon(icon) 
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus13Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3399,7 +3561,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus13Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus13Button.setIcon(icon) 
     #obus14
     def press_obus16_14_button(self):
         global Obus_1614
@@ -3413,8 +3575,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1614=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
-                   # self._widget.Huevera16Obus14Button.setIcon(icon) 
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus14Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3436,7 +3598,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus14Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus14Button.setIcon(icon) 
     #obus15
     def press_obus16_15_button(self):
         global Obus_1615
@@ -3450,8 +3612,8 @@ class RqtKuka(Plugin):
                     #cambia el color de la imagen
                     Obus_1615=True
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus15Button.setIcon(icon) 
+                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    self._widget.Huevera16Obus15Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3473,7 +3635,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus15Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus15Button.setIcon(icon) 
     #obus16
     def press_obus16_16_button(self):
         global Obus_1616
@@ -3488,7 +3650,7 @@ class RqtKuka(Plugin):
                     Obus_1616=True
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
-                    #self._widget.Huevera16Obus16Button.setIcon(icon) 
+                    self._widget.Huevera16Obus16Button.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
                     #Call service to move robot up and then to the pre-pick pose, should be fast
@@ -3510,7 +3672,7 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon();
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera16Obus16Button.setIcon(icon) 
+                    #self._widget.Huevera16Obus16Button.setIcon(icon) 
     def press_tool_homming(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
         #ret = QMessageBox.critical(self._widget, "WARNING!", 'The tool is activated and there is some weight \ndetected by the gauges!', QMessageBox.Ok)
@@ -3520,11 +3682,12 @@ class RqtKuka(Plugin):
             limit_cont_current_service(current_limit_0)
             limit_peak_current_service(current_limit_0)
             #Call tool homing method
-            global weight_empty, weight_read
+            global weight_empty, weight_read, TOOL_HOMED
             try:
                 gripper_move_service = rospy.ServiceProxy(srv_finger_set_pose,set_odometry)
                 homing_service = rospy.ServiceProxy(srv_tool_homing, home)           
                 ret = homing_service()
+                TOOL_HOMED=True 
                 #weight_empty=weight_read
                 gripper_move_service(0.02,0,0,-0.15)
                 if ret == True:
@@ -3549,9 +3712,11 @@ class RqtKuka(Plugin):
                 limit_peak_current_service(current_limit_4)
                 
     def press_finger_adjust_button(self):
-        
+        if(not TOOL_HOMED):
+                QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nHoming of the tool should be done first', QMessageBox.Ok, QMessageBox.Cancel)
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
+            
             gripper_trasl_service = rospy.ServiceProxy(srv_finger_set_pose,set_odometry)
             if finger_type == 0:
                 print 'No gripper selected'
@@ -4040,7 +4205,7 @@ class RqtKuka(Plugin):
 				test_method=getattr(self._widget, name_method)
 				test_method.show()
         #weight progress bar
-        self._widget.weightProgressBar.setMaximum(weight_expected_max*2)
+        self._widget.weightProgressBar.setMaximum(weight_expected_max*1.3)
 
 
     def load_robot_description(self, gripper_model):
@@ -4060,13 +4225,14 @@ class RqtKuka(Plugin):
         gripper_move_service = rospy.ServiceProxy(srv_finger_set_pose, set_odometry)
         press_counter=0
         old_pos_x=0
-        while press_counter<10 :
+        self.desactivate_buttons()
+        while press_counter<5 :
                 print press_counter
                 print 'angle tool '
                 print angle_tool
                 gripper_move_service(x_tool,0,0,angle_tool-0.01)
                 self.sleep_loop(0.15)
-                if(tool_current>current_limit_picked-0.2):
+                if(tool_current>current_limit_picked):
                         press_counter=press_counter+1
                 else:
                         pres_counter=0
@@ -4075,15 +4241,17 @@ class RqtKuka(Plugin):
                 print tool_current
                 
         press_counter=0
-        while press_counter<10 :
+        while press_counter<5 :
                 print press_counter
                 gripper_move_service(x_tool+0.02,0,0,angle_tool)
                 self.sleep_loop(0.15)
-                if(tool_current>current_limit_picked-0.2 or abs(x_tool-old_pos_x)<0.002):
+                if(tool_current>current_limit_picked or abs(x_tool-old_pos_x)<0.002):
                         press_counter=press_counter+1
                 else:
                        pres_counter=0
                        old_pos_x=x_tool
+        self.sleep_loop(0.5)
+        self.activate_buttons()
         
         
     def callback_tool_state(self, data):

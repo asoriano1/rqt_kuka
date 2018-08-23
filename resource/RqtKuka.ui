@@ -3006,50 +3006,6 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_19">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>120</y>
-        <width>51</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="mouseTracking">
-       <bool>true</bool>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>images/rotated-symb_obus_abajo26x71.png</normaloff>images/rotated-symb_obus_abajo26x71.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>41</width>
-        <height>111</height>
-       </size>
-      </property>
-      <property name="autoExclusive">
-       <bool>false</bool>
-      </property>
-     </widget>
      <widget class="QPushButton" name="PickBox16_20">
       <property name="enabled">
        <bool>true</bool>
@@ -3780,6 +3736,50 @@
        <string>Reset positions</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="PickBox16_19">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>120</y>
+        <width>51</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="mouseTracking">
+       <bool>true</bool>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/rotated-symb_obus_abajo26x71.png</normaloff>images/rotated-symb_obus_abajo26x71.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>41</width>
+        <height>111</height>
+       </size>
+      </property>
+      <property name="autoExclusive">
+       <bool>false</bool>
+      </property>
+     </widget>
      <zorder>background_plate_pick</zorder>
      <zorder>background_plate</zorder>
      <zorder>MoveToTable_Button</zorder>
@@ -3817,26 +3817,6 @@
      <zorder>Huevera4Obus1Button</zorder>
      <zorder>Huevera2Obus2Button</zorder>
      <zorder>Huevera2Obus1Button</zorder>
-     <zorder>PickBox16_1</zorder>
-     <zorder>PickBox16_15</zorder>
-     <zorder>PickBox16_5</zorder>
-     <zorder>PickBox16_3</zorder>
-     <zorder>PickBox16_4</zorder>
-     <zorder>PickBox16_12</zorder>
-     <zorder>PickBox16_13</zorder>
-     <zorder>PickBox16_11</zorder>
-     <zorder>PickBox16_14</zorder>
-     <zorder>PickBox16_2</zorder>
-     <zorder>PickBox16_6</zorder>
-     <zorder>PickBox16_7</zorder>
-     <zorder>PickBox16_8</zorder>
-     <zorder>PickBox16_9</zorder>
-     <zorder>PickBox16_10</zorder>
-     <zorder>PickBox16_16</zorder>
-     <zorder>PickBox16_17</zorder>
-     <zorder>PickBox16_18</zorder>
-     <zorder>PickBox16_19</zorder>
-     <zorder>PickBox16_20</zorder>
      <zorder>Gotolabel_3</zorder>
      <zorder>PickBox2_4</zorder>
      <zorder>PickBox2_3</zorder>
@@ -3862,6 +3842,26 @@
      <zorder>PickBox4_5</zorder>
      <zorder>PickBox4_2</zorder>
      <zorder>PickBox4_3</zorder>
+     <zorder>PickBox16_14</zorder>
+     <zorder>PickBox16_17</zorder>
+     <zorder>PickBox16_15</zorder>
+     <zorder>PickBox16_9</zorder>
+     <zorder>PickBox16_6</zorder>
+     <zorder>PickBox16_7</zorder>
+     <zorder>PickBox16_5</zorder>
+     <zorder>PickBox16_18</zorder>
+     <zorder>PickBox16_11</zorder>
+     <zorder>PickBox16_13</zorder>
+     <zorder>PickBox16_2</zorder>
+     <zorder>PickBox16_3</zorder>
+     <zorder>PickBox16_8</zorder>
+     <zorder>PickBox16_16</zorder>
+     <zorder>PickBox16_20</zorder>
+     <zorder>PickBox16_4</zorder>
+     <zorder>PickBox16_12</zorder>
+     <zorder>PickBox16_10</zorder>
+     <zorder>PickBox16_1</zorder>
+     <zorder>PickBox16_19</zorder>
     </widget>
     <widget class="QFrame" name="frame_tool_current">
      <property name="geometry">
@@ -4051,7 +4051,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
