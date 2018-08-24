@@ -1208,112 +1208,112 @@ class RqtKuka(Plugin):
         for i in range(1,9):
                 name='Obus_16'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera16Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(9,17):
                 name='Obus_16'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera16Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(1,5):
                 name='Obus_8'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera8Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(5,9):
                 name='Obus_8'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera8Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(1,5):
                 name='Obus_4'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera4Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(1,3):
                 name='Obus_2'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
                         name_method='Huevera2Obus'+str(i)+'Button'
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         ##PICK
         for i in range(1,11):
                 name='Pick_Obus_16'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox16_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(11,21):
                 name='Pick_Obus_16'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox16_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(1,8):
                 name='Pick_Obus_8'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox8_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(8,15):
                 name='Pick_Obus_8'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox8_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(1,6):
                 name='Pick_Obus_4'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox4_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         for i in range(1,5):
                 name='Pick_Obus_2'+str(i)
                 if(globals()[name]==True):
-                        icon=QtGui.QIcon()
-                        icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+                        #icon=QtGui.QIcon()
+                        #icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
                         name_method='PickBox2_'+str(i)
                         test_method=getattr(self._widget, name_method)
                         test_method.removeEventFilter(self)
-                        test_method.setIcon(icon)
+                        #test_method.setIcon(icon)
         
         
 				
@@ -1517,7 +1517,6 @@ class RqtKuka(Plugin):
                     self._widget.mode_label.setText("AUTOMATIC")
                     self.desactivate_buttons()
                     first_time_moving_kuka = False
-            #selt._widget.mode_label.setStyleSheet(\ncolor: rgb(255, 0, 0))
                             
         else:
             KUKA_AUT=False
@@ -1633,16 +1632,17 @@ class RqtKuka(Plugin):
     
     def press_move_to_rotation_table_button(self):
 		ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
-		global KUKA_AUT
 		if ret == QMessageBox.Ok:
 			try:
 				placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
 				ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-				KUKA_AUT=True
+				#KUKA_AUT=True
+                                self.sleep_loop(2)
 				while KUKA_AUT: self.sleep_loop(0.3)
 				placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
 				ret=placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, H2O1_Pose_z, table_pose_a, H2O1_Pose_b, H2O1_Pose_c)
-				KUKA_AUT=True
+				#KUKA_AUT=True
+                                self.sleep_loop(2)
 				while KUKA_AUT: self.sleep_loop(0.3)
 				placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
 				ret = placed_abs_service(table_pose_x, table_pose_y, table_pose_z, table_pose_a, table_pose_b, table_pose_c)
@@ -1650,7 +1650,7 @@ class RqtKuka(Plugin):
 				print "Service call failed: %s"%e
 #Pick buttons obus 2
     def press_pick_obus2_1_button(self):
-        global Pick_Obus_21, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_21, pos_z_kuka, pos_a_kuka, origin_pick # KUKA_AUT,
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_21=True
@@ -1662,7 +1662,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -1671,7 +1672,7 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus2_2_button(self):
-        global Pick_Obus_22, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_22, pos_z_kuka, pos_a_kuka, origin_pick # KUKA_AUT,
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_22=True
@@ -1683,7 +1684,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -1704,7 +1706,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -1725,7 +1728,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -1747,7 +1751,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -1768,7 +1773,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -1789,7 +1795,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -1810,7 +1817,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -1831,7 +1839,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -1853,7 +1862,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -1874,7 +1884,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -1895,7 +1906,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -1916,7 +1928,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -1937,7 +1950,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -1958,7 +1972,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -1979,7 +1994,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2000,7 +2016,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2021,7 +2038,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2042,7 +2060,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2063,7 +2082,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2084,7 +2104,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2105,7 +2126,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2126,7 +2148,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2148,7 +2171,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2190,7 +2214,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2211,7 +2236,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2232,7 +2258,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2253,7 +2280,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2274,7 +2302,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2295,7 +2324,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2316,7 +2346,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2337,7 +2368,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2358,7 +2390,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2379,7 +2412,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2400,7 +2434,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2421,7 +2456,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2442,7 +2478,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick1_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick1_A1_A6_service(pick_A1, pick_left_A6)
@@ -2463,7 +2500,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2505,7 +2543,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2526,7 +2565,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2547,7 +2587,8 @@ class RqtKuka(Plugin):
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 pick_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=pick_A1_A6_service(pick_A1, pick_right_A6)
@@ -2594,8 +2635,8 @@ class RqtKuka(Plugin):
                     #y volvera a poner el color original
                     icon = QtGui.QIcon()
                     icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
-                    self._widget.Huevera2Obus1Button.setIcon(icon)
-                    #self._widget.Huevera2Obus1Button.setIcon(QtGui.QIcon(PATH+"resource/images/symb_obus_abajo41x111.png", QtGui.QIcon.Disabled))
+                    #self._widget.Huevera2Obus1Button.setIcon(icon)
+                    
     #obus2
     def press_obus2_2_button(self):
         global Obus_22
@@ -2655,15 +2696,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H4O1_Pose_x, H4O1_Pose_y, H4O1_Pose_z, H4O1_Pose_a, H4O1_Pose_b, H4O1_Pose_c)
                         #KUKA_AUT=True
+                        #self.sleep_loop(2)
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -2692,11 +2736,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H4O2_Pose_x, H4O2_Pose_y, H4O2_Pose_z, H4O2_Pose_a, H4O2_Pose_b, H4O2_Pose_c)
@@ -2729,11 +2775,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H4O3_Pose_x, H4O3_Pose_y, H4O3_Pose_z, H4O3_Pose_a, H4O3_Pose_b, H4O3_Pose_c)
@@ -2766,11 +2814,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H4O4_Pose_x, H4O4_Pose_y, H4O4_Pose_z, H4O4_Pose_a, H4O4_Pose_b, H4O4_Pose_c)
@@ -2804,11 +2854,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O1_Pose_x, H8O1_Pose_y, H8O1_Pose_z, H8O1_Pose_a, H8O1_Pose_b, H8O1_Pose_c)
@@ -2841,11 +2893,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O2_Pose_x, H8O2_Pose_y, H8O2_Pose_z, H8O2_Pose_a, H8O2_Pose_b, H8O2_Pose_c)
@@ -2878,11 +2932,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O3_Pose_x, H8O3_Pose_y, H8O3_Pose_z, H8O3_Pose_a, H8O3_Pose_b, H8O3_Pose_c)
@@ -2915,11 +2971,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O4_Pose_x, H8O4_Pose_y, H8O4_Pose_z, H8O4_Pose_a, H8O4_Pose_b, H8O4_Pose_c)
@@ -2952,11 +3010,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O5_Pose_x, H8O5_Pose_y, H8O5_Pose_z, H8O5_Pose_a, H8O5_Pose_b, H8O5_Pose_c)
@@ -2989,11 +3049,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O6_Pose_x, H8O6_Pose_y, H8O6_Pose_z, H8O6_Pose_a, H8O6_Pose_b, H8O6_Pose_c)
@@ -3026,11 +3088,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O7_Pose_x, H8O7_Pose_y, H8O7_Pose_z, H8O7_Pose_a, H8O7_Pose_b, H8O7_Pose_c)
@@ -3063,11 +3127,13 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O8_Pose_x, H8O8_Pose_y, H8O8_Pose_z, H8O8_Pose_a, H8O8_Pose_b, H8O8_Pose_c)
@@ -3101,15 +3167,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
                         ret2 = placed_abs_service(H16O1_Pose_x, H16O1_Pose_y, H16O1_Pose_z, H16O1_Pose_a, H16O1_Pose_b, H16O1_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3139,15 +3208,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O2_Pose_x, H16O2_Pose_y, H16O2_Pose_z, H16O2_Pose_a, H16O2_Pose_b, H16O2_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3176,15 +3248,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O3_Pose_x, H16O3_Pose_y, H16O3_Pose_z, H16O3_Pose_a, H16O3_Pose_b, H16O3_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3213,15 +3288,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O4_Pose_x, H16O4_Pose_y, H16O4_Pose_z, H16O4_Pose_a, H16O4_Pose_b, H16O4_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3250,15 +3328,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O5_Pose_x, H16O5_Pose_y, H16O5_Pose_z, H16O5_Pose_a, H16O5_Pose_b, H16O5_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3287,15 +3368,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O6_Pose_x, H16O6_Pose_y, H16O6_Pose_z, H16O6_Pose_a, H16O6_Pose_b, H16O6_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3324,15 +3408,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O7_Pose_x, H16O7_Pose_y, H16O7_Pose_z, H16O7_Pose_a, H16O7_Pose_b, H16O7_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3361,15 +3448,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O8_Pose_x, H16O8_Pose_y, H16O8_Pose_z, H16O8_Pose_a, H16O8_Pose_b, H16O8_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3398,15 +3488,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O9_Pose_x, H16O9_Pose_y, H16O9_Pose_z, H16O9_Pose_a, H16O9_Pose_b, H16O9_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3435,15 +3528,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O10_Pose_x, H16O10_Pose_y, H16O10_Pose_z, H16O10_Pose_a, H16O10_Pose_b, H16O10_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3472,15 +3568,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O11_Pose_x, H16O11_Pose_y, H16O11_Pose_z, H16O11_Pose_a, H16O11_Pose_b, H16O11_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3509,15 +3608,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_left_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O12_Pose_x, H16O12_Pose_y, H16O12_Pose_z, H16O12_Pose_a, H16O12_Pose_b, H16O12_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3546,15 +3648,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O13_Pose_x, H16O13_Pose_y, H16O13_Pose_z, H16O13_Pose_a, H16O13_Pose_b, H16O13_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3583,15 +3688,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O14_Pose_x, H16O14_Pose_y, H16O14_Pose_z, H16O14_Pose_a, H16O14_Pose_b, H16O14_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3620,15 +3728,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O15_Pose_x, H16O15_Pose_y, H16O15_Pose_z, H16O15_Pose_a, H16O15_Pose_b, H16O15_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3657,15 +3768,18 @@ class RqtKuka(Plugin):
                     try:
                         placed_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                         ret_rel=placed_rel_service(0, 0, pose_z_safe-pos_z_kuka, 0, 0, 0)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         place_axes_service = rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                         ret = place_axes_service(place_A1, place_right_A6)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         ret = placed_abs_service(H16O16_Pose_x, H16O16_Pose_y, H16O16_Pose_z, H16O16_Pose_a, H16O16_Pose_b, H16O16_Pose_c)
-                        KUKA_AUT=True
+                        #KUKA_AUT=True
+                        self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
@@ -3831,11 +3945,13 @@ class RqtKuka(Plugin):
             try:
                 homming_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=homming_rel_service(0, 0,pose_z_safe-pos_z_kuka , 0, 0, 0)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 home_A1_A6_service=rospy.ServiceProxy(srv_move_A1_A6, set_A1_A6)
                 ret=home_A1_A6_service(0.0, 177)
-                KUKA_AUT=True
+                #KUKA_AUT=True
+                self.sleep_loop(2)
                 while KUKA_AUT: self.sleep_loop(0.3)
                 placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                 ret = placed_abs_service(table_pose_x, table_pose_y, table_pose_z, table_pose_a, table_pose_b, table_pose_c)
