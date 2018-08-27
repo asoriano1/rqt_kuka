@@ -631,8 +631,8 @@ class RqtKuka(Plugin):
         self._widget.PickBox16_20.installEventFilter(self)
         ##obuses buttons PLACE
         #Huevera_2
-        h2o1posex=80
-        h2o1posey=600
+        h2o1posex=70
+        h2o1posey=560
         #obus1     
         self._widget.Huevera2Obus1Button.setGeometry(h2o1posex,h2o1posey,111,41)
         self._widget.Huevera2Obus1Button.clicked.connect(self.press_obus2_1_button)
@@ -653,8 +653,8 @@ class RqtKuka(Plugin):
         self._widget.Huevera2Obus2Button.installEventFilter(self)        
         
         #Huevera_4
-        h4o1posex=70
-        h4o1posey=640
+        h4o1posex=60
+        h4o1posey=600
         #obus1
         self._widget.Huevera4Obus1Button.setGeometry(h4o1posex,h4o1posey,102,37)
         self._widget.Huevera4Obus1Button.clicked.connect(self.press_obus4_1_button)
@@ -693,8 +693,8 @@ class RqtKuka(Plugin):
         self._widget.Huevera4Obus4Button.installEventFilter(self)
 
         #Huevera_8
-        h8o1posex=70
-        h8o1posey=650
+        h8o1posex=60
+        h8o1posey=610
         #obus1
         self._widget.Huevera8Obus1Button.setGeometry(h8o1posex,h8o1posey,71,26)
         self._widget.Huevera8Obus1Button.clicked.connect(self.press_obus8_1_button)
@@ -769,8 +769,8 @@ class RqtKuka(Plugin):
         self._widget.Huevera8Obus8Button.installEventFilter(self)
         
         #huevera16
-        h16o1posex=70
-        h16o1posey=650
+        h16o1posex=60
+        h16o1posey=610
         #obus1
         self._widget.Huevera16Obus1Button.setGeometry(h16o1posex,h16o1posey,51,19)
         self._widget.Huevera16Obus1Button.clicked.connect(self.press_obus16_1_button)
@@ -1511,15 +1511,17 @@ class RqtKuka(Plugin):
     def callback_moving(self, data):
         global KUKA_AUT, first_time_moving_kuka
         #print 'CB:moving_received:',data.data
-        if data.data == True:
-            KUKA_AUT=True
+        if data.data == True :
+            if not KUKA_AUT:
+                KUKA_AUT=True
             if first_time_moving_kuka:
                     self._widget.mode_label.setText("AUTOMATIC")
                     self.desactivate_buttons()
                     first_time_moving_kuka = False
                             
         else:
-            KUKA_AUT=False
+            if KUKA_AUT:    
+                KUKA_AUT=False
             if first_time_moving_kuka==False:
                 self._widget.mode_label.setText("MANUAL")
                 self.activate_buttons()
@@ -1716,7 +1718,7 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus2_4_button(self):
-        global Pick_Obus_24, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_24, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_24=True
@@ -1739,7 +1741,7 @@ class RqtKuka(Plugin):
                 print "Service call failed: %s"%e
 #Pick buttons obus 4
     def press_pick_obus4_1_button(self):
-        global Pick_Obus_41, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_41, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_41=True
@@ -1761,7 +1763,7 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus4_2_button(self):
-        global Pick_Obus_42, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_42, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_42=True
@@ -1783,7 +1785,7 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus4_3_button(self):
-        global Pick_Obus_43, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_43, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_43=True
@@ -1805,7 +1807,7 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus4_4_button(self):
-        global Pick_Obus_44, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_44, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_44=True
@@ -1827,7 +1829,7 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus4_5_button(self):
-        global Pick_Obus_45, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_45, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_45=True
@@ -1850,13 +1852,13 @@ class RqtKuka(Plugin):
                 print "Service call failed: %s"%e
 #Pick buttons obus 8
     def press_pick_obus8_1_button(self):
-        global Pick_Obus_81, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_81, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_81=True
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_1.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -1872,13 +1874,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_2_button(self):
-        global Pick_Obus_82, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_82, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_82=True
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_2.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -1894,13 +1896,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_3_button(self):
-        global Pick_Obus_83, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_83, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_83=True
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_3.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -1916,7 +1918,7 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_4_button(self):
-        global Pick_Obus_84, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_84, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_84=True
@@ -1938,13 +1940,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_5_button(self):
-        global Pick_Obus_85, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_85, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_85=True
             origin_pick=2   
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_5.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -1960,13 +1962,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_6_button(self):
-        global Pick_Obus_86, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_86, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             Pick_Obus_86=True
             origin_pick=2 
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_6.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -1982,13 +1984,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_7_button(self):
-        global Pick_Obus_87, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_87, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             Pick_Obus_87=True
             origin_pick=2 
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_7.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2004,13 +2006,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_8_button(self):
-        global Pick_Obus_88, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_88, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_88=True
             origin_pick=3
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_8.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2026,13 +2028,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_9_button(self):
-        global Pick_Obus_89, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_89, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_89=True
             origin_pick=3
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_9.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2048,13 +2050,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_10_button(self):
-        global Pick_Obus_810, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_810, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_810=True
             origin_pick=3
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_10.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2070,13 +2072,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_11_button(self):
-        global Pick_Obus_811, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_811, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
             Pick_Obus_811=True
             origin_pick=3
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_11.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2092,13 +2094,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_12_button(self):
-        global Pick_Obus_812, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_812, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             Pick_Obus_812=True
             origin_pick=4      
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_12.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2114,13 +2116,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_13_button(self):
-        global Pick_Obus_813, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_813, pos_z_kuka, pos_a_kuka, origin_pick#, KUKA_AUT
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             Pick_Obus_813=True
             origin_pick=4   
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_13.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2136,13 +2138,13 @@ class RqtKuka(Plugin):
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
     def press_pick_obus8_14_button(self):
-        global Pick_Obus_814, KUKA_AUT, pos_z_kuka, pos_a_kuka, origin_pick
+        global Pick_Obus_814, pos_z_kuka, pos_a_kuka, origin_pick
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok: 
             origin_pick=4 
             Pick_Obus_814=True     
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
             self._widget.PickBox8_14.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -4064,7 +4066,7 @@ class RqtKuka(Plugin):
 
             pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_16.png")
             self._widget.background_plate.setPixmap(pixmap)
-            pixmap_pick = QtGui.QPixmap(PATH+"resource/images/BoxPick.png")
+            pixmap_pick = QtGui.QPixmap(PATH+"resource/images/BoxPick_3.png")
             self._widget.background_plate_pick.setPixmap(pixmap_pick)
             self._widget.Huevera16Obus1Button.show()
             self._widget.Huevera16Obus2Button.show()
@@ -4134,7 +4136,7 @@ class RqtKuka(Plugin):
 
             pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_8.png")
             self._widget.background_plate.setPixmap(pixmap)
-            pixmap_pick = QtGui.QPixmap(PATH+"resource/images/BoxPick.png")
+            pixmap_pick = QtGui.QPixmap(PATH+"resource/images/BoxPick_3.png")
             self._widget.background_plate_pick.setPixmap(pixmap_pick)
             self._widget.Huevera2Obus1Button.hide()
             self._widget.Huevera2Obus2Button.hide()
@@ -4203,7 +4205,7 @@ class RqtKuka(Plugin):
 
             pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_4.png")
             self._widget.background_plate.setPixmap(pixmap)
-            pixmap_pick = QtGui.QPixmap(PATH+"resource/images/BoxPick.png")
+            pixmap_pick = QtGui.QPixmap(PATH+"resource/images/BoxPick_3.png")
             self._widget.background_plate_pick.setPixmap(pixmap_pick)
             self._widget.Huevera4Obus1Button.show()
             self._widget.Huevera4Obus2Button.show()
@@ -4272,7 +4274,7 @@ class RqtKuka(Plugin):
             
             pixmap = QtGui.QPixmap(PATH+"resource/images/rotated-fondo_huevera_2.png")
             self._widget.background_plate.setPixmap(pixmap)
-            pixmap_pick = QtGui.QPixmap(PATH+"resource/images/BoxPick.png")
+            pixmap_pick = QtGui.QPixmap(PATH+"resource/images/BoxPick_3.png")
             self._widget.background_plate_pick.setPixmap(pixmap_pick)
             self._widget.Huevera2Obus1Button.show()
             self._widget.Huevera2Obus2Button.show()
