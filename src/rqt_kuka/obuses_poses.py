@@ -6,7 +6,7 @@ pose_c = 179
 pose_a_left = -179
 pose_a_right = 1
 # z is always safe
-pose_z_safe = 1535.39
+pose_z_safe = 1550 #1535.39
 
 
 
@@ -252,15 +252,15 @@ H4O4_Pose_c = pose_c
 
 #huevera 2
 #obus2
-H2O2_Pose_x = 1630.93
-H2O2_Pose_y = 47.44
+H2O2_Pose_x = 82.23
+H2O2_Pose_y = -1600
 H2O2_Pose_z = pose_z_safe
 H2O2_Pose_a = pose_a_right
 H2O2_Pose_b = pose_b
 H2O2_Pose_c = pose_c
 #obus1
-H2O1_Pose_x = 1716.63
-H2O1_Pose_y = -203
+H2O1_Pose_x = -194.23
+H2O1_Pose_y = -1590.28
 H2O1_Pose_z = pose_z_safe
 H2O1_Pose_a = pose_a_left
 H2O1_Pose_b = pose_b

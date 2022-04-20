@@ -2629,9 +2629,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, H2O1_Pose_z, H2O1_Pose_a, H2O1_Pose_b, H2O1_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, H2O1_Pose_z, H2O1_Pose_a, H2O1_Pose_b, H2O1_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -2667,9 +2667,9 @@ class RqtKuka(Plugin):
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
                         placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        #ret = placed_abs_service(H2O2_Pose_x, H2O2_Pose_y, H2O2_Pose_z, H2O2_Pose_a, H2O2_Pose_b, H2O2_Pose_c)
-                        #KUKA_AUT=True
-                        #while KUKA_AUT: self.sleep_loop(0.3)
+                        ret = placed_abs_service(H2O2_Pose_x, H2O2_Pose_y, H2O2_Pose_z, H2O2_Pose_a, H2O2_Pose_b, H2O2_Pose_c)
+                        KUKA_AUT=True
+                        while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     #y volvera a poner el color original
@@ -3805,7 +3805,7 @@ class RqtKuka(Plugin):
                 ret = homing_service()
                 TOOL_HOMED=True 
                 #weight_empty=weight_read
-                gripper_move_service(0.02,0,0,-0.15)
+                #gripper_move_service(0.02,0,0,-0.15)
                 if ret == True:
                     TOOL_HOMED=True                 
             except rospy.ServiceException, e:
@@ -4350,24 +4350,30 @@ class RqtKuka(Plugin):
                 print angle_tool
                 gripper_move_service(x_tool,0,0,angle_tool-0.01)
                 self.sleep_loop(0.15)
-                if(tool_current>current_limit_picked):
+                if(tool_current>current_limit_cont):
                         press_counter=press_counter+1
                 else:
-                        pres_counter=0
+                        press_counter=0
                 print abs(x_tool-old_pos_x)
                 print 'current:'
                 print tool_current
+                print 'counter:'
+                print press_counter
                 
         press_counter=0
         while press_counter<5 :
                 print press_counter
                 gripper_move_service(x_tool+0.02,0,0,angle_tool)
                 self.sleep_loop(0.15)
-                if(tool_current>current_limit_picked or abs(x_tool-old_pos_x)<0.002):
+                if(tool_current>current_limit_cont or abs(x_tool-old_pos_x)<0.002):
                         press_counter=press_counter+1
                 else:
-                       pres_counter=0
+                       press_counter=0
                        old_pos_x=x_tool
+                print 'current:'
+                print tool_current
+                print 'counter:'
+                print press_counter
         self.sleep_loop(0.5)
         self.activate_buttons()
         
