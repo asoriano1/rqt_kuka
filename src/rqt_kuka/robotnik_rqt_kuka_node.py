@@ -292,8 +292,8 @@ class RqtKuka(Plugin):
         self._widget.Tare_Button.pressed.connect(self.press_tare_button)
         self._widget.Tare_Reset_Button.pressed.connect(self.press_tare_reset_button)
         self._widget.Reset_Ext_Button.pressed.connect(self.press_reset_external_pc_button)
-        self._widget.Run_Program_Button.pressed.connect(self.press_run_program_button)
-        self._widget.Run_Program_Button.hide()
+        self._widget.Reset_Robot_Button.pressed.connect(self.press_reset_robot_button)
+        self._widget.Reset_Robot_Button.hide()
         self._widget.MoveToTable_Button.pressed.connect(self.press_homming_button)#self.press_move_to_rotation_table_button)
         
         
@@ -4403,7 +4403,7 @@ class RqtKuka(Plugin):
         x_tool = data.position[2]
         angle_tool = data.position[3]
     
-    def press_run_program_button(self):
+    def press_reset_robot_button(self):
         command_string = "rosnode kill /kuka_pad/joy; sleep 1; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"
         os.system(command_string)
         
