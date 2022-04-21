@@ -293,7 +293,7 @@ class RqtKuka(Plugin):
         self._widget.Tare_Reset_Button.pressed.connect(self.press_tare_reset_button)
         self._widget.Reset_Ext_Button.pressed.connect(self.press_reset_external_pc_button)
         self._widget.Reset_Robot_Button.pressed.connect(self.press_reset_robot_button)
-        self._widget.Reset_Robot_Button.hide()
+        #self._widget.Reset_Robot_Button.hide()
         self._widget.MoveToTable_Button.pressed.connect(self.press_homming_button)#self.press_move_to_rotation_table_button)
         
         
