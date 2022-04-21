@@ -341,7 +341,7 @@
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>30</y>
+        <y>40</y>
         <width>120</width>
         <height>22</height>
        </rect>
@@ -354,7 +354,7 @@
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>10</y>
+        <y>0</y>
         <width>120</width>
         <height>22</height>
        </rect>
@@ -413,6 +413,48 @@
       <property name="text">
        <string>Select obus calibre:</string>
       </property>
+     </widget>
+     <widget class="QLabel" name="joy_label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>131</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Joystick Selection:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="joy_comboBox">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>7</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="currentText">
+       <string>PS4</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="maxVisibleItems">
+       <number>2</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>PS4</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>ITOWA</string>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QFrame" name="frame_move">

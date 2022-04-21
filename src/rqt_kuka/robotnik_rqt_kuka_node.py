@@ -266,12 +266,18 @@ class RqtKuka(Plugin):
         loadUi(ui_file, self._widget)
         # Give QObjects reasonable names
         self._widget.setObjectName('RqtKukaUi')
-        #keyboard management
         
+        #Joysticks management with muxiplexor        
+        command_string = "rosrun topic_tools mux cartesian_move ps4_joy ps4_itowa mux:=mux_joy &"
+        os.system(command_string)
+        #PS4 by default
+        command_string = "rosrun topic_tools mux_select mux_joy ps4_joy"
+        os.system(command_string)
         
         # add signals/slots
         #select obus calibre
         self._widget.calibre_comboBox.currentIndexChanged.connect(self.calibre_selected)
+        self._widget.joy_comboBox.currentIndexChanged.connect(self.joy_selected)
         #self._widget.calibre_comboBox.highlighted.connect(self.arm_activated)
 
         #Buttons
@@ -1121,6 +1127,7 @@ class RqtKuka(Plugin):
         self._widget.resetPositions_Button.setEnabled(True)
         self._widget.resetPositions_Button_pick.setEnabled(True)
         self._widget.calibre_comboBox.setEnabled(True)
+        self._widget.joy_comboBox.setEnabled(True)
         for i in range(1, 21):
 				name_method='PickBox16'+'_'+str(i)
 				test_method=getattr(self._widget, name_method)
@@ -1454,7 +1461,7 @@ class RqtKuka(Plugin):
 		Pick_Obus_1614=False
 		Pick_Obus_1615=False
 		Pick_Obus_1616=False
-                Pick_Obus_1617=False
+		Pick_Obus_1617=False
 		Pick_Obus_1618=False
 		Pick_Obus_1619=False
 		Pick_Obus_1620=False
@@ -3984,6 +3991,19 @@ class RqtKuka(Plugin):
     def press_tare_reset_button(self):
         tare_service = rospy.ServiceProxy(srv_tare_gauges, SetBool)
         ret = tare_service(False)
+
+    #################################################JOY SELECTION
+    def joy_selected(self, index):
+        if index == 0:
+            print 'PS4 selected'
+            command_string = "rosrun topic_tools mux_select mux_joy ps4_joy"
+            os.system(command_string)
+        elif index == 1:            
+            print 'ITOWA selected'
+            command_string = "rosrun topic_tools mux_select mux_joy itowa_joy"
+            os.system(command_string)
+
+    
     #################################################CALIBRE SELECTION
     def calibre_selected(self, index):
         global finger_type, weight_expected_min, weight_expected_max, current_limit_picked
