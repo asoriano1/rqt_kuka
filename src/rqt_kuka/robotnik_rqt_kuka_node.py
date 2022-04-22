@@ -267,12 +267,20 @@ class RqtKuka(Plugin):
         # Give QObjects reasonable names
         self._widget.setObjectName('RqtKukaUi')
         
+        print '__INIT__'        
         #Joysticks management with multiplexor        
         command_string = "rosrun topic_tools mux /kuka_pad/joy /kuka_pad/ps4_joy /kuka_pad/itowa_joy mux:=mux_joy __name:=joy_mux_node &"
         os.system(command_string)
         #PS4 by default
         command_string = "rosrun topic_tools mux_select mux_joy /kuka_pad/ps4_joy"
         os.system(command_string)
+        
+        ###launch MAIN nodes
+        command_string = "rosnode kill /kuka_pad/ps4_joystick; sleep 1; rosnode kill /kuka_pad/itowa_safe_joystick; sleep 1;rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"        
+        ###command_string = "rosnode kill /kuka_pad/ps4_joystick; sleep 1; rosnode kill /kuka_pad/itowa_safe_joystick; sleep 1;rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1;"        
+        os.system(command_string)
+            
+            
         
         # add signals/slots
         #select obus calibre
@@ -4406,10 +4414,12 @@ class RqtKuka(Plugin):
         angle_tool = data.position[3]
     
     def press_reset_robot_button(self):
-        command_string = "rosnode kill /kuka_pad/joy; sleep 1; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"
+        #command_string = "rosnode kill /kuka_pad/ps4_joystick; sleep 1; rosnode kill /kuka_pad/itowa_safe_joystick; sleep 1; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"
+        command_string = "rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; ROS_NAMESPACE=kuka_robot roslaunch kuka_rsi_cartesian_hw_interface test_hardware_interface.launch &"
         os.system(command_string)
         
     def shutdown_plugin(self):
+        print "Program finishing..."
         # TODO unregister all publishers here
         print 'closing all...'
         self.sub_robot_moving.unregister()
@@ -4418,7 +4428,12 @@ class RqtKuka(Plugin):
         self.sub_tool_current.unregister()
         self.sub_tool_force.unregister()
         self.sub_tool_status.unregister()
+        self.sub_tool_force.unregister()
+        self.sub_tool_status.unregister()
         self.sub_tool_state.unregister()
+        #Stop nodes
+        command_string = "rosnode kill /kuka_pad/itowa_safe_joystick; rosnode kill /kuka_pad/ps4_joystick; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface"        
+        os.system(command_string)
         pass
     def sleep_loop(self,delay):
         loop = QtCore.QEventLoop()
