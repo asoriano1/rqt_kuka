@@ -288,6 +288,8 @@ class RqtKuka(Plugin):
         self._widget.joy_comboBox.currentIndexChanged.connect(self.joy_selected)
         #self._widget.calibre_comboBox.highlighted.connect(self.arm_activated)
 
+        print "CUANTAS VECES"
+
         #Buttons
         #self._widget.Home_Button.pressed.connect(self.press_homming_button)
         #self._widget.Pick_Left_Button.pressed.connect(self.press_pick_left_button)
@@ -4419,10 +4421,12 @@ class RqtKuka(Plugin):
     def shutdown_plugin(self):
         print "Program finishing..."
         # TODO unregister all publishers here
+        print 'closing all...'
         self.sub_robot_moving.unregister()
         self.sub_robot_pose.unregister()
         self.sub_tool_weight.unregister()
         self.sub_tool_current.unregister()
+        self.sub_tool_force.unregister()
         self.sub_tool_status.unregister()
         self.sub_tool_force.unregister()
         self.sub_tool_status.unregister()
@@ -4430,7 +4434,6 @@ class RqtKuka(Plugin):
         #Stop nodes
         command_string = "rosnode kill /kuka_pad/itowa_safe_joystick; rosnode kill /kuka_pad/ps4_joystick; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface"        
         os.system(command_string)
-        
         pass
     def sleep_loop(self,delay):
         loop = QtCore.QEventLoop()
