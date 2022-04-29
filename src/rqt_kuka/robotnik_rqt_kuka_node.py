@@ -46,12 +46,12 @@ STATE_HOMING=6
 PATH="/home/angel/workspaces/rqt_kuka/src/rqt_kuka/"
 #images
 #[0] original - blanca   [1] resaltada - verde    [2] seleccionada - roja
-imgObus16izq = [PATH+'resource/images/rotated-symb_obus_arriba19x51.png', PATH+'resource/images/rotated-symb_obus_arriba19x51P.png', PATH+'resource/images/rotated-symb_obus_arriba19x51PP.png']
-imgObus16der = [PATH+'resource/images/rotated-symb_obus_abajo19x51.png', PATH+'resource/images/rotated-symb_obus_abajo19x51P.png', PATH+'resource/images/rotated-symb_obus_abajo19x51PP.png']
-imgObus8izq = [PATH+'resource/images/rotated-symb_obus_arriba26x71.png', PATH+'resource/images/rotated-symb_obus_arriba26x71P.png', PATH+'resource/images/rotated-symb_obus_arriba26x71PP.png']
-imgObus8der = [PATH+'resource/images/rotated-symb_obus_abajo26x71.png', PATH+'resource/images/rotated-symb_obus_abajo26x71P.png', PATH+'resource/images/rotated-symb_obus_abajo26x71PP.png']
-imgObus4 = [PATH+'resource/images/rotated-symb_obus_abajo37x101.png', PATH+'resource/images/rotated-symb_obus_abajo37x101P.png', PATH+'resource/images/rotated-symb_obus_abajo37x101PP.png']
-imgObus2 = [PATH+'resource/images/rotated-symb_obus_abajo41x111.png', PATH+'resource/images/rotated-symb_obus_abajo41x111P.png', PATH+'resource/images/rotated-symb_obus_abajo41x111PP.png']
+imgObus16izq = [PATH+'resource/images/obus_izq_19x51_0.png', PATH+'resource/images/obus_izq_19x51_1.png', PATH+'resource/images/obus_izq_19x51_2.png']
+imgObus16der = [PATH+'resource/images/obus_der_19x51_0.png', PATH+'resource/images/obus_der_19x51_1.png', PATH+'resource/images/obus_der_19x51_2.png']
+imgObus8izq = [PATH+'resource/images/obus_izq_26x71_0.png', PATH+'resource/images/obus_izq_26x71_1.png', PATH+'resource/images/obus_izq_26x71_2.png']
+imgObus8der = [PATH+'resource/images/obus_der_26x71_0.png', PATH+'resource/images/obus_der_26x71_1.png', PATH+'resource/images/obus_der_26x71_2.png']
+imgObus4 = [PATH+'resource/images/obus_der_37x101_0.png', PATH+'resource/images/obus_der_37x101_1.png', PATH+'resource/images/obus_der_37x101_2.png']
+imgObus2 = [PATH+'resource/images/obus_der_41x111_0.png', PATH+'resource/images/obus_der_41x111_1.png', PATH+'resource/images/obus_der_41x111_2.png']
 
 
 TOOL_HOMED=False
