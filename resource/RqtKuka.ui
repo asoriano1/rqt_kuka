@@ -516,7 +516,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera8Obus8Button">
+     <widget class="QPushButton" name="PlaceObus8_8">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -560,7 +560,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus16Button">
+     <widget class="QPushButton" name="PlaceObus16_16">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -604,7 +604,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera4Obus2Button">
+     <widget class="QPushButton" name="PlaceObus4_2">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -690,7 +690,7 @@
        <string>Move robot to:</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="resetPositions_Button">
+     <widget class="QPushButton" name="resetPositions_Button_place">
       <property name="geometry">
        <rect>
         <x>110</x>
@@ -703,7 +703,7 @@
        <string>Reset positions</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus15Button">
+     <widget class="QPushButton" name="PlaceObus16_15">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -747,7 +747,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus14Button">
+     <widget class="QPushButton" name="PlaceObus16_14">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -791,7 +791,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus13Button">
+     <widget class="QPushButton" name="PlaceObus16_13">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -835,7 +835,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus12Button">
+     <widget class="QPushButton" name="PlaceObus16_12">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -879,7 +879,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus11Button">
+     <widget class="QPushButton" name="PlaceObus16_11">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -923,7 +923,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus10Button">
+     <widget class="QPushButton" name="PlaceObus16_10">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -967,7 +967,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus9Button">
+     <widget class="QPushButton" name="PlaceObus16_9">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1011,7 +1011,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus8Button">
+     <widget class="QPushButton" name="PlaceObus16_8">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1055,7 +1055,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus7Button">
+     <widget class="QPushButton" name="PlaceObus16_7">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1099,7 +1099,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus6Button">
+     <widget class="QPushButton" name="PlaceObus16_6">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1143,7 +1143,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus3Button">
+     <widget class="QPushButton" name="PlaceObus16_3">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1187,7 +1187,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus4Button">
+     <widget class="QPushButton" name="PlaceObus16_4">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1231,7 +1231,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus5Button">
+     <widget class="QPushButton" name="PlaceObus16_5">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1275,7 +1275,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus2Button">
+     <widget class="QPushButton" name="PlaceObus16_2">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1319,7 +1319,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera16Obus1Button">
+     <widget class="QPushButton" name="PlaceObus16_1">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1363,7 +1363,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera4Obus3Button">
+     <widget class="QPushButton" name="PlaceObus4_3">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1407,7 +1407,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera8Obus7Button">
+     <widget class="QPushButton" name="PlaceObus8_7">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1451,7 +1451,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera8Obus6Button">
+     <widget class="QPushButton" name="PlaceObus8_6">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1495,7 +1495,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera8Obus5Button">
+     <widget class="QPushButton" name="PlaceObus8_5">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1539,7 +1539,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera8Obus4Button">
+     <widget class="QPushButton" name="PlaceObus8_4">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1583,7 +1583,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera8Obus3Button">
+     <widget class="QPushButton" name="PlaceObus8_3">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1627,7 +1627,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera8Obus2Button">
+     <widget class="QPushButton" name="PlaceObus8_2">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1671,7 +1671,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera8Obus1Button">
+     <widget class="QPushButton" name="PlaceObus8_1">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1715,7 +1715,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera4Obus4Button">
+     <widget class="QPushButton" name="PlaceObus4_4">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1759,7 +1759,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera4Obus1Button">
+     <widget class="QPushButton" name="PlaceObus4_1">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1803,7 +1803,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera2Obus2Button">
+     <widget class="QPushButton" name="PlaceObus2_2">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1847,7 +1847,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="Huevera2Obus1Button">
+     <widget class="QPushButton" name="PlaceObus2_1">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1891,7 +1891,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_11">
+     <widget class="QPushButton" name="PickObus16_11">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1935,7 +1935,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_12">
+     <widget class="QPushButton" name="PickObus16_12">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -1979,7 +1979,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_13">
+     <widget class="QPushButton" name="PickObus16_13">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2023,7 +2023,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_14">
+     <widget class="QPushButton" name="PickObus16_14">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2067,7 +2067,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_15">
+     <widget class="QPushButton" name="PickObus16_15">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2111,7 +2111,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_5">
+     <widget class="QPushButton" name="PickObus16_5">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2155,7 +2155,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_4">
+     <widget class="QPushButton" name="PickObus16_4">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2199,7 +2199,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_3">
+     <widget class="QPushButton" name="PickObus16_3">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2243,7 +2243,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_2">
+     <widget class="QPushButton" name="PickObus16_2">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2287,7 +2287,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_1">
+     <widget class="QPushButton" name="PickObus16_1">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2331,7 +2331,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_4">
+     <widget class="QPushButton" name="PickObus8_4">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2375,7 +2375,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_3">
+     <widget class="QPushButton" name="PickObus8_3">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2419,7 +2419,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_2">
+     <widget class="QPushButton" name="PickObus8_2">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2463,7 +2463,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_1">
+     <widget class="QPushButton" name="PickObus8_1">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2507,7 +2507,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_11">
+     <widget class="QPushButton" name="PickObus8_11">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2551,7 +2551,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_10">
+     <widget class="QPushButton" name="PickObus8_10">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2595,7 +2595,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_9">
+     <widget class="QPushButton" name="PickObus8_9">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2639,7 +2639,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_8">
+     <widget class="QPushButton" name="PickObus8_8">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2683,7 +2683,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_6">
+     <widget class="QPushButton" name="PickObus16_6">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2727,7 +2727,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_7">
+     <widget class="QPushButton" name="PickObus16_7">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2771,7 +2771,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_8">
+     <widget class="QPushButton" name="PickObus16_8">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2815,7 +2815,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_9">
+     <widget class="QPushButton" name="PickObus16_9">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2859,7 +2859,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_10">
+     <widget class="QPushButton" name="PickObus16_10">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2903,7 +2903,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_16">
+     <widget class="QPushButton" name="PickObus16_16">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2947,7 +2947,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_17">
+     <widget class="QPushButton" name="PickObus16_17">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -2991,7 +2991,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_18">
+     <widget class="QPushButton" name="PickObus16_18">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3035,7 +3035,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_20">
+     <widget class="QPushButton" name="PickObus16_20">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3092,7 +3092,7 @@
        <string>Pick:</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_5">
+     <widget class="QPushButton" name="PickObus8_5">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3136,7 +3136,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_6">
+     <widget class="QPushButton" name="PickObus8_6">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3180,7 +3180,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_7">
+     <widget class="QPushButton" name="PickObus8_7">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3224,7 +3224,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_12">
+     <widget class="QPushButton" name="PickObus8_12">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3268,7 +3268,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_13">
+     <widget class="QPushButton" name="PickObus8_13">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3312,7 +3312,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox8_14">
+     <widget class="QPushButton" name="PickObus8_14">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3356,7 +3356,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox4_5">
+     <widget class="QPushButton" name="PickObus4_5">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3400,7 +3400,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox4_4">
+     <widget class="QPushButton" name="PickObus4_4">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3444,7 +3444,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox4_1">
+     <widget class="QPushButton" name="PickObus4_1">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3488,7 +3488,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox4_2">
+     <widget class="QPushButton" name="PickObus4_2">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3532,7 +3532,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox4_3">
+     <widget class="QPushButton" name="PickObus4_3">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3576,7 +3576,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox2_4">
+     <widget class="QPushButton" name="PickObus2_4">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3620,7 +3620,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox2_3">
+     <widget class="QPushButton" name="PickObus2_3">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3664,7 +3664,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox2_2">
+     <widget class="QPushButton" name="PickObus2_2">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3708,7 +3708,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox2_1">
+     <widget class="QPushButton" name="PickObus2_1">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3765,7 +3765,7 @@
        <string>Reset positions</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="PickBox16_19">
+     <widget class="QPushButton" name="PickObus16_19">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -3809,88 +3809,116 @@
        <bool>false</bool>
       </property>
      </widget>
+     <widget class="QPushButton" name="undoPositions_Button_pick">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>300</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Undo</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="undoPositions_Button_place">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>660</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Undo</string>
+      </property>
+     </widget>
      <zorder>background_plate_pick</zorder>
      <zorder>background_plate</zorder>
      <zorder>MoveToTable_Button</zorder>
      <zorder>Gotolabel_2</zorder>
      <zorder>PickTest_Button</zorder>
      <zorder>Gotolabel</zorder>
-     <zorder>Huevera16Obus16Button</zorder>
-     <zorder>resetPositions_Button</zorder>
-     <zorder>Huevera16Obus15Button</zorder>
-     <zorder>Huevera16Obus14Button</zorder>
-     <zorder>Huevera16Obus13Button</zorder>
-     <zorder>Huevera16Obus12Button</zorder>
-     <zorder>Huevera16Obus11Button</zorder>
-     <zorder>Huevera16Obus10Button</zorder>
-     <zorder>Huevera16Obus9Button</zorder>
-     <zorder>Huevera16Obus8Button</zorder>
-     <zorder>Huevera16Obus7Button</zorder>
-     <zorder>Huevera16Obus6Button</zorder>
-     <zorder>Huevera16Obus3Button</zorder>
-     <zorder>Huevera16Obus4Button</zorder>
-     <zorder>Huevera16Obus5Button</zorder>
-     <zorder>Huevera16Obus2Button</zorder>
-     <zorder>Huevera16Obus1Button</zorder>
-     <zorder>Huevera8Obus8Button</zorder>
-     <zorder>Huevera8Obus7Button</zorder>
-     <zorder>Huevera8Obus6Button</zorder>
-     <zorder>Huevera8Obus5Button</zorder>
-     <zorder>Huevera8Obus4Button</zorder>
-     <zorder>Huevera8Obus3Button</zorder>
-     <zorder>Huevera8Obus2Button</zorder>
-     <zorder>Huevera8Obus1Button</zorder>
-     <zorder>Huevera4Obus2Button</zorder>
-     <zorder>Huevera4Obus3Button</zorder>
-     <zorder>Huevera4Obus4Button</zorder>
-     <zorder>Huevera4Obus1Button</zorder>
-     <zorder>Huevera2Obus2Button</zorder>
-     <zorder>Huevera2Obus1Button</zorder>
+     <zorder>PlaceObus16_16</zorder>
+     <zorder>resetPositions_Button_place</zorder>
+     <zorder>PlaceObus16_15</zorder>
+     <zorder>PlaceObus16_14</zorder>
+     <zorder>PlaceObus16_13</zorder>
+     <zorder>PlaceObus16_12</zorder>
+     <zorder>PlaceObus16_11</zorder>
+     <zorder>PlaceObus16_10</zorder>
+     <zorder>PlaceObus16_9</zorder>
+     <zorder>PlaceObus16_8</zorder>
+     <zorder>PlaceObus16_7</zorder>
+     <zorder>PlaceObus16_6</zorder>
+     <zorder>PlaceObus16_3</zorder>
+     <zorder>PlaceObus16_4</zorder>
+     <zorder>PlaceObus16_5</zorder>
+     <zorder>PlaceObus16_2</zorder>
+     <zorder>PlaceObus16_1</zorder>
+     <zorder>PlaceObus8_8</zorder>
+     <zorder>PlaceObus8_7</zorder>
+     <zorder>PlaceObus8_6</zorder>
+     <zorder>PlaceObus8_5</zorder>
+     <zorder>PlaceObus8_4</zorder>
+     <zorder>PlaceObus8_3</zorder>
+     <zorder>PlaceObus8_2</zorder>
+     <zorder>PlaceObus8_1</zorder>
+     <zorder>PlaceObus4_2</zorder>
+     <zorder>PlaceObus4_3</zorder>
+     <zorder>PlaceObus4_4</zorder>
+     <zorder>PlaceObus4_1</zorder>
+     <zorder>PlaceObus2_2</zorder>
+     <zorder>PlaceObus2_1</zorder>
      <zorder>Gotolabel_3</zorder>
-     <zorder>PickBox2_4</zorder>
-     <zorder>PickBox2_3</zorder>
-     <zorder>PickBox2_2</zorder>
-     <zorder>PickBox2_1</zorder>
+     <zorder>PickObus2_4</zorder>
+     <zorder>PickObus2_3</zorder>
+     <zorder>PickObus2_2</zorder>
+     <zorder>PickObus2_1</zorder>
      <zorder>resetPositions_Button_pick</zorder>
-     <zorder>PickBox8_12</zorder>
-     <zorder>PickBox8_9</zorder>
-     <zorder>PickBox8_6</zorder>
-     <zorder>PickBox8_3</zorder>
-     <zorder>PickBox8_14</zorder>
-     <zorder>PickBox8_5</zorder>
-     <zorder>PickBox8_1</zorder>
-     <zorder>PickBox8_2</zorder>
-     <zorder>PickBox8_13</zorder>
-     <zorder>PickBox8_4</zorder>
-     <zorder>PickBox8_10</zorder>
-     <zorder>PickBox8_7</zorder>
-     <zorder>PickBox8_11</zorder>
-     <zorder>PickBox8_8</zorder>
-     <zorder>PickBox4_1</zorder>
-     <zorder>PickBox4_4</zorder>
-     <zorder>PickBox4_5</zorder>
-     <zorder>PickBox4_2</zorder>
-     <zorder>PickBox4_3</zorder>
-     <zorder>PickBox16_14</zorder>
-     <zorder>PickBox16_17</zorder>
-     <zorder>PickBox16_15</zorder>
-     <zorder>PickBox16_9</zorder>
-     <zorder>PickBox16_6</zorder>
-     <zorder>PickBox16_7</zorder>
-     <zorder>PickBox16_5</zorder>
-     <zorder>PickBox16_18</zorder>
-     <zorder>PickBox16_11</zorder>
-     <zorder>PickBox16_13</zorder>
-     <zorder>PickBox16_2</zorder>
-     <zorder>PickBox16_3</zorder>
-     <zorder>PickBox16_8</zorder>
-     <zorder>PickBox16_16</zorder>
-     <zorder>PickBox16_20</zorder>
-     <zorder>PickBox16_4</zorder>
-     <zorder>PickBox16_12</zorder>
-     <zorder>PickBox16_10</zorder>
-     <zorder>PickBox16_1</zorder>
-     <zorder>PickBox16_19</zorder>
+     <zorder>PickObus8_12</zorder>
+     <zorder>PickObus8_9</zorder>
+     <zorder>PickObus8_6</zorder>
+     <zorder>PickObus8_3</zorder>
+     <zorder>PickObus8_14</zorder>
+     <zorder>PickObus8_5</zorder>
+     <zorder>PickObus8_1</zorder>
+     <zorder>PickObus8_2</zorder>
+     <zorder>PickObus8_13</zorder>
+     <zorder>PickObus8_4</zorder>
+     <zorder>PickObus8_10</zorder>
+     <zorder>PickObus8_7</zorder>
+     <zorder>PickObus8_11</zorder>
+     <zorder>PickObus8_8</zorder>
+     <zorder>PickObus4_1</zorder>
+     <zorder>PickObus4_4</zorder>
+     <zorder>PickObus4_5</zorder>
+     <zorder>PickObus4_2</zorder>
+     <zorder>PickObus4_3</zorder>
+     <zorder>PickObus16_14</zorder>
+     <zorder>PickObus16_17</zorder>
+     <zorder>PickObus16_15</zorder>
+     <zorder>PickObus16_9</zorder>
+     <zorder>PickObus16_6</zorder>
+     <zorder>PickObus16_7</zorder>
+     <zorder>PickObus16_5</zorder>
+     <zorder>PickObus16_18</zorder>
+     <zorder>PickObus16_11</zorder>
+     <zorder>PickObus16_13</zorder>
+     <zorder>PickObus16_2</zorder>
+     <zorder>PickObus16_3</zorder>
+     <zorder>PickObus16_8</zorder>
+     <zorder>PickObus16_16</zorder>
+     <zorder>PickObus16_20</zorder>
+     <zorder>PickObus16_4</zorder>
+     <zorder>PickObus16_12</zorder>
+     <zorder>PickObus16_10</zorder>
+     <zorder>PickObus16_1</zorder>
+     <zorder>PickObus16_19</zorder>
+     <zorder>undoPositions_Button_pick</zorder>
+     <zorder>undoPositions_Button_place</zorder>
     </widget>
     <widget class="QFrame" name="frame_tool_current">
      <property name="geometry">
