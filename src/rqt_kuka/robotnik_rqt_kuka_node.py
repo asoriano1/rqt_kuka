@@ -42,8 +42,17 @@ STATE_MOVING_TO_PLACE=4
 STATE_PLACED=5
 STATE_HOMING=6
 
-PATH="/home/suippes/kuka_catkin_ws/src/rqt_kuka/"
-#PATH="/home/angel/workspaces/rqt_kuka/src/rqt_kuka/"
+#PATH="/home/suippes/kuka_catkin_ws/src/rqt_kuka/"
+PATH="/home/angel/workspaces/rqt_kuka/src/rqt_kuka/"
+#images
+#[0] original - blanca   [1] resaltada - verde    [2] seleccionada - roja
+imgObus16izq = [PATH+'resource/images/rotated-symb_obus_arriba19x51.png', PATH+'resource/images/rotated-symb_obus_arriba19x51P.png', PATH+'resource/images/rotated-symb_obus_arriba19x51PP.png']
+imgObus16der = [PATH+'resource/images/rotated-symb_obus_abajo19x51.png', PATH+'resource/images/rotated-symb_obus_abajo19x51P.png', PATH+'resource/images/rotated-symb_obus_abajo19x51PP.png']
+imgObus8izq = [PATH+'resource/images/rotated-symb_obus_arriba26x71.png', PATH+'resource/images/rotated-symb_obus_arriba26x71P.png', PATH+'resource/images/rotated-symb_obus_arriba26x71PP.png']
+imgObus8der = [PATH+'resource/images/rotated-symb_obus_abajo26x71.png', PATH+'resource/images/rotated-symb_obus_abajo26x71P.png', PATH+'resource/images/rotated-symb_obus_abajo26x71PP.png']
+imgObus4 = [PATH+'resource/images/rotated-symb_obus_abajo37x101.png', PATH+'resource/images/rotated-symb_obus_abajo37x101P.png', PATH+'resource/images/rotated-symb_obus_abajo37x101PP.png']
+imgObus2 = [PATH+'resource/images/rotated-symb_obus_abajo41x111.png', PATH+'resource/images/rotated-symb_obus_abajo41x111P.png', PATH+'resource/images/rotated-symb_obus_abajo41x111PP.png']
+
 
 TOOL_HOMED=False
 KUKA_AUT=False
@@ -349,21 +358,21 @@ class RqtKuka(Plugin):
         #Obus 2
         self._widget.PickObus2_2.clicked.connect(self.press_pick_obus2_2_button)
         self._widget.PickObus2_2.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png")
+        path = self.select_icon('pick',[2,2], 0)
         self._widget.PickObus2_2.setMask(mask.mask())
         self._widget.PickObus2_2.setMouseTracking(True)       
         self._widget.PickObus2_2.installEventFilter(self)
         #Obus 3
         self._widget.PickObus2_3.clicked.connect(self.press_pick_obus2_3_button)
         self._widget.PickObus2_3.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png")
+        path = self.select_icon('pick',[2,3], 0)
         self._widget.PickObus2_3.setMask(mask.mask())
         self._widget.PickObus2_3.setMouseTracking(True)       
         self._widget.PickObus2_3.installEventFilter(self)
         #Obus 4
         self._widget.PickObus2_4.clicked.connect(self.press_pick_obus2_4_button)
         self._widget.PickObus2_4.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png")
+        path = self.select_icon('pick',[2,4], 0)
         self._widget.PickObus2_4.setMask(mask.mask())
         self._widget.PickObus2_4.setMouseTracking(True)       
         self._widget.PickObus2_4.installEventFilter(self)
@@ -372,35 +381,40 @@ class RqtKuka(Plugin):
         #Obus 1
         self._widget.PickObus4_1.clicked.connect(self.press_pick_obus4_1_button)
         self._widget.PickObus4_1.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
+        path = self.select_icon('pick',[4,1], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus4_1.setMask(mask.mask())
         self._widget.PickObus4_1.setMouseTracking(True)       
         self._widget.PickObus4_1.installEventFilter(self)
         #Obus 2
         self._widget.PickObus4_2.clicked.connect(self.press_pick_obus4_2_button)
         self._widget.PickObus4_2.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
+        path = self.select_icon('pick',[4,2], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus4_2.setMask(mask.mask())
         self._widget.PickObus4_2.setMouseTracking(True)       
         self._widget.PickObus4_2.installEventFilter(self)
         #Obus 3
         self._widget.PickObus4_3.clicked.connect(self.press_pick_obus4_3_button)
         self._widget.PickObus4_3.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
+        path = self.select_icon('pick',[4,3], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus4_3.setMask(mask.mask())
         self._widget.PickObus4_3.setMouseTracking(True)       
         self._widget.PickObus4_3.installEventFilter(self)
         #Obus 4
         self._widget.PickObus4_4.clicked.connect(self.press_pick_obus4_4_button)
         self._widget.PickObus4_4.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png")
+        path = self.select_icon('pick',[4,4], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus4_4.setMask(mask.mask())
         self._widget.PickObus4_4.setMouseTracking(True)       
         self._widget.PickObus4_4.installEventFilter(self)
         #Obus 5
         self._widget.PickObus4_5.clicked.connect(self.press_pick_obus4_5_button)
         self._widget.PickObus4_5.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png")
+        path = self.select_icon('pick',[4,5], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus4_5.setMask(mask.mask())
         self._widget.PickObus4_5.setMouseTracking(True)       
         self._widget.PickObus4_5.installEventFilter(self)
@@ -409,98 +423,112 @@ class RqtKuka(Plugin):
         #obus1
         self._widget.PickObus8_1.clicked.connect(self.press_pick_obus8_1_button)
         self._widget.PickObus8_1.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        path = self.select_icon('pick',[8,1], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_1.setMask(mask.mask())
         self._widget.PickObus8_1.setMouseTracking(True)       
         self._widget.PickObus8_1.installEventFilter(self)
         #obus2
         self._widget.PickObus8_2.clicked.connect(self.press_pick_obus8_2_button)
         self._widget.PickObus8_2.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        path = self.select_icon('pick',[8,2], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_2.setMask(mask.mask())
         self._widget.PickObus8_2.setMouseTracking(True)       
         self._widget.PickObus8_2.installEventFilter(self)
         #obus3
         self._widget.PickObus8_3.clicked.connect(self.press_pick_obus8_3_button)
         self._widget.PickObus8_3.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        path = self.select_icon('pick',[8,3], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_3.setMask(mask.mask())
         self._widget.PickObus8_3.setMouseTracking(True)       
         self._widget.PickObus8_3.installEventFilter(self)
         #obus4
         self._widget.PickObus8_4.clicked.connect(self.press_pick_obus8_4_button)
         self._widget.PickObus8_4.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        path = self.select_icon('pick',[8,4], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_4.setMask(mask.mask())
         self._widget.PickObus8_4.setMouseTracking(True)       
         self._widget.PickObus8_4.installEventFilter(self)
         #obus5
         self._widget.PickObus8_5.clicked.connect(self.press_pick_obus8_5_button)
         self._widget.PickObus8_5.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        path = self.select_icon('pick',[8,5], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_5.setMask(mask.mask())
         self._widget.PickObus8_5.setMouseTracking(True)       
         self._widget.PickObus8_5.installEventFilter(self)
         #obus6
         self._widget.PickObus8_6.clicked.connect(self.press_pick_obus8_6_button)
         self._widget.PickObus8_6.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        path = self.select_icon('pick',[8,6], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_6.setMask(mask.mask())
         self._widget.PickObus8_6.setMouseTracking(True)       
         self._widget.PickObus8_6.installEventFilter(self)
         #obus7
         self._widget.PickObus8_7.clicked.connect(self.press_pick_obus8_7_button)
         self._widget.PickObus8_7.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        path = self.select_icon('pick',[8,7], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_7.setMask(mask.mask())
         self._widget.PickObus8_7.setMouseTracking(True)       
         self._widget.PickObus8_7.installEventFilter(self)
         #obus8
         self._widget.PickObus8_8.clicked.connect(self.press_pick_obus8_8_button)
         self._widget.PickObus8_8.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        path = self.select_icon('pick',[8,8], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_8.setMask(mask.mask())
         self._widget.PickObus8_8.setMouseTracking(True)       
         self._widget.PickObus8_8.installEventFilter(self)
         #obus9
         self._widget.PickObus8_9.clicked.connect(self.press_pick_obus8_9_button)
         self._widget.PickObus8_9.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        path = self.select_icon('pick',[8,9], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_9.setMask(mask.mask())
         self._widget.PickObus8_9.setMouseTracking(True)       
         self._widget.PickObus8_9.installEventFilter(self)
         #obus9
         self._widget.PickObus8_10.clicked.connect(self.press_pick_obus8_10_button)
         self._widget.PickObus8_10.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        path = self.select_icon('pick',[8,10], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_10.setMask(mask.mask())
         self._widget.PickObus8_10.setMouseTracking(True)       
         self._widget.PickObus8_10.installEventFilter(self)
         #obus11
         self._widget.PickObus8_11.clicked.connect(self.press_pick_obus8_11_button)
         self._widget.PickObus8_11.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        path = self.select_icon('pick',[8,11], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_11.setMask(mask.mask())
         self._widget.PickObus8_11.setMouseTracking(True)       
         self._widget.PickObus8_11.installEventFilter(self)
         #obus12
         self._widget.PickObus8_12.clicked.connect(self.press_pick_obus8_12_button)
         self._widget.PickObus8_12.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        path = self.select_icon('pick',[8,12], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_12.setMask(mask.mask())
         self._widget.PickObus8_12.setMouseTracking(True)       
         self._widget.PickObus8_12.installEventFilter(self)
         #obus13
         self._widget.PickObus8_13.clicked.connect(self.press_pick_obus8_13_button)
         self._widget.PickObus8_13.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        path = self.select_icon('pick',[8,13], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_13.setMask(mask.mask())
         self._widget.PickObus8_13.setMouseTracking(True)       
         self._widget.PickObus8_13.installEventFilter(self)
         #obus14
         self._widget.PickObus8_14.clicked.connect(self.press_pick_obus8_14_button)
         self._widget.PickObus8_14.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        path = self.select_icon('pick',[8,14], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus8_14.setMask(mask.mask())
         self._widget.PickObus8_14.setMouseTracking(True)       
         self._widget.PickObus8_14.installEventFilter(self)
@@ -509,140 +537,160 @@ class RqtKuka(Plugin):
         #obus1
         self._widget.PickObus16_1.clicked.connect(self.press_pick_obus16_1_button)
         self._widget.PickObus16_1.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,1], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_1.setMask(mask.mask())
         self._widget.PickObus16_1.setMouseTracking(True)       
         self._widget.PickObus16_1.installEventFilter(self)
         #obus2
         self._widget.PickObus16_2.clicked.connect(self.press_pick_obus16_2_button)
         self._widget.PickObus16_2.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,2], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_2.setMask(mask.mask())
         self._widget.PickObus16_2.setMouseTracking(True)       
         self._widget.PickObus16_2.installEventFilter(self)
         #obus3
         self._widget.PickObus16_3.clicked.connect(self.press_pick_obus16_3_button)
         self._widget.PickObus16_3.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,3], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_3.setMask(mask.mask())
         self._widget.PickObus16_3.setMouseTracking(True)       
         self._widget.PickObus16_3.installEventFilter(self)
         #obus4
         self._widget.PickObus16_4.clicked.connect(self.press_pick_obus16_4_button)
         self._widget.PickObus16_4.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,4], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_4.setMask(mask.mask())
         self._widget.PickObus16_4.setMouseTracking(True)       
         self._widget.PickObus16_4.installEventFilter(self)
         #obus5
         self._widget.PickObus16_5.clicked.connect(self.press_pick_obus16_5_button)
         self._widget.PickObus16_5.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,5], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_5.setMask(mask.mask())
         self._widget.PickObus16_5.setMouseTracking(True)       
         self._widget.PickObus16_5.installEventFilter(self)
         #obus6
         self._widget.PickObus16_6.clicked.connect(self.press_pick_obus16_6_button)
         self._widget.PickObus16_6.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,6], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_6.setMask(mask.mask())
         self._widget.PickObus16_6.setMouseTracking(True)       
         self._widget.PickObus16_6.installEventFilter(self)
         #obus7
         self._widget.PickObus16_7.clicked.connect(self.press_pick_obus16_7_button)
         self._widget.PickObus16_7.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,7], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_7.setMask(mask.mask())
         self._widget.PickObus16_7.setMouseTracking(True)       
         self._widget.PickObus16_7.installEventFilter(self)
         #obus8
         self._widget.PickObus16_8.clicked.connect(self.press_pick_obus16_8_button)
         self._widget.PickObus16_8.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,8], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_8.setMask(mask.mask())
         self._widget.PickObus16_8.setMouseTracking(True)       
         self._widget.PickObus16_8.installEventFilter(self)
         #obus9
         self._widget.PickObus16_9.clicked.connect(self.press_pick_obus16_9_button)
         self._widget.PickObus16_9.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,9], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_9.setMask(mask.mask())
         self._widget.PickObus16_9.setMouseTracking(True)       
         self._widget.PickObus16_9.installEventFilter(self)
         #obus10
         self._widget.PickObus16_10.clicked.connect(self.press_pick_obus16_10_button)
         self._widget.PickObus16_10.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        path = self.select_icon('pick',[16,10], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_10.setMask(mask.mask())
         self._widget.PickObus16_10.setMouseTracking(True)       
         self._widget.PickObus16_10.installEventFilter(self)
         #obus11
         self._widget.PickObus16_11.clicked.connect(self.press_pick_obus16_11_button)
         self._widget.PickObus16_11.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,11], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_11.setMask(mask.mask())
         self._widget.PickObus16_11.setMouseTracking(True)       
         self._widget.PickObus16_11.installEventFilter(self)
         #obus12
         self._widget.PickObus16_12.clicked.connect(self.press_pick_obus16_12_button)
         self._widget.PickObus16_12.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,12], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_12.setMask(mask.mask())
         self._widget.PickObus16_12.setMouseTracking(True)       
         self._widget.PickObus16_12.installEventFilter(self)
         #obus13
         self._widget.PickObus16_13.clicked.connect(self.press_pick_obus16_13_button)
         self._widget.PickObus16_13.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,13], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_13.setMask(mask.mask())
         self._widget.PickObus16_13.setMouseTracking(True)       
         self._widget.PickObus16_13.installEventFilter(self)
         #obus14
         self._widget.PickObus16_14.clicked.connect(self.press_pick_obus16_14_button)
         self._widget.PickObus16_14.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,14], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_14.setMask(mask.mask())
         self._widget.PickObus16_14.setMouseTracking(True)       
         self._widget.PickObus16_14.installEventFilter(self)
         #obus15
         self._widget.PickObus16_15.clicked.connect(self.press_pick_obus16_15_button)
         self._widget.PickObus16_15.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,15], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_15.setMask(mask.mask())
         self._widget.PickObus16_15.setMouseTracking(True)       
         self._widget.PickObus16_15.installEventFilter(self)
         #obus16
         self._widget.PickObus16_16.clicked.connect(self.press_pick_obus16_16_button)
         self._widget.PickObus16_16.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,16], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_16.setMask(mask.mask())
         self._widget.PickObus16_16.setMouseTracking(True)       
         self._widget.PickObus16_16.installEventFilter(self)
         #obus17
         self._widget.PickObus16_17.clicked.connect(self.press_pick_obus16_17_button)
         self._widget.PickObus16_17.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,17], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_17.setMask(mask.mask())
         self._widget.PickObus16_17.setMouseTracking(True)       
         self._widget.PickObus16_17.installEventFilter(self)
         #obus18
         self._widget.PickObus16_18.clicked.connect(self.press_pick_obus16_18_button)
         self._widget.PickObus16_18.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,18], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_18.setMask(mask.mask())
         self._widget.PickObus16_18.setMouseTracking(True)       
         self._widget.PickObus16_18.installEventFilter(self)
         #obus19
         self._widget.PickObus16_19.clicked.connect(self.press_pick_obus16_19_button)
         self._widget.PickObus16_19.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,19], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_19.setMask(mask.mask())
         self._widget.PickObus16_19.setMouseTracking(True)       
         self._widget.PickObus16_19.installEventFilter(self)
         #obus20
         self._widget.PickObus16_20.clicked.connect(self.press_pick_obus16_20_button)
         self._widget.PickObus16_20.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        path = self.select_icon('pick',[16,20], 0)
+        mask = QtGui.QPixmap(path)
         self._widget.PickObus16_20.setMask(mask.mask())
         self._widget.PickObus16_20.setMouseTracking(True)       
         self._widget.PickObus16_20.installEventFilter(self)
@@ -653,18 +701,20 @@ class RqtKuka(Plugin):
         #obus1     
         self._widget.PlaceObus2_1.setGeometry(h2o1posex,h2o1posey,111,41)
         self._widget.PlaceObus2_1.clicked.connect(self.press_obus2_1_button)
-        self._widget.PlaceObus2_1.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"))
+        path = self.select_icon('place',[2,1], 0)
+        self._widget.PlaceObus2_1.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus2_1.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus2_1.setMask(mask.mask())
         self._widget.PlaceObus2_1.setMouseTracking(True)       
         self._widget.PlaceObus2_1.installEventFilter(self)
         #obus2
         self._widget.PlaceObus2_2.setGeometry(h2o1posex,h2o1posey-70,111,41)
         self._widget.PlaceObus2_2.clicked.connect(self.press_obus2_2_button)
-        self._widget.PlaceObus2_2.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"))
+        path = self.select_icon('place',[2,2], 0)
+        self._widget.PlaceObus2_2.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus2_2.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus2_2.setMask(mask.mask())
         self._widget.PlaceObus2_2.setMouseTracking(True)       
         self._widget.PlaceObus2_2.installEventFilter(self)        
@@ -675,36 +725,40 @@ class RqtKuka(Plugin):
         #obus1
         self._widget.PlaceObus4_1.setGeometry(h4o1posex,h4o1posey,102,37)
         self._widget.PlaceObus4_1.clicked.connect(self.press_obus4_1_button)
-        self._widget.PlaceObus4_1.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
+        path = self.select_icon('place',[4,1], 0)
+        self._widget.PlaceObus4_1.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus4_1.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus4_1.setMask(mask.mask())
         self._widget.PlaceObus4_1.setMouseTracking(True)       
         self._widget.PlaceObus4_1.installEventFilter(self)
         #obus2
         self._widget.PlaceObus4_2.setGeometry(h4o1posex,h4o1posey-50,102,37)
         self._widget.PlaceObus4_2.clicked.connect(self.press_obus4_2_button)
-        self._widget.PlaceObus4_2.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
+        path = self.select_icon('place',[4,2], 0)
+        self._widget.PlaceObus4_2.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus4_2.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus4_2.setMask(mask.mask())
         self._widget.PlaceObus4_2.setMouseTracking(True)       
         self._widget.PlaceObus4_2.installEventFilter(self)
         #obus3
         self._widget.PlaceObus4_3.setGeometry(h4o1posex,h4o1posey-102,102,37)
         self._widget.PlaceObus4_3.clicked.connect(self.press_obus4_3_button)
-        self._widget.PlaceObus4_3.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
+        path = self.select_icon('place',[4,3], 0)
+        self._widget.PlaceObus4_3.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus4_3.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus4_3.setMask(mask.mask())
         self._widget.PlaceObus4_3.setMouseTracking(True)       
         self._widget.PlaceObus4_3.installEventFilter(self)
         #obus4
         self._widget.PlaceObus4_4.setGeometry(h4o1posex,h4o1posey-152,102,37)
         self._widget.PlaceObus4_4.clicked.connect(self.press_obus4_4_button)
-        self._widget.PlaceObus4_4.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
+        path = self.select_icon('place',[4,4], 0)
+        self._widget.PlaceObus4_4.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus4_4.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo31x101.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus4_4.setMask(mask.mask())
         self._widget.PlaceObus4_4.setMouseTracking(True)       
         self._widget.PlaceObus4_4.installEventFilter(self)
@@ -715,72 +769,80 @@ class RqtKuka(Plugin):
         #obus1
         self._widget.PlaceObus8_1.setGeometry(h8o1posex,h8o1posey,71,26)
         self._widget.PlaceObus8_1.clicked.connect(self.press_obus8_1_button)
-        self._widget.PlaceObus8_1.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
+        path = self.select_icon('place',[8,1], 0)
+        self._widget.PlaceObus8_1.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus8_1.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus8_1.setMask(mask.mask())
         self._widget.PlaceObus8_1.setMouseTracking(True)       
         self._widget.PlaceObus8_1.installEventFilter(self)
         #obus2
         self._widget.PlaceObus8_2.setGeometry(h8o1posex,h8o1posey-38,71,26)
         self._widget.PlaceObus8_2.clicked.connect(self.press_obus8_2_button)
-        self._widget.PlaceObus8_2.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
+        path = self.select_icon('place',[8,2], 0)
+        self._widget.PlaceObus8_2.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus8_2.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus8_2.setMask(mask.mask())
         self._widget.PlaceObus8_2.setMouseTracking(True)       
         self._widget.PlaceObus8_2.installEventFilter(self)
         #obus3
         self._widget.PlaceObus8_3.setGeometry(h8o1posex,h8o1posey-86,71,26)
         self._widget.PlaceObus8_3.clicked.connect(self.press_obus8_3_button)
-        self._widget.PlaceObus8_3.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
+        path = self.select_icon('place',[8,3], 0)
+        self._widget.PlaceObus8_3.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus8_3.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus8_3.setMask(mask.mask())
         self._widget.PlaceObus8_3.setMouseTracking(True)       
         self._widget.PlaceObus8_3.installEventFilter(self)
         #obus4
         self._widget.PlaceObus8_4.setGeometry(h8o1posex,h8o1posey-132,71,26)
         self._widget.PlaceObus8_4.clicked.connect(self.press_obus8_4_button)
-        self._widget.PlaceObus8_4.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
+        path = self.select_icon('place',[8,4], 0)
+        self._widget.PlaceObus8_4.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus8_4.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus8_4.setMask(mask.mask())
         self._widget.PlaceObus8_4.setMouseTracking(True)       
         self._widget.PlaceObus8_4.installEventFilter(self)
         #obus5
         self._widget.PlaceObus8_5.setGeometry(h8o1posex+51,h8o1posey-18,71,26)
         self._widget.PlaceObus8_5.clicked.connect(self.press_obus8_5_button)
-        self._widget.PlaceObus8_5.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))
+        path = self.select_icon('place',[8,5], 0)
+        self._widget.PlaceObus8_5.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus8_5.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus8_5.setMask(mask.mask())
         self._widget.PlaceObus8_5.setMouseTracking(True)       
         self._widget.PlaceObus8_5.installEventFilter(self)
         #obus6
         self._widget.PlaceObus8_6.setGeometry(h8o1posex+51,h8o1posey-63,71,26)
         self._widget.PlaceObus8_6.clicked.connect(self.press_obus8_6_button)
-        self._widget.PlaceObus8_6.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))
+        path = self.select_icon('place',[8,6], 0)
+        self._widget.PlaceObus8_6.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus8_6.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus8_6.setMask(mask.mask())
         self._widget.PlaceObus8_6.setMouseTracking(True)       
         self._widget.PlaceObus8_6.installEventFilter(self)
         #obus7
         self._widget.PlaceObus8_7.setGeometry(h8o1posex+51,h8o1posey-109,71,26)
         self._widget.PlaceObus8_7.clicked.connect(self.press_obus8_7_button)
-        self._widget.PlaceObus8_7.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))
+        path = self.select_icon('place',[8,7], 0)
+        self._widget.PlaceObus8_7.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus8_7.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus8_7.setMask(mask.mask())
         self._widget.PlaceObus8_7.setMouseTracking(True)       
         self._widget.PlaceObus8_7.installEventFilter(self)
         #obus8
         self._widget.PlaceObus8_8.setGeometry(h8o1posex+51,h8o1posey-150,71,26)
         self._widget.PlaceObus8_8.clicked.connect(self.press_obus8_8_button)
-        self._widget.PlaceObus8_8.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))
+        path = self.select_icon('place',[8,8], 0)
+        self._widget.PlaceObus8_8.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus8_8.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus8_8.setMask(mask.mask())
         self._widget.PlaceObus8_8.setMouseTracking(True)       
         self._widget.PlaceObus8_8.installEventFilter(self)
@@ -791,144 +853,160 @@ class RqtKuka(Plugin):
         #obus1
         self._widget.PlaceObus16_1.setGeometry(h16o1posex,h16o1posey,51,19)
         self._widget.PlaceObus16_1.clicked.connect(self.press_obus16_1_button)
-        self._widget.PlaceObus16_1.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
+        path = self.select_icon('place',[16,1], 0)
+        self._widget.PlaceObus16_1.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_1.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_1.setMask(mask.mask())
         self._widget.PlaceObus16_1.setMouseTracking(True)       
         self._widget.PlaceObus16_1.installEventFilter(self)
         #obus2
         self._widget.PlaceObus16_2.setGeometry(h16o1posex,h16o1posey-22,51,19)
         self._widget.PlaceObus16_2.clicked.connect(self.press_obus16_2_button)
-        self._widget.PlaceObus16_2.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
+        path = self.select_icon('place',[16,2], 0)
+        self._widget.PlaceObus16_2.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_2.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_2.setMask(mask.mask())
         self._widget.PlaceObus16_2.setMouseTracking(True)       
         self._widget.PlaceObus16_2.installEventFilter(self)
         #obus3
         self._widget.PlaceObus16_3.setGeometry(h16o1posex,h16o1posey-42,51,19)
         self._widget.PlaceObus16_3.clicked.connect(self.press_obus16_3_button)
-        self._widget.PlaceObus16_3.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
+        path = self.select_icon('place',[16,3], 0)
+        self._widget.PlaceObus16_3.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_3.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_3.setMask(mask.mask())
         self._widget.PlaceObus16_3.setMouseTracking(True)       
         self._widget.PlaceObus16_3.installEventFilter(self)
         #obus4
         self._widget.PlaceObus16_4.setGeometry(h16o1posex,h16o1posey-63,51,19)
         self._widget.PlaceObus16_4.clicked.connect(self.press_obus16_4_button)
-        self._widget.PlaceObus16_4.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
+        path = self.select_icon('place',[16,4], 0)
+        self._widget.PlaceObus16_4.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_4.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_4.setMask(mask.mask())
         self._widget.PlaceObus16_4.setMouseTracking(True)       
         self._widget.PlaceObus16_4.installEventFilter(self)
         #obus5
         self._widget.PlaceObus16_5.setGeometry(h16o1posex,h16o1posey-86,51,19)
         self._widget.PlaceObus16_5.clicked.connect(self.press_obus16_5_button)
-        self._widget.PlaceObus16_5.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
+        path = self.select_icon('place',[16,5], 0)
+        self._widget.PlaceObus16_5.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_5.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_5.setMask(mask.mask())
         self._widget.PlaceObus16_5.setMouseTracking(True)       
         self._widget.PlaceObus16_5.installEventFilter(self)
         #obus6
         self._widget.PlaceObus16_6.setGeometry(h16o1posex,h16o1posey-109,51,19)
         self._widget.PlaceObus16_6.clicked.connect(self.press_obus16_6_button)
-        self._widget.PlaceObus16_6.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
+        path = self.select_icon('place',[16,6], 0)
+        self._widget.PlaceObus16_6.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_6.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_6.setMask(mask.mask())
         self._widget.PlaceObus16_6.setMouseTracking(True)       
         self._widget.PlaceObus16_6.installEventFilter(self)
         #obus7
         self._widget.PlaceObus16_7.setGeometry(h16o1posex,h16o1posey-132,51,19)
         self._widget.PlaceObus16_7.clicked.connect(self.press_obus16_7_button)
-        self._widget.PlaceObus16_7.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
+        path = self.select_icon('place',[16,7], 0)
+        self._widget.PlaceObus16_7.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_7.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_7.setMask(mask.mask())
         self._widget.PlaceObus16_7.setMouseTracking(True)       
         self._widget.PlaceObus16_7.installEventFilter(self)
         #obus8
         self._widget.PlaceObus16_8.setGeometry(h16o1posex,h16o1posey-152,51,19)
         self._widget.PlaceObus16_8.clicked.connect(self.press_obus16_8_button)
-        self._widget.PlaceObus16_8.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
+        path = self.select_icon('place',[16,8], 0)
+        self._widget.PlaceObus16_8.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_8.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_8.setMask(mask.mask())
         self._widget.PlaceObus16_8.setMouseTracking(True)       
         self._widget.PlaceObus16_8.installEventFilter(self)
         #obus9
         self._widget.PlaceObus16_9.setGeometry(h16o1posex+74,h16o1posey,51,19)
         self._widget.PlaceObus16_9.clicked.connect(self.press_obus16_9_button)
-        self._widget.PlaceObus16_9.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
+        path = self.select_icon('place',[16,9], 0)
+        self._widget.PlaceObus16_9.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_9.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_9.setMask(mask.mask())
         self._widget.PlaceObus16_9.setMouseTracking(True)       
         self._widget.PlaceObus16_9.installEventFilter(self)
         #obus10
         self._widget.PlaceObus16_10.setGeometry(h16o1posex+74,h16o1posey-22,51,19)
         self._widget.PlaceObus16_10.clicked.connect(self.press_obus16_10_button)
-        self._widget.PlaceObus16_10.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
+        path = self.select_icon('place',[16,10], 0)
+        self._widget.PlaceObus16_10.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_10.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_10.setMask(mask.mask())
         self._widget.PlaceObus16_10.setMouseTracking(True)       
         self._widget.PlaceObus16_10.installEventFilter(self)
         #obus11
         self._widget.PlaceObus16_11.setGeometry(h16o1posex+74,h16o1posey-42,51,19)
         self._widget.PlaceObus16_11.clicked.connect(self.press_obus16_11_button)
-        self._widget.PlaceObus16_11.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
+        path = self.select_icon('place',[16,11], 0)
+        self._widget.PlaceObus16_11.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_11.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_11.setMask(mask.mask())
         self._widget.PlaceObus16_11.setMouseTracking(True)       
         self._widget.PlaceObus16_11.installEventFilter(self)
         #obus12
         self._widget.PlaceObus16_12.setGeometry(h16o1posex+74,h16o1posey-63,51,19)
         self._widget.PlaceObus16_12.clicked.connect(self.press_obus16_12_button)
-        self._widget.PlaceObus16_12.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
+        path = self.select_icon('place',[16,12], 0)
+        self._widget.PlaceObus16_12.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_12.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_12.setMask(mask.mask())
         self._widget.PlaceObus16_12.setMouseTracking(True)       
         self._widget.PlaceObus16_12.installEventFilter(self)
         #obus13
         self._widget.PlaceObus16_13.setGeometry(h16o1posex+74,h16o1posey-86,51,19)
         self._widget.PlaceObus16_13.clicked.connect(self.press_obus16_13_button)
-        self._widget.PlaceObus16_13.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
+        path = self.select_icon('place',[16,13], 0)
+        self._widget.PlaceObus16_13.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_13.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_13.setMask(mask.mask())
         self._widget.PlaceObus16_13.setMouseTracking(True)       
         self._widget.PlaceObus16_13.installEventFilter(self)
         #obus14
         self._widget.PlaceObus16_14.setGeometry(h16o1posex+74,h16o1posey-109,51,19)
         self._widget.PlaceObus16_14.clicked.connect(self.press_obus16_14_button)
-        self._widget.PlaceObus16_14.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
+        path = self.select_icon('place',[16,14], 0)
+        self._widget.PlaceObus16_14.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_14.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_14.setMask(mask.mask())
         self._widget.PlaceObus16_14.setMouseTracking(True)       
         self._widget.PlaceObus16_14.installEventFilter(self)
         #obus15
         self._widget.PlaceObus16_15.setGeometry(h16o1posex+74,h16o1posey-132,51,19)
         self._widget.PlaceObus16_15.clicked.connect(self.press_obus16_15_button)
-        self._widget.PlaceObus16_15.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
+        path = self.select_icon('place',[16,15], 0)
+        self._widget.PlaceObus16_15.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_15.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_15.setMask(mask.mask())
         self._widget.PlaceObus16_15.setMouseTracking(True)       
         self._widget.PlaceObus16_15.installEventFilter(self)
         #obus16
         self._widget.PlaceObus16_16.setGeometry(h16o1posex+74,h16o1posey-152,51,19)
         self._widget.PlaceObus16_16.clicked.connect(self.press_obus16_16_button)
-        self._widget.PlaceObus16_16.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
+        path = self.select_icon('place',[16,16], 0)
+        self._widget.PlaceObus16_16.setIcon(QtGui.QIcon(path))
         self._widget.PlaceObus16_16.hide()
-        mask = QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png")
+        mask = QtGui.QPixmap(path)
         self._widget.PlaceObus16_16.setMask(mask.mask())
         self._widget.PlaceObus16_16.setMouseTracking(True)       
         self._widget.PlaceObus16_16.installEventFilter(self)
@@ -1009,212 +1087,134 @@ class RqtKuka(Plugin):
         self.last_obus_selected_place = -1
 
 
-    #filtro para detectar el raton y ponerlo verde si está el cursor encima o dejarlo blanco si no
+    #filtro para detectar el raton y ponerlo verde si esta el cursor encima o dejarlo blanco si no
     def eventFilter(self, object, event):               
         if not KUKA_AUT :
             #huevera 16
-            if finger_type == 1 :
-                if event.type() == QtCore.QEvent.HoverEnter:                                
-                    #obuses hacia abajo (los de arriba [1-8])                    
-                    if ((object == self._widget.PlaceObus16_1 and not Place_Obus_16_1)
-                    or (object == self._widget.PlaceObus16_2 and not Place_Obus_16_2)
-                    or (object == self._widget.PlaceObus16_3 and not Place_Obus_16_3)
-                    or (object == self._widget.PlaceObus16_4 and not Place_Obus_16_4)
-                    or (object == self._widget.PlaceObus16_5 and not Place_Obus_16_5)
-                    or (object == self._widget.PlaceObus16_6 and not Place_Obus_16_6)
-                    or (object == self._widget.PlaceObus16_7 and not Place_Obus_16_7)
-                    or (object == self._widget.PlaceObus16_8 and not Place_Obus_16_8)
-                    or (object ==self._widget.PickObus16_1 and not Pick_Obus_16_1)
-                    or (object ==self._widget.PickObus16_2 and not Pick_Obus_16_2)
-                    or (object ==self._widget.PickObus16_3 and not Pick_Obus_16_3)
-                    or (object ==self._widget.PickObus16_4 and not Pick_Obus_16_4)
-                    or (object ==self._widget.PickObus16_5 and not Pick_Obus_16_5)
-                    or (object ==self._widget.PickObus16_6 and not Pick_Obus_16_6)
-                    or (object ==self._widget.PickObus16_7 and not Pick_Obus_16_7)
-                    or (object ==self._widget.PickObus16_8 and not Pick_Obus_16_8)
-                    or (object ==self._widget.PickObus16_9 and not Pick_Obus_16_9)
-                    or (object ==self._widget.PickObus16_10 and not Pick_Obus_16_10)
-                    ) :
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51P.png"))
+            if finger_type == 1 :        
+                #obuses de la parte izquierda ( [1-8])                    
+                if ((object == self._widget.PlaceObus16_1 and not Place_Obus_16_1)
+                or (object == self._widget.PlaceObus16_2 and not Place_Obus_16_2)
+                or (object == self._widget.PlaceObus16_3 and not Place_Obus_16_3)
+                or (object == self._widget.PlaceObus16_4 and not Place_Obus_16_4)
+                or (object == self._widget.PlaceObus16_5 and not Place_Obus_16_5)
+                or (object == self._widget.PlaceObus16_6 and not Place_Obus_16_6)
+                or (object == self._widget.PlaceObus16_7 and not Place_Obus_16_7)
+                or (object == self._widget.PlaceObus16_8 and not Place_Obus_16_8)
+                or (object ==self._widget.PickObus16_1 and not Pick_Obus_16_1)
+                or (object ==self._widget.PickObus16_2 and not Pick_Obus_16_2)
+                or (object ==self._widget.PickObus16_3 and not Pick_Obus_16_3)
+                or (object ==self._widget.PickObus16_4 and not Pick_Obus_16_4)
+                or (object ==self._widget.PickObus16_5 and not Pick_Obus_16_5)
+                or (object ==self._widget.PickObus16_6 and not Pick_Obus_16_6)
+                or (object ==self._widget.PickObus16_7 and not Pick_Obus_16_7)
+                or (object ==self._widget.PickObus16_8 and not Pick_Obus_16_8)
+                or (object ==self._widget.PickObus16_9 and not Pick_Obus_16_9)
+                or (object ==self._widget.PickObus16_10 and not Pick_Obus_16_10)
+                ) :
+                    if event.type() == QtCore.QEvent.HoverEnter:                        
+                        object.setIcon(QtGui.QIcon(imgObus16izq[1]))
+                    elif event.type() == QtCore.QEvent.HoverLeave:
+                        object.setIcon(QtGui.QIcon(imgObus16izq[0]))
 
-                    #obuses hacia arriba
-                    elif (
-                        (object == self._widget.PlaceObus16_9 and not Place_Obus_16_9)
-                        or (object == self._widget.PlaceObus16_10 and not Place_Obus_16_10)
-                        or (object == self._widget.PlaceObus16_11 and not Place_Obus_16_11)
-                        or (object == self._widget.PlaceObus16_12 and not Place_Obus_16_12)
-                        or (object == self._widget.PlaceObus16_13 and not Place_Obus_16_13)
-                        or (object == self._widget.PlaceObus16_14 and not Place_Obus_16_14)
-                        or (object == self._widget.PlaceObus16_15 and not Place_Obus_16_15)
-                        or (object == self._widget.PlaceObus16_16 and not Place_Obus_16_16)
-                        or (object == self._widget.PickObus16_11 and not Pick_Obus_16_11)
-                        or (object == self._widget.PickObus16_12 and not Pick_Obus_16_12)
-                        or (object == self._widget.PickObus16_13 and not Pick_Obus_16_13)
-                        or (object == self._widget.PickObus16_14 and not Pick_Obus_16_14)
-                        or (object == self._widget.PickObus16_15 and not Pick_Obus_16_15)
-                        or (object == self._widget.PickObus16_16 and not Pick_Obus_16_16)
-                        or (object == self._widget.PickObus16_17 and not Pick_Obus_16_17)
-                        or (object == self._widget.PickObus16_18 and not Pick_Obus_16_18)
-                        or (object == self._widget.PickObus16_19 and not Pick_Obus_16_19)
-                        or (object == self._widget.PickObus16_20 and not Pick_Obus_16_20)
-                    ):
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51P.png"))
-                if event.type() == QtCore.QEvent.HoverLeave:
-                    #obuses hacia abajo (los de arriba [1-8])
-                    if ((object == self._widget.PlaceObus16_1 and not Place_Obus_16_1)
-                    or (object == self._widget.PlaceObus16_2 and not Place_Obus_16_2)
-                    or (object == self._widget.PlaceObus16_3 and not Place_Obus_16_3)
-                    or (object == self._widget.PlaceObus16_4 and not Place_Obus_16_4)
-                    or (object == self._widget.PlaceObus16_5 and not Place_Obus_16_5)
-                    or (object == self._widget.PlaceObus16_6 and not Place_Obus_16_6)
-                    or (object == self._widget.PlaceObus16_7 and not Place_Obus_16_7)
-                    or (object == self._widget.PlaceObus16_8 and not Place_Obus_16_8)
-                    or (object ==self._widget.PickObus16_1 and not Pick_Obus_16_1)
-                    or (object ==self._widget.PickObus16_2 and not Pick_Obus_16_2)
-                    or (object ==self._widget.PickObus16_3 and not Pick_Obus_16_3)
-                    or (object ==self._widget.PickObus16_4 and not Pick_Obus_16_4)
-                    or (object ==self._widget.PickObus16_5 and not Pick_Obus_16_5)
-                    or (object ==self._widget.PickObus16_6 and not Pick_Obus_16_6)
-                    or (object ==self._widget.PickObus16_7 and not Pick_Obus_16_7)
-                    or (object ==self._widget.PickObus16_8 and not Pick_Obus_16_8)
-                    or (object ==self._widget.PickObus16_9 and not Pick_Obus_16_9)
-                    or (object ==self._widget.PickObus16_10 and not Pick_Obus_16_10)
-                    ) :
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"))
-                    #obuses hacia arriba
-                    elif (
-                        (object == self._widget.PlaceObus16_9 and not Place_Obus_16_9)
-                        or (object == self._widget.PlaceObus16_10 and not Place_Obus_16_10)
-                        or (object == self._widget.PlaceObus16_11 and not Place_Obus_16_11)
-                        or (object == self._widget.PlaceObus16_12 and not Place_Obus_16_12)
-                        or (object == self._widget.PlaceObus16_13 and not Place_Obus_16_13)
-                        or (object == self._widget.PlaceObus16_14 and not Place_Obus_16_14)
-                        or (object == self._widget.PlaceObus16_15 and not Place_Obus_16_15)
-                        or (object == self._widget.PlaceObus16_16 and not Place_Obus_16_16)
-                        or (object == self._widget.PickObus16_11 and not Pick_Obus_16_11)
-                        or (object == self._widget.PickObus16_12 and not Pick_Obus_16_12)
-                        or (object == self._widget.PickObus16_13 and not Pick_Obus_16_13)
-                        or (object == self._widget.PickObus16_14 and not Pick_Obus_16_14)
-                        or (object == self._widget.PickObus16_15 and not Pick_Obus_16_15)
-                        or (object == self._widget.PickObus16_16 and not Pick_Obus_16_16)
-                        or (object == self._widget.PickObus16_17 and not Pick_Obus_16_17)
-                        or (object == self._widget.PickObus16_18 and not Pick_Obus_16_18)
-                        or (object == self._widget.PickObus16_19 and not Pick_Obus_16_19)
-                        or (object == self._widget.PickObus16_20 and not Pick_Obus_16_20)
-                    ):
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"))
+                #obuses parte derecha
+                elif (
+                    (object == self._widget.PlaceObus16_9 and not Place_Obus_16_9)
+                    or (object == self._widget.PlaceObus16_10 and not Place_Obus_16_10)
+                    or (object == self._widget.PlaceObus16_11 and not Place_Obus_16_11)
+                    or (object == self._widget.PlaceObus16_12 and not Place_Obus_16_12)
+                    or (object == self._widget.PlaceObus16_13 and not Place_Obus_16_13)
+                    or (object == self._widget.PlaceObus16_14 and not Place_Obus_16_14)
+                    or (object == self._widget.PlaceObus16_15 and not Place_Obus_16_15)
+                    or (object == self._widget.PlaceObus16_16 and not Place_Obus_16_16)
+                    or (object == self._widget.PickObus16_11 and not Pick_Obus_16_11)
+                    or (object == self._widget.PickObus16_12 and not Pick_Obus_16_12)
+                    or (object == self._widget.PickObus16_13 and not Pick_Obus_16_13)
+                    or (object == self._widget.PickObus16_14 and not Pick_Obus_16_14)
+                    or (object == self._widget.PickObus16_15 and not Pick_Obus_16_15)
+                    or (object == self._widget.PickObus16_16 and not Pick_Obus_16_16)
+                    or (object == self._widget.PickObus16_17 and not Pick_Obus_16_17)
+                    or (object == self._widget.PickObus16_18 and not Pick_Obus_16_18)
+                    or (object == self._widget.PickObus16_19 and not Pick_Obus_16_19)
+                    or (object == self._widget.PickObus16_20 and not Pick_Obus_16_20)
+                ):
+                    if event.type() == QtCore.QEvent.HoverEnter:                        
+                        object.setIcon(QtGui.QIcon(imgObus16der[1]))
+                    elif event.type() == QtCore.QEvent.HoverLeave:
+                        object.setIcon(QtGui.QIcon(imgObus16der[0]))
+                    
             #huevera 8
-            if finger_type == 2 :
-                if event.type() == QtCore.QEvent.HoverEnter:
-                    #obuses hacia abajo (los de arriba [1-4])
-                    if ((object == self._widget.PlaceObus8_1 and not Place_Obus_8_1)
-                    or (object == self._widget.PlaceObus8_2 and not Place_Obus_8_2)
-                    or (object == self._widget.PlaceObus8_3 and not Place_Obus_8_3)
-                    or (object == self._widget.PlaceObus8_4 and not Place_Obus_8_4)
-                    or (object == self._widget.PickObus8_1 and not Pick_Obus_8_1)
-                    or (object == self._widget.PickObus8_2 and not Pick_Obus_8_2)
-                    or (object == self._widget.PickObus8_3 and not Pick_Obus_8_3)
-                    or (object == self._widget.PickObus8_4 and not Pick_Obus_8_4)
-                    or (object == self._widget.PickObus8_5 and not Pick_Obus_8_5)
-                    or (object == self._widget.PickObus8_6 and not Pick_Obus_8_6)
-                    or (object == self._widget.PickObus8_7 and not Pick_Obus_8_7)
-                    ):
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71P.png"))
-                    #obuses hacia arriba
-                    elif (
-                        (object == self._widget.PlaceObus8_5 and not Place_Obus_8_5)
-                        or (object == self._widget.PlaceObus8_6 and not Place_Obus_8_6)
-                        or (object == self._widget.PlaceObus8_7 and not Place_Obus_8_7)
-                        or (object == self._widget.PlaceObus8_8 and not Place_Obus_8_8)
-                        or (object == self._widget.PickObus8_8 and not Pick_Obus_8_8)
-                        or (object == self._widget.PickObus8_9 and not Pick_Obus_8_9)
-                        or (object == self._widget.PickObus8_10 and not Pick_Obus_8_10)
-                        or (object == self._widget.PickObus8_11 and not Pick_Obus_8_11)
-                        or (object == self._widget.PickObus8_12 and not Pick_Obus_8_12)
-                        or (object == self._widget.PickObus8_13 and not Pick_Obus_8_13)
-                        or (object == self._widget.PickObus8_14 and not Pick_Obus_8_14)
-                    ):
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71P.png"))
-                if event.type() == QtCore.QEvent.HoverLeave:
-                    #obuses hacia abajo (los de arriba [1-4])
-                    if ((object == self._widget.PlaceObus8_1 and not Place_Obus_8_1)
-                    or (object == self._widget.PlaceObus8_2 and not Place_Obus_8_2)
-                    or (object == self._widget.PlaceObus8_3 and not Place_Obus_8_3)
-                    or (object == self._widget.PlaceObus8_4 and not Place_Obus_8_4)
-                    or (object == self._widget.PickObus8_1 and not Pick_Obus_8_1)
-                    or (object == self._widget.PickObus8_2 and not Pick_Obus_8_2)
-                    or (object == self._widget.PickObus8_3 and not Pick_Obus_8_3)
-                    or (object == self._widget.PickObus8_4 and not Pick_Obus_8_4)
-                    or (object == self._widget.PickObus8_5 and not Pick_Obus_8_5)
-                    or (object == self._widget.PickObus8_6 and not Pick_Obus_8_6)
-                    or (object == self._widget.PickObus8_7 and not Pick_Obus_8_7)
-                    ):
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"))
-                    #obuses hacia arriba
-                    elif (
-                        (object == self._widget.PlaceObus8_5 and not Place_Obus_8_5)
-                        or (object == self._widget.PlaceObus8_6 and not Place_Obus_8_6)
-                        or (object == self._widget.PlaceObus8_7 and not Place_Obus_8_7)
-                        or (object == self._widget.PlaceObus8_8 and not Place_Obus_8_8)
-                        or (object == self._widget.PickObus8_8 and not Pick_Obus_8_8)
-                        or (object == self._widget.PickObus8_9 and not Pick_Obus_8_9)
-                        or (object == self._widget.PickObus8_10 and not Pick_Obus_8_10)
-                        or (object == self._widget.PickObus8_11 and not Pick_Obus_8_11)
-                        or (object == self._widget.PickObus8_12 and not Pick_Obus_8_12)
-                        or (object == self._widget.PickObus8_13 and not Pick_Obus_8_13)
-                        or (object == self._widget.PickObus8_14 and not Pick_Obus_8_14)
-                    ):
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"))        
+            if finger_type == 2 :                
+                #obuses parte izquierda ([1-4])
+                if ((object == self._widget.PlaceObus8_1 and not Place_Obus_8_1)
+                or (object == self._widget.PlaceObus8_2 and not Place_Obus_8_2)
+                or (object == self._widget.PlaceObus8_3 and not Place_Obus_8_3)
+                or (object == self._widget.PlaceObus8_4 and not Place_Obus_8_4)
+                or (object == self._widget.PickObus8_1 and not Pick_Obus_8_1)
+                or (object == self._widget.PickObus8_2 and not Pick_Obus_8_2)
+                or (object == self._widget.PickObus8_3 and not Pick_Obus_8_3)
+                or (object == self._widget.PickObus8_4 and not Pick_Obus_8_4)
+                or (object == self._widget.PickObus8_5 and not Pick_Obus_8_5)
+                or (object == self._widget.PickObus8_6 and not Pick_Obus_8_6)
+                or (object == self._widget.PickObus8_7 and not Pick_Obus_8_7)
+                ):
+                    if event.type() == QtCore.QEvent.HoverEnter:
+                        object.setIcon(QtGui.QIcon(imgObus8izq[1]))
+                    elif event.type() == QtCore.QEvent.HoverLeave:
+                        object.setIcon(QtGui.QIcon(imgObus8izq[0]))
+                #obuses parte derecha
+                elif (
+                    (object == self._widget.PlaceObus8_5 and not Place_Obus_8_5)
+                    or (object == self._widget.PlaceObus8_6 and not Place_Obus_8_6)
+                    or (object == self._widget.PlaceObus8_7 and not Place_Obus_8_7)
+                    or (object == self._widget.PlaceObus8_8 and not Place_Obus_8_8)
+                    or (object == self._widget.PickObus8_8 and not Pick_Obus_8_8)
+                    or (object == self._widget.PickObus8_9 and not Pick_Obus_8_9)
+                    or (object == self._widget.PickObus8_10 and not Pick_Obus_8_10)
+                    or (object == self._widget.PickObus8_11 and not Pick_Obus_8_11)
+                    or (object == self._widget.PickObus8_12 and not Pick_Obus_8_12)
+                    or (object == self._widget.PickObus8_13 and not Pick_Obus_8_13)
+                    or (object == self._widget.PickObus8_14 and not Pick_Obus_8_14)
+                ):
+                    if event.type() == QtCore.QEvent.HoverEnter:
+                        object.setIcon(QtGui.QIcon(imgObus8der[1]))
+                    elif event.type() == QtCore.QEvent.HoverLeave:
+                        object.setIcon(QtGui.QIcon(imgObus8der[0]))
+                      
             #huevera 4
             if finger_type == 3 :
-                if event.type() == QtCore.QEvent.HoverEnter:
-                    if (
-                        (object == self._widget.PlaceObus4_1 and not Place_Obus_4_1)
-                        or (object == self._widget.PlaceObus4_2 and not Place_Obus_4_2)
-                        or (object == self._widget.PlaceObus4_3 and not Place_Obus_4_3)
-                        or (object == self._widget.PlaceObus4_4 and not Place_Obus_4_4)
-                        or (object == self._widget.PickObus4_1 and not Pick_Obus_4_1)
-                        or (object == self._widget.PickObus4_2 and not Pick_Obus_4_2)
-                        or (object == self._widget.PickObus4_3 and not Pick_Obus_4_3)
-                        or (object == self._widget.PickObus4_4 and not Pick_Obus_4_4)
-                        or (object == self._widget.PickObus4_5 and not Pick_Obus_4_5)
-                    ):
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101P.png"))
-                if event.type() == QtCore.QEvent.HoverLeave:
-                    if (
-                        (object == self._widget.PlaceObus4_1 and not Place_Obus_4_1)
-                        or (object == self._widget.PlaceObus4_2 and not Place_Obus_4_2)
-                        or (object == self._widget.PlaceObus4_3 and not Place_Obus_4_3)
-                        or (object == self._widget.PlaceObus4_4 and not Place_Obus_4_4)
-                        or (object == self._widget.PickObus4_1 and not Pick_Obus_4_1)
-                        or (object == self._widget.PickObus4_2 and not Pick_Obus_4_2)
-                        or (object == self._widget.PickObus4_3 and not Pick_Obus_4_3)
-                        or (object == self._widget.PickObus4_4 and not Pick_Obus_4_4)
-                        or (object == self._widget.PickObus4_5 and not Pick_Obus_4_5)
-                    ):
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"))
+     
+                if (
+                    (object == self._widget.PlaceObus4_1 and not Place_Obus_4_1)
+                    or (object == self._widget.PlaceObus4_2 and not Place_Obus_4_2)
+                    or (object == self._widget.PlaceObus4_3 and not Place_Obus_4_3)
+                    or (object == self._widget.PlaceObus4_4 and not Place_Obus_4_4)
+                    or (object == self._widget.PickObus4_1 and not Pick_Obus_4_1)
+                    or (object == self._widget.PickObus4_2 and not Pick_Obus_4_2)
+                    or (object == self._widget.PickObus4_3 and not Pick_Obus_4_3)
+                    or (object == self._widget.PickObus4_4 and not Pick_Obus_4_4)
+                    or (object == self._widget.PickObus4_5 and not Pick_Obus_4_5)
+                ):
+                    if event.type() == QtCore.QEvent.HoverEnter:
+                        object.setIcon(QtGui.QIcon(imgObus4[1]))
+                    elif event.type() == QtCore.QEvent.HoverLeave:
+                        object.setIcon(QtGui.QIcon(imgObus4[0]))
+                       
             #huevera 2
             if finger_type == 4 :
-                if event.type() == QtCore.QEvent.HoverEnter:
-                    if (
-                        (object == self._widget.PlaceObus2_1 and not Place_Obus_2_1)
-                        or (object == self._widget.PlaceObus2_2 and not Place_Obus_2_2)
-                        or (object == self._widget.PickObus2_1 and not Pick_Obus_2_1)
-                        or (object == self._widget.PickObus2_2 and not Pick_Obus_2_2)
-                        or (object == self._widget.PickObus2_3 and not Pick_Obus_2_3)
-                        or (object == self._widget.PickObus2_4 and not Pick_Obus_2_4)
-                    ):            
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111P.png"))
-                if event.type() == QtCore.QEvent.HoverLeave:
-                    if (
-                        (object == self._widget.PlaceObus2_1 and not Place_Obus_2_1)
-                        or (object == self._widget.PlaceObus2_2 and not Place_Obus_2_2)
-                        or (object == self._widget.PickObus2_1 and not Pick_Obus_2_1)
-                        or (object == self._widget.PickObus2_2 and not Pick_Obus_2_2)
-                        or (object == self._widget.PickObus2_3 and not Pick_Obus_2_3)
-                        or (object == self._widget.PickObus2_4 and not Pick_Obus_2_4)
-                    ):
-                        object.setIcon(QtGui.QIcon(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"))
+                if (
+                    (object == self._widget.PlaceObus2_1 and not Place_Obus_2_1)
+                    or (object == self._widget.PlaceObus2_2 and not Place_Obus_2_2)
+                    or (object == self._widget.PickObus2_1 and not Pick_Obus_2_1)
+                    or (object == self._widget.PickObus2_2 and not Pick_Obus_2_2)
+                    or (object == self._widget.PickObus2_3 and not Pick_Obus_2_3)
+                    or (object == self._widget.PickObus2_4 and not Pick_Obus_2_4)
+                ):  
+                    if event.type() == QtCore.QEvent.HoverEnter:
+                        object.setIcon(QtGui.QIcon(imgObus2[1]))
+                    elif event.type() == QtCore.QEvent.HoverLeave:
+                        object.setIcon(QtGui.QIcon(imgObus2[0]))         
+                       
         return False
         
 
@@ -1481,44 +1481,34 @@ class RqtKuka(Plugin):
         Place_Obus_16_14=False
         Place_Obus_16_15=False
         Place_Obus_16_16=False
+        for i in range(1,17):
+            icon=QtGui.QIcon();
+            path = self.select_icon('place', [16, i], 0)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
+            name_method='PlaceObus16_'+str(i)
+            test_method=getattr(self._widget, name_method)
+            test_method.setIcon(icon)
+            test_method.installEventFilter(self)
         for i in range(1,9):
             icon=QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-            name_method='PlaceObus16_'+str(i)
-            test_method=getattr(self._widget, name_method)
-            test_method.setIcon(icon)
-            test_method.installEventFilter(self)
-        for i in range(9,17):
-            icon=QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-            name_method='PlaceObus16_'+str(i)
-            test_method=getattr(self._widget, name_method)
-            test_method.setIcon(icon)
-            test_method.installEventFilter(self)
-        for i in range(1,5):
-            icon=QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-            name_method='PlaceObus8_'+str(i)
-            test_method=getattr(self._widget, name_method)
-            test_method.setIcon(icon)
-            test_method.installEventFilter(self)
-        for i in range(5,9):
-            icon=QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('place', [8, i], 0)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             name_method='PlaceObus8_'+str(i)
             test_method=getattr(self._widget, name_method)
             test_method.setIcon(icon)
             test_method.installEventFilter(self)
         for i in range(1,5):
             icon=QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('place', [4, i], 0)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             name_method='PlaceObus4_'+str(i)
             test_method=getattr(self._widget, name_method)
             test_method.setIcon(icon)
             test_method.installEventFilter(self)
         for i in range(1,3):
             icon=QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('place', [2, i], 0)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             name_method='PlaceObus4_'+str(i)
             test_method=getattr(self._widget, name_method)
             test_method.setIcon(icon)
@@ -1577,34 +1567,20 @@ class RqtKuka(Plugin):
         Pick_Obus_16_18=False
         Pick_Obus_16_19=False
         Pick_Obus_16_20=False
-        for i in range(1,11):
+        for i in range(1,21):
                 name='Pick_Obus_16_'+str(i)
                 icon=QtGui.QIcon();
-                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
+                path=self.select_icon('pick',[16, i],0)
+                icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                 name_method='PickObus16_'+str(i)
                 test_method=getattr(self._widget, name_method)
                 test_method.setIcon(icon)
                 test_method.installEventFilter(self)
-        for i in range(11,21):
-                name='Pick_Obus_16_'+str(i)
-                icon=QtGui.QIcon();
-                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                name_method='PickObus16_'+str(i)
-                test_method=getattr(self._widget, name_method)
-                test_method.setIcon(icon)
-                test_method.installEventFilter(self)
-        for i in range(1,8):
+        for i in range(1,15):
                 name='Pick_Obus_8_'+str(i)
                 icon=QtGui.QIcon();
-                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                name_method='PickObus8_'+str(i)
-                test_method=getattr(self._widget, name_method)
-                test_method.setIcon(icon)
-                test_method.installEventFilter(self)
-        for i in range(8,15):
-                name='Pick_Obus_8_'+str(i)
-                icon=QtGui.QIcon();
-                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
+                path=self.select_icon('pick',[8, i],0)
+                icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                 name_method='PickObus8_'+str(i)
                 test_method=getattr(self._widget, name_method)
                 test_method.setIcon(icon)
@@ -1612,7 +1588,8 @@ class RqtKuka(Plugin):
         for i in range(1,6):
                 name='Pick_Obus_4_'+str(i)
                 icon=QtGui.QIcon();
-                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
+                path=self.select_icon('pick',[4, i],0)
+                icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                 name_method='PickObus4_'+str(i)
                 test_method=getattr(self._widget, name_method)
                 test_method.setIcon(icon)
@@ -1620,7 +1597,8 @@ class RqtKuka(Plugin):
         for i in range(1,5):
                 name='Pick_Obus_2_'+str(i)
                 icon=QtGui.QIcon();
-                icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
+                path=self.select_icon('pick',[2,i],0)
+                icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                 name_method='PickObus2_'+str(i)
                 test_method=getattr(self._widget, name_method)
                 test_method.setIcon(icon)
@@ -1629,7 +1607,7 @@ class RqtKuka(Plugin):
         self.last_obus_selected_pick = -1
 
     
-    def select_icon(self,operation, obus_id,state):
+    def select_icon(self,operation, obus_id, state):        
         #operation es "pick" o "place"
         #obus_id es un vector donde la posicion [0] contiene el calibre y posicion [1] la posicion
         #state=0 normal - blanco
@@ -1640,73 +1618,31 @@ class RqtKuka(Plugin):
         print calibre
         print num
         if calibre == 2:
-            return PATH+"resource/images/rotated-symb_obus_abajo41x111.png"
+            return imgObus2[state]
         elif calibre == 4:
-            return PATH+"resource/images/rotated-symb_obus_abajo37x101.png"
+            return imgObus4[state]
         elif calibre == 8:
             if operation == 'pick':
                 if num < 8:
-                    if state == 0:
-                        return PATH+"resource/images/rotated-symb_obus_arriba26x71.png"
-                    if state == 1:
-                        return PATH+"resource/images/rotated-symb_obus_arriba26x71P.png"
-                    if state == 2:
-                        return PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"
+                    return imgObus8izq[state]                    
                 if num >= 8:
-                    if state == 0:
-                        return PATH+"resource/images/rotated-symb_obus_abajo26x71.png"
-                    if state == 1:
-                        return PATH+"resource/images/rotated-symb_obus_abajo26x71P.png"
-                    if state == 2:
-                        return PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"
+                    return imgObus8der[state]
             elif operation == 'place':
                 if num < 5:
-                    if state == 0:
-                        return PATH+"resource/images/rotated-symb_obus_arriba26x71.png"
-                    if state == 1:
-                        return PATH+"resource/images/rotated-symb_obus_arriba26x71P.png"
-                    if state == 2:
-                        return PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"
+                    return imgObus8izq[state]
                 if num >= 5:
-                    if state == 0:
-                        return PATH+"resource/images/rotated-symb_obus_abajo26x71.png"
-                    if state == 1:
-                        return PATH+"resource/images/rotated-symb_obus_abajo26x71P.png"
-                    if state == 2:
-                        return PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"
+                    return imgObus8der[state]
         elif calibre == 16:
             if operation == 'pick':
                 if num < 11:
-                    if state == 0:
-                        return PATH+"resource/images/rotated-symb_obus_arriba19x51.png"
-                    if state == 1:
-                        return PATH+"resource/images/rotated-symb_obus_arriba19x51P.png"
-                    if state == 2:
-                        return PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"
+                    return imgObus16izq[state]
                 elif num >= 11:
-                    if state == 0:
-                        return PATH+"resource/images/rotated-symb_obus_abajo19x51.png"
-                    if state == 1:
-                        return PATH+"resource/images/rotated-symb_obus_abajo19x51P.png"
-                    if state == 2:
-                        return PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"
+                    return imgObus16der[state]
             elif operation == 'place':
                 if num < 9:
-                    if state == 0:
-                        return PATH+"resource/images/rotated-symb_obus_arriba19x51.png"
-                    if state == 1:
-                        return PATH+"resource/images/rotated-symb_obus_arriba19x51P.png"
-                    if state == 2:
-                        return PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"
+                    return imgObus16izq[state]
                 elif num >= 9:
-                    if state == 0:
-                        return PATH+"resource/images/rotated-symb_obus_abajo19x51.png"
-                    if state == 1:
-                        return PATH+"resource/images/rotated-symb_obus_abajo19x51P.png"
-                    if state == 2:
-                        return PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"
-
-
+                    return imgObus16der[state]
 
     def press_undo_positions_button_pick(self):
         print 'undo_pick'
@@ -1888,7 +1824,8 @@ class RqtKuka(Plugin):
                 ret = placed_abs_service(table_pose_x, table_pose_y, table_pose_z, table_pose_a, table_pose_b, table_pose_c)
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
-                ret=QMessageBox.critical(self._widget, "WARNING!", 'Movement Service not available.', QMessageBox.Ok)
+                ret=QMessageBox.critical(self._widget, "WARNING!", 'Movement Service not available.', QMessageBox.Ok)    
+
 
 #Pick buttons obus 2
     def press_pick_obus2_1_button(self):
@@ -1899,9 +1836,10 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='2_1'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus2_1.setIcon(icon)
-            #Call service to move robot up and then to pre place pose, should be slow
+            #Call service to move robot up and then to pre pick pose, should be slow
             try:
                 picked_rel_service = rospy.ServiceProxy(srv_name_move_rel_slow, set_CartesianEuler_pose)
                 ret_rel=picked_rel_service(0, 0,Prepick_Pose_z-pos_z_kuka , 0, 0, 0)
@@ -1924,7 +1862,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='2_2'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus2_2.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -1949,7 +1888,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='2_3'
             origin_pick=2      
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus2_3.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -1974,7 +1914,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='2_4'
             origin_pick=2      
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus2_4.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -1999,7 +1940,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='4_1'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus4_1.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2023,7 +1965,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='4_2'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus4_2.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2048,7 +1991,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='4_3'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus4_3.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2073,7 +2017,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='4_4'
             origin_pick=2 
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus4_4.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2098,7 +2043,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='4_5'
             origin_pick=2 
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus4_5.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2124,7 +2070,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_1'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_1.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2149,7 +2096,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_2'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_2.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2174,7 +2122,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_3'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_3.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2199,7 +2148,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_4'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_4.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2224,7 +2174,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_5'
             origin_pick=2   
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_5.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2249,7 +2200,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_6'
             origin_pick=2 
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_6.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2274,7 +2226,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_7'
             origin_pick=2 
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_7.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2299,7 +2252,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_8'
             origin_pick=3
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_8.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2324,7 +2278,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_9'
             origin_pick=3
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_9.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2349,7 +2304,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_10'
             origin_pick=3
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_10.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2374,7 +2330,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_11'
             origin_pick=3
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_11.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2399,7 +2356,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_12'
             origin_pick=4      
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_12.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2424,7 +2382,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='8_13'
             origin_pick=4   
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_13.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2449,7 +2408,8 @@ class RqtKuka(Plugin):
             Pick_Obus_8_14=True
             self.last_obus_selected_pick='8_14'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus8_14.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2475,7 +2435,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_1=True
             self.last_obus_selected_pick='16_1'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_1.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2500,7 +2461,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_2=True
             self.last_obus_selected_pick='16_2'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_2.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2524,7 +2486,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='16_3'
             origin_pick=1
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_3.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2549,7 +2512,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_4=True
             self.last_obus_selected_pick='16_4'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_4.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2574,7 +2538,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_5=True
             self.last_obus_selected_pick='16_5'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_5.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2599,7 +2564,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_6=True
             self.last_obus_selected_pick='16_6'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_6.setIcon(icon) 
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2624,7 +2590,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_7=True
             self.last_obus_selected_pick='16_7'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_7.setIcon(icon)      
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2649,7 +2616,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_8=True
             self.last_obus_selected_pick='16_8'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_8.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2674,7 +2642,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_9=True
             self.last_obus_selected_pick='16_9'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_9.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2699,7 +2668,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_10=True
             self.last_obus_selected_pick='16_10'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_10.setIcon(icon)  
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2724,7 +2694,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_11=True
             self.last_obus_selected_pick='16_11'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_11.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2749,7 +2720,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_12=True
             self.last_obus_selected_pick='16_12'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_12.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2774,7 +2746,8 @@ class RqtKuka(Plugin):
             self.last_obus_selected_pick='16_13'
             origin_pick=3
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_13.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2799,7 +2772,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_14=True
             self.last_obus_selected_pick='16_14'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_14.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2824,7 +2798,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_15=True
             self.last_obus_selected_pick='16_15'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_15.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2849,7 +2824,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_16=True
             self.last_obus_selected_pick='16_16'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_16.setIcon(icon) 
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2874,7 +2850,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_17=True
             self.last_obus_selected_pick='16_17'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_17.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2898,7 +2875,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_18=True
             self.last_obus_selected_pick='16_18'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_18.setIcon(icon)
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2923,7 +2901,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_19=True
             self.last_obus_selected_pick='16_19'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_19.setIcon(icon)     
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2948,7 +2927,8 @@ class RqtKuka(Plugin):
             Pick_Obus_16_20=True
             self.last_obus_selected_pick='16_20'
             icon = QtGui.QIcon();
-            icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+            path = self.select_icon('pick',self.last_obus_selected_pick.split("_"),2)
+            icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
             self._widget.PickObus16_20.setIcon(icon)   
             #Call service to move robot up and then to pre place pose, should be slow
             try:
@@ -2981,7 +2961,8 @@ class RqtKuka(Plugin):
                     Place_Obus_2_1=True
                     self.last_obus_selected_place='2_1'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus2_1.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3001,10 +2982,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus2_1.setIcon(icon)
+                    
                     
     #obus2
     def press_obus2_2_button(self):
@@ -3020,7 +2998,8 @@ class RqtKuka(Plugin):
                     Place_Obus_2_2=True
                     self.last_obus_selected_place='2_2'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus2_2.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3040,10 +3019,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo41x111.png"), QtGui.QIcon.Disabled)
-                   # self._widget.PlaceObus2_2.setIcon(icon)
+                    
     #huevera4
     #obus1
     def press_obus4_1_button(self):
@@ -3059,7 +3035,8 @@ class RqtKuka(Plugin):
                     Place_Obus_4_1=True
                     self.last_obus_selected_place='4_1'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus4_1.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3082,10 +3059,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus4_1.setIcon(icon)
+                    
     #obus2
     def press_obus4_2_button(self):
         global Place_Obus_4_2
@@ -3100,7 +3074,8 @@ class RqtKuka(Plugin):
                     Place_Obus_4_2=True
                     self.last_obus_selected_place='4_2'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus4_2.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3122,10 +3097,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus4_2.setIcon(icon)
+                    
     #obus3
     def press_obus4_3_button(self):
         global Place_Obus_4_3
@@ -3140,7 +3112,8 @@ class RqtKuka(Plugin):
                     Place_Obus_4_3=True
                     self.last_obus_selected_place='4_3'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus4_3.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3162,10 +3135,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus4_3.setIcon(icon)
+                    
     #obus4
     def press_obus4_4_button(self):
         global Place_Obus_4_4
@@ -3180,7 +3150,8 @@ class RqtKuka(Plugin):
                     Place_Obus_4_4=True
                     self.last_obus_selected_place='4_4'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus4_4.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3202,10 +3173,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon()
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo37x101.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus4_4.setIcon(icon)
+                    
     #huevera8
     #obus1
     def press_obus8_1_button(self):
@@ -3221,7 +3189,8 @@ class RqtKuka(Plugin):
                     Place_Obus_8_1=True
                     self.last_obus_selected_place='8_1'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus8_1.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3243,10 +3212,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus8_1.setIcon(icon)
+                    
     #obus2
     def press_obus8_2_button(self):
         global Place_Obus_8_2
@@ -3261,7 +3227,8 @@ class RqtKuka(Plugin):
                     Place_Obus_8_2=True
                     self.last_obus_selected_place='8_2'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus8_2.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3283,10 +3250,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus8_2.setIcon(icon)
+                    
     #obus3
     def press_obus8_3_button(self):
         global Place_Obus_8_3
@@ -3301,7 +3265,8 @@ class RqtKuka(Plugin):
                     Place_Obus_8_3=True
                     self.last_obus_selected_place='8_3'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus8_3.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3323,10 +3288,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus8_3.setIcon(icon)
+                    
     #obus4
     def press_obus8_4_button(self):
         global Place_Obus_8_4
@@ -3341,7 +3303,8 @@ class RqtKuka(Plugin):
                     Place_Obus_8_4=True
                     self.last_obus_selected_place='8_4'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus8_4.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3363,10 +3326,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus8_4.setIcon(icon)
+                    
     #obus5
     def press_obus8_5_button(self):
         global Place_Obus_8_5
@@ -3381,7 +3341,8 @@ class RqtKuka(Plugin):
                     Place_Obus_8_5=True
                     self.last_obus_selected_place='8_5'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus8_5.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3403,10 +3364,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus8_5.setIcon(icon)
+                    
     #obus6
     def press_obus8_6_button(self):
         global Place_Obus_8_6
@@ -3421,7 +3379,8 @@ class RqtKuka(Plugin):
                     Place_Obus_8_6=True
                     self.last_obus_selected_place='8_6'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus8_6.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3443,10 +3402,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus8_6.setIcon(icon)
+                    
     #obus7
     def press_obus8_7_button(self):
         global Place_Obus_8_7
@@ -3461,7 +3417,8 @@ class RqtKuka(Plugin):
                     Place_Obus_8_7=True
                     self.last_obus_selected_place='8_7'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus8_7.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3483,10 +3440,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus8_7.setIcon(icon)
+                    
     #obus8
     def press_obus8_8_button(self):
         global Place_Obus_8_8
@@ -3501,7 +3455,8 @@ class RqtKuka(Plugin):
                     Place_Obus_8_8=True
                     self.last_obus_selected_place='8_8'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo26x71PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus8_8.setIcon(icon)
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3523,10 +3478,7 @@ class RqtKuka(Plugin):
                         #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba26x71.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus8_8.setIcon(icon)
+                    
     #huevera16
     #obus1
     def press_obus16_1_button(self):
@@ -3542,7 +3494,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_1=True
                     self.last_obus_selected_place='16_1'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_1.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3565,10 +3518,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_1.setIcon(icon)
+                    
                 
     #obus2
     def press_obus16_2_button(self):
@@ -3584,7 +3534,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_2=True
                     self.last_obus_selected_place='16_2'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_2.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3607,10 +3558,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_2.setIcon(icon)            
+                                
     #obus3
     def press_obus16_3_button(self):
         global Place_Obus_16_3
@@ -3625,7 +3573,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_3=True
                     self.last_obus_selected_place='16_3'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_3.setIcon(icon)                        
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3648,10 +3597,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_3.setIcon(icon)            
+                                
     #obus4
     def press_obus16_4_button(self):
         global Place_Obus_16_4
@@ -3666,7 +3612,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_4=True
                     self.last_obus_selected_place='16_4'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_4.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3689,10 +3636,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_4.setIcon(icon)            
+                                
     #obus5
     def press_obus16_5_button(self):
         global Place_Obus_16_5
@@ -3707,7 +3651,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_5=True
                     self.last_obus_selected_place='16_5'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_5.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3730,10 +3675,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_5.setIcon(icon)            
+                                
     #obus6
     def press_obus16_6_button(self):
         global Place_Obus_16_6
@@ -3748,7 +3690,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_6=True
                     self.last_obus_selected_place='16_6'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_6.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3771,10 +3714,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_6.setIcon(icon)            
+                              
     #obus7
     def press_obus16_7_button(self):
         global Place_Obus_16_7
@@ -3789,7 +3729,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_7=True
                     self.last_obus_selected_place='16_7'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_7.setIcon(icon)            
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3812,10 +3753,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_7.setIcon(icon) 
+                     
     #obus8
     def press_obus16_8_button(self):
         global Place_Obus_16_8
@@ -3830,7 +3768,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_8=True
                     self.last_obus_selected_place='16_8'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_8.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3853,10 +3792,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_8.setIcon(icon) 
+                    
     #obus9
     def press_obus16_9_button(self):
         global Place_Obus_16_9
@@ -3871,7 +3807,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_9=True
                     self.last_obus_selected_place='16_9'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_9.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3894,10 +3831,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_9.setIcon(icon) 
+                     
     #obus10
     def press_obus16_10_button(self):
         global Place_Obus_16_10
@@ -3912,7 +3846,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_10=True
                     self.last_obus_selected_place='16_10'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_10.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3935,10 +3870,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_10.setIcon(icon) 
+                    
     #obus11
     def press_obus16_11_button(self):
         global Place_Obus_16_11
@@ -3953,7 +3885,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_11=True
                     self.last_obus_selected_place='16_11'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_11.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -3976,10 +3909,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_11.setIcon(icon) 
+                    
     #obus12
     def press_obus16_12_button(self):
         global Place_Obus_16_12
@@ -3994,7 +3924,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_12=True
                     self.last_obus_selected_place='16_12'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_12.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -4017,10 +3948,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_12.setIcon(icon) 
+                    
     #obus13
     def press_obus16_13_button(self):
         global Place_Obus_16_13
@@ -4035,7 +3963,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_13=True
                     self.last_obus_selected_place='16_13'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_13.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -4058,10 +3987,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_13.setIcon(icon) 
+                    
     #obus14
     def press_obus16_14_button(self):
         global Place_Obus_16_14
@@ -4076,7 +4002,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_14=True
                     self.last_obus_selected_place='16_14'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_14.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -4099,10 +4026,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_14.setIcon(icon) 
+                   
     #obus15
     def press_obus16_15_button(self):
         global Place_Obus_16_15
@@ -4117,7 +4041,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_15=True
                     self.last_obus_selected_place='16_15'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_15.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -4140,10 +4065,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_arriba19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_15.setIcon(icon) 
+                     
     #obus16
     def press_obus16_16_button(self):
         global Place_Obus_16_16
@@ -4158,7 +4080,8 @@ class RqtKuka(Plugin):
                     Place_Obus_16_16=True
                     self.last_obus_selected_place='16_16'
                     icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51PP.png"), QtGui.QIcon.Disabled)
+                    path = self.select_icon('place',self.last_obus_selected_place.split("_"),2)
+                    icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
                     self._widget.PlaceObus16_16.setIcon(icon) 
                     #llamara al servicio de mover
                     global KUKA_AUT
@@ -4181,10 +4104,7 @@ class RqtKuka(Plugin):
                         while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
-                    #y volvera a poner el color original
-                    icon = QtGui.QIcon();
-                    icon.addPixmap(QtGui.QPixmap(PATH+"resource/images/rotated-symb_obus_abajo19x51.png"), QtGui.QIcon.Disabled)
-                    #self._widget.PlaceObus16_16.setIcon(icon) 
+                    
     def press_tool_homming(self):
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nBe sure there is no obus picked', QMessageBox.Ok, QMessageBox.Cancel)
         #ret = QMessageBox.critical(self._widget, "WARNING!", 'The tool is activated and there is some weight \ndetected by the gauges!', QMessageBox.Ok)
