@@ -42,8 +42,9 @@ STATE_MOVING_TO_PLACE=4
 STATE_PLACED=5
 STATE_HOMING=6
 
-#PATH="/home/suippes/kuka_catkin_ws/src/rqt_kuka/"
-PATH="/home/angel/workspaces/rqt_kuka/src/rqt_kuka/"
+PATH="/home/suippes/kuka_catkin_ws/src/rqt_kuka/"
+#PATH="/home/angel/workspaces/rqt_kuka/src/rqt_kuka/"
+
 #images
 #[0] original - blanca   [1] resaltada - verde    [2] seleccionada - roja
 imgObus16izq = [PATH+'resource/images/obus_izq_19x51_0.png', PATH+'resource/images/obus_izq_19x51_1.png', PATH+'resource/images/obus_izq_19x51_2.png']
@@ -280,6 +281,7 @@ class RqtKuka(Plugin):
         
         print '__Checking background processes__'        
         #Joysticks management with multiplexor        
+        #command_string = "screen -S mux -d -m rosrun topic_tools mux /kuka_pad/joy /kuka_pad/ps4_joy /kuka_pad/itowa_joy mux:=mux_joy __name:=joy_mux_node &"
         command_string = "rosrun topic_tools mux /kuka_pad/joy /kuka_pad/ps4_joy /kuka_pad/itowa_joy mux:=mux_joy __name:=joy_mux_node &"
         os.system(command_string)
         #PS4 by default
@@ -287,7 +289,8 @@ class RqtKuka(Plugin):
         os.system(command_string)
         
         ###launch MAIN nodes: Joysticks and main
-        command_string = "rosnode kill /kuka_pad/ps4_joystick; sleep 1; rosnode kill /kuka_pad/itowa_safe_joystick; sleep 1;rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"        
+        command_string = "killall screen; sleep 1; screen -S bringup -d -m roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch"
+        #command_string = "rosnode kill /kuka_pad/ps4_joystick; sleep 1; rosnode kill /kuka_pad/itowa_safe_joystick; sleep 1;rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"        
         ###command_string = "rosnode kill /kuka_pad/ps4_joystick; sleep 1; rosnode kill /kuka_pad/itowa_safe_joystick; sleep 1;rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1;"        
         os.system(command_string)
                     
@@ -1517,7 +1520,7 @@ class RqtKuka(Plugin):
         self.last_obus_selected_place = -1
                 
     def press_reset_positions_button_pick(self):
-        global Pick_Obus_2_1, Pick_Obus_2_2, Pick_Obus_2_3, Pick_Obus_2_4, Pick_Obus_4_1, Pick_Obus_4_2, Pick_Obus_4_3, Pick_Obus_4_4
+        global Pick_Obus_2_1, Pick_Obus_2_2, Pick_Obus_2_3, Pick_Obus_2_4, Pick_Obus_4_1, Pick_Obus_4_2, Pick_Obus_4_3, Pick_Obus_4_4, Pick_Obus_4_5
         global Pick_Obus_8_1, Pick_Obus_8_2, Pick_Obus_8_3, Pick_Obus_8_4, Pick_Obus_8_5, Pick_Obus_8_6, Pick_Obus_8_7, Pick_Obus_8_8,Pick_Obus_8_9, Pick_Obus_8_10, Pick_Obus_8_11, Pick_Obus_8_12, Pick_Obus_8_13, Pick_Obus_8_14
         global Pick_Obus_16_1, Pick_Obus_16_2, Pick_Obus_16_3, Pick_Obus_16_4, Pick_Obus_16_5, Pick_Obus_16_6, Pick_Obus_16_7, Pick_Obus_16_8,Pick_Obus_16_9, Pick_Obus_16_10
         global Pick_Obus_16_11, Pick_Obus_16_12, Pick_Obus_16_13, Pick_Obus_16_14, Pick_Obus_16_15, Pick_Obus_16_16, Pick_Obus_16_17, Pick_Obus_16_18, Pick_Obus_16_19, Pick_Obus_16_20
@@ -1531,6 +1534,7 @@ class RqtKuka(Plugin):
         Pick_Obus_4_2=False
         Pick_Obus_4_3=False
         Pick_Obus_4_4=False
+        Pick_Obus_4_5=False
         #Hueveras de 8
         Pick_Obus_8_1=False
         Pick_Obus_8_2=False
@@ -1615,8 +1619,7 @@ class RqtKuka(Plugin):
         #state=2 seleccionado - rojo
         calibre = int(obus_id[0])
         num = int(obus_id[1])
-        print calibre
-        print num
+        
         if calibre == 2:
             return imgObus2[state]
         elif calibre == 4:
@@ -2950,10 +2953,11 @@ class RqtKuka(Plugin):
     #obus1
     def press_obus2_1_button(self):
         global Place_Obus_2_1
-        if(Place_Obus_2_1==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_2_1=False
+        #if(Place_Obus_2_1==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                #        Place_Obus_2_1=False
         if(Place_Obus_2_1==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -2987,10 +2991,11 @@ class RqtKuka(Plugin):
     #obus2
     def press_obus2_2_button(self):
         global Place_Obus_2_2
-        if(Place_Obus_2_2==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_2_2=False
+        #if(Place_Obus_2_2==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_2_2=False
         if(Place_Obus_2_2==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3024,10 +3029,11 @@ class RqtKuka(Plugin):
     #obus1
     def press_obus4_1_button(self):
         global Place_Obus_4_1
-        if(Place_Obus_4_1==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_4_1=False
+        #if(Place_Obus_4_1==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_4_1=False
         if(Place_Obus_4_1==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:           
@@ -3063,10 +3069,11 @@ class RqtKuka(Plugin):
     #obus2
     def press_obus4_2_button(self):
         global Place_Obus_4_2
-        if(Place_Obus_4_2==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_4_2=False
+        #if(Place_Obus_4_2==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_4_2=False
         if(Place_Obus_4_2==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:    
@@ -3101,10 +3108,11 @@ class RqtKuka(Plugin):
     #obus3
     def press_obus4_3_button(self):
         global Place_Obus_4_3
-        if(Place_Obus_4_3==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_4_3=False
+        #if(Place_Obus_4_3==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_4_3=False
         if(Place_Obus_4_3==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:           
@@ -3139,10 +3147,11 @@ class RqtKuka(Plugin):
     #obus4
     def press_obus4_4_button(self):
         global Place_Obus_4_4
-        if(Place_Obus_4_4==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_4_4=False
+        #if(Place_Obus_4_4==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_4_4=False
         if(Place_Obus_4_4==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3178,10 +3187,11 @@ class RqtKuka(Plugin):
     #obus1
     def press_obus8_1_button(self):
         global Place_Obus_8_1
-        if(Place_Obus_8_1==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_8_1=False
+        #if(Place_Obus_8_1==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_8_1=False
         if(Place_Obus_8_1==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3216,10 +3226,11 @@ class RqtKuka(Plugin):
     #obus2
     def press_obus8_2_button(self):
         global Place_Obus_8_2
-        if(Place_Obus_8_2==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_8_2=False
+        #if(Place_Obus_8_2==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_8_2=False
         if(Place_Obus_8_2==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3254,10 +3265,11 @@ class RqtKuka(Plugin):
     #obus3
     def press_obus8_3_button(self):
         global Place_Obus_8_3
-        if(Place_Obus_8_3==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_8_3=False
+        #if(Place_Obus_8_3==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_8_3=False
         if(Place_Obus_8_3==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3292,10 +3304,11 @@ class RqtKuka(Plugin):
     #obus4
     def press_obus8_4_button(self):
         global Place_Obus_8_4
-        if(Place_Obus_8_4==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_8_4=False
+        #if(Place_Obus_8_4==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_8_4=False
         if(Place_Obus_8_4==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3330,10 +3343,11 @@ class RqtKuka(Plugin):
     #obus5
     def press_obus8_5_button(self):
         global Place_Obus_8_5
-        if(Place_Obus_8_5==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_8_5=False
+        #if(Place_Obus_8_5==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_8_5=False
         if(Place_Obus_8_5==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3368,10 +3382,11 @@ class RqtKuka(Plugin):
     #obus6
     def press_obus8_6_button(self):
         global Place_Obus_8_6
-        if(Place_Obus_8_6==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_8_6=False
+        #if(Place_Obus_8_6==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_8_6=False
         if(Place_Obus_8_6==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:           
@@ -3406,10 +3421,11 @@ class RqtKuka(Plugin):
     #obus7
     def press_obus8_7_button(self):
         global Place_Obus_8_7
-        if(Place_Obus_8_7==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_8_7=False
+        #if(Place_Obus_8_7==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_8_7=False
         if(Place_Obus_8_7==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3444,10 +3460,11 @@ class RqtKuka(Plugin):
     #obus8
     def press_obus8_8_button(self):
         global Place_Obus_8_8
-        if(Place_Obus_8_8==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_8_8=False
+        #if(Place_Obus_8_8==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_8_8=False
         if(Place_Obus_8_8==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:           
@@ -3483,10 +3500,11 @@ class RqtKuka(Plugin):
     #obus1
     def press_obus16_1_button(self):
         global Place_Obus_16_1
-        if(Place_Obus_16_1==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_1=False
+        #if(Place_Obus_16_1==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_1=False
         if(Place_Obus_16_1==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3523,10 +3541,11 @@ class RqtKuka(Plugin):
     #obus2
     def press_obus16_2_button(self):
         global Place_Obus_16_2
-        if(Place_Obus_16_2==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_2=False
+        #if(Place_Obus_16_2==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_2=False
         if(Place_Obus_16_2==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3562,10 +3581,11 @@ class RqtKuka(Plugin):
     #obus3
     def press_obus16_3_button(self):
         global Place_Obus_16_3
-        if(Place_Obus_16_3==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_3=False
+        #if(Place_Obus_16_3==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_3=False
         if(Place_Obus_16_3==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3601,10 +3621,11 @@ class RqtKuka(Plugin):
     #obus4
     def press_obus16_4_button(self):
         global Place_Obus_16_4
-        if(Place_Obus_16_4==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_4=False
+        #if(Place_Obus_16_4==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_4=False
         if(Place_Obus_16_4==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3640,10 +3661,11 @@ class RqtKuka(Plugin):
     #obus5
     def press_obus16_5_button(self):
         global Place_Obus_16_5
-        if(Place_Obus_16_5==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_5=False
+        #if(Place_Obus_16_5==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_5=False
         if(Place_Obus_16_5==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3679,10 +3701,11 @@ class RqtKuka(Plugin):
     #obus6
     def press_obus16_6_button(self):
         global Place_Obus_16_6
-        if(Place_Obus_16_6==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_6=False
+        #if(Place_Obus_16_6==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_6=False
         if(Place_Obus_16_6==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:           
@@ -3718,10 +3741,11 @@ class RqtKuka(Plugin):
     #obus7
     def press_obus16_7_button(self):
         global Place_Obus_16_7
-        if(Place_Obus_16_7==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_7=False
+        #if(Place_Obus_16_7==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_7=False
         if(Place_Obus_16_7==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3757,10 +3781,11 @@ class RqtKuka(Plugin):
     #obus8
     def press_obus16_8_button(self):
         global Place_Obus_16_8
-        if(Place_Obus_16_8==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_8=False
+        #if(Place_Obus_16_8==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_8=False
         if(Place_Obus_16_8==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:           
@@ -3796,10 +3821,11 @@ class RqtKuka(Plugin):
     #obus9
     def press_obus16_9_button(self):
         global Place_Obus_16_9
-        if(Place_Obus_16_9==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_9=False
+        #if(Place_Obus_16_9==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_9=False
         if(Place_Obus_16_9==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3835,10 +3861,11 @@ class RqtKuka(Plugin):
     #obus10
     def press_obus16_10_button(self):
         global Place_Obus_16_10
-        if(Place_Obus_16_10==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_10=False
+        #if(Place_Obus_16_10==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_10=False
         if(Place_Obus_16_10==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3874,10 +3901,11 @@ class RqtKuka(Plugin):
     #obus11
     def press_obus16_11_button(self):
         global Place_Obus_16_11
-        if(Place_Obus_16_11==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_11=False
+        #if(Place_Obus_16_11==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_11=False
         if(Place_Obus_16_11==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3913,10 +3941,11 @@ class RqtKuka(Plugin):
     #obus12
     def press_obus16_12_button(self):
         global Place_Obus_16_12
-        if(Place_Obus_16_12==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_12=False
+        #if(Place_Obus_16_12==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                        #Place_Obus_16_12=False
         if(Place_Obus_16_12==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3952,10 +3981,11 @@ class RqtKuka(Plugin):
     #obus13
     def press_obus16_13_button(self):
         global Place_Obus_16_13
-        if(Place_Obus_16_13==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_13=False
+        #if(Place_Obus_16_13==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                #        Place_Obus_16_13=False
         if(Place_Obus_16_13==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -3991,10 +4021,11 @@ class RqtKuka(Plugin):
     #obus14
     def press_obus16_14_button(self):
         global Place_Obus_16_14
-        if(Place_Obus_16_14==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_14=False
+        #if(Place_Obus_16_14==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                #        Place_Obus_16_14=False
         if(Place_Obus_16_14==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:           
@@ -4030,10 +4061,11 @@ class RqtKuka(Plugin):
     #obus15
     def press_obus16_15_button(self):
         global Place_Obus_16_15
-        if(Place_Obus_16_15==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_15=False
+        #if(Place_Obus_16_15==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                #        Place_Obus_16_15=False
         if(Place_Obus_16_15==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:
@@ -4069,10 +4101,11 @@ class RqtKuka(Plugin):
     #obus16
     def press_obus16_16_button(self):
         global Place_Obus_16_16
-        if(Place_Obus_16_16==True):
-                ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
-                if(ret==QMessageBox.Ok):
-                        Place_Obus_16_16=False
+        #if(Place_Obus_16_16==True):
+                #ret = QMessageBox.warning(self._widget, "ERROR!", 'Position already ocuppated.', QMessageBox.Ok)
+                #ret = QMessageBox.warning(self._widget, "WARNING!", 'Apparently that position is already picked.\n Do you still want to go?', QMessageBox.Ok, QMessageBox.Cancel)
+                #if(ret==QMessageBox.Ok):
+                #        Place_Obus_16_16=False
         if(Place_Obus_16_16==False):
                 ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot moves automatically', QMessageBox.Ok, QMessageBox.Cancel)
                 if ret == QMessageBox.Ok:           
@@ -4731,7 +4764,8 @@ class RqtKuka(Plugin):
     
     def press_reset_robot_button(self):
         #command_string = "rosnode kill /kuka_pad/ps4_joystick; sleep 1; rosnode kill /kuka_pad/itowa_safe_joystick; sleep 1; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"
-        command_string = "rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; ROS_NAMESPACE=kuka_robot roslaunch kuka_rsi_cartesian_hw_interface test_hardware_interface.launch &"
+        command_string = "killall screen; sleep 1; screen -S bringup -d -m roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch"
+        #command_string = "rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; ROS_NAMESPACE=kuka_robot roslaunch kuka_rsi_cartesian_hw_interface test_hardware_interface.launch &"
         os.system(command_string)
         
     def shutdown_plugin(self):
@@ -4748,7 +4782,8 @@ class RqtKuka(Plugin):
         self.sub_tool_status.unregister()
         self.sub_tool_state.unregister()
         #Stop nodes
-        command_string = "rosnode kill /kuka_pad/itowa_safe_joystick; rosnode kill /kuka_pad/ps4_joystick; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface"        
+        command_string = "killall screen"
+        #command_string = "rosnode kill /kuka_pad/itowa_safe_joystick; rosnode kill /kuka_pad/ps4_joystick; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface"        
         os.system(command_string)
         pass
     def sleep_loop(self,delay):
