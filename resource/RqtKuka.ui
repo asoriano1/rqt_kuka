@@ -4030,7 +4030,7 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>100</x>
         <y>50</y>
         <width>61</width>
         <height>51</height>
@@ -4049,7 +4049,7 @@
      <widget class="QLabel" name="under_voltage_tool">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>170</x>
         <y>50</y>
         <width>64</width>
         <height>51</height>
@@ -4068,7 +4068,7 @@
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>240</x>
         <y>50</y>
         <width>62</width>
         <height>51</height>
@@ -4095,6 +4095,25 @@
       </property>
       <property name="text">
        <string>Alerts:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_door">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>50</y>
+        <width>61</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>images/puerta_verde_peq.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
