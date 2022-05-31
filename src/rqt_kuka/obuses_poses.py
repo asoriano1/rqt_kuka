@@ -11,12 +11,12 @@ pose_z_safe = 1550 #1535.39
 
 
 ##AXIS POSITIONS A1 and A6
-pick_A1=-87.0
-pick_right_A6=267.0
-pick_left_A6=87.0
-place_A1=87.0
-place_left_A6=267.0
-place_right_A6=87.0
+pick_A1=-87.0 #-87
+pick_right_A6=271.0 #267
+pick_left_A6=87.0 #87
+place_A1=87.0 #87
+place_left_A6=271.0 #267
+place_right_A6=87.0 #87
 #rotation table
 table_pose_x = 1620
 table_pose_y = -8.45
