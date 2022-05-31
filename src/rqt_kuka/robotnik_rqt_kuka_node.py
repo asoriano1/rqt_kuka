@@ -24,7 +24,7 @@ from std_msgs.msg import Bool, Float64, Float32
 from std_srvs.srv import SetBool
 from sensor_msgs.msg import JointState
 from robotnik_msgs.srv import home, set_odometry, set_CartesianEuler_pose, set_digital_output, set_float_value
-from robotnik_msgs.msg import Cartesian_Euler_pose, RobotnikMotorsStatus, MotorStatus
+from robotnik_msgs.msg import Cartesian_Euler_pose, RobotnikMotorsStatus, MotorStatus, inputs_outputs
 from geometry_msgs.msg import Pose, Point, Quaternion
 from kuka_rsi_cartesian_hw_interface.srv import set_A1_A6
 
@@ -91,6 +91,7 @@ topic_current='/kuka_tool/robotnik_base_hw/current0'
 topic_horiz_force='/phidget_load/vertical_force'
 topic_motor_status='/kuka_tool/robotnik_base_hw/status'
 topic_tool_state='/kuka_tool/joint_states'
+topic_door_state='/phidgets_vint_hub/io'
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
 #Prepick_Pose=Pose(Point(100, 100, 100), Quaternion(0, 0, 0, 1))
@@ -1042,6 +1043,8 @@ class RqtKuka(Plugin):
         #subscriber to tool state
         self.sub_tool_state = rospy.Subscriber(topic_tool_state, JointState,  self.callback_tool_state)
         
+        #subscriber to door state
+        self.sub_door_status = rospy.Subscriber(topic_door_state, inputs_outputs, self.callback_door_state)
         
         #Robot settings initialization
         #Default: deadman activated
@@ -1050,7 +1053,7 @@ class RqtKuka(Plugin):
                 ret = deadman_service(True)
         except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
-                ret=QMessageBox.critical(self._widget, "WARNING!", 'Deadman service not available', QMessageBox.Ok)
+                #ret=QMessageBox.critical(self._widget, "WARNING!", 'Deadman service not available', QMessageBox.Ok)
                 
         #Default: angle activated
         try:
@@ -1058,14 +1061,14 @@ class RqtKuka(Plugin):
                 ret = angle_mode_service(True)
         except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
-                ret=QMessageBox.critical(self._widget, "WARNING!", 'Angle Mode service not available', QMessageBox.Ok)
+                #ret=QMessageBox.critical(self._widget, "WARNING!", 'Angle Mode service not available', QMessageBox.Ok)
         #Default: tool orientation reference deactivated
         try:
                 toolOrientation_service=rospy.ServiceProxy(srv_rel_tool, SetBool)
                 ret = toolOrientation_service(False)
         except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
-                ret=QMessageBox.critical(self._widget, "WARNING!", 'Tool Orientation service not available', QMessageBox.Ok)
+                #ret=QMessageBox.critical(self._widget, "WARNING!", 'Tool Orientation service not available', QMessageBox.Ok)
 
         
         # Show _widget.windowTitle on left-top of each plugin (when 
@@ -1512,7 +1515,7 @@ class RqtKuka(Plugin):
             icon=QtGui.QIcon();
             path = self.select_icon('place', [2, i], 0)
             icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Disabled)
-            name_method='PlaceObus4_'+str(i)
+            name_method='PlaceObus2_'+str(i)
             test_method=getattr(self._widget, name_method)
             test_method.setIcon(icon)
             test_method.installEventFilter(self)
@@ -1647,8 +1650,8 @@ class RqtKuka(Plugin):
                 elif num >= 9:
                     return imgObus16der[state]
 
-    def press_undo_positions_button_pick(self):
-        print 'undo_pick'
+    def press_undo_positions_button_pick(self): 
+                   
         if self.last_obus_selected_pick == -1: return
         #last pick_obus_selected format 'YY_XX'
         #Pick_Obus_YY_XX = False
@@ -1668,7 +1671,7 @@ class RqtKuka(Plugin):
         self.last_obus_selected_pick = -1
 
     def press_undo_positions_button_place(self):
-        print 'undo_place'
+        
         if self.last_obus_selected_place == -1: return
         #last place_obus_selected format 'YY_XX'
         #Place_Obus_YY_XX = False
@@ -1732,6 +1735,15 @@ class RqtKuka(Plugin):
         if(motor1.status=="FAULT"):
             first_time_enabled=True
             #print first_time_enabled
+            
+    def callback_door_state(self, data):
+        
+        if data.digital_inputs[0]:
+            pixmap =QtGui.QPixmap(PATH+"resource/images/puerta_roja_peq.png")
+            self._widget.label_door.setPixmap(pixmap)
+        else :
+            pixmap =QtGui.QPixmap(PATH+"resource/images/puerta_verde_peq.png")
+            self._widget.label_door.setPixmap(pixmap)
                         
     def callback_motor_status2(self,data):
             self.do_callback_motor_status.emit(data)
@@ -1832,6 +1844,7 @@ class RqtKuka(Plugin):
 
 #Pick buttons obus 2
     def press_pick_obus2_1_button(self):
+
         global Pick_Obus_2_1, pos_z_kuka, pos_a_kuka, origin_pick # KUKA_AUT,
         ret = QMessageBox.warning(self._widget, "WARNING!", 'Are you sure? \nRobot is going to move autonomously', QMessageBox.Ok, QMessageBox.Cancel)
         if ret == QMessageBox.Ok:
@@ -2980,10 +2993,10 @@ class RqtKuka(Plugin):
                         ret = place_axes_service(place_A1, place_left_A6)
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, H2O1_Pose_z, H2O1_Pose_a, H2O1_Pose_b, H2O1_Pose_c)
-                        KUKA_AUT=True
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H2O1_Pose_x, H2O1_Pose_y, H2O1_Pose_z, H2O1_Pose_a, H2O1_Pose_b, H2O1_Pose_c)
+                        #KUKA_AUT=True
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     
@@ -3018,10 +3031,10 @@ class RqtKuka(Plugin):
                         ret = place_axes_service(place_A1, place_right_A6)
                         KUKA_AUT=True
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H2O2_Pose_x, H2O2_Pose_y, H2O2_Pose_z, H2O2_Pose_a, H2O2_Pose_b, H2O2_Pose_c)
-                        KUKA_AUT=True
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H2O2_Pose_x, H2O2_Pose_y, H2O2_Pose_z, H2O2_Pose_a, H2O2_Pose_b, H2O2_Pose_c)
+                        #KUKA_AUT=True
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     
@@ -3058,7 +3071,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H4O1_Pose_x, H4O1_Pose_y, H4O1_Pose_z, H4O1_Pose_a, H4O1_Pose_b, H4O1_Pose_c)
                         #KUKA_AUT=True
                         #self.sleep_loop(2)
@@ -3098,7 +3111,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H4O2_Pose_x, H4O2_Pose_y, H4O2_Pose_z, H4O2_Pose_a, H4O2_Pose_b, H4O2_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3137,7 +3150,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H4O3_Pose_x, H4O3_Pose_y, H4O3_Pose_z, H4O3_Pose_a, H4O3_Pose_b, H4O3_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3216,7 +3229,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O1_Pose_x, H8O1_Pose_y, H8O1_Pose_z, H8O1_Pose_a, H8O1_Pose_b, H8O1_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3255,7 +3268,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O2_Pose_x, H8O2_Pose_y, H8O2_Pose_z, H8O2_Pose_a, H8O2_Pose_b, H8O2_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3294,7 +3307,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O3_Pose_x, H8O3_Pose_y, H8O3_Pose_z, H8O3_Pose_a, H8O3_Pose_b, H8O3_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3333,7 +3346,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O4_Pose_x, H8O4_Pose_y, H8O4_Pose_z, H8O4_Pose_a, H8O4_Pose_b, H8O4_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3372,7 +3385,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O5_Pose_x, H8O5_Pose_y, H8O5_Pose_z, H8O5_Pose_a, H8O5_Pose_b, H8O5_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3411,7 +3424,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O6_Pose_x, H8O6_Pose_y, H8O6_Pose_z, H8O6_Pose_a, H8O6_Pose_b, H8O6_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3450,7 +3463,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O7_Pose_x, H8O7_Pose_y, H8O7_Pose_z, H8O7_Pose_a, H8O7_Pose_b, H8O7_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3489,7 +3502,7 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
                         #ret = placed_abs_service(H8O8_Pose_x, H8O8_Pose_y, H8O8_Pose_z, H8O8_Pose_a, H8O8_Pose_b, H8O8_Pose_c)
                         #KUKA_AUT=True
                         #while KUKA_AUT: self.sleep_loop(0.3)
@@ -3529,11 +3542,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
-                        ret2 = placed_abs_service(H16O1_Pose_x, H16O1_Pose_y, H16O1_Pose_z, H16O1_Pose_a, H16O1_Pose_b, H16O1_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)
+                        #ret2 = placed_abs_service(H16O1_Pose_x, H16O1_Pose_y, H16O1_Pose_z, H16O1_Pose_a, H16O1_Pose_b, H16O1_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     
@@ -3570,11 +3583,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O2_Pose_x, H16O2_Pose_y, H16O2_Pose_z, H16O2_Pose_a, H16O2_Pose_b, H16O2_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O2_Pose_x, H16O2_Pose_y, H16O2_Pose_z, H16O2_Pose_a, H16O2_Pose_b, H16O2_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                                 
@@ -3610,11 +3623,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O3_Pose_x, H16O3_Pose_y, H16O3_Pose_z, H16O3_Pose_a, H16O3_Pose_b, H16O3_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O3_Pose_x, H16O3_Pose_y, H16O3_Pose_z, H16O3_Pose_a, H16O3_Pose_b, H16O3_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                                 
@@ -3650,11 +3663,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O4_Pose_x, H16O4_Pose_y, H16O4_Pose_z, H16O4_Pose_a, H16O4_Pose_b, H16O4_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O4_Pose_x, H16O4_Pose_y, H16O4_Pose_z, H16O4_Pose_a, H16O4_Pose_b, H16O4_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                                 
@@ -3690,11 +3703,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O5_Pose_x, H16O5_Pose_y, H16O5_Pose_z, H16O5_Pose_a, H16O5_Pose_b, H16O5_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O5_Pose_x, H16O5_Pose_y, H16O5_Pose_z, H16O5_Pose_a, H16O5_Pose_b, H16O5_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                                 
@@ -3730,11 +3743,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O6_Pose_x, H16O6_Pose_y, H16O6_Pose_z, H16O6_Pose_a, H16O6_Pose_b, H16O6_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O6_Pose_x, H16O6_Pose_y, H16O6_Pose_z, H16O6_Pose_a, H16O6_Pose_b, H16O6_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                               
@@ -3770,11 +3783,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O7_Pose_x, H16O7_Pose_y, H16O7_Pose_z, H16O7_Pose_a, H16O7_Pose_b, H16O7_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O7_Pose_x, H16O7_Pose_y, H16O7_Pose_z, H16O7_Pose_a, H16O7_Pose_b, H16O7_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                      
@@ -3810,11 +3823,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O8_Pose_x, H16O8_Pose_y, H16O8_Pose_z, H16O8_Pose_a, H16O8_Pose_b, H16O8_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O8_Pose_x, H16O8_Pose_y, H16O8_Pose_z, H16O8_Pose_a, H16O8_Pose_b, H16O8_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     
@@ -3850,11 +3863,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O9_Pose_x, H16O9_Pose_y, H16O9_Pose_z, H16O9_Pose_a, H16O9_Pose_b, H16O9_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O9_Pose_x, H16O9_Pose_y, H16O9_Pose_z, H16O9_Pose_a, H16O9_Pose_b, H16O9_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                      
@@ -3890,11 +3903,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O10_Pose_x, H16O10_Pose_y, H16O10_Pose_z, H16O10_Pose_a, H16O10_Pose_b, H16O10_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O10_Pose_x, H16O10_Pose_y, H16O10_Pose_z, H16O10_Pose_a, H16O10_Pose_b, H16O10_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     
@@ -3930,11 +3943,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O11_Pose_x, H16O11_Pose_y, H16O11_Pose_z, H16O11_Pose_a, H16O11_Pose_b, H16O11_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O11_Pose_x, H16O11_Pose_y, H16O11_Pose_z, H16O11_Pose_a, H16O11_Pose_b, H16O11_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     
@@ -3970,11 +3983,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O12_Pose_x, H16O12_Pose_y, H16O12_Pose_z, H16O12_Pose_a, H16O12_Pose_b, H16O12_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O12_Pose_x, H16O12_Pose_y, H16O12_Pose_z, H16O12_Pose_a, H16O12_Pose_b, H16O12_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     
@@ -4010,11 +4023,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O13_Pose_x, H16O13_Pose_y, H16O13_Pose_z, H16O13_Pose_a, H16O13_Pose_b, H16O13_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O13_Pose_x, H16O13_Pose_y, H16O13_Pose_z, H16O13_Pose_a, H16O13_Pose_b, H16O13_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     
@@ -4050,11 +4063,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O14_Pose_x, H16O14_Pose_y, H16O14_Pose_z, H16O14_Pose_a, H16O14_Pose_b, H16O14_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O14_Pose_x, H16O14_Pose_y, H16O14_Pose_z, H16O14_Pose_a, H16O14_Pose_b, H16O14_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                    
@@ -4090,11 +4103,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O15_Pose_x, H16O15_Pose_y, H16O15_Pose_z, H16O15_Pose_a, H16O15_Pose_b, H16O15_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O15_Pose_x, H16O15_Pose_y, H16O15_Pose_z, H16O15_Pose_a, H16O15_Pose_b, H16O15_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                      
@@ -4130,11 +4143,11 @@ class RqtKuka(Plugin):
                         #KUKA_AUT=True
                         self.sleep_loop(2)
                         while KUKA_AUT: self.sleep_loop(0.3)
-                        placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
-                        ret = placed_abs_service(H16O16_Pose_x, H16O16_Pose_y, H16O16_Pose_z, H16O16_Pose_a, H16O16_Pose_b, H16O16_Pose_c)
+                        #placed_abs_service = rospy.ServiceProxy(srv_name_move_abs_slow, set_CartesianEuler_pose)                
+                        #ret = placed_abs_service(H16O16_Pose_x, H16O16_Pose_y, H16O16_Pose_z, H16O16_Pose_a, H16O16_Pose_b, H16O16_Pose_c)
                         #KUKA_AUT=True
-                        self.sleep_loop(2)
-                        while KUKA_AUT: self.sleep_loop(0.3)
+                        #self.sleep_loop(2)
+                        #while KUKA_AUT: self.sleep_loop(0.3)
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     
