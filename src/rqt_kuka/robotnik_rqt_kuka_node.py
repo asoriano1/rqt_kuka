@@ -67,6 +67,7 @@ angle_tool=0
 origin_pick=0
 tool_current=0
 first_time_moving_kuka=False
+rob_connected = False
 #service names:
 srv_name_move_abs_fast='/kuka_robot/setKukaAbsFast'
 srv_name_move_abs_slow='/kuka_robot/setKukaAbs'
@@ -92,6 +93,7 @@ topic_horiz_force='/phidget_load/vertical_force'
 topic_motor_status='/kuka_tool/robotnik_base_hw/status'
 topic_tool_state='/kuka_tool/joint_states'
 topic_door_state='/phidgets_vint_hub/io'
+
 
 #Prepick Pose # tf.transformations.quaternion_from_euler(0, 0, th)
 #Prepick_Pose=Pose(Point(100, 100, 100), Quaternion(0, 0, 0, 1))
@@ -300,6 +302,8 @@ class RqtKuka(Plugin):
         self._widget.calibre_comboBox.currentIndexChanged.connect(self.calibre_selected)
         self._widget.joy_comboBox.currentIndexChanged.connect(self.joy_selected)
         #self._widget.calibre_comboBox.highlighted.connect(self.arm_activated)
+        
+        self._widget.mode_label.setText("NOT CONNECTED")
 
         #Buttons
         #self._widget.Home_Button.pressed.connect(self.press_homming_button)
@@ -1744,12 +1748,21 @@ class RqtKuka(Plugin):
         else :
             pixmap =QtGui.QPixmap(PATH+"resource/images/puerta_verde_peq.png")
             self._widget.label_door.setPixmap(pixmap)
+        if data.digital_inputs[1]:
+            pixmap =QtGui.QPixmap(PATH+"resource/images/emergency_verde_peq.png")
+            self._widget.label_6.setPixmap(pixmap)
+        else :
+            pixmap =QtGui.QPixmap(PATH+"resource/images/emergency_roja_peq.png")
+            self._widget.label_6.setPixmap(pixmap)
                         
     def callback_motor_status2(self,data):
             self.do_callback_motor_status.emit(data)
 
     def callback_robot_pose(self, data):
-        global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka, pos_b_kuka, pos_c_kuka#, elapsed_time_gauges#, gauges_failure
+        global pos_x_kuka, pos_y_kuka, pos_z_kuka, pos_a_kuka, pos_b_kuka, pos_c_kuka, rob_connected#, elapsed_time_gauges#, gauges_failure
+        if not rob_connected :
+             rob_connected = True
+             self._widget.mode_label.setText("MANUAL")
         #print 'CB:robot_pose_received',data
         pos_x_kuka=data.x
         pos_y_kuka=data.y
@@ -1771,7 +1784,7 @@ class RqtKuka(Plugin):
             self.do_callback_horiz_force.emit(data)
         
     def callback_tool_weight(self, data):
-        global weight_empty, weight_read#, gauges_failure, start_time_gauges
+        global weight_empty, weight_reads#, gauges_failure, start_time_gauges
         #start_time_gauges=time.time()
         #gauges_failure=False
         self._widget.weight_lcdNumber.setDigitCount(4)
@@ -4776,10 +4789,14 @@ class RqtKuka(Plugin):
         angle_tool = data.position[3]
     
     def press_reset_robot_button(self):
+        global rob_connected
         #command_string = "rosnode kill /kuka_pad/ps4_joystick; sleep 1; rosnode kill /kuka_pad/itowa_safe_joystick; sleep 1; rosnode kill /kuka_pad/robotnik_trajectory_pad_node; sleep 1; rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch &"
         command_string = "killall screen; sleep 1; screen -S bringup -d -m roslaunch kuka_robot_bringup kuka_robot_bringup_standalone.launch"
         #command_string = "rosnode kill /kuka_robot/kuka_cartesian_hardware_interface; sleep 1; ROS_NAMESPACE=kuka_robot roslaunch kuka_rsi_cartesian_hw_interface test_hardware_interface.launch &"
         os.system(command_string)
+        self._widget.mode_label.setText("NOT CONNECTED")
+        rob_connected = False
+        
         
     def shutdown_plugin(self):
         print "Program finishing..."
