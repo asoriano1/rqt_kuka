@@ -1,0 +1,3 @@
+[qt_gui.plugin]
+rqt_kuka_plugin = rqt_kuka_plugin.main_plugin:RqtKukaPlugin
+

@@ -1,17 +1,8 @@
-<library path="src">
-  <class name="Kuka" type="rqt_kuka.robotnik_rqt_kuka_node.RqtKuka" base_class_type="rqt_gui_py::Plugin">
-    <description>
-      RQT Plugin to control Kuka
-    </description>
-    <qtgui>
-		<group>
-			<label>KUKA OBUSES</label>
-			<icon type="theme">folder</icon>
-			<statustip>Kuka Plugin</statustip>
-		</group>
-      <label>RQT Kuka</label>
-      <icon type="theme">start-here</icon>
-      <statustip>RQT Plugin for Kuka project.</statustip>
-    </qtgui>
+<library path="scripts/rqt_kuka_plugin">
+  <class name="RqtKukaPlugin"
+         type="main_plugin.RqtKukaPlugin"
+         base_class_type="qt_gui.Plugin">
+    <description>Plugin para control de KUKA con ROS y Qt</description>
   </class>
 </library>
+

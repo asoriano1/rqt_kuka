@@ -1,13 +1,17 @@
-#!/usr/bin/env python
+# setup.py
+from setuptools import setup
 
-from distutils.core import setup
-from catkin_pkg.python_setup import generate_distutils_setup
-
-d = generate_distutils_setup(
-    packages=['rqt_kuka'],
-    package_dir={'': 'src'},
-    scripts=['scripts/rqt_kuka.py']
+setup(
+    name='rqt_kuka_plugin',
+    version='0.1.0',
+    packages=['rqt_kuka_plugin'],
+    package_dir={'rqt_kuka_plugin': 'scripts/rqt_kuka_plugin'},
+    package_data={'rqt_kuka_plugin': ['resource/*.ui']},
+    install_requires=['setuptools'],
+    entry_points={
+        'qt_gui.plugin': [
+            'rqt_kuka_plugin = rqt_kuka_plugin.main_plugin:RqtKukaPlugin',
+        ],
+    },
 )
-
-setup(**d)
 
