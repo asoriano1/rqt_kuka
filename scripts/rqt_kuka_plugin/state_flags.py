@@ -1,4 +1,6 @@
 # state_flags.py
+# -*- coding: utf-8 -*-
+
 
 # Inicializa los diccionarios con estados por huevera y obús
 def create_status_dict(hueveras):

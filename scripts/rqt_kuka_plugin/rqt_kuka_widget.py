@@ -1,6 +1,7 @@
 # rqt_kuka_widget.py
 
-from PyQt5.QtWidgets import QWidget
+from python_qt_binding.QtWidgets import QWidget
+from python_qt_binding.QtGui import QPixmap
 from python_qt_binding import loadUi
 import os
 from config import UI_PATH
@@ -18,7 +19,7 @@ class RqtKukaWidget(QWidget):
         self.init_ui()
 
     def init_ui(self):
-        self.background_plate.setPixmap(BACKGROUND_IMAGE)
+        self.background_plate.setPixmap(QPixmap(BACKGROUND_IMAGE))
 
         if hasattr(self, 'Gripper_Homing_Button'):
             self.Gripper_Homing_Button.pressed.connect(self.press_gripper_homing)

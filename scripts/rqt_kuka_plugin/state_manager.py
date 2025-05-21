@@ -1,4 +1,6 @@
 # state_manager.py
+# -*- coding: utf-8 -*-
+
 
 from state_flags import pick_status, place_status
 

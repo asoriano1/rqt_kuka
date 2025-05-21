@@ -1,7 +1,7 @@
 # config.py
-
+# -*- coding: utf-8 -*-
 # Paths
-PLUGIN_PATH = "/home/suippes/kuka_catkin_ws/src/rqt_kuka/"
+PLUGIN_PATH = "/home/robotnik/rqt_kuka_ws/src/rqt_kuka/"
 UI_PATH = PLUGIN_PATH + "resource/RqtKuka.ui"
 IMG_PATH = PLUGIN_PATH + "resource/images/"
 
